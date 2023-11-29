@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+     --clr-bg-dark: #1f2937; /* gray-800 */
+     --clr-bg-light: #fff; /* zinc-50 */
+
+     --clr-text-dark: #fafafa; /* gray-200 */
+     --clr-text-light: #1f2937; /* zinc-50 */
+}
+
+.dark {
+     background-color: var(--clr-bg-dark);
+     color: var(--clr-text-dark);
+}
+
+.light {
+     background-color: var(--clr-bg-light);
+     color: var(--clr-text-light);
+}
+
+.dark {
+     @apply bg-gray-800 text-zinc-50;
+}
