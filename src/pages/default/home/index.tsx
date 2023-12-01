@@ -11,17 +11,24 @@ import {
      TwoHands,
 } from "../../../component";
 import { Link } from "react-router-dom";
-import { handleFaq, useFaqSlice } from "../../../redux/features";
+import { handleFaq, useFaqSlice, useLayoutSlice } from "../../../redux/features";
 import { useAppDispatch } from "../../../redux";
 import clsx from "clsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 export const DefaultHome = () => {
      const { data, active } = useFaqSlice();
+     const { darkMode } = useLayoutSlice();
      const dispatch = useAppDispatch();
      return (
           <MainLayout>
-               <div className="flex items-center gap-10 py-10 bg-gradient-to-bl from-primary-300 to-white">
+               {/* section one */}
+               <div
+                    className={clsx(
+                         `flex items-center gap-10 py-10 bg-gradient-to-bl `,
+                         darkMode ? "dark  from-primary-600 to-gray-400" : "light  from-primary-300 to-white"
+                    )}
+               >
                     <div className="flex-1 p-10">
                          <h1 className="text-7xl text-primary-500 font-bold">Welcome to AlterBuddy</h1>
                          <p className="py-10 text-lg dark:text-gray-500">
@@ -40,6 +47,7 @@ export const DefaultHome = () => {
                     </div>
                </div>
 
+               {/* section two */}
                <div className="my-20 container mx-auto w-[60%]">
                     <h6 className="font-light text-4xl text-center capitalize">
                          why choose <span className="font-semibold text-primary-500">AlterBuddy?</span>
@@ -63,6 +71,8 @@ export const DefaultHome = () => {
                          </div>
                     </div>
                </div>
+
+               {/* section three */}
                <div className="container mx-auto w-[60%]">
                     <h6 className="text-5xl capitalize text-left font-semibold">
                          our <span className="text-primary-500">experts</span>.
@@ -73,6 +83,8 @@ export const DefaultHome = () => {
                          and character to help users connect with your team.
                     </p>
                </div>
+
+               {/* section four */}
                <div className="bg-primary-200 py-20">
                     <div className="container mx-auto grid grid-col-12 xl:grid-cols-4 lg:grid-cols-4 gap-10 md:col-span-12">
                          <ExportMentors
@@ -107,6 +119,8 @@ export const DefaultHome = () => {
                          />
                     </div>
                </div>
+
+               {/* section five */}
                <div className="">
                     <div className="container mx-auto w-[60%] py-20">
                          <h6 className="text-5xl capitalize text-left">
@@ -137,6 +151,8 @@ export const DefaultHome = () => {
                          />
                     </div>
                </div>
+
+               {/* section six */}
                <div>
                     <div className=" mx-auto w-[60%] pt-20 pb-10">
                          <h6 className="text-5xl capitalize text-left">
@@ -173,6 +189,7 @@ export const DefaultHome = () => {
                     </div>
                </div>
 
+               {/* section seven */}
                <div className="w-[70%] mx-auto py-20">
                     <h6 className="text-4xl font-bold capitalize text-center">Frequently asked questions</h6>
                     {data.map(({ label, body }: { label: string; body: string }, i: number) => (

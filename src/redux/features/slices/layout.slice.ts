@@ -1,15 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../..";
 
 export interface LayoutSliceProps {
      darkMode: boolean;
      mobileMenu: boolean;
+     authModal: boolean;
+     modalView: modalView;
 }
+
+type modalView = "onboard" | "signin" | "signup";
 
 const initialState: LayoutSliceProps = {
      darkMode: false,
      mobileMenu: false,
+     authModal: false,
+     modalView: "onboard",
 };
 
 const LayoutSlice = createSlice({
@@ -28,6 +34,16 @@ const LayoutSlice = createSlice({
           handleMobileMenu: (state) => {
                state.mobileMenu = !state.mobileMenu;
           },
+          handleAuthModal: (state) => {
+               state.authModal = !state.authModal;
+          },
+          handleAuthModalView: (state, action: PayloadAction<modalView>) => {
+               if (action.payload) {
+                    state.modalView = action.payload;
+               } else {
+                    state.modalView = "onboard";
+               }
+          },
      },
 });
 
@@ -37,4 +53,4 @@ export const useLayoutSlice = () =>
      });
 export const LayoutReducer = LayoutSlice.reducer;
 
-export const { handleDarkMode, handleMobileMenu } = LayoutSlice.actions;
+export const { handleDarkMode, handleMobileMenu, handleAuthModal, handleAuthModalView } = LayoutSlice.actions;

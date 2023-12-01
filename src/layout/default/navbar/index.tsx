@@ -10,9 +10,10 @@ interface MainNavBarProps {
      darkMode: boolean;
      mobile: boolean;
      handleMenu: () => void;
+     authModal: () => void;
 }
 
-export const MainNavBar: FC<MainNavBarProps> = ({ darkMode, toggle, handleMenu, mobile }) => {
+export const MainNavBar: FC<MainNavBarProps> = ({ darkMode, toggle, handleMenu, mobile, authModal }) => {
      return (
           <div
                className={clsx(
@@ -51,10 +52,17 @@ export const MainNavBar: FC<MainNavBarProps> = ({ darkMode, toggle, handleMenu, 
                                         </ul>
                                    </div>
                                    <div className="hidden flex-1 xl:justify-end md:block xl:w-full xl:flex items-center justify-between gap-5">
-                                        <AppButton outlined>Talk to Buddy</AppButton>
+                                        <AppButton flexed={false} outlined>
+                                             Talk to Buddy
+                                        </AppButton>
                                         <button onClick={toggle}>
                                              {darkMode ? <FaRegMoon size={22} /> : <FaRegSun size={22} />}
                                         </button>
+                                        <ul className="flex items-center gap-10">
+                                             <li>
+                                                  <button onClick={authModal}>Log in</button>
+                                             </li>
+                                        </ul>
                                    </div>
                               </div>
                               <div className="flex gap-5 md:hidden items-center">
