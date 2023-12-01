@@ -4,6 +4,7 @@ import { Transition } from "@headlessui/react";
 import clsx from "clsx";
 import { FaRegMoon, FaRegSun } from "react-icons/fa";
 import { AppButton, AppLink } from "../../../component";
+import { Link } from "react-router-dom";
 
 interface MainNavBarProps {
      toggle: () => void;
@@ -26,28 +27,33 @@ export const MainNavBar: FC<MainNavBarProps> = ({ darkMode, toggle, handleMenu, 
                          <div className="flex items-center justify-between h-16">
                               <div className="flex items-center justify-between w-full">
                                    <div className="flex-shrink-0 flex-1">
-                                        <img
-                                             className="w-[50%]"
-                                             src={require("../../../assets/image/logo.png")}
-                                             alt="Workflow"
-                                        />
+                                        <Link to="/">
+                                             <img
+                                                  className="w-[50%]"
+                                                  src={require("../../../assets/image/logo.png")}
+                                                  alt="Workflow"
+                                             />
+                                        </Link>
                                    </div>
                                    <div className="flex-1 hidden md:block">
-                                        <ul className="flex items-center gap-10">
+                                        <ul className="flex items-center gap-5">
+                                             <li>
+                                                  <AppLink path="/about" label="About" />
+                                             </li>
                                              <li>
                                                   <AppLink path="/services" label="services" />
                                              </li>
                                              <li>
-                                                  <AppLink path="/services" label="Talk to" />
-                                             </li>
-                                             <li>
-                                                  <AppLink path="/about" label="About" />
+                                                  <AppLink path="/talk" label="Talk to" />
                                              </li>
                                              <li>
                                                   <AppLink path="/contact" label="Contact" />
                                              </li>
                                              <li>
-                                                  <AppLink path="/about" label="Blog" />
+                                                  <AppLink path="/blog" label="Blog" />
+                                             </li>
+                                             <li>
+                                                  <AppLink path="/rant" label="rant" />
                                              </li>
                                         </ul>
                                    </div>

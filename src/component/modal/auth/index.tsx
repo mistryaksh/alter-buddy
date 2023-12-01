@@ -118,9 +118,7 @@ export const AuthModel: FC<AuthModalProps> = ({ modalHandler, viewType, viewSwit
                                                             type="email"
                                                        />
                                                   </div>
-                                                  <AppButton onClick={viewSwitcher as unknown as any} filled>
-                                                       Continue to register
-                                                  </AppButton>
+                                                  <AppButton filled>Continue to register</AppButton>
                                              </AuthModalBody>
                                         </div>
                                    )}

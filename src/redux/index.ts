@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import { useDispatch } from "react-redux";
-import { FaqReducer, LayoutReducer } from "./features";
+import { FaqReducer, LayoutReducer, MentorReducer } from "./features";
 
 const AppMiddlewareFunc = (getDefaultMiddleware: CurriedGetDefaultMiddleware<any>) => {
      return getDefaultMiddleware({ immutableCheck: false }).concat([]);
@@ -11,6 +11,7 @@ export const AppStore = configureStore({
      reducer: combineReducers({
           layout: LayoutReducer,
           faq: FaqReducer,
+          mentors: MentorReducer,
      }),
      middleware: (getDefaultMiddleware) => AppMiddlewareFunc(getDefaultMiddleware),
 });

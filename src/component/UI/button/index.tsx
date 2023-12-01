@@ -16,8 +16,8 @@ export const AppButton: FC<
                     filled && `bg-primary-500 text-white`,
                     outlined &&
                          `border-2 border-primary-500 text-primary-500 hover:text-white hover:dark:bg-primary-600 text-sm hover:bg-primary-200 duration-150`,
-                    `py-3 px-5 rounded-full capitalize`,
-                    flexed && `flex-1 w-full`
+                    flexed && `flex-1 w-full`,
+                    `py-3 px-5 rounded-full capitalize flex items-center gap-3 justify-center`
                )}
                {...rest}
           >

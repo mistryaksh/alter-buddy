@@ -75,7 +75,7 @@ export const DefaultHome = () => {
                {/* section three */}
                <div className="container mx-auto w-[60%]">
                     <h6 className="text-5xl capitalize text-left font-semibold">
-                         our <span className="text-primary-500">experts</span>.
+                         our <span className="text-primary-500">experts</span>
                     </h6>
                     <p className="font-extralight text-md text-gray-500 my-5">
                          This is your Team section. It's a great place to introduce your team and talk about what makes
@@ -181,7 +181,7 @@ export const DefaultHome = () => {
                     </div>
                     <div className="w-full text-center py-10">
                          <Link
-                              to="/all-services"
+                              to="/services"
                               className="hover:underline font-extralight text-lg text-primary-500 text-center"
                          >
                               Browse all services
