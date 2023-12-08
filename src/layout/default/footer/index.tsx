@@ -9,8 +9,8 @@ interface MainFooterProps {
 export const MainFooter: FC<MainFooterProps> = ({ darkMode, toggle }) => {
      return (
           <div className={clsx(darkMode ? "dark" : "light")}>
-               <footer className="bg-primary-100 py-10">
-                    <p className="text-gray-500 text-center">© 2035 by Alterbuddy.</p>
+               <footer className={clsx(darkMode ? "bg-primary-800" : "bg-primary-200", " py-10")}>
+                    <p className={clsx(`text-center`, darkMode ? "text-white" : "text-black")}>© 2035 by Alterbuddy.</p>
                </footer>
           </div>
      );

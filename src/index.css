@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+     font-family: avnir;
+     src: url("./assets/fonts/AvenirLTStd-Book.otf");
+}
+
+@font-face {
+     font-family: avnir_bold;
+     src: url("./assets/fonts/AvenirLTStd-Black.otf");
+}
+
 :root {
      --clr-bg-dark: #1f2937; /* gray-800 */
      --clr-bg-light: #fff; /* zinc-50 */

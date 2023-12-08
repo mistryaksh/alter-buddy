@@ -20,7 +20,8 @@ module.exports = {
                     },
                },
                fontFamily: {
-                    sans: ["'Poppins', sans-serif"],
+                    sans: ["'avnir', sans-serif"],
+                    sans2: ["'avnir_bold', sans-serif"],
                },
           },
      },

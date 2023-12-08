@@ -2,7 +2,7 @@ import React from "react";
 
 import { AppProvider } from "./providers";
 import { Route } from "react-router-dom";
-import { AboutPage, DefaultHome, OurServicePage, TalkToPage } from "./pages";
+import { AboutPage, DefaultHome, OurServicePage, TalkToPage, UserProfilePage } from "./pages";
 
 export default function App() {
      return (
@@ -11,6 +11,9 @@ export default function App() {
                <Route path="/about" element={<AboutPage />} />
                <Route path="/services" element={<OurServicePage />} />
                <Route path="/talk" element={<TalkToPage />} />
+               <Route path="user">
+                    <Route path="profile" element={<UserProfilePage />} />
+               </Route>
           </AppProvider>
      );
 }

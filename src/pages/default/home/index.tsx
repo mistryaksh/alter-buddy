@@ -30,7 +30,7 @@ export const DefaultHome = () => {
                     )}
                >
                     <div className="flex-1 p-10">
-                         <h1 className="text-7xl text-primary-500 font-bold">Welcome to AlterBuddy</h1>
+                         <h1 className="text-7xl text-primary-500 font-bold font-sans2">Welcome to AlterBuddy</h1>
                          <p className="py-10 text-lg dark:text-gray-500">
                               AlterBuddy is an online platform to help people connect with external therapists and help
                               with their mental health problems. Our mission is to provide mental wellness support to
@@ -49,7 +49,7 @@ export const DefaultHome = () => {
 
                {/* section two */}
                <div className="my-20 container mx-auto w-[60%]">
-                    <h6 className="font-light text-4xl text-center capitalize">
+                    <h6 className="font-light text-4xl text-center capitalize font-sans2">
                          why choose <span className="font-semibold text-primary-500">AlterBuddy?</span>
                     </h6>
                     <div className="grid grid-cols-12 mt-20 xl:grid-cols-4 lg:grid-cols-4  md:grid-cols-6">
@@ -74,7 +74,7 @@ export const DefaultHome = () => {
 
                {/* section three */}
                <div className="container mx-auto w-[60%]">
-                    <h6 className="text-5xl capitalize text-left font-semibold">
+                    <h6 className="text-5xl capitalize text-left font-semibold font-sans2">
                          our <span className="text-primary-500">experts</span>
                     </h6>
                     <p className="font-extralight text-md text-gray-500 my-5">
@@ -123,7 +123,7 @@ export const DefaultHome = () => {
                {/* section five */}
                <div className="">
                     <div className="container mx-auto w-[60%] py-20">
-                         <h6 className="text-5xl capitalize text-left">
+                         <h6 className="text-5xl capitalize text-left font-sans2">
                               Client <span className="text-primary-500 font-semibold">Testimonials</span>
                          </h6>
                          <p className="font-extralight text-md text-gray-500 my-5">
@@ -155,7 +155,7 @@ export const DefaultHome = () => {
                {/* section six */}
                <div>
                     <div className=" mx-auto w-[60%] pt-20 pb-10">
-                         <h6 className="text-5xl capitalize text-left">
+                         <h6 className="text-5xl capitalize text-left font-sans2">
                               Our <span className="text-primary-500 font-semibold">Services</span>
                          </h6>
                     </div>
@@ -191,25 +191,27 @@ export const DefaultHome = () => {
 
                {/* section seven */}
                <div className="w-[70%] mx-auto py-20">
-                    <h6 className="text-4xl font-bold capitalize text-center">Frequently asked questions</h6>
-                    {data.map(({ label, body }: { label: string; body: string }, i: number) => (
-                         <div key={i} onClick={() => dispatch(handleFaq(i))}>
-                              <div className="border-b py-5 border-primary-500">
-                                   <div className="flex items-center justify-between">
-                                        <h6
-                                             className={clsx(
-                                                  `text-md font-semibold capitalize`,
-                                                  i === active && "text-primary-500"
-                                             )}
-                                        >
-                                             {label}
-                                        </h6>
-                                        {i === active ? <FaAngleUp size={26} /> : <FaAngleDown size={26} />}
+                    <h6 className="text-4xl font-bold capitalize text-center font-sans2">Frequently asked questions</h6>
+                    <div className="mt-10">
+                         {data.map(({ label, body }: { label: string; body: string }, i: number) => (
+                              <div key={i} onClick={() => dispatch(handleFaq(i))}>
+                                   <div className="border-b py-5 border-primary-500">
+                                        <div className="flex items-center justify-between">
+                                             <h6
+                                                  className={clsx(
+                                                       `text-md font-semibold capitalize`,
+                                                       i === active && "text-primary-500"
+                                                  )}
+                                             >
+                                                  {label}
+                                             </h6>
+                                             {i === active ? <FaAngleUp size={26} /> : <FaAngleDown size={26} />}
+                                        </div>
+                                        {i === active && <p className="mt-3 font-extralight">{body}</p>}
                                    </div>
-                                   {i === active && <p className="mt-3 font-extralight">{body}</p>}
                               </div>
-                         </div>
-                    ))}
+                         ))}
+                    </div>
                </div>
           </MainLayout>
      );
