@@ -1,4 +1,4 @@
 export * from "./home";
 export * from "./about";
-export * from "./our-services";
-export * from "./talk-to";
+export * from "./mentor-list";
+export * from "./blogs";

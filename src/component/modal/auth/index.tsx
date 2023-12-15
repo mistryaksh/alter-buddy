@@ -4,16 +4,29 @@ import { useLayoutSlice } from "../../../redux/features";
 import clsx from "clsx";
 import { AuthModalFooter } from "../../modal-components";
 import { AuthOnboardBody, SignInBody, SignUpBody } from "../../user-authentication";
+import { UserLoginProps, UserRegisterProps } from "../../../interface";
 
 interface AuthModalProps {
      modalHandler: () => void;
      viewType: ModelType;
      viewSwitcher: (btnType: string | null) => void;
+     loginFunc: ({ mobile, password }: UserLoginProps) => void;
+     registerFunc: ({ email, fname, lname, mobile, password }: UserRegisterProps) => void;
+     error: string | null;
+     loading: boolean;
 }
 
 type ModelType = "signin" | "signup" | "onboard";
 
-export const AuthModel: FC<AuthModalProps> = ({ modalHandler, viewType, viewSwitcher }) => {
+export const AuthModel: FC<AuthModalProps> = ({
+     modalHandler,
+     viewType,
+     viewSwitcher,
+     loginFunc,
+     registerFunc,
+     error,
+     loading,
+}) => {
      const { darkMode } = useLayoutSlice();
      return (
           <>
@@ -38,10 +51,20 @@ export const AuthModel: FC<AuthModalProps> = ({ modalHandler, viewType, viewSwit
                                         <AuthOnboardBody viewSwitcher={viewSwitcher as unknown as any} />
                                    )}
                                    {viewType === "signin" && (
-                                        <SignInBody viewSwitcher={viewSwitcher as unknown as any} />
+                                        <SignInBody
+                                             error={error}
+                                             loading={loading}
+                                             loginFunc={loginFunc}
+                                             viewSwitcher={viewSwitcher as unknown as any}
+                                        />
                                    )}
                                    {viewType === "signup" && (
-                                        <SignUpBody viewSwitcher={viewSwitcher as unknown as any} />
+                                        <SignUpBody
+                                             error={error as string}
+                                             loading={loading}
+                                             registerFunc={registerFunc}
+                                             viewSwitcher={viewSwitcher as unknown as any}
+                                        />
                                    )}
                                    {/* only footer shows to sign up & onboard */}
                                    {viewType !== "signin" && <AuthModalFooter />}

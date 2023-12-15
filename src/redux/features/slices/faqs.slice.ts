@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../..";
 
-interface FaqSliceProps {
+export interface FaqSliceProps {
      active: number | null;
      data: {
           label: string;

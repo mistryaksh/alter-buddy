@@ -21,9 +21,6 @@ export const AuthOnboardBody: FC<OnboardBodyProps> = ({ viewSwitcher }) => {
                          <button className="border rounded-md p-3 w-full text-primary-500 capitalize border-primary-500">
                               Sign up with google
                          </button>
-                         <button className="rounded-md p-3 w-full capitalize  bg-[#1878f2] text-white">
-                              Sign up with facebook
-                         </button>
                          <hr />
                          <AppButton onClick={viewSwitcher as unknown as any} outlined>
                               Sign up with email

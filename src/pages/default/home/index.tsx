@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MainLayout } from "../../../layout";
 import {
      AppButton,
@@ -11,17 +11,42 @@ import {
      TwoHands,
 } from "../../../component";
 import { Link } from "react-router-dom";
-import { handleFaq, useFaqSlice, useLayoutSlice } from "../../../redux/features";
+import { handleError, handleFaq, useAuthenticationSlice, useFaqSlice, useLayoutSlice } from "../../../redux/features";
 import { useAppDispatch } from "../../../redux";
 import clsx from "clsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-
+import { useGetAllFaqQuery, useGetAllSubCategoryQuery, useGetTopMentorListQuery } from "../../../redux/rtk-api";
+import { getUserToken } from "../../../utils";
 export const DefaultHome = () => {
-     const { data, active } = useFaqSlice();
+     const { active } = useFaqSlice();
+     const { data: mentor } = useGetTopMentorListQuery();
+     const { authentication } = useAuthenticationSlice();
+
+     const {
+          data: subCategory,
+          isError: isSubCategoryError,
+          isLoading: isSubCategoryLoading,
+          error: subCategoryError,
+     } = useGetAllSubCategoryQuery();
+
+     const { data: faq, isError: isFaqError, error: faqError, isLoading: isFaqLoading } = useGetAllFaqQuery();
+
      const { darkMode } = useLayoutSlice();
+
      const dispatch = useAppDispatch();
+
+     const localStore = getUserToken();
+     useEffect(() => {
+          if (isSubCategoryError) {
+               dispatch(handleError((subCategoryError as any).data.message));
+          }
+          if (isFaqError) {
+               dispatch(handleError((faqError as any).data.message));
+          }
+     }, [authentication, dispatch, isSubCategoryError, subCategoryError, isFaqError, faqError, localStore]);
+
      return (
-          <MainLayout>
+          <MainLayout loading={isSubCategoryLoading || isFaqLoading}>
                {/* section one */}
                <div
                     className={clsx(
@@ -52,7 +77,7 @@ export const DefaultHome = () => {
                     <h6 className="font-light text-4xl text-center capitalize font-sans2">
                          why choose <span className="font-semibold text-primary-500">AlterBuddy?</span>
                     </h6>
-                    <div className="grid grid-cols-12 mt-20 xl:grid-cols-4 lg:grid-cols-4  md:grid-cols-6">
+                    <div className="grid grid-cols-12 gap-10 mt-20 xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6">
                          <div className="flex flex-col justify-center gap-2 items-center">
                               <HumanBrainIcon height={100} width={100} />
                               <p className="text-xl font-semibold">Licensed Therapists</p>
@@ -85,38 +110,20 @@ export const DefaultHome = () => {
                </div>
 
                {/* section four */}
-               <div className="bg-primary-200 py-20">
+               <div className="bg-primary-200 py-20 pb-28">
                     <div className="container mx-auto grid grid-col-12 xl:grid-cols-4 lg:grid-cols-4 gap-10 md:col-span-12">
-                         <ExportMentors
-                              image="https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
-                              experience="1"
-                              name="Ashley Jones"
-                              path="#read_more"
-                              specialist="Counseling Psychologist"
-                         />
-                         <ExportMentors
-                              image="https://static.wixstatic.com/media/11062b_20413f100a3d47248ecfbf9c75cfd272~mv2.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Portrait.jpg"
-                              experience="1"
-                              name="Ashley Jones"
-                              path="#read_more"
-                              specialist="Counseling Psychologist"
-                         />
-
-                         <ExportMentors
-                              image="https://static.wixstatic.com/media/11062b_7759ebb25c9040a9a1d177611e3b11be~mv2.png/v1/fill/w_574,h_646,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/Portrait%20with%20Beanie.png"
-                              experience="1"
-                              name="Ashley Jones"
-                              path="#read_more"
-                              specialist="Counseling Psychologist"
-                         />
-
-                         <ExportMentors
-                              image="https://static.wixstatic.com/media/11062b_1903feb4e8be4c199e5cc7a9d3319b8d~mv2.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Portrait%20Smirk.jpg"
-                              experience="1"
-                              name="Ashley Jones"
-                              path="#read_more"
-                              specialist="Counseling Psychologist"
-                         />
+                         {mentor?.data
+                              .map(({ mentorId, _id }) => (
+                                   <ExportMentors
+                                        key={_id}
+                                        image="https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
+                                        experience="1"
+                                        name={`${mentorId?.name?.firstName} ${mentorId?.name?.lastName}`}
+                                        path="#read_more"
+                                        specialist={mentorId?.specialists?.join(", ")}
+                                   />
+                              ))
+                              .slice(0, 4)}
                     </div>
                </div>
 
@@ -161,22 +168,16 @@ export const DefaultHome = () => {
                     </div>
                     <div className="xl:w-[70%] mx-auto">
                          <div className="w-full xl:grid xl:grid-cols-12 gap-10 lg:grid-cols-6 md:grid-cols-12">
-                              <div className="col-span-6">
-                                   <ServicesCard
-                                        body="Are negative thoughts taking you away from reality? Talk to renowned experts and feel better right away."
-                                        image="https://static.wixstatic.com/media/4432a4c385c44e609ac41982225b1669.jpg/v1/fill/w_386,h_466,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Loneliness.jpg"
-                                        label="Anxiety"
-                                        path="#read_more"
-                                   />
-                              </div>
-                              <div className="col-span-6">
-                                   <ServicesCard
-                                        body="Has stress made you stop living your life to the fullest? Connect with top industry professionals and get back the joys of life today."
-                                        image="https://static.wixstatic.com/media/f4a2eb10b3154a8a8c1bcda2e37e94c0.jpg/v1/fill/w_386,h_466,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Stressed%20Woman.jpg"
-                                        label="Stress"
-                                        path="#read_more"
-                                   />
-                              </div>
+                              {subCategory?.data.map(({ label, desc, _id }) => (
+                                   <div className="col-span-6" key={_id}>
+                                        <ServicesCard
+                                             body={desc}
+                                             image="https://static.wixstatic.com/media/4432a4c385c44e609ac41982225b1669.jpg/v1/fill/w_386,h_466,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Loneliness.jpg"
+                                             label={label}
+                                             path="#read_more"
+                                        />
+                                   </div>
+                              ))}
                          </div>
                     </div>
                     <div className="w-full text-center py-10">
@@ -190,29 +191,33 @@ export const DefaultHome = () => {
                </div>
 
                {/* section seven */}
-               <div className="w-[70%] mx-auto py-20">
-                    <h6 className="text-4xl font-bold capitalize text-center font-sans2">Frequently asked questions</h6>
-                    <div className="mt-10">
-                         {data.map(({ label, body }: { label: string; body: string }, i: number) => (
-                              <div key={i} onClick={() => dispatch(handleFaq(i))}>
-                                   <div className="border-b py-5 border-primary-500">
-                                        <div className="flex items-center justify-between">
-                                             <h6
-                                                  className={clsx(
-                                                       `text-md font-semibold capitalize`,
-                                                       i === active && "text-primary-500"
-                                                  )}
-                                             >
-                                                  {label}
-                                             </h6>
-                                             {i === active ? <FaAngleUp size={26} /> : <FaAngleDown size={26} />}
+               {faq?.data.length !== 0 && (
+                    <div className="w-[70%] mx-auto py-20">
+                         <h6 className="text-4xl font-bold capitalize text-center font-sans2">
+                              Frequently asked questions
+                         </h6>
+                         <div className="mt-10">
+                              {faq?.data.map(({ question, answer }, i: number) => (
+                                   <div key={i} onClick={() => dispatch(handleFaq(i))}>
+                                        <div className="border-b py-5 border-primary-500">
+                                             <div className="flex items-center justify-between">
+                                                  <h6
+                                                       className={clsx(
+                                                            `text-md font-semibold capitalize`,
+                                                            i === active && "text-primary-500"
+                                                       )}
+                                                  >
+                                                       {question}
+                                                  </h6>
+                                                  {i === active ? <FaAngleUp size={26} /> : <FaAngleDown size={26} />}
+                                             </div>
+                                             {i === active && <p className="mt-3 font-extralight">{answer}</p>}
                                         </div>
-                                        {i === active && <p className="mt-3 font-extralight">{body}</p>}
                                    </div>
-                              </div>
-                         ))}
+                              ))}
+                         </div>
                     </div>
-               </div>
+               )}
           </MainLayout>
      );
 };

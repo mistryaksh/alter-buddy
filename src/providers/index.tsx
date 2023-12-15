@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from "react";
 
 import { Provider as ReduxProvider } from "react-redux";
 import { AppStore } from "../redux";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 interface AppProviderProps {
      children: ReactNode;
@@ -11,9 +11,7 @@ interface AppProviderProps {
 export const AppProvider: FC<AppProviderProps> = ({ children }) => {
      return (
           <ReduxProvider store={AppStore}>
-               <BrowserRouter>
-                    <Routes>{children}</Routes>
-               </BrowserRouter>
+               <BrowserRouter>{children}</BrowserRouter>
           </ReduxProvider>
      );
 };

@@ -1,23 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../..";
 
 interface AuthenticationSliceProps {
      authentication: boolean;
-     user: string | null;
      token: string | null;
 }
 
 const initialState: AuthenticationSliceProps = {
      authentication: false,
      token: null,
-     user: null,
 };
 
 const AuthenticationSlice = createSlice({
      initialState,
      name: "authentication",
-     reducers: {},
+     reducers: {
+          handleUserAuthentication: (state, action: PayloadAction<{ token: string }>) => {
+               state.authentication = true;
+               state.token = action.payload.token;
+          },
+          handleUserLogout: (state) => {
+               state.authentication = false;
+               state.token = null;
+          },
+     },
 });
 
 export const useAuthenticationSlice = () =>
@@ -25,4 +32,4 @@ export const useAuthenticationSlice = () =>
           return state.authentication;
      });
 export const AuthenticationReducer = AuthenticationSlice.reducer;
-// export const {} = AuthenticationSlice.actions
+export const { handleUserAuthentication, handleUserLogout } = AuthenticationSlice.actions;

@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 interface SignInProps {
-     email: string;
+     mobile: string;
      password: string;
 }
 
@@ -14,12 +14,12 @@ interface SignUpProps {
 }
 
 export const SignInInitialState: SignInProps = {
-     email: "",
+     mobile: "",
      password: "",
 };
 
 export const SignInValidationSchema = yup.object().shape({
-     email: yup.string().required("email is required to sign in").email("email is not valid email"),
+     mobile: yup.string().required("mobile is required to sign in"),
      password: yup.string().required("password is required for sign in").min(6).max(16),
 });
 
@@ -36,5 +36,4 @@ export const SignUpValidationSchema = yup.object().shape({
      password: yup.string().required("password is required for sign up").min(6).max(16),
      fname: yup.string().required("first name is required"),
      lname: yup.string().required("last name is required"),
-     username: yup.string().required("username is required"),
 });

@@ -15,8 +15,10 @@ export const ServicesCard: FC<ServicesCardProps> = ({ body, image, label, path }
                     <img src={image} alt={label} className="rounded-lg" />
                </div>
                <div className="flex-1 flex flex-col justify-between py-5">
-                    <h6 className="text-2xl group-hover:text-primary-500 font-semibold text-center">{label}</h6>
-                    <p className="font-extralight italic text-gray-500">{body}</p>
+                    <h6 className="text-2xl group-hover:text-primary-500 font-semibold text-center capitalize">
+                         {label}
+                    </h6>
+                    <p className="font-extralight italic text-gray-500">"{body}"</p>
                     <div className="flex justify-center">
                          <Link
                               to={path}
