@@ -20,6 +20,9 @@ const MentorApi = createApi({
           GetMentorBySubCategory: query<{ data: IMentorProps[] }, string>({
                query: (id: string) => `/get-mentor/sub-category/${id}`,
           }),
+          GetMentorUsingId: query<{ data: IMentorProps }, string>({
+               query: (id: string) => `/mentor/profile/${id}`,
+          }),
      }),
 });
 
@@ -27,6 +30,7 @@ export const {
      useGetMentorsListQuery,
      useGetTopMentorListQuery,
      useGetMentorByCategoryQuery,
+     useGetMentorUsingIdQuery,
      useGetMentorBySubCategoryQuery,
      useLazyGetMentorByCategoryQuery,
      useLazyGetMentorBySubCategoryQuery,

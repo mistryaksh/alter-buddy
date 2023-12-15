@@ -8,7 +8,7 @@ const AuthenticationApi = createApi({
      reducerPath: "authenticationApi",
      tagTypes: ["account"],
      endpoints: ({ mutation, query }) => ({
-          LoginUser: mutation<{ data: { message: string; token: string; user: UserProps } }, any>({
+          LoginUser: mutation<{ data: { message: string; token: string; user: UserProps } }, UserLoginProps>({
                query: ({ mobile, password }: UserLoginProps) => {
                     return {
                          url: `/sign-in`,

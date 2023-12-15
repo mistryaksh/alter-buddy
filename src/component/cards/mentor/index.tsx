@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { MdVerified, MdStarRate } from "react-icons/md";
 import { BiCertification } from "react-icons/bi";
 import { AppButton } from "../../UI";
+import { useNavigate } from "react-router-dom";
 
 interface MentorCardProps {
      fname: string;
@@ -10,9 +11,11 @@ interface MentorCardProps {
      image: string;
      verified: boolean;
      expertise: string;
+     id: string;
 }
 
-export const MentorCard: FC<MentorCardProps> = ({ fname, image, lname, specialist, verified, expertise }) => {
+export const MentorCard: FC<MentorCardProps> = ({ fname, image, lname, specialist, verified, expertise, id }) => {
+     const navigate = useNavigate();
      return (
           <div className="border border-primary-500 p-3 rounded-lg">
                <div className="flex items-center gap-3 justify-between">
@@ -46,7 +49,7 @@ export const MentorCard: FC<MentorCardProps> = ({ fname, image, lname, specialis
                </div>
                <hr className="border-t border-primary-500" />
                <div className="flex items-center mt-3 gap-3 w-full">
-                    <AppButton outlined flexed>
+                    <AppButton outlined flexed onClick={() => navigate(`/user/mentor/details/${id}`)}>
                          View more
                     </AppButton>
                     <AppButton filled flexed>

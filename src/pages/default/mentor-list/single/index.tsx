@@ -107,6 +107,7 @@ export const SingleCategoryPage = () => {
                                    mentor?.data.map(
                                         ({ name, _id: id, specialists, accountStatus, category }: IMentorProps) => (
                                              <MentorCard
+                                                  id={id as string}
                                                   image={
                                                        "https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
                                                   }

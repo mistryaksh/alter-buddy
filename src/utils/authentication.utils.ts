@@ -1,5 +1,5 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
-import { getUserToken } from "./local-store";
+import { getMentorToken, getUserToken } from "./local-store";
 
 export const ApiBaseQuery = (baseQuery: (headers: Headers) => void) =>
      fetchBaseQuery({
@@ -9,4 +9,8 @@ export const ApiBaseQuery = (baseQuery: (headers: Headers) => void) =>
 
 export const baseQueryUser = (headers: Headers) => {
      headers.set("Authorization", getUserToken() || `{}`);
+};
+
+export const baseQueryMentor = (headers: Headers) => {
+     headers.set("Authorization", getMentorToken() || `{}`);
 };

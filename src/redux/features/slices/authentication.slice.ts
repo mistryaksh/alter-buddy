@@ -5,11 +5,19 @@ import { RootState } from "../..";
 interface AuthenticationSliceProps {
      authentication: boolean;
      token: string | null;
+     mentor: {
+          authentication: boolean;
+          token: string | null;
+     };
 }
 
 const initialState: AuthenticationSliceProps = {
      authentication: false,
      token: null,
+     mentor: {
+          authentication: false,
+          token: null,
+     },
 };
 
 const AuthenticationSlice = createSlice({
@@ -24,6 +32,10 @@ const AuthenticationSlice = createSlice({
                state.authentication = false;
                state.token = null;
           },
+          handleMentorAuthentication: (state, action: PayloadAction<{ token: string }>) => {
+               state.mentor.authentication = true;
+               state.mentor.token = action.payload.token;
+          },
      },
 });
 
@@ -32,4 +44,4 @@ export const useAuthenticationSlice = () =>
           return state.authentication;
      });
 export const AuthenticationReducer = AuthenticationSlice.reducer;
-export const { handleUserAuthentication, handleUserLogout } = AuthenticationSlice.actions;
+export const { handleUserAuthentication, handleUserLogout, handleMentorAuthentication } = AuthenticationSlice.actions;

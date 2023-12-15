@@ -99,6 +99,7 @@ export const AllMentorsPage = () => {
                                              image="https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
                                              specialist={specialists}
                                              verified={accountStatus.verification}
+                                             id={_id as string}
                                         />
                                    ))}
                          </div>

@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { IMentorAuthProps } from "../interface";
 
 interface SignInProps {
      mobile: string;
@@ -36,4 +37,14 @@ export const SignUpValidationSchema = yup.object().shape({
      password: yup.string().required("password is required for sign up").min(6).max(16),
      fname: yup.string().required("first name is required"),
      lname: yup.string().required("last name is required"),
+});
+
+export const MentorSignInProps: IMentorAuthProps = {
+     password: "",
+     username: "",
+};
+
+export const MentorSignInValidationSchema = yup.object().shape({
+     username: yup.string().required("username is required for login"),
+     password: yup.string().required("password is required for login"),
 });

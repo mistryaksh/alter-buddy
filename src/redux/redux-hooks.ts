@@ -10,6 +10,8 @@ import {
      MentorApiMiddleware,
      MentorApiReducer,
      FaqApiReducer,
+     MentorAuthenticationApiMiddleware,
+     MentorAuthenticationApiReducer,
 } from "./rtk-api";
 import { AuthenticationReducer, FaqReducer, InputReducer, LayoutReducer, MentorReducer } from "./features";
 
@@ -19,6 +21,7 @@ export const AppMiddlewares: Middleware[] = [
      CategoryApiMiddleware,
      BlogApiMiddleware,
      FaqMiddleware,
+     MentorAuthenticationApiMiddleware,
 ];
 export const AppReducers = combineReducers({
      //! APP API REDUCER
@@ -27,6 +30,7 @@ export const AppReducers = combineReducers({
      categoryApi: CategoryApiReducer,
      blogApi: BlogApiReducer,
      faqApi: FaqApiReducer,
+     mentorAuthenticationApi: MentorAuthenticationApiReducer,
 
      //! DEFAULT APP REDUCERS
      layout: LayoutReducer,

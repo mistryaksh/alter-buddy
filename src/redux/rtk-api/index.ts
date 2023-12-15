@@ -3,3 +3,4 @@ export * from "./mentor.api";
 export * from "./category.api";
 export * from "./blogs.api";
 export * from "./faq.api";
+export * from "./mentor-authentication.api";

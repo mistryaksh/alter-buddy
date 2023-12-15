@@ -1,22 +1,29 @@
+import clsx from "clsx";
 import React, { FC } from "react";
 
 interface TextFieldProps {
      label: string;
      error?: string;
      touched?: boolean;
+     outlined?: boolean;
 }
 
 export const TextField: FC<
      React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & TextFieldProps
-> = ({ label, error, touched, ...rest }) => {
+> = ({ label, error, touched, outlined, ...rest }) => {
      return (
-          <div className="group flex flex-col gap-2 w-full">
+          <div className="group flex flex-col w-full">
                <label htmlFor={label} className="capitalize group-hover:text-primary-500 text-gray-500 font-light">
                     {label}
                </label>
                <input
                     id={label}
-                    className="border-b-2 text-primary-500 group-focus:border-primary-500 hover:border-primary-500 outline-none pb-2 flex-1 w-full bg-transparent"
+                    className={clsx(
+                         outlined
+                              ? "border-2 px-5 py-2 rounded-md focus:outline-none focus:border-primary-500"
+                              : "border-b-2 text-primary-500 group-focus:border-primary-500 hover:border-primary-500 outline-none pb-2 ",
+                         "flex-1 w-full bg-transparent"
+                    )}
                     {...rest}
                />
                {touched && <p className="text-red-500 text-right uppercase text-xs">{error}</p>}
