@@ -17,13 +17,13 @@ export const MentorDashboardPage = () => {
           data: calls,
           isError: isCallError,
           error: callError,
-          isLoading: isCallLoading,
+          // isLoading: isCallLoading,
      } = useMentorGetMyCallsQuery();
      const {
           data: slots,
           isError: isSlotError,
           error: slotError,
-          isLoading: isSlotLoading,
+          // isLoading: isSlotLoading,
      } = useMentorGetMySchedulesQuery();
 
      useEffect(() => {
