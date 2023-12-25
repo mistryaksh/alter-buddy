@@ -3,7 +3,7 @@ import { getMentorToken, getUserToken } from "./local-store";
 
 export const ApiBaseQuery = (baseQuery: (headers: Headers) => void) =>
      fetchBaseQuery({
-          baseUrl: process.env.REACT_APP_AWS_DEV_BACKEND,
+          baseUrl: process.env.REACT_APP_BACKEND_URL,
           prepareHeaders: baseQuery,
      });
 

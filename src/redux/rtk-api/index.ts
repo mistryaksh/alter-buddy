@@ -4,3 +4,6 @@ export * from "./category.api";
 export * from "./blogs.api";
 export * from "./faq.api";
 export * from "./mentor-authentication.api";
+export * from "./video-call.api";
+export * from "./user.api";
+export * from "./calls.api";

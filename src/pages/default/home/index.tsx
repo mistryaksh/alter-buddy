@@ -174,7 +174,7 @@ export const DefaultHome = () => {
                                              body={desc}
                                              image="https://static.wixstatic.com/media/4432a4c385c44e609ac41982225b1669.jpg/v1/fill/w_386,h_466,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Loneliness.jpg"
                                              label={label}
-                                             path="#read_more"
+                                             path={`/category/${_id}`}
                                         />
                                    </div>
                               ))}

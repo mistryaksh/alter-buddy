@@ -13,7 +13,7 @@ export const IconLinkButton: FC<IconLinkButtonProps> = ({ Icon, path }) => {
      let match = useMatch({ path: resolved.pathname, end: true });
      return (
           <Link to={path} className={clsx(" p-3 rounded-md", match && "bg-primary-400 text-white")}>
-               <Icon size={32} className="fill-white" />
+               <Icon size={32} className="text-white" />
           </Link>
      );
 };

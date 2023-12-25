@@ -16,6 +16,8 @@ export const BlogPage = () => {
           }
      }, [isBlogError, blogError, dispatch]);
 
+     console.log(blogs?.data);
+
      return (
           <MainLayout loading={isBlogLoading}>
                <div className="bg-gradient-to-t from-white to-primary-300 py-20">

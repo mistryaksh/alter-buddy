@@ -5,7 +5,11 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { AppMiddlewares, AppReducers } from "./redux-hooks";
 
 const AppMiddlewareFunc = (getDefaultMiddleware: CurriedGetDefaultMiddleware<any>) => {
-     return getDefaultMiddleware({ immutableCheck: false }).concat(AppMiddlewares);
+     return getDefaultMiddleware({
+          immutableCheck: false,
+          serializableStateInvariant: false,
+          actionCreatorInvariant: false,
+     }).concat(AppMiddlewares);
 };
 
 export const AppStore = configureStore({

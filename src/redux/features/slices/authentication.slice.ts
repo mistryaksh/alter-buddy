@@ -27,6 +27,7 @@ const AuthenticationSlice = createSlice({
           handleUserAuthentication: (state, action: PayloadAction<{ token: string }>) => {
                state.authentication = true;
                state.token = action.payload.token;
+               sessionStorage.setItem("ROLE", "USER");
           },
           handleUserLogout: (state) => {
                state.authentication = false;
@@ -35,6 +36,7 @@ const AuthenticationSlice = createSlice({
           handleMentorAuthentication: (state, action: PayloadAction<{ token: string }>) => {
                state.mentor.authentication = true;
                state.mentor.token = action.payload.token;
+               sessionStorage.setItem("ROLE", "MENTOR");
           },
      },
 });

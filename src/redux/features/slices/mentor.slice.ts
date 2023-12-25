@@ -1,12 +1,31 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../../";
-import { IMentorProps } from "../../../interface";
+
+interface MentorSliceProps {
+     call: boolean;
+     onAccept: boolean;
+}
+
+const initialState: MentorSliceProps = {
+     call: false,
+     onAccept: false,
+};
 
 const MentorSlice = createSlice({
-     initialState: {},
+     initialState,
      name: "mentors",
-     reducers: {},
+     reducers: {
+          getCall: (state) => {
+               state.call = true;
+          },
+          removeCall: (state) => {
+               state.call = false;
+          },
+          onCallAccept: (state) => {
+               state.onAccept = true;
+          },
+     },
 });
 
 export const useMentorSlice = () =>
@@ -14,4 +33,4 @@ export const useMentorSlice = () =>
           return state.mentors;
      });
 export const MentorReducer = MentorSlice.reducer;
-// export const {} = MentorSlice.actions;
+export const { getCall, removeCall, onCallAccept } = MentorSlice.actions;

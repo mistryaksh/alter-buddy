@@ -12,8 +12,13 @@ import {
      UserProfilePage,
      MentorDashboardPage,
      UserMentorDetailsPage,
+     VideoCallOnboard,
+     MentorChatPage,
+     MentorCallHistoryPage,
+     MentorSchedulesPage,
+     MentorSettingsPage,
 } from "../pages";
-import { PrivateRoutes } from "../component";
+import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 export const AppRoutes = () => {
      return (
           <Routes>
@@ -27,16 +32,20 @@ export const AppRoutes = () => {
                <Route path="/blog" element={<BlogPage />} />
                <Route path="user">
                     <Route path="mentor/details/:id" element={<UserMentorDetailsPage />} />
-                    <Route element={<PrivateRoutes />}>
+                    <Route element={<UserPrivateRoutes />}>
                          <Route path="profile" element={<UserProfilePage />} />
+                         <Route path="video/onboard/:id" element={<VideoCallOnboard />} />
                     </Route>
                </Route>
                <Route path="mentor">
                     <Route path="login" element={<MentorLoginPage />} />
-                    <Route path="dashboard" element={<MentorDashboardPage />} />
-                    <Route path="schedules" element={<MentorDashboardPage />} />
-                    <Route path="chat" element={<MentorDashboardPage />} />
-                    <Route path="settings" element={<MentorDashboardPage />} />
+                    <Route element={<MentorPrivateRoutes />}>
+                         <Route path="dashboard" element={<MentorDashboardPage />} />
+                         <Route path="call-history" element={<MentorCallHistoryPage />} />
+                         <Route path="schedules" element={<MentorSchedulesPage />} />
+                         <Route path="chat/:id" element={<MentorChatPage />} />
+                         <Route path="settings" element={<MentorSettingsPage />} />
+                    </Route>
                </Route>
           </Routes>
      );

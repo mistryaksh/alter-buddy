@@ -131,13 +131,14 @@ export const MainLayout: FC<MainLayoutProps> = ({ children, hideNav, loading }) 
                dispatch(handleError(null));
                removeUserToken();
           }
-          if (localStore?.length) {
+          if (localStorage.getItem("USER_TOKEN")) {
                dispatch(
                     handleUserAuthentication({
                          token: localStore as string,
                     })
                );
           }
+          window.scrollTo(0, 0);
      }, [
           browserMode,
           dispatch,

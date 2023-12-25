@@ -35,3 +35,11 @@
 .dark {
      @apply bg-gray-800 text-zinc-50;
 }
+
+.react-date-picker__wrapper {
+     border: none !important;
+}
+
+video {
+     border-radius: theme("borderRadius.lg");
+}

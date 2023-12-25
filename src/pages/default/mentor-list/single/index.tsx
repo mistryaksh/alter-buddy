@@ -53,7 +53,7 @@ export const SingleCategoryPage = () => {
      return (
           <MainLayout loading={isSubCategoryLoading || isMentorLoading}>
                {error}
-               <div className={clsx(`bg-gradient-to-t from-transparent via-transparent to-primary-400`)}>
+               <div className={clsx(`bg-gradient-to-t from-white via-white to-primary-200`)}>
                     <div className="container mx-auto flex flex-col gap-5 py-20 w-[60%]">
                          <h1 className="text-5xl font-semibold capitalize">{subCategory?.data.label}</h1>
                          <h6 className="text-2xl font-semibold">{subCategory?.data.subTitle}</h6>

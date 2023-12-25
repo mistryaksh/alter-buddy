@@ -16,13 +16,38 @@ const MentorApi = createApi({
           GetMentorByCategory: query<{ data: IMentorProps[] }, string>({
                query: (id: string) => `/get-mentor/category/${id}`,
           }),
-
           GetMentorBySubCategory: query<{ data: IMentorProps[] }, string>({
                query: (id: string) => `/get-mentor/sub-category/${id}`,
           }),
           GetMentorUsingId: query<{ data: IMentorProps }, string>({
                query: (id: string) => `/mentor/profile/${id}`,
           }),
+          BookMentorSlot: mutation<{ data: any }, { userId: string; slotId: string; mainId: string; mentorId: string }>(
+               {
+                    query: ({
+                         slotId,
+                         userId,
+                         mainId,
+                         mentorId,
+                    }: {
+                         userId: string;
+                         slotId: string;
+                         mainId: string;
+                         mentorId: string;
+                    }) => {
+                         return {
+                              url: "/slot/book",
+                              method: "PUT",
+                              body: {
+                                   userId,
+                                   slotId,
+                                   mainId,
+                                   mentorId,
+                              },
+                         };
+                    },
+               }
+          ),
      }),
 });
 
@@ -34,6 +59,7 @@ export const {
      useGetMentorBySubCategoryQuery,
      useLazyGetMentorByCategoryQuery,
      useLazyGetMentorBySubCategoryQuery,
+     useBookMentorSlotMutation,
 } = MentorApi;
 export const MentorApiReducer = MentorApi.reducer;
 export const MentorApiMiddleware = MentorApi.middleware;
