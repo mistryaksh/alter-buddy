@@ -15,7 +15,7 @@ export const AppProvider: FC<AppProviderProps> = ({ children }) => {
      return (
           <ReduxProvider store={AppStore}>
                <ToastContainer position="top-right" autoClose={2000} />
-               <BrowserRouter>{children}</BrowserRouter>
+               <BrowserRouter basename="/">{children}</BrowserRouter>
           </ReduxProvider>
      );
 };
