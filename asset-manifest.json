@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/alter-buddy/static/css/main.457684bc.css",
+    "main.js": "/alter-buddy/static/js/main.3e56889d.js",
+    "static/media/AvenirLTStd-Black.otf": "/alter-buddy/static/media/AvenirLTStd-Black.7ce894e12078ca8c5134.otf",
+    "static/media/AvenirLTStd-Book.otf": "/alter-buddy/static/media/AvenirLTStd-Book.813557df4c7a90b1a474.otf",
+    "static/media/logo.png": "/alter-buddy/static/media/logo.f6f03919811d124b745b.png",
+    "index.html": "/alter-buddy/index.html",
+    "main.457684bc.css.map": "/alter-buddy/static/css/main.457684bc.css.map",
+    "main.3e56889d.js.map": "/alter-buddy/static/js/main.3e56889d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.457684bc.css",
+    "static/js/main.3e56889d.js"
+  ]
+}
