@@ -1,4 +1,4 @@
 import io from "socket.io-client";
 
-export const socketService = io("https://alter-buddy-backend-2.onrender.com");
+export const socketService = io("https://mighty-mint-height.glitch.me");
 socketService.connect();

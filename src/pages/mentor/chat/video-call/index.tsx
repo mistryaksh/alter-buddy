@@ -43,6 +43,7 @@ export const MentorChatPage = () => {
                                    webcamEnabled: true,
                                    name: `${profile?.data.name.firstName} ${profile?.data.name.lastName}`,
                                    mode: "CONFERENCE",
+                                   participantId: profile?.data._id,
                               }}
                          >
                               <MentorMeetingView
@@ -110,40 +111,46 @@ const MentorMeetingView: FC<MentorMeetingViewProps> = ({ userName, callerName, m
                                              key={participantId}
                                              mentorId={mentorId}
                                              userId={userId}
-                                             messages={messages}
                                              roomId={roomId}
                                         />
                                    ))
                                    .reverse()}
                          </div>
                          <div className="w-[40%] flex flex-col gap-3">
-                              {messages.map(({ id, message, senderName, timestamp }) => (
-                                   <div
-                                        key={id}
-                                        className={clsx(
-                                             senderName !== userName
-                                                  ? "bg-primary-500 text-white"
-                                                  : "text-right bg-primary-300",
-                                             "p-3 rounded-md"
-                                        )}
-                                   >
-                                        <div>
-                                             {senderName !== userName && (
-                                                  <p>
-                                                       <span className="capitalize">{senderName} </span> at{" "}
-                                                       {moment(timestamp).format("LT")}
-                                                  </p>
+                              {messages.map(({ id, message, senderName, timestamp }) => {
+                                   return (
+                                        <div
+                                             key={id}
+                                             className={clsx(
+                                                  senderName !== userName
+                                                       ? "bg-primary-500 text-white"
+                                                       : "text-right bg-primary-300",
+                                                  "p-3 rounded-md"
                                              )}
+                                        >
+                                             <div>
+                                                  {senderName !== userName && (
+                                                       <p>
+                                                            <span className="capitalize">{senderName} </span> at{" "}
+                                                            {moment(timestamp).format("LT")}
+                                                       </p>
+                                                  )}
+                                             </div>
+                                             <div className=" w-full text-right">
+                                                  <p
+                                                       className={clsx(
+                                                            "text-sm",
+                                                            senderName === userName && "text-right"
+                                                       )}
+                                                  >
+                                                       {senderName === userName &&
+                                                            `You at ${moment(timestamp).format("LT")}`}
+                                                  </p>
+                                             </div>
+                                             <p>{message}</p>
                                         </div>
-                                        <div className=" w-full text-right">
-                                             <p className={clsx("text-sm", senderName === userName && "text-right")}>
-                                                  {senderName === userName &&
-                                                       `You at ${moment(timestamp).format("LT")}`}
-                                             </p>
-                                        </div>
-                                        <p>{message}</p>
-                                   </div>
-                              ))}
+                                   );
+                              })}
                               <div className="h-[10%] flex items-center gap-3">
                                    <input
                                         type="text"
@@ -196,7 +203,6 @@ interface MentorParticipateViewProps {
      leave: () => void;
      toggleWebcam: (camera: boolean) => void;
      toggleMic: (mic: boolean) => void;
-     messages: any;
      mentorId: string;
      userId: string;
      roomId: string;
@@ -208,7 +214,6 @@ const MentorParticipantView: FC<MentorParticipateViewProps> = ({
      toggleWebcam,
      userName,
      mentorId,
-     messages,
      userId,
      roomId,
 }) => {
@@ -256,7 +261,6 @@ const MentorParticipantView: FC<MentorParticipateViewProps> = ({
           socketService.emit("CALL_END", {
                userId: userId,
                mentorId: mentorId,
-               messages: messages,
                roomId: roomId,
           });
           navigate("/mentor/dashboard", { replace: true });
