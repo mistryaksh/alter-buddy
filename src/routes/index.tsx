@@ -17,6 +17,7 @@ import {
      MentorCallHistoryPage,
      MentorSchedulesPage,
      MentorSettingsPage,
+     PrivacyPolicyPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 export const AppRoutes = () => {
@@ -24,6 +25,7 @@ export const AppRoutes = () => {
           <Routes>
                <Route path="/" element={<DefaultHome />} />
                <Route path="/about" element={<AboutPage />} />
+               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                <Route path="/mentor/category/:id" element={<AllMentorsPage />} />
                <Route path="/mobile-verification" element={<MobileVerificationPage />} />
                <Route path="/category/:id" element={<SingleCategoryPage />} />

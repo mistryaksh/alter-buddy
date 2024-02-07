@@ -47,7 +47,7 @@ export const AuthModel: FC<AuthModalProps> = ({
                                         <AiOutlineClose size={30} />
                                    </button>
                               </div>
-                              <div className="w-[60%] h-[60%] flex flex-col justify-between">
+                              <div className="w-[60%] h-[70%] flex flex-col justify-between">
                                    {/* authentication component */}
                                    {/* ! :- SECURE COMPONENTS */}
                                    {viewType === "onboard" && (
@@ -71,15 +71,6 @@ export const AuthModel: FC<AuthModalProps> = ({
                                    )}
                                    {/* only footer shows to sign up & onboard */}
                                    {viewType !== "signin" && <AuthModalFooter />}
-                              </div>
-                              <div className="text-center">
-                                   <Link
-                                        onClick={() => dispatch(handleAuthModal())}
-                                        to="/mentor/login"
-                                        className="underline text-primary-500 uppercase"
-                                   >
-                                        sign in to mentor panel
-                                   </Link>
                               </div>
                          </div>
                     </div>

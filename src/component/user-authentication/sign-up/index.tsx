@@ -1,9 +1,12 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { AuthModalBody } from "../../modal-components";
 import { AppButton, TextField } from "../../UI";
 import { UserRegisterProps } from "../../../interface";
 import { Formik } from "formik";
 import { SignUpValidationSchema } from "../../../validation";
+import { Link, useNavigate } from "react-router-dom";
+import { handleAuthModal } from "../../../redux/features";
+import { useAppDispatch } from "../../../redux";
 
 interface SignUpBodyProps {
      viewSwitcher: () => void;
@@ -13,8 +16,14 @@ interface SignUpBodyProps {
 }
 
 export const SignUpBody: FC<SignUpBodyProps> = ({ viewSwitcher, registerFunc, loading, error }) => {
+     const [accept, setAccept] = useState<boolean>(false);
+     const dispatch = useAppDispatch();
+     const navigate = useNavigate();
+     const handlePrivacyAccept = () => {
+          setAccept(!accept);
+     };
      return (
-          <div className="flex flex-col items-center gap-5 mx-auto w-[70%]">
+          <div className="flex flex-col items-center gap-3 mx-auto w-[70%] ">
                <AuthModalBody
                     modalTitle="Continue to creating account"
                     header={{
@@ -87,9 +96,33 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ viewSwitcher, registerFunc, lo
                                              touched={touched.password}
                                         />
                                    </div>
-                                   <AppButton loading={loading} type="submit" filled>
-                                        Sign up account
-                                   </AppButton>
+                                   <div className="flex gap-3 items-center pl-3 py-3">
+                                        <input
+                                             type="checkbox"
+                                             className="w-4 rounded-full h-4"
+                                             name="privacy"
+                                             id="privacy"
+                                             checked={accept}
+                                             onChange={handlePrivacyAccept}
+                                        />
+                                        <label className="select-none" htmlFor="privacy">
+                                             Accept{" "}
+                                             <span
+                                                  onClick={() => {
+                                                       dispatch(handleAuthModal());
+                                                       navigate("/privacy-policy");
+                                                  }}
+                                                  className="underline text-primary-500 cursor-pointer"
+                                             >
+                                                  Privacy Policy
+                                             </span>
+                                        </label>
+                                   </div>
+                                   <div className="flex justify-end">
+                                        <AppButton disabled={!accept} loading={loading} type="submit" filled>
+                                             Sign up account
+                                        </AppButton>
+                                   </div>
                               </form>
                          )}
                     </Formik>

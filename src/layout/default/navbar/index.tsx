@@ -42,10 +42,10 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                )}
           >
                <nav>
-                    <div className="mx-auto px-4 sm:px-6 py-2 lg:px-8 p-">
-                         <div className="flex items-center justify-between h-16">
-                              <div className="flex items-center justify-between w-full">
-                                   <div className="flex-shrink-0 flex-1">
+                    <div className="px-4 sm:px-6 py-2 lg:px-8">
+                         <div className="flex items-center justify-between h-16 w-full">
+                              <div className="flex items-center justify-between">
+                                   <div className="flex-shrink-0">
                                         <Link to="/">
                                              <img
                                                   className="w-[50%]"
@@ -54,149 +54,154 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              />
                                         </Link>
                                    </div>
-                                   <div className="flex-1 hidden md:block">
-                                        <ul className="flex items-center gap-5">
-                                             <li>
+                                   <div className="flex-1  hidden md:block w-full">
+                                        <ul className="flex items-center gap-5 w-full">
+                                             <li className="flex-1">
                                                   <AppLink path="/about" label="About" />
                                              </li>
-                                             <div className="group relative">
-                                                  <Menu as="div" className="relative inline-block text-left">
-                                                       <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
-                                                            Services
-                                                            <FaChevronDown />
-                                                       </Menu.Button>
-                                                       <Transition
-                                                            as={Fragment}
-                                                            enter="transition ease-out duration-100"
-                                                            enterFrom="transform opacity-0 scale-95"
-                                                            enterTo="transform opacity-100 scale-100"
-                                                            leave="transition ease-in duration-75"
-                                                            leaveFrom="transform opacity-100 scale-100"
-                                                            leaveTo="transform opacity-0 scale-95"
-                                                       >
-                                                            <Menu.Items
-                                                                 className="absolute left-0 mt-2
-                                                            w-[500px] origin-top-right bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-20"
+                                             <li>
+                                                  <div className="group relative">
+                                                       <Menu as="div" className="relative inline-block text-left">
+                                                            <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
+                                                                 Services
+                                                                 <FaChevronDown />
+                                                            </Menu.Button>
+                                                            <Transition
+                                                                 as={Fragment}
+                                                                 enter="transition ease-out duration-100"
+                                                                 enterFrom="transform opacity-0 scale-95"
+                                                                 enterTo="transform opacity-100 scale-100"
+                                                                 leave="transition ease-in duration-75"
+                                                                 leaveFrom="transform opacity-100 scale-100"
+                                                                 leaveTo="transform opacity-0 scale-95"
                                                             >
-                                                                 <div className="">
-                                                                      <label
-                                                                           htmlFor="service"
-                                                                           className="uppercase font-semibold text-sm text-primary-500"
-                                                                      >
-                                                                           get help for:
-                                                                      </label>
-                                                                      <div className="flex flex-1 flex-col gap-3 ">
-                                                                           {subCategory?.map(({ label, _id }) => (
-                                                                                <div className="flex gap-3" key={_id}>
-                                                                                     <Menu.Item>
-                                                                                          {({ active }) => (
-                                                                                               <Link
-                                                                                                    to={`/category/${_id}`}
-                                                                                                    className={`${
-                                                                                                         active
-                                                                                                              ? "text-primary-500"
-                                                                                                              : "text-gray-500"
-                                                                                                    } group flex w-full
+                                                                 <Menu.Items
+                                                                      className="absolute left-0 mt-2
+                                                            w-[500px] origin-top-right bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-20"
+                                                                 >
+                                                                      <div className="">
+                                                                           <label
+                                                                                htmlFor="service"
+                                                                                className="uppercase font-semibold text-sm text-primary-500"
+                                                                           >
+                                                                                get help for:
+                                                                           </label>
+                                                                           <div className="flex flex-1 flex-col gap-3 ">
+                                                                                {subCategory?.map(({ label, _id }) => (
+                                                                                     <div
+                                                                                          className="flex gap-3"
+                                                                                          key={_id}
+                                                                                     >
+                                                                                          <Menu.Item>
+                                                                                               {({ active }) => (
+                                                                                                    <Link
+                                                                                                         to={`/category/${_id}`}
+                                                                                                         className={`${
+                                                                                                              active
+                                                                                                                   ? "text-primary-500"
+                                                                                                                   : "text-gray-500"
+                                                                                                         } group flex w-full
                                                                                                     font-bold items-center capitalize`}
-                                                                                               >
-                                                                                                    {label}
-                                                                                               </Link>
-                                                                                          )}
-                                                                                     </Menu.Item>
-                                                                                </div>
-                                                                           ))}
+                                                                                                    >
+                                                                                                         {label}
+                                                                                                    </Link>
+                                                                                               )}
+                                                                                          </Menu.Item>
+                                                                                     </div>
+                                                                                ))}
+                                                                           </div>
                                                                       </div>
-                                                                 </div>
-                                                                 <div className="flex-1 h-full pl-3">
-                                                                      <label
-                                                                           htmlFor="service"
-                                                                           className="uppercase font-semibold text-sm text-primary-500"
-                                                                      >
-                                                                           Therapy for mental wellness:
-                                                                      </label>
-                                                                      <div className="flex flex-col gap-3">
-                                                                           <Link
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                                to="#"
+                                                                      <div className="flex-1 h-full pl-3">
+                                                                           <label
+                                                                                htmlFor="service"
+                                                                                className="uppercase font-semibold text-sm text-primary-500"
                                                                            >
-                                                                                marriage counseling
-                                                                           </Link>
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                relationship counseling
-                                                                           </Link>
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                Depression counseling
-                                                                           </Link>
+                                                                                Therapy for mental wellness:
+                                                                           </label>
+                                                                           <div className="flex flex-col gap-3">
+                                                                                <Link
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                     to="#"
+                                                                                >
+                                                                                     marriage counseling
+                                                                                </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     relationship counseling
+                                                                                </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     Depression counseling
+                                                                                </Link>
 
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                LGBTQ therapy
-                                                                           </Link>
-                                                                           <Link
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                                to="#"
-                                                                           >
-                                                                                marriage counseling
-                                                                           </Link>
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                relationship counseling
-                                                                           </Link>
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                Depression counseling
-                                                                           </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     LGBTQ therapy
+                                                                                </Link>
+                                                                                <Link
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                     to="#"
+                                                                                >
+                                                                                     marriage counseling
+                                                                                </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     relationship counseling
+                                                                                </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     Depression counseling
+                                                                                </Link>
 
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                LGBTQ therapy
-                                                                           </Link>
-                                                                           <Link
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                                to="#"
-                                                                           >
-                                                                                marriage counseling
-                                                                           </Link>
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                relationship counseling
-                                                                           </Link>
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                Depression counseling
-                                                                           </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     LGBTQ therapy
+                                                                                </Link>
+                                                                                <Link
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                     to="#"
+                                                                                >
+                                                                                     marriage counseling
+                                                                                </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     relationship counseling
+                                                                                </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     Depression counseling
+                                                                                </Link>
 
-                                                                           <Link
-                                                                                to="#"
-                                                                                className="capitalize text-gray-500 font-bold"
-                                                                           >
-                                                                                LGBTQ therapy
-                                                                           </Link>
+                                                                                <Link
+                                                                                     to="#"
+                                                                                     className="capitalize text-gray-500 font-bold"
+                                                                                >
+                                                                                     LGBTQ therapy
+                                                                                </Link>
+                                                                           </div>
                                                                       </div>
-                                                                 </div>
-                                                            </Menu.Items>
-                                                       </Transition>
-                                                  </Menu>
-                                             </div>
-                                             <li className="group relative">
+                                                                 </Menu.Items>
+                                                            </Transition>
+                                                       </Menu>
+                                                  </div>
+                                             </li>
+                                             <li className="group relative w-[70px]">
                                                   <Menu as="div" className="relative inline-block text-left">
                                                        <div>
                                                             <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
@@ -245,9 +250,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              <li>
                                                   <AppLink path="/rant" label="rant" />
                                              </li>
+                                             <li className="w-[120px]">
+                                                  <AppLink path="/privacy-policy" label="Privacy Policy" />
+                                             </li>
                                         </ul>
                                    </div>
-                                   <div className="hidden flex-1 xl:justify-end md:block xl:w-full xl:flex items-center justify-between gap-5">
+                                   <div className="hidden xl:justify-end md:block xl:w-full xl:flex items-center justify-between gap-5">
                                         <AppButton flexed={false} outlined>
                                              Talk to Buddy
                                         </AppButton>
