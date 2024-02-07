@@ -1,12 +1,10 @@
 import React, { FC } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { handleAuthModal, useLayoutSlice } from "../../../redux/features";
+import { useLayoutSlice } from "../../../redux/features";
 import clsx from "clsx";
 import { AuthModalFooter } from "../../modal-components";
 import { AuthOnboardBody, SignInBody, SignUpBody } from "../../user-authentication";
 import { UserLoginProps, UserRegisterProps } from "../../../interface";
-import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../../redux";
 
 interface AuthModalProps {
      modalHandler: () => void;
@@ -29,7 +27,6 @@ export const AuthModel: FC<AuthModalProps> = ({
      error,
      loading,
 }) => {
-     const dispatch = useAppDispatch();
      const { darkMode } = useLayoutSlice();
      return (
           <>

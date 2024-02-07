@@ -4,7 +4,7 @@ import { AppButton, TextField } from "../../UI";
 import { UserRegisterProps } from "../../../interface";
 import { Formik } from "formik";
 import { SignUpValidationSchema } from "../../../validation";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { handleAuthModal } from "../../../redux/features";
 import { useAppDispatch } from "../../../redux";
 
