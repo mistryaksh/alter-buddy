@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux";
 
 export const SingleCategoryPage = () => {
-     const { darkMode, error } = useLayoutSlice();
+     const { error } = useLayoutSlice();
      const { id } = useParams();
      const dispatch = useAppDispatch();
      const [
@@ -67,8 +67,7 @@ export const SingleCategoryPage = () => {
                     </div>
                     <div
                          className={clsx(
-                              "border shadow-lg border-primary-500 rounded-lg p-10 w-[70%] container mx-auto",
-                              darkMode ? "dark" : "light"
+                              "border shadow-lg border-primary-500 rounded-lg p-10 w-[70%] container mx-auto"
                          )}
                     >
                          <div className="grid grid-cols-12 xl:grid-cols-3 lg:col-span-3 md:col-span-12 divide-x divide-primary-500">

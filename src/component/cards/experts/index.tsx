@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { useLayoutSlice } from "../../../redux/features";
 import clsx from "clsx";
 
 import { AppButton } from "../../UI";
@@ -13,14 +12,13 @@ interface ExportMentorsProps {
 }
 
 export const ExportMentors: FC<ExportMentorsProps> = ({ experience, name, path, specialist, image }) => {
-     const { darkMode } = useLayoutSlice();
      return (
           <div className="relative">
                <img src={image} alt={name} />
                <div
                     className={clsx(
                          ` p-3 xl:w-[95%] xl:absolute -right-5 -bottom-16 flex flex-col gap-5 xl:mb-0`,
-                         darkMode ? "bg-gray-900" : "bg-gray-100"
+                         "bg-gray-100"
                     )}
                >
                     <div>

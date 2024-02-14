@@ -11,7 +11,13 @@ export const AppLink: FC<AppLinkProps> = ({ label, path }) => {
      let resolved = useResolvedPath(path);
      let match = useMatch({ path: resolved.pathname, end: true });
      return (
-          <Link className={clsx(match ? "text-primary-500" : "text-gray-400", "capitalize")} to={path}>
+          <Link
+               className={clsx(
+                    match ? "text-primary-500" : "text-gray-400",
+                    "capitalize font-semibold transition-all duration-300 hover:text-primary-500"
+               )}
+               to={path}
+          >
                {label}
           </Link>
      );

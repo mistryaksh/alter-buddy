@@ -11,7 +11,7 @@ import {
      TwoHands,
 } from "../../../component";
 import { Link } from "react-router-dom";
-import { handleError, handleFaq, useAuthenticationSlice, useFaqSlice, useLayoutSlice } from "../../../redux/features";
+import { handleError, handleFaq, useAuthenticationSlice, useFaqSlice } from "../../../redux/features";
 import { useAppDispatch } from "../../../redux";
 import clsx from "clsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
@@ -31,8 +31,6 @@ export const DefaultHome = () => {
 
      const { data: faq, isError: isFaqError, error: faqError, isLoading: isFaqLoading } = useGetAllFaqQuery();
 
-     const { darkMode } = useLayoutSlice();
-
      const dispatch = useAppDispatch();
 
      const localStore = getUserToken();
@@ -48,12 +46,7 @@ export const DefaultHome = () => {
      return (
           <MainLayout loading={isSubCategoryLoading || isFaqLoading}>
                {/* section one */}
-               <div
-                    className={clsx(
-                         `flex items-center gap-10 py-10 bg-gradient-to-bl `,
-                         darkMode ? "dark  from-primary-600 to-gray-400" : "light  from-primary-300 to-white"
-                    )}
-               >
+               <div className={clsx(`flex items-center gap-10 py-10 bg-gradient-to-bl `, "from-primary-300 to-white")}>
                     <div className="flex-1 p-10">
                          <h1 className="text-7xl text-primary-500 font-bold font-sans2">Welcome to AlterBuddy</h1>
                          <p className="py-10 text-lg dark:text-gray-500">

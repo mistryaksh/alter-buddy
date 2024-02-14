@@ -3,12 +3,9 @@ import React, { FC, useEffect } from "react";
 import { useGetAllCategoryQuery, useGetAllSubCategoryQuery } from "../../../redux/rtk-api";
 import { Link } from "react-router-dom";
 
-interface MainFooterProps {
-     darkMode: boolean;
-     toggle: () => void;
-}
+interface MainFooterProps {}
 
-export const MainFooter: FC<MainFooterProps> = ({ darkMode }) => {
+export const MainFooter: FC<MainFooterProps> = () => {
      const { data: category, isError: isCategoryError, error: categoryError } = useGetAllCategoryQuery();
      const { data: subCategory, isError: isSubCategoryError, error: subCategoryError } = useGetAllSubCategoryQuery();
 
@@ -22,8 +19,8 @@ export const MainFooter: FC<MainFooterProps> = ({ darkMode }) => {
      }, [isCategoryError, categoryError, isSubCategoryError, subCategoryError]);
 
      return (
-          <div className={clsx(darkMode ? "dark" : "light")}>
-               <footer className={clsx(darkMode ? "bg-primary-800" : "bg-primary-100", " py-5")}>
+          <div className={clsx("")}>
+               <footer className={clsx("py-10 bg-primary-300", " py-5")}>
                     <div className="flex container mx-auto">
                          <div className="flex flex-col w-[40%]">
                               <img className="w-[50%]" src={require("../../../assets/image/logo.png")} alt="Workflow" />
@@ -35,7 +32,7 @@ export const MainFooter: FC<MainFooterProps> = ({ darkMode }) => {
                                         Categories
                                    </label>
                                    {category?.data.map(({ title, _id }) => (
-                                        <Link to={`/mentor/category/${_id}`}>
+                                        <Link key={_id} to={`/mentor/category/${_id}`}>
                                              <li className="capitalize font-semibold">{title}</li>
                                         </Link>
                                    ))}
@@ -45,7 +42,7 @@ export const MainFooter: FC<MainFooterProps> = ({ darkMode }) => {
                                         Mentor's sub categories
                                    </label>
                                    {subCategory?.data.map(({ label, _id }) => (
-                                        <Link to={`/category/${_id}`}>
+                                        <Link key={_id} to={`/category/${_id}`}>
                                              <li className="font-semibold capitalize">{label}</li>
                                         </Link>
                                    ))}

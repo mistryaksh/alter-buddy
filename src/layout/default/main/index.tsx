@@ -5,7 +5,6 @@ import clsx from "clsx";
 import {
      handleAuthModal,
      handleAuthModalView,
-     handleDarkMode,
      handleError,
      handleMobileMenu,
      handleUserAuthentication,
@@ -33,10 +32,9 @@ interface MainLayoutProps {
 }
 
 export const MainLayout: FC<MainLayoutProps> = ({ children, hideNav, loading }) => {
-     const { darkMode, mobileMenu, authModal, modalView, error } = useLayoutSlice();
+     const { mobileMenu, authModal, modalView, error } = useLayoutSlice();
      const dispatch = useAppDispatch();
      const { authentication } = useAuthenticationSlice();
-     const browserMode = localStorage.getItem("darkMode");
      const localStore = getUserToken();
      const {
           data: subCategory,
@@ -76,9 +74,6 @@ export const MainLayout: FC<MainLayoutProps> = ({ children, hideNav, loading }) 
      ] = useRegisterUserMutation();
 
      useEffect(() => {
-          if (!browserMode) {
-               dispatch(handleDarkMode());
-          }
           if (isLoginError) {
                if ((loginError as any).data) {
                     dispatch(handleError((loginError as any).data.message));
@@ -140,7 +135,6 @@ export const MainLayout: FC<MainLayoutProps> = ({ children, hideNav, loading }) 
           }
           window.scrollTo(0, 0);
      }, [
-          browserMode,
           dispatch,
           isLoginError,
           loginError,
@@ -198,11 +192,9 @@ export const MainLayout: FC<MainLayoutProps> = ({ children, hideNav, loading }) 
                          authModal={() => dispatch(handleAuthModal())}
                          mobile={mobileMenu}
                          handleMenu={() => dispatch(handleMobileMenu())}
-                         darkMode={darkMode}
-                         toggle={() => dispatch(handleDarkMode())}
                     />
                )}
-               <main className={clsx(darkMode ? "dark" : "light", !hideNav && "mt-20", "relative")}>
+               <main className={clsx(!hideNav && "mt-20", "relative")}>
                     {loading && isSubCategoryLoading && isCategoryLoading ? (
                          <div className="flex h-[300px] justify-center items-center">
                               <AiOutlineLoading size={150} className="animate-spin text-primary-500" />
@@ -211,7 +203,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children, hideNav, loading }) 
                          children
                     )}
                </main>
-               {!hideNav && <MainFooter darkMode={darkMode} toggle={() => dispatch(handleDarkMode())} />}
+               {!hideNav && <MainFooter />}
                {!authentication && authModal && (
                     <AuthModel
                          loading={isLoginLoading || isRegisterLoading}

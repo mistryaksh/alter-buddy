@@ -2,7 +2,6 @@ import React, { FC, Fragment } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 import clsx from "clsx";
-import { FaRegMoon, FaRegSun } from "react-icons/fa";
 import { AppButton, AppLink } from "../../../component";
 import { Link } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -10,8 +9,6 @@ import { ICategoryProps, ISubCategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
 
 interface MainNavBarProps {
-     toggle: () => void;
-     darkMode: boolean;
      mobile: boolean;
      handleMenu: () => void;
      authModal: () => void;
@@ -23,8 +20,6 @@ interface MainNavBarProps {
 }
 
 export const MainNavBar: FC<MainNavBarProps> = ({
-     darkMode,
-     toggle,
      handleMenu,
      mobile,
      authModal,
@@ -35,36 +30,34 @@ export const MainNavBar: FC<MainNavBarProps> = ({
      category,
 }) => {
      return (
-          <div
-               className={clsx(
-                    darkMode ? "text-white bg-gray-900 " : "light",
-                    "fixed w-full top-0 z-20 bg-opacity-90 backdrop-blur-sm"
-               )}
-          >
+          <div className={clsx("fixed w-full top-0 z-20 bg-opacity-60 backdrop-blur-lg bg-white")}>
                <nav>
                     <div className="px-4 sm:px-6 py-2 lg:px-8">
                          <div className="flex items-center justify-between h-16 w-full">
-                              <div className="flex items-center justify-between">
-                                   <div className="flex-shrink-0">
+                              <div className="flex items-center justify-between gap-10">
+                                   <div className="w-[15%]">
                                         <Link to="/">
                                              <img
-                                                  className="w-[50%]"
+                                                  className=""
                                                   src={require("../../../assets/image/logo.png")}
                                                   alt="Workflow"
                                              />
                                         </Link>
                                    </div>
-                                   <div className="flex-1  hidden md:block w-full">
-                                        <ul className="flex items-center gap-5 w-full">
-                                             <li className="flex-1">
+                                   <div className="flex-1 hidden md:block w-full xl:flex xl:justify-end">
+                                        <ul className="flex items-center gap-5 w-full justify-end">
+                                             <li>
+                                                  <AppLink path="/" label="home" />
+                                             </li>
+                                             <li>
                                                   <AppLink path="/about" label="About" />
                                              </li>
                                              <li>
                                                   <div className="group relative">
                                                        <Menu as="div" className="relative inline-block text-left">
-                                                            <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
+                                                            <Menu.Button className="flex items-center gap-1 text-gray-400 capitalize hover:text-primary-500">
                                                                  Services
-                                                                 <FaChevronDown />
+                                                                 <FaChevronDown size={12} />
                                                             </Menu.Button>
                                                             <Transition
                                                                  as={Fragment}
@@ -76,8 +69,8 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                                  leaveTo="transform opacity-0 scale-95"
                                                             >
                                                                  <Menu.Items
-                                                                      className="absolute left-0 mt-2
-                                                            w-[500px] origin-top-right bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-20"
+                                                                      className="absolute left-0 mt-5 border
+                                                            w-[550px] origin-top-right bg-white shadow-2xl rounded-2xl divide-x p-5 divide-gray-500 flex gap-20"
                                                                  >
                                                                       <div className="">
                                                                            <label
@@ -204,9 +197,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              <li className="group relative w-[70px]">
                                                   <Menu as="div" className="relative inline-block text-left">
                                                        <div>
-                                                            <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
+                                                            <Menu.Button className="flex items-center gap-1 text-gray-400 capitalize hover:text-primary-500">
                                                                  Talk to
-                                                                 <FaChevronDown />
+                                                                 <FaChevronDown size={12} />
                                                             </Menu.Button>
                                                        </div>
                                                        <Transition
@@ -218,9 +211,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                             leaveFrom="transform opacity-100 scale-100"
                                                             leaveTo="transform opacity-0 scale-95"
                                                        >
-                                                            <Menu.Items className="absolute right-0 mt-2 w-[300px] origin-top-left bg-white  rounded-md">
+                                                            <Menu.Items className="absolute right-0 mt-5 shadow-2xl w-[350px] origin-top-left bg-white rounded-2xl border px-5">
                                                                  {category?.map(({ _id, title }) => (
-                                                                      <div className="px-1 py-1" key={_id}>
+                                                                      <div className="p-2" key={_id}>
                                                                            <Menu.Item>
                                                                                 {({ active }) => (
                                                                                      <Link
@@ -245,7 +238,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                   <AppLink path="/coming-soon" label="Contact" />
                                              </li>
                                              <li>
-                                                  <AppLink path="/blog" label="Blog" />
+                                                  <AppLink path="/blog" label="BuddyTube" />
                                              </li>
                                              <li>
                                                   <AppLink path="/rant" label="rant" />
@@ -255,13 +248,10 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              </li>
                                         </ul>
                                    </div>
-                                   <div className="hidden xl:justify-end md:block xl:w-full xl:flex items-center justify-between gap-5">
+                                   <div className="hidden xl:justify-end md:block xl:flex items-center justify-between gap-5 xl:w-[20%]">
                                         <AppButton flexed={false} outlined>
-                                             Talk to Buddy
+                                             Talk to expert
                                         </AppButton>
-                                        <button onClick={toggle}>
-                                             {darkMode ? <FaRegMoon size={22} /> : <FaRegSun size={22} />}
-                                        </button>
                                         <ul className="flex items-center gap-3">
                                              {!navLoading && authenticated && (
                                                   <>
@@ -295,11 +285,6 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                    </div>
                               </div>
                               <div className="flex gap-5 md:hidden items-center">
-                                   <div className="">
-                                        <button onClick={toggle} className="bg-primary-500 p-3 rounded-full text-white">
-                                             {darkMode ? <FaRegMoon size={22} /> : <FaRegSun size={22} />}
-                                        </button>
-                                   </div>
                                    <button
                                         onClick={handleMenu}
                                         type="button"

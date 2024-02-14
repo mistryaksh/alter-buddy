@@ -1,20 +1,11 @@
 import React from "react";
 import { MainLayout } from "../../../layout";
-import { useLayoutSlice } from "../../../redux/features";
 import clsx from "clsx";
 
 export const AboutPage = () => {
-     const { darkMode } = useLayoutSlice();
      return (
           <MainLayout>
-               <div
-                    className={clsx(
-                         "bg-gradient-to-t  py-32  p-3",
-                         darkMode
-                              ? "dark to-primary-700 from-gray-700 via-gray-700"
-                              : "to-primary-400 light from-white via-white"
-                    )}
-               >
+               <div className={clsx("bg-gradient-to-t  py-32  p-3", "to-primary-400 light from-white via-white")}>
                     <h6 className="text-6xl font-semibold text-center capitalize">
                          About <span className="text-primary-500">Us</span>
                     </h6>
@@ -24,13 +15,13 @@ export const AboutPage = () => {
                               alt=""
                          />
                     </div>
-                    <hr className="pt-20 border-t-2 border-blue-500" />
-                    <div className="flex items-start container w-[60%] mx-auto gap-20 flex-wrap">
-                         <div className="w-[10%]">
+                    <hr className="pt-20 border-t-2 border-primary-300" />
+                    <div className="flex items-start flex-col container w-[60%] mx-auto gap-10 flex-wrap">
+                         <div className="w-[40%]">
                               <h6 className="capitalize text-3xl font-light">Our Company</h6>
                          </div>
                          <div className="flex-1">
-                              <p className="font-extralight">
+                              <p className="font-extralight text-gray-500">
                                    This is your About page. This space is a great opportunity to give a full background
                                    on who you are, what you do, and what your site has to offer. Your users are
                                    genuinely interested in learning more about you, so don’t be afraid to share personal

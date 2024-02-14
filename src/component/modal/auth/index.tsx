@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { useLayoutSlice } from "../../../redux/features";
 import clsx from "clsx";
 import { AuthModalFooter } from "../../modal-components";
 import { AuthOnboardBody, SignInBody, SignUpBody } from "../../user-authentication";
@@ -27,16 +26,14 @@ export const AuthModel: FC<AuthModalProps> = ({
      error,
      loading,
 }) => {
-     const { darkMode } = useLayoutSlice();
      return (
           <>
-               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-white">
                     <div className="relative w-full h-full mx-auto">
                          {/*content*/}
                          <div
                               className={clsx(
-                                   `border-0 rounded-lg shadow-lg relative flex flex-col w-full  outline-none justify-center items-center focus:outline-none h-full`,
-                                   darkMode ? "dark" : "light"
+                                   `border-0 rounded-lg shadow-lg relative flex flex-col w-full  outline-none justify-center items-center focus:outline-none h-full`
                               )}
                          >
                               <div className="absolute right-20 top-20">
