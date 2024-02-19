@@ -15,19 +15,18 @@ export const ExportMentors: FC<ExportMentorsProps> = ({ experience, name, path, 
      return (
           <div className="relative">
                <img src={image} alt={name} />
-               <div
-                    className={clsx(
-                         ` p-3 xl:w-[95%] xl:absolute -right-5 -bottom-16 flex flex-col gap-5 xl:mb-0`,
-                         "bg-gray-100"
-                    )}
-               >
+               <div className={clsx(` p-3  -right-5 -bottom-16 flex flex-col gap-5 xl:mb-0`, "bg-gray-100")}>
                     <div>
-                         <h6 className="text-xl font-semibold capitalize">{name}</h6>
-                         <p className="text-md font-extralight capitalize">{specialist}</p>
-                         <p className="text-md font-extralight capitalize">{experience} years of Experience</p>
+                         <h6 className="text-xl font-semibold capitalize text-gray-900">
+                              {name ? name : "Mistry Aksh"}
+                         </h6>
+                         <p className="text-sm font-extralight capitalize text-gray-500">{specialist}</p>
+                         <p className="text-sm font-extralight capitalize text-gray-500">
+                              {experience} years of Experience
+                         </p>
                     </div>
                     <div className="flex justify-between gap-4 items-center">
-                         <AppButton outlined>read more</AppButton>
+                         <AppButton link>view details</AppButton>
                     </div>
                </div>
           </div>

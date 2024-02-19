@@ -7,11 +7,12 @@ interface AppButtonProps {
      outlined?: boolean;
      flexed?: boolean;
      loading?: boolean;
+     link?: boolean;
 }
 
 export const AppButton: FC<
      AppButtonProps & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-> = ({ filled, outlined, children, flexed, loading, ...rest }) => {
+> = ({ filled, outlined, children, flexed, loading, link, ...rest }) => {
      return (
           <button
                className={clsx(
@@ -19,7 +20,8 @@ export const AppButton: FC<
                     outlined &&
                          `border-2 border-primary-500 text-primary-500 hover:text-white hover:dark:bg-primary-600 text-sm hover:bg-primary-200 duration-150 disabled:border-opacity-50 disabled:hover:bg-gray-200 disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-500`,
                     flexed && `flex-1 w-full`,
-                    `py-2 px-5 rounded-full capitalize flex items-center gap-5 justify-center`
+                    `py-2 px-5 rounded-full capitalize flex items-center gap-5 justify-center`,
+                    link && `text-primary-500 px-0 py-0`
                )}
                disabled={loading}
                {...rest}

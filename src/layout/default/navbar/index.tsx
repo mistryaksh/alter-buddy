@@ -39,7 +39,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                         <Link to="/">
                                              <img
                                                   className=""
-                                                  src={require("../../../assets/image/logo.png")}
+                                                  src={require("../../../assets/image/logo.jpeg")}
                                                   alt="Workflow"
                                              />
                                         </Link>

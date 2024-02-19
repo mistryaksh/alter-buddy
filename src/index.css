@@ -43,3 +43,12 @@
 video {
      border-radius: theme("borderRadius.lg");
 }
+.cls-1,
+.cls-2 {
+     fill: none;
+}
+.cls-2 {
+     stroke: #000;
+     stroke-linecap: round;
+     stroke-linejoin: round;
+}

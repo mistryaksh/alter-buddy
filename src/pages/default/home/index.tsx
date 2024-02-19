@@ -11,15 +11,16 @@ import {
      TwoHands,
 } from "../../../component";
 import { Link } from "react-router-dom";
-import { handleError, handleFaq, useAuthenticationSlice, useFaqSlice } from "../../../redux/features";
+import { handleAuthModal, handleFaq, useAuthenticationSlice, useFaqSlice } from "../../../redux/features";
 import { useAppDispatch } from "../../../redux";
 import clsx from "clsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { useGetAllFaqQuery, useGetAllSubCategoryQuery, useGetTopMentorListQuery } from "../../../redux/rtk-api";
+import { useGetAllFaqQuery, useGetAllSubCategoryQuery, useGetMentorsListQuery } from "../../../redux/rtk-api";
 import { getUserToken } from "../../../utils";
+import { AiOutlineCheck } from "react-icons/ai";
 export const DefaultHome = () => {
      const { active } = useFaqSlice();
-     const { data: mentor } = useGetTopMentorListQuery();
+     const { data: mentor } = useGetMentorsListQuery();
      const { authentication } = useAuthenticationSlice();
 
      const {
@@ -36,10 +37,12 @@ export const DefaultHome = () => {
      const localStore = getUserToken();
      useEffect(() => {
           if (isSubCategoryError) {
-               dispatch(handleError((subCategoryError as any).data.message));
+               console.log(subCategoryError);
+               // dispatch(handleError((subCategoryError as any).data));
           }
           if (isFaqError) {
-               dispatch(handleError((faqError as any).data.message));
+               console.log(faqError);
+               // dispatch(handleError((faqError as any).data.message));
           }
      }, [authentication, dispatch, isSubCategoryError, subCategoryError, isFaqError, faqError, localStore]);
 
@@ -48,13 +51,97 @@ export const DefaultHome = () => {
                {/* section one */}
                <div className={clsx(`flex items-center gap-10 py-10 bg-gradient-to-bl `, "from-primary-300 to-white")}>
                     <div className="flex-1 p-10">
-                         <h1 className="text-7xl text-primary-500 font-bold font-sans2">Welcome to AlterBuddy</h1>
-                         <p className="py-10 text-lg dark:text-gray-500">
-                              AlterBuddy is an online platform to help people connect with external therapists and help
-                              with their mental health problems. Our mission is to provide mental wellness support to
-                              those in need.
-                         </p>
-                         <AppButton outlined>Talk to expert</AppButton>
+                         <h1 className="text-5xl text-primary-500 font-bold font-sans2 whitespace-pre-wrap">
+                              Welcome to AlterBuddy.
+                         </h1>
+                         <h3 className="text-5xl mt-3 text-primary-500 font-bold font-sans2 whitespace-pre-wrap">
+                              Your life alters here.
+                         </h3>
+                         <ul className="my-5">
+                              <li className="flex items-center gap-3">
+                                   <div className=" text-primary-500 p-2 rounded-full">
+                                        <AiOutlineCheck size={25} />
+                                   </div>
+                                   <p className="text-gray-500">
+                                        Linking you to a support system for mental health, healing, and manifestation,
+                                        24/7.
+                                   </p>
+                              </li>
+                              <li className="flex items-center gap-5">
+                                   <div className=" text-primary-500 p-2 rounded-full">
+                                        <AiOutlineCheck size={25} />
+                                   </div>
+                                   <p className="text-gray-500">
+                                        Empower your journey with our expert guidance and personalized services to
+                                        reshape your reality.
+                                   </p>
+                              </li>
+                              <li className="flex items-center gap-5">
+                                   <div className=" text-primary-500 p-2 rounded-full">
+                                        <AiOutlineCheck size={25} />
+                                   </div>
+                                   <p className="text-gray-500">
+                                        Guiding you through demanding workdays and sleepless nights toward positive life
+                                        transformations.
+                                   </p>
+                              </li>
+                         </ul>
+                         <div className="">
+                              <p className="text-gray-500 uppercase">Talk to buddies :</p>
+
+                              <div className="flex gap-5 items-center mt-2">
+                                   <div onClick={() => dispatch(handleAuthModal())}>
+                                        <AppButton filled>Continue on browser</AppButton>
+                                   </div>
+                                   <a
+                                        rel="noreferrer"
+                                        href="http://play.google.com/store/apps/details?"
+                                        target="_blank"
+                                   >
+                                        <svg
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             x="0px"
+                                             y="0px"
+                                             width="50"
+                                             height="50"
+                                             viewBox="0 0 48 48"
+                                        >
+                                             <path
+                                                  fill="#4db6ac"
+                                                  d="M7.705,4.043C7.292,4.15,7,4.507,7,5.121c0,1.802,0,18.795,0,18.795S7,42.28,7,43.091c0,0.446,0.197,0.745,0.5,0.856l20.181-20.064L7.705,4.043z"
+                                             ></path>
+                                             <path
+                                                  fill="#dce775"
+                                                  d="M33.237,18.36l-8.307-4.796c0,0-15.245-8.803-16.141-9.32C8.401,4.02,8.019,3.961,7.705,4.043l19.977,19.84L33.237,18.36z"
+                                             ></path>
+                                             <path
+                                                  fill="#d32f2f"
+                                                  d="M8.417,43.802c0.532-0.308,15.284-8.825,24.865-14.357l-5.601-5.562L7.5,43.947C7.748,44.038,8.066,44.004,8.417,43.802z"
+                                             ></path>
+                                             <path
+                                                  fill="#fbc02d"
+                                                  d="M41.398,23.071c-0.796-0.429-8.1-4.676-8.1-4.676l-0.061-0.035l-5.556,5.523l5.601,5.562c4.432-2.559,7.761-4.48,8.059-4.653C42.285,24.248,42.194,23.5,41.398,23.071z"
+                                             ></path>
+                                        </svg>
+                                   </a>
+                                   <a
+                                        rel="noreferrer"
+                                        href="http://play.google.com/store/apps/details?"
+                                        target="_blank"
+                                   >
+                                        <svg
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             x="0px"
+                                             y="0px"
+                                             width="50"
+                                             height="50"
+                                             viewBox="0 0 50 50"
+                                        >
+                                             <path d="M 16 3 C 9.38 3 4 8.38 4 15 L 4 35 C 4 41.62 9.38 47 16 47 L 36 47 C 42.62 47 48 41.62 48 35 L 48 15 C 48 8.38 42.62 3 36 3 L 16 3 z M 12.619141 18.070312 C 13.319141 18.070312 13.839844 18.570469 13.839844 19.230469 C 13.839844 19.880469 13.319141 20.380859 12.619141 20.380859 C 11.909141 20.380859 11.390625 19.880469 11.390625 19.230469 C 11.390625 18.570469 11.909141 18.070312 12.619141 18.070312 z M 23.039062 18.640625 C 26.689062 18.640625 28.939453 21.189297 28.939453 25.279297 C 28.939453 29.359297 26.709062 31.929688 23.039062 31.929688 C 19.349062 31.929688 17.109375 29.369297 17.109375 25.279297 C 17.109375 21.179297 19.399062 18.640625 23.039062 18.640625 z M 35.970703 18.640625 C 38.540703 18.640625 40.419062 20.139297 40.539062 22.279297 L 38.619141 22.279297 C 38.429141 21.109297 37.419453 20.380859 35.939453 20.380859 C 34.379453 20.380859 33.349609 21.119531 33.349609 22.269531 C 33.349609 23.169531 34.009922 23.690078 35.669922 24.080078 L 37.060547 24.419922 C 39.670547 25.029922 40.740234 26.080234 40.740234 27.990234 C 40.740234 30.420234 38.859609 31.939453 35.849609 31.939453 C 33.039609 31.939453 31.149766 30.490703 31.009766 28.220703 L 32.960938 28.220703 C 33.130938 29.420703 34.31 30.189453 36 30.189453 C 37.58 30.189453 38.740234 29.370234 38.740234 28.240234 C 38.740234 27.280234 38.010078 26.700781 36.330078 26.300781 L 34.689453 25.910156 C 32.399453 25.370156 31.349609 24.260391 31.349609 22.400391 C 31.349609 20.140391 33.200703 18.640625 35.970703 18.640625 z M 23.039062 20.470703 C 20.649062 20.470703 19.130859 22.339297 19.130859 25.279297 C 19.130859 28.209297 20.599062 30.099609 23.039062 30.099609 C 25.449062 30.099609 26.929688 28.209297 26.929688 25.279297 C 26.929688 22.339297 25.449063 20.470703 23.039062 20.470703 z M 11.679688 22.060547 L 13.560547 22.060547 L 13.560547 31.630859 L 11.679688 31.630859 L 11.679688 22.060547 z"></path>
+                                        </svg>
+                                   </a>
+                              </div>
+                         </div>
                     </div>
                     <div className="flex-1">
                          <img
@@ -66,32 +153,41 @@ export const DefaultHome = () => {
                </div>
 
                {/* section two */}
-               <div className="my-20 container mx-auto w-[60%]">
+               <div className="my-40 container mx-auto w-[80%]">
                     <h6 className="font-light text-4xl text-center capitalize font-sans2">
-                         why choose <span className="font-semibold text-primary-500">AlterBuddy?</span>
+                         why <span className="font-semibold text-primary-500">AlterBuddy?</span>
                     </h6>
-                    <div className="grid grid-cols-12 gap-10 mt-20 xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6">
+                    <p className="text-center text-gray-500">
+                         At AlterBuddy, we recognize the significance of fostering a positive mindset and nurturing
+                         mental well-being. That's why we offer trusted buddies who are equipped to navigate through any
+                         obstacles with you
+                    </p>
+                    <div className="grid grid-cols-12 gap-10 mt-20 items-center xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6">
                          <div className="flex flex-col justify-center gap-2 items-center">
                               <HumanBrainIcon height={100} width={100} />
-                              <p className="text-xl font-semibold">Licensed Therapists</p>
+                              <p className="text-xl text-center text-gray-500 font-semibold">
+                                   Trusted & Verified Buddies
+                              </p>
                          </div>
                          <div className="flex flex-col justify-center gap-2 items-center">
                               <DayHours height={100} width={100} />
-                              <p className="text-xl font-semibold">Licensed Therapists</p>
+                              <p className="text-xl text-center text-gray-500 font-semibold">24*7 available</p>
                          </div>
                          <div className="flex flex-col justify-center gap-2 items-center">
                               <ShopUser height={100} width={100} />
-                              <p className="text-xl font-semibold">Licensed Therapists</p>
+                              <p className="text-xl text-center text-gray-500 font-semibold">Licensed Therapists</p>
                          </div>
                          <div className="flex flex-col justify-center gap-2 items-center">
                               <TwoHands height={100} width={100} />
-                              <p className="text-xl font-semibold">Licensed Therapists</p>
+                              <p className="text-xl text-center text-gray-500 font-semibold">
+                                   Regional/Multiple Lanuages
+                              </p>
                          </div>
                     </div>
                </div>
 
                {/* section three */}
-               <div className="container mx-auto w-[60%]">
+               <div className="container mx-auto w-[80%]">
                     <h6 className="text-5xl capitalize text-left font-semibold font-sans2">
                          our <span className="text-primary-500">experts</span>
                     </h6>
@@ -106,23 +202,98 @@ export const DefaultHome = () => {
                <div className="bg-primary-200 py-20 pb-28">
                     <div className="container mx-auto grid grid-col-12 xl:grid-cols-4 lg:grid-cols-4 gap-10 md:col-span-12">
                          {mentor?.data
-                              .map(({ mentorId, _id }) => (
+                              .map(({ name, _id, specialists }) => (
                                    <ExportMentors
                                         key={_id}
                                         image="https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
                                         experience="1"
-                                        name={`${mentorId?.name?.firstName} ${mentorId?.name?.lastName}`}
+                                        name={`${name?.firstName} ${name?.lastName}`}
                                         path="#read_more"
-                                        specialist={mentorId?.specialists?.join(", ")}
+                                        specialist={specialists?.join(", ")}
                                    />
                               ))
                               .slice(0, 4)}
                     </div>
                </div>
 
+               {/* section six */}
+               <div>
+                    <div className=" mx-auto w-[70%] pt-20 pb-10">
+                         <h6 className="text-5xl capitalize text-left font-sans2">
+                              We got your <span className="text-primary-500 font-semibold">back for</span>
+                         </h6>
+                    </div>
+                    <div className="xl:w-[70%] mx-auto">
+                         <div className="w-full xl:grid xl:grid-cols-12 gap-10 lg:grid-cols-6 md:grid-cols-12">
+                              {subCategory?.data.map(({ label, desc, _id }) => (
+                                   <div className="col-span-6" key={_id}>
+                                        <ServicesCard
+                                             body={desc}
+                                             image="https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp"
+                                             label={label}
+                                             path={`/category/${_id}`}
+                                        />
+                                   </div>
+                              ))}
+                         </div>
+                    </div>
+                    <div className="w-full text-center py-10">
+                         <Link
+                              to="/services"
+                              className="hover:underline font-extralight text-lg text-primary-500 text-center"
+                         >
+                              Browse all services
+                         </Link>
+                    </div>
+               </div>
+
+               <div className="w-[80%] p-3 mx-auto my-20">
+                    <h6 className="text-5xl capitalize text-left font-sans2">
+                         How It <span className="text-primary-500">Works</span>
+                    </h6>
+                    <ul className="flex flex-wrap items-center gap-20 mt-10">
+                         <li className="flex-1">
+                              <h6 className="text-gray-900 font-xl text-2xl font-bold">
+                                   <span className="select-none">01.</span> Get your logins
+                              </h6>
+                              <p className="text-gray-500">
+                                   Take your pick from our panel of mental health & self-improvement experts
+                              </p>
+                              <img
+                                   src={require("../../../assets/image/mobile-dashboard.png")}
+                                   className="mt-5"
+                                   alt=""
+                              />
+                         </li>
+                         <li className="flex-1 list-item">
+                              <h6 className="text-gray-900 font-xl text-2xl font-bold">
+                                   <span className="select-none">02.</span>Find Online Experts
+                              </h6>
+                              <p className="text-gray-500">
+                                   Take your pick from our panel of mental health & self-improvement experts
+                              </p>
+                              <img src={require("../../../assets/image/mobile-doc-list.png")} className="mt-5" alt="" />
+                         </li>
+                         <li className="flex-1 list-item">
+                              <h6 className="text-gray-900 font-xl text-2xl font-bold">
+                                   <span className="select-none">03.</span> Connect Instantly
+                              </h6>
+                              <p className="text-gray-500">Share your thoughts, get support, and feel better</p>
+                              <img
+                                   src={require("../../../assets/image/mobile-video-call.png")}
+                                   className="mt-5"
+                                   alt=""
+                              />
+                         </li>
+                    </ul>
+                    <div className="mt-5 flex justify-center">
+                         <AppButton filled>Download app</AppButton>
+                    </div>
+               </div>
+
                {/* section five */}
                <div className="">
-                    <div className="container mx-auto w-[60%] py-20">
+                    <div className="container mx-auto pt-20">
                          <h6 className="text-5xl capitalize text-left font-sans2">
                               Client <span className="text-primary-500 font-semibold">Testimonials</span>
                          </h6>
@@ -152,37 +323,6 @@ export const DefaultHome = () => {
                     </div>
                </div>
 
-               {/* section six */}
-               <div>
-                    <div className=" mx-auto w-[60%] pt-20 pb-10">
-                         <h6 className="text-5xl capitalize text-left font-sans2">
-                              Our <span className="text-primary-500 font-semibold">Services</span>
-                         </h6>
-                    </div>
-                    <div className="xl:w-[70%] mx-auto">
-                         <div className="w-full xl:grid xl:grid-cols-12 gap-10 lg:grid-cols-6 md:grid-cols-12">
-                              {subCategory?.data.map(({ label, desc, _id }) => (
-                                   <div className="col-span-6" key={_id}>
-                                        <ServicesCard
-                                             body={desc}
-                                             image="https://static.wixstatic.com/media/4432a4c385c44e609ac41982225b1669.jpg/v1/fill/w_386,h_466,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Loneliness.jpg"
-                                             label={label}
-                                             path={`/category/${_id}`}
-                                        />
-                                   </div>
-                              ))}
-                         </div>
-                    </div>
-                    <div className="w-full text-center py-10">
-                         <Link
-                              to="/services"
-                              className="hover:underline font-extralight text-lg text-primary-500 text-center"
-                         >
-                              Browse all services
-                         </Link>
-                    </div>
-               </div>
-
                {/* section seven */}
                {faq?.data.length !== 0 && (
                     <div className="w-[70%] mx-auto py-20">
@@ -192,17 +332,21 @@ export const DefaultHome = () => {
                          <div className="mt-10">
                               {faq?.data.map(({ question, answer }, i: number) => (
                                    <div key={i} onClick={() => dispatch(handleFaq(i))}>
-                                        <div className="border-b py-5 border-primary-500">
+                                        <div className="border-b py-8 border-gray-900">
                                              <div className="flex items-center justify-between">
                                                   <h6
                                                        className={clsx(
-                                                            `text-md font-semibold capitalize`,
+                                                            `text-lg font-semibold capitalize`,
                                                             i === active && "text-primary-500"
                                                        )}
                                                   >
                                                        {question}
                                                   </h6>
-                                                  {i === active ? <FaAngleUp size={26} /> : <FaAngleDown size={26} />}
+                                                  {i === active ? (
+                                                       <FaAngleUp size={26} className="text-primary-500" />
+                                                  ) : (
+                                                       <FaAngleDown size={26} />
+                                                  )}
                                              </div>
                                              {i === active && <p className="mt-3 font-extralight">{answer}</p>}
                                         </div>
