@@ -31,9 +31,10 @@ export const MainNavBar: FC<MainNavBarProps> = ({
 }) => {
      return (
           <div className={clsx("fixed w-full top-0 z-20 bg-opacity-60 backdrop-blur-lg bg-white")}>
+               <p className="font-mono uppercase absolute bg-white border">Development Mode activated</p>
                <nav>
                     <div className="px-4 sm:px-6 py-2 lg:px-8">
-                         <div className="flex items-center justify-between h-16 w-full">
+                         <div className="flex items-center justify-center  h-16 w-full">
                               <div className="flex items-center justify-between gap-10">
                                    <div className="w-[15%]">
                                         <Link to="/">
