@@ -4,9 +4,10 @@ import { Menu, Transition } from "@headlessui/react";
 import clsx from "clsx";
 import { AppButton, AppLink } from "../../../component";
 import { Link } from "react-router-dom";
-import { AiOutlineLoading } from "react-icons/ai";
+import { AiOutlineLoading, AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import { ICategoryProps, ISubCategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
+import { AlterBuddyLogo } from "../../../assets/logo";
 
 interface MainNavBarProps {
      mobile: boolean;
@@ -36,16 +37,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                     <div className="px-4 sm:px-6 py-2 lg:px-8">
                          <div className="flex items-center justify-center  h-16 w-full">
                               <div className="flex items-center justify-between gap-10">
-                                   <div className="w-[15%]">
+                                   <div className="">
                                         <Link to="/">
-                                             <img
-                                                  className=""
-                                                  src={require("../../../assets/image/logo.jpeg")}
-                                                  alt="Workflow"
-                                             />
+                                             <AlterBuddyLogo />
                                         </Link>
                                    </div>
-                                   <div className="flex-1 hidden md:block w-full xl:flex xl:justify-end">
+                                   <div className="flex-1 hidden md:block w-full xl:flex xl:justify-end ml-5">
                                         <ul className="flex items-center gap-5 w-full justify-end">
                                              <li>
                                                   <AppLink path="/" label="home" />
@@ -71,7 +68,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                             >
                                                                  <Menu.Items
                                                                       className="absolute left-0 mt-5 border
-                                                            w-[550px] origin-top-right bg-white shadow-2xl rounded-2xl divide-x p-5 divide-gray-500 flex gap-20"
+                                                            w-[550px] origin-top-right bg-white rounded-2xl divide-x p-5 divide-gray-500 flex gap-20"
                                                                  >
                                                                       <div className="">
                                                                            <label
@@ -212,7 +209,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                             leaveFrom="transform opacity-100 scale-100"
                                                             leaveTo="transform opacity-0 scale-95"
                                                        >
-                                                            <Menu.Items className="absolute right-0 mt-5 shadow-2xl w-[350px] origin-top-left bg-white rounded-2xl border px-5">
+                                                            <Menu.Items className="absolute left-0 mt-5 w-[350px] origin-top-left bg-white rounded-2xl border px-5">
                                                                  {category?.map(({ _id, title }) => (
                                                                       <div className="p-2" key={_id}>
                                                                            <Menu.Item>
@@ -236,20 +233,24 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                   </Menu>
                                              </li>
                                              <li>
-                                                  <AppLink path="/coming-soon" label="Contact" />
-                                             </li>
-                                             <li>
                                                   <AppLink path="/blog" label="BuddyTube" />
                                              </li>
-                                             <li>
-                                                  <AppLink path="/rant" label="rant" />
-                                             </li>
+                                             {!authenticated && (
+                                                  <>
+                                                       <li>
+                                                            <AppLink path="/rant" label="rant" />
+                                                       </li>
+                                                       <li>
+                                                            <AppLink path="/coming-soon" label="Contact" />
+                                                       </li>
+                                                  </>
+                                             )}
                                              <li className="w-[120px]">
                                                   <AppLink path="/privacy-policy" label="Privacy Policy" />
                                              </li>
                                         </ul>
                                    </div>
-                                   <div className="hidden xl:justify-end md:block xl:flex items-center justify-between gap-5 xl:w-[20%]">
+                                   <div className="hidden xl:justify-end md:block xl:flex items-center justify-between gap-5 xl:w-[30%]">
                                         <AppButton flexed={false} outlined>
                                              Talk to expert
                                         </AppButton>
@@ -258,12 +259,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                   <>
                                                        <li>
                                                             <Link to="/user/profile" className="capitalize">
-                                                                 my profile
+                                                                 <AiOutlineUser size={25} />
                                                             </Link>
                                                        </li>
                                                        <li>
-                                                            <button onClick={logout} className="capitalize">
-                                                                 Log out
+                                                            <button onClick={logout} className="mt-2">
+                                                                 <AiOutlineLogout size={25} />
                                                             </button>
                                                        </li>
                                                   </>

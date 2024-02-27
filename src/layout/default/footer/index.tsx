@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../redux";
 import { handleAuthModal } from "../../../redux/features";
 import { AppButton } from "../../../component";
+import { AlterBuddyLogo } from "../../../assets/logo";
 
 interface MainFooterProps {}
 
@@ -29,11 +30,7 @@ export const MainFooter: FC<MainFooterProps> = () => {
                          <div className="flex flex-col">
                               <div className="w-[100%]">
                                    <Link to="/">
-                                        <img
-                                             className=""
-                                             src={require("../../../assets/image/logo.jpeg")}
-                                             alt="Workflow"
-                                        />
+                                        <AlterBuddyLogo />
                                    </Link>
                               </div>
                               <div className=" mt-10">
