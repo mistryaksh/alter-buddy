@@ -93,20 +93,20 @@ export const DefaultHome = () => {
                                    <div onClick={() => dispatch(handleAuthModal())}>
                                         <AppButton filled>Talk to Buddy</AppButton>
                                    </div>
-                                   <div className="flex-1">
+                                   <div className="w-[50%]">
                                         <a
                                              rel="noreferrer"
                                              href="http://play.google.com/store/apps/details?"
                                              target="_blank"
                                         >
                                              <img
-                                                  className="w-full"
+                                                  className="w-[70%]"
                                                   src={require("../../../assets/play-store.jpeg")}
                                                   alt=""
                                              />
                                         </a>
                                    </div>
-                                   <div className="flex-1">
+                                   <div className="w-[50%] -ml-24">
                                         <a
                                              rel="noreferrer"
                                              href="http://play.google.com/store/apps/details?"
@@ -114,7 +114,7 @@ export const DefaultHome = () => {
                                              className="flex-1"
                                         >
                                              <img
-                                                  className="w-full"
+                                                  className="w-[70%]"
                                                   src={require("../../../assets/app-store.png")}
                                                   alt=""
                                              />
@@ -266,7 +266,10 @@ export const DefaultHome = () => {
                               />
                          </li>
                     </ul>
-                    <div className="mt-10 flex justify-center">
+                    <div
+                         className="mt-10
+                     flex justify-center"
+                    >
                          <a rel="noreferrer" href="http://play.google.com/store/apps/details?" target="_blank">
                               <AppButton filled>Download app</AppButton>
                          </a>

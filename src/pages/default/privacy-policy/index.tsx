@@ -5,6 +5,7 @@ export const PrivacyPolicyPage = () => {
      return (
           <MainLayout>
                <div className="container mx-auto my-10 pt-20">
+                    <h6 className="text-3xl mb-10">Privacy Policy & Use Terms</h6>
                     <h6 className="text-primary-500 text-2xl capitalize font-semibold mb-2">ACCEPTANCE OF TERMS</h6>
                     <p className="font-sans text-gray-500 whitespace-pre-wrap">
                          Welcome to the website of AlterBuddy (hereinafter referred to as the “Organization”, “we”,

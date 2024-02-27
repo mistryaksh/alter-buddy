@@ -35,8 +35,8 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                {/* <p className="font-mono uppercase absolute bg-white border">Development Mode activated</p> */}
                <nav>
                     <div className="px-4 sm:px-6 py-2 lg:px-8">
-                         <div className="flex items-center justify-center  h-16 w-full">
-                              <div className="flex items-center justify-between gap-10">
+                         <div className="flex items-center  h-16 w-full">
+                              <div className="flex items-center w-full justify-between gap-10">
                                    <div className="">
                                         <Link to="/">
                                              <AlterBuddyLogo />
@@ -44,12 +44,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                    </div>
                                    <div className="flex-1 hidden md:block w-full xl:flex xl:justify-end ml-5">
                                         <ul className="flex items-center gap-5 w-full justify-end">
-                                             <li>
+                                             {/* <li>
                                                   <AppLink path="/" label="home" />
                                              </li>
                                              <li>
                                                   <AppLink path="/about" label="About" />
-                                             </li>
+                                             </li> */}
                                              <li>
                                                   <div className="group relative">
                                                        <Menu as="div" className="relative inline-block text-left">
@@ -235,16 +235,17 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              <li>
                                                   <AppLink path="/blog" label="BuddyTube" />
                                              </li>
-                                             {!authenticated && (
+
+                                             <li>
+                                                  <AppLink path="/rant" label="rant" />
+                                             </li>
+                                             {/* {!authenticated && (
                                                   <>
-                                                       <li>
-                                                            <AppLink path="/rant" label="rant" />
-                                                       </li>
                                                        <li>
                                                             <AppLink path="/coming-soon" label="Contact" />
                                                        </li>
                                                   </>
-                                             )}
+                                             )} */}
                                              <li className="w-[120px]">
                                                   <AppLink path="/privacy-policy" label="Privacy Policy" />
                                              </li>
