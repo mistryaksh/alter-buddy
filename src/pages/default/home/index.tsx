@@ -87,26 +87,24 @@ export const DefaultHome = () => {
                               </li>
                          </ul>
                          <div className="">
-                              <p className="text-gray-500 uppercase">Talk to buddies :</p>
-
-                              <div className="flex gap-5 items-center mt-2 justify-start">
-                                   <div onClick={() => dispatch(handleAuthModal())}>
-                                        <AppButton filled>Talk to Buddy</AppButton>
+                              <div className="flex items-center mt-10 justify-start">
+                                   <div onClick={() => dispatch(handleAuthModal())} className="flex-1">
+                                        <AppButton filled>Talk to experts</AppButton>
                                    </div>
-                                   <div className="w-[50%]">
+                                   <div className="flex-1">
                                         <a
                                              rel="noreferrer"
                                              href="http://play.google.com/store/apps/details?"
                                              target="_blank"
                                         >
                                              <img
-                                                  className="w-[70%]"
+                                                  className="w-[60%]"
                                                   src={require("../../../assets/play-store.jpeg")}
                                                   alt=""
                                              />
                                         </a>
                                    </div>
-                                   <div className="w-[50%] -ml-24">
+                                   <div className="flex-1">
                                         <a
                                              rel="noreferrer"
                                              href="http://play.google.com/store/apps/details?"
@@ -114,7 +112,7 @@ export const DefaultHome = () => {
                                              className="flex-1"
                                         >
                                              <img
-                                                  className="w-[70%]"
+                                                  className="w-[60%]"
                                                   src={require("../../../assets/app-store.png")}
                                                   alt=""
                                              />

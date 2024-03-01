@@ -2,7 +2,7 @@ import React, { FC, Fragment } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 import clsx from "clsx";
-import { AppButton, AppLink } from "../../../component";
+import { AppButton, AppLink, UserIcon } from "../../../component";
 import { Link } from "react-router-dom";
 import { AiOutlineLoading, AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import { ICategoryProps, ISubCategoryProps } from "../../../interface";
@@ -42,8 +42,8 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              <AlterBuddyLogo />
                                         </Link>
                                    </div>
-                                   <div className="flex-1 hidden md:block w-full xl:flex xl:justify-end ml-5">
-                                        <ul className="flex items-center gap-5 w-full justify-end">
+                                   <div className="xl:flex-1 hidden md:block w-full xl:flex xl:justify-end ml-5">
+                                        <ul className="flex items-center gap-5 w-full">
                                              {/* <li>
                                                   <AppLink path="/" label="home" />
                                              </li>
@@ -53,7 +53,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              <li>
                                                   <div className="group relative">
                                                        <Menu as="div" className="relative inline-block text-left">
-                                                            <Menu.Button className="flex items-center gap-1 text-gray-400 capitalize hover:text-primary-500">
+                                                            <Menu.Button className="flex items-center gap-1 text-gray-500  font-sans2  capitalize hover:text-primary-500">
                                                                  Services
                                                                  <FaChevronDown size={12} />
                                                             </Menu.Button>
@@ -195,7 +195,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              <li className="group relative w-[70px]">
                                                   <Menu as="div" className="relative inline-block text-left">
                                                        <div>
-                                                            <Menu.Button className="flex items-center gap-1 text-gray-400 capitalize hover:text-primary-500">
+                                                            <Menu.Button className="flex items-center gap-1 text-gray-500 font-sans2 capitalize hover:text-primary-500">
                                                                  Talk to
                                                                  <FaChevronDown size={12} />
                                                             </Menu.Button>
@@ -246,9 +246,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                        </li>
                                                   </>
                                              )} */}
-                                             <li className="w-[120px]">
+                                             {/* <li className="w-[120px]">
                                                   <AppLink path="/privacy-policy" label="Privacy Policy" />
-                                             </li>
+                                             </li> */}
                                         </ul>
                                    </div>
                                    <div className="hidden xl:justify-end md:block xl:flex items-center justify-between gap-5 xl:w-[30%]">
@@ -272,7 +272,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                              )}
                                              {!authenticated && (
                                                   <li>
-                                                       <button onClick={authModal}>Log in</button>
+                                                       <button onClick={authModal} className="mt-2">
+                                                            <UserIcon height={30} width={30} fill="#000" />
+                                                       </button>
                                                   </li>
                                              )}
                                              {navLoading && (
@@ -525,12 +527,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                                   </Transition>
                                              </Menu>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                              <AppLink path="/coming-soon" label="Contact" />
                                         </li>
                                         <li>
                                              <AppLink path="/blog" label="Blog" />
-                                        </li>
+                                        </li>*/}
                                         <li>
                                              <AppLink path="/rant" label="rant" />
                                         </li>
