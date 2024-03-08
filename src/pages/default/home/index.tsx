@@ -17,7 +17,7 @@ import clsx from "clsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useGetAllFaqQuery, useGetAllSubCategoryQuery, useGetMentorsListQuery } from "../../../redux/rtk-api";
 import { getUserToken } from "../../../utils";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck, AiOutlinePhone } from "react-icons/ai";
 export const DefaultHome = () => {
      const { active } = useFaqSlice();
      const { data: mentor } = useGetMentorsListQuery();
@@ -89,7 +89,9 @@ export const DefaultHome = () => {
                          <div className="">
                               <div className="flex items-center mt-10 justify-start">
                                    <div onClick={() => dispatch(handleAuthModal())} className="flex-1">
-                                        <AppButton filled>Talk to experts</AppButton>
+                                        <AppButton filled>
+                                             <AiOutlinePhone size={26} className="rotate-90" /> talk to buddy
+                                        </AppButton>
                                    </div>
                                    <div className="flex-1">
                                         <a
@@ -180,8 +182,9 @@ export const DefaultHome = () => {
                <div className="bg-primary-200 py-20 pb-28">
                     <div className="container mx-auto grid grid-col-12 xl:grid-cols-4 lg:grid-cols-4 gap-10 md:col-span-12">
                          {mentor?.data
-                              .map(({ name, _id, specialists }) => (
+                              .map(({ name, _id, specialists, accountStatus }) => (
                                    <ExportMentors
+                                        status={accountStatus.verification}
                                         key={_id}
                                         image="https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
                                         experience="1"

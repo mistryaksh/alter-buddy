@@ -270,14 +270,14 @@ const MentorParticipantView: FC<MentorParticipateViewProps> = ({
           <div className="w-full h-full flex flex-col">
                <audio ref={micRef} autoPlay playsInline muted={isLocal} />
                {webcamOn && itsMe && (
-                    <div className="w-[30%] h-[30%] relative">
+                    <div className="w-[30%] h-[30%] relative border border-red-500">
                          <div className="absolute bottom-8 rounded-lg left-5 p-2 bg-primary-500 w-full">
                               <video className="rounded-lg" ref={webcamRef} autoPlay />
                          </div>
                     </div>
                )}
                {webcamOn && !itsMe && (
-                    <div className="w-full h-full">
+                    <div className="w-[300px] h-[300px] object-cover">
                          <video className="w-full h-full" ref={webcamRef} autoPlay />
                     </div>
                )}

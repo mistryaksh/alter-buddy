@@ -56,7 +56,7 @@ export const MentorCallHistoryPage = () => {
                                    width: "200px",
                                    cell: (_, index) => (
                                         <p className="text-sm text-gray-900 flex gap-3 capitalize">
-                                             {_.users.user.name.firstName} {_.users.user.name.lastName}
+                                             {_.users?.user?.name?.firstName} {_?.users?.user?.name?.lastName}
                                         </p>
                                    ),
                               },

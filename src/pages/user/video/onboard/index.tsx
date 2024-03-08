@@ -137,6 +137,7 @@ const UserMeetingView: FC<UserMeetingViewProps> = ({ mentorName, userName }) => 
 
      useEffect(() => {
           socketService.on("START_CALL", (res) => {
+               console.log(res);
                setJoined("STARTED");
           });
      }, [join]);
