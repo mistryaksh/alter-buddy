@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import clsx from "clsx";
 
 import { AppButton } from "../../UI";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import { MdOutlineVerified } from "react-icons/md";
 
 interface ExportMentorsProps {
      image: string;
@@ -22,9 +22,9 @@ export const ExportMentors: FC<ExportMentorsProps> = ({ experience, name, path, 
                          <h6 className="text-xl font-semibold  flex justify-between items-center capitalize text-gray-900">
                               {name ? name : "Mistry Aksh"}
                               {status ? (
-                                   <AiOutlineCheckCircle color="red" size={30} />
+                                   <MdOutlineVerified color="green" size={26} />
                               ) : (
-                                   <AiOutlineCheckCircle color="gray" size={30} />
+                                   <MdOutlineVerified color="gray" size={26} />
                               )}
                          </h6>
                          <p className="text-sm font-extralight capitalize text-gray-500">{specialist}</p>

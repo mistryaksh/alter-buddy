@@ -240,11 +240,7 @@ export const DefaultHome = () => {
                               <p className="text-gray-500">
                                    Take your pick from our panel of mental health & self-improvement experts
                               </p>
-                              <img
-                                   src={require("../../../assets/image/mobile-dashboard.png")}
-                                   className="mt-5"
-                                   alt=""
-                              />
+                              <img src={require("../../../assets/image/app-home-user.jpeg")} className="mt-5" alt="" />
                          </li>
                          <li className="flex-1 list-item">
                               <h6 className="text-gray-900 font-xl text-2xl font-bold">
@@ -253,18 +249,18 @@ export const DefaultHome = () => {
                               <p className="text-gray-500">
                                    Take your pick from our panel of mental health & self-improvement experts
                               </p>
-                              <img src={require("../../../assets/image/mobile-doc-list.png")} className="mt-5" alt="" />
+                              <img
+                                   src={require("../../../assets/image/app-mentor-list.jpeg")}
+                                   className="mt-5"
+                                   alt=""
+                              />
                          </li>
                          <li className="flex-1 list-item">
                               <h6 className="text-gray-900 font-xl text-2xl font-bold">
                                    <span className="select-none">03.</span> Connect Instantly
                               </h6>
                               <p className="text-gray-500">Share your thoughts, get support, and feel better</p>
-                              <img
-                                   src={require("../../../assets/image/mobile-video-call.png")}
-                                   className="mt-5"
-                                   alt=""
-                              />
+                              <img src={require("../../../assets/image/app-chat-user.jpeg")} className="mt-5" alt="" />
                          </li>
                     </ul>
                     <div
@@ -326,6 +322,7 @@ export const DefaultHome = () => {
                                                             i === active && "text-primary-500"
                                                        )}
                                                   >
+                                                       {/* {i + 1} */}
                                                        {question}
                                                   </h6>
                                                   {i === active ? (
