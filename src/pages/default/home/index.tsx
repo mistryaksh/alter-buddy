@@ -294,24 +294,57 @@ export const DefaultHome = () => {
                               transformed themselves with the guidance of Alterbuddy Experts.
                          </p>
                     </div>
-                    <div className="xl:grid grid-cols-12 xl:grid-cols-4 lg:grid-cols-4 gap-10 container mx-auto">
-                         <TestimonialsCard
-                              body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
-                              user="Samantha Smith"
-                         />
-                         <TestimonialsCard
-                              body="AlterBuddy helped me find the perfect therapist who understood my needs and supported me through a difficult time in my life."
-                              user="Robert Cooper"
-                         />
-                         <TestimonialsCard
-                              body="The self-care tools provided by AlterBuddy have been a game-changer for me. I feel more in control of my mental health now."
-                              user="Robert Rose
+                    <div className="flex gap-5 relative px-10 overflow-x-scroll items-center no-scrollbar">
+                         <div className="w-[400px]">
+                              <TestimonialsCard
+                                   body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
+                                   user="Samantha Smith"
+                              />
+                         </div>
+                         <div className="w-[400px]">
+                              <TestimonialsCard
+                                   body="AlterBuddy helped me find the perfect therapist who understood my needs and supported me through a difficult time in my life."
+                                   user="Robert Cooper"
+                              />
+                         </div>
+                         <div className="w-[400px]">
+                              <TestimonialsCard
+                                   body="The self-care tools provided by AlterBuddy have been a game-changer for me. I feel more in control of my mental health now."
+                                   user="Robert Rose
 "
-                         />
-                         <TestimonialsCard
-                              body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
-                              user=" Samantha Smith"
-                         />
+                              />
+                         </div>
+                         <div className="w-[400px]">
+                              <TestimonialsCard
+                                   body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
+                                   user=" Samantha Smith"
+                              />
+                         </div>
+                         <div className="w-[400px]">
+                              <TestimonialsCard
+                                   body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
+                                   user="Samantha Smith"
+                              />
+                         </div>
+                         <div className="w-[400px]">
+                              <TestimonialsCard
+                                   body="AlterBuddy helped me find the perfect therapist who understood my needs and supported me through a difficult time in my life."
+                                   user="Robert Cooper"
+                              />
+                         </div>
+                         <div className="w-[400px]">
+                              <TestimonialsCard
+                                   body="The self-care tools provided by AlterBuddy have been a game-changer for me. I feel more in control of my mental health now."
+                                   user="Robert Rose
+"
+                              />
+                         </div>
+                         <div className="w-[400px]">
+                              <TestimonialsCard
+                                   body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
+                                   user=" Samantha Smith"
+                              />
+                         </div>
                     </div>
                </div>
 
