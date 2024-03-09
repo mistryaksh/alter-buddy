@@ -17,7 +17,7 @@ import clsx from "clsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useGetAllFaqQuery, useGetAllSubCategoryQuery, useGetMentorsListQuery } from "../../../redux/rtk-api";
 import { getUserToken } from "../../../utils";
-import { AiOutlineCheck, AiOutlinePhone } from "react-icons/ai";
+import { AiOutlineCheckCircle, AiOutlinePhone } from "react-icons/ai";
 export const DefaultHome = () => {
      const { active } = useFaqSlice();
      const { data: mentor } = useGetMentorsListQuery();
@@ -60,7 +60,7 @@ export const DefaultHome = () => {
                          <ul className="my-5">
                               <li className="flex items-center gap-3">
                                    <div className=" text-primary-500 p-2 rounded-full">
-                                        <AiOutlineCheck size={25} />
+                                        <AiOutlineCheckCircle size={25} />
                                    </div>
                                    <p className="text-gray-500">
                                         Linking you to a support system for mental health, healing, and manifestation,
@@ -69,7 +69,7 @@ export const DefaultHome = () => {
                               </li>
                               <li className="flex items-center gap-5">
                                    <div className=" text-primary-500 p-2 rounded-full">
-                                        <AiOutlineCheck size={25} />
+                                        <AiOutlineCheckCircle size={25} />
                                    </div>
                                    <p className="text-gray-500">
                                         Empower your journey with our expert guidance and personalized services to
@@ -78,7 +78,7 @@ export const DefaultHome = () => {
                               </li>
                               <li className="flex items-center gap-5">
                                    <div className=" text-primary-500 p-2 rounded-full">
-                                        <AiOutlineCheck size={25} />
+                                        <AiOutlineCheckCircle size={25} />
                                    </div>
                                    <p className="text-gray-500">
                                         Guiding you through demanding workdays and sleepless nights toward positive life
@@ -233,34 +233,44 @@ export const DefaultHome = () => {
                          How It <span className="text-primary-500">Works</span>
                     </h6>
                     <ul className="flex flex-wrap items-center gap-20 mt-10">
-                         <li className="flex-1">
+                         <li className="flex-1 flex flex-col items-center">
                               <h6 className="text-gray-900 font-xl text-2xl font-bold">
                                    <span className="select-none">01.</span> Get your logins
                               </h6>
-                              <p className="text-gray-500">
+                              <p className="text-gray-500 text-center">
                                    Take your pick from our panel of mental health & self-improvement experts
                               </p>
-                              <img src={require("../../../assets/image/app-home-user.jpeg")} className="mt-5" alt="" />
+                              <img
+                                   src={require("../../../assets/image/app-home-user.jpeg")}
+                                   className="mt-5 w-[70%]"
+                                   alt=""
+                              />
                          </li>
-                         <li className="flex-1 list-item">
+                         <li className="flex-1  flex flex-col items-center">
                               <h6 className="text-gray-900 font-xl text-2xl font-bold">
                                    <span className="select-none">02.</span>Find Online Experts
                               </h6>
-                              <p className="text-gray-500">
+                              <p className="text-gray-500 text-center">
                                    Take your pick from our panel of mental health & self-improvement experts
                               </p>
                               <img
                                    src={require("../../../assets/image/app-mentor-list.jpeg")}
-                                   className="mt-5"
+                                   className="mt-5 w-[70%]"
                                    alt=""
                               />
                          </li>
-                         <li className="flex-1 list-item">
+                         <li className="flex-1 flex flex-col items-center">
                               <h6 className="text-gray-900 font-xl text-2xl font-bold">
                                    <span className="select-none">03.</span> Connect Instantly
                               </h6>
-                              <p className="text-gray-500">Share your thoughts, get support, and feel better</p>
-                              <img src={require("../../../assets/image/app-chat-user.jpeg")} className="mt-5" alt="" />
+                              <p className="text-gray-500 text-center">
+                                   Share your thoughts, get support, and feel better
+                              </p>
+                              <img
+                                   src={require("../../../assets/image/app-chat-user.jpeg")}
+                                   className="mt-5 w-[70%]"
+                                   alt=""
+                              />
                          </li>
                     </ul>
                     <div
