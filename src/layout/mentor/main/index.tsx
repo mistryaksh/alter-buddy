@@ -30,34 +30,39 @@ export const MentorLayout: FC<MentorLayoutProps> = ({ children, loading, hideNav
      const navigate = useNavigate();
 
      useEffect(() => {
-          if (isUserError) {
-               if ((userError as any).data) {
-                    console.log((userError as any).data.message);
-               } else {
-                    console.log(userError);
-               }
-          }
-          socketService.on("THROW_CALL_REQUEST", (res: any) => {
-               if (mentor?.data._id === res.mentor._id) {
-                    (async () => {
-                         await GetUserById(res.user._id as string);
-                         dispatch(getCall());
-                         dispatch(
-                              handleMeetingConfig({
-                                   token: token?.data,
-                                   roomId: res.data.roomId,
-                              })
-                         );
-                    })();
-               }
-          });
+       if (isUserError) {
+         if ((userError as any).data) {
+           console.log((userError as any).data.message);
+         } else {
+           console.log(userError);
+         }
+       }
+       socketService.on("THROW_CALL_REQUEST", (res: any) => {
+         console.log("RECEIVED REQUEST", res);
+         if (mentor?.data._id === res.mentor._id) {
+           (async () => {
+             await GetUserById(res.user._id as string);
+             dispatch(getCall());
+             dispatch(
+               handleMeetingConfig({
+                 token: token?.data,
+                 roomId: res.data.roomId,
+               })
+             );
+           })();
+         }
+       });
      }, [mentor, dispatch, isUserError, userError, GetUserById, user, token]);
 
      const AcceptCall = useCallback(() => {
-          socketService.emit("CALL_ACTION", { action: "ACCEPT", meetingConfig });
-          dispatch(removeCall());
-          navigate(`/mentor/chat/${user?.data._id}`);
-     }, [meetingConfig, navigate, dispatch, user]);
+       socketService.emit("CALL_ACTION", {
+         action: "ACCEPT",
+         config: meetingConfig,
+         mentor: mentor?.data._id,
+       });
+       dispatch(removeCall());
+       navigate(`/mentor/chat/${user?.data._id}`);
+     }, [meetingConfig, navigate, dispatch, user, mentor?.data._id]);
 
      const RejectCall = useCallback(() => {
           socketService.emit("CALL_ACTION", { action: "REJECT", meetingConfig });

@@ -139,6 +139,7 @@ const UserMeetingView: FC<UserMeetingViewProps> = ({ mentorName, userName }) => 
           socketService.on("START_CALL", (res) => {
                console.log(res);
                setJoined("STARTED");
+               join();
           });
      }, [join]);
 
