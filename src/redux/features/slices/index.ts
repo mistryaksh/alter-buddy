@@ -5,3 +5,5 @@ export * from "./authentication.slice";
 export * from "./input.slice";
 export * from "./video-call.slice";
 export * from "./slot.slice";
+export * from "./home.slice";
+export * from "./static-services.slice";

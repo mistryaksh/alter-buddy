@@ -3,3 +3,4 @@ export * from "./about";
 export * from "./mentor-list";
 export * from "./blogs";
 export * from "./privacy-policy";
+export * from "./services";

@@ -53,13 +53,16 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                     <Link to="/">Home</Link>
                   </li>
                   <li>
+                    <Link to="/services">Our Services</Link>
+                  </li>
+                  <li>
                     <div className="group relative">
                       <Menu
                         as="div"
                         className="relative inline-block text-left"
                       >
                         <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
-                          Services
+                          Categories
                           <FaChevronDown />
                         </Menu.Button>
                         <Transition

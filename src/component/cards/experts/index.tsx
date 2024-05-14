@@ -1,27 +1,27 @@
 import React, { FC } from "react";
 import clsx from "clsx";
-import { MdOutlineVerified } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { ISubCategoryProps } from "../../../interface";
 
 interface ExportMentorsProps {
   image: string;
   name: string;
   specialist: string;
-  experience: string;
   path: string;
   status: boolean;
+  subCategory: ISubCategoryProps[];
 }
 
 export const ExportMentors: FC<ExportMentorsProps> = ({
-  experience,
   name,
   path,
   specialist,
   image,
   status,
+  subCategory,
 }) => {
   return (
-    <div className="relative">
+    <div className="relative h-auto">
       <img src={image} alt={name} className="rounded-t-lg shadow-lg" />
       <div
         className={clsx(
@@ -32,17 +32,19 @@ export const ExportMentors: FC<ExportMentorsProps> = ({
         <div>
           <h6 className="text-xl font-semibold flex justify-between items-center capitalize text-gray-900">
             {name ? name : "Mistry Aksh"}
-            {status ? (
+            {/* {status ? (
               <MdOutlineVerified color="green" size={26} />
             ) : (
               <MdOutlineVerified color="gray" size={26} />
-            )}
+            )} */}
           </h6>
-          <p className="text-sm font-extralight capitalize text-gray-500">
+          <p className="text-md font-extralight capitalize text-gray-500">
             {specialist}
           </p>
           <p className="text-sm font-extralight capitalize text-gray-500">
-            {experience} years of Experience
+            {subCategory.map(({ label }) => (
+              <div>{label}</div>
+            ))}
           </p>
         </div>
         <div className="flex gap-4 items-center">
