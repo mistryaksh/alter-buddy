@@ -148,9 +148,9 @@ export const DefaultHome = () => {
           it has no choice but to return the same back to us, making us even
           more miserable.
         </p>
-        <div className="mt-10 justify-center gap-10 flex flex-col px-3">
+        <div className="mt-10 justify-center gap-20 flex flex-col px-3">
           {problems.map(({ age, points }) => (
-            <div className="shadow-lg py-10">
+            <div className="shadow-lg py-10 border-2 rounded-md overflow-hidden">
               <h6 className="capitalize text-xl text-center font-semibold text-gray-900">
                 Age Group {age}
               </h6>
@@ -447,10 +447,10 @@ export const DefaultHome = () => {
             <span className="text-primary-500 font-semibold">back for</span>
           </h6>
         </div>
-        <div className="xl:w-[70%] mx-auto">
-          <div className="w-full xl:grid xl:grid-cols-12 gap-10 mt-10 lg:grid-cols-6 md:grid-cols-12">
+        <div className="xl:w-[90%] mx-auto px-5">
+          <div className="w-full xl:grid xl:grid-cols-3 gap-10 mt-10 lg:grid-cols-3 md:grid-cols-12 sm:grid-cols-12 grid-cols-4">
             {subCategory?.data.map(({ label, desc, _id }) => (
-              <div className="col-span-6" key={_id}>
+              <div className="" key={_id}>
                 <ServicesCard
                   body={desc}
                   image="https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp"
@@ -460,14 +460,14 @@ export const DefaultHome = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className="w-full text-center py-10">
-          <Link
-            to="/services"
-            className="hover:underline font-extralight text-lg text-primary-500 text-center"
-          >
-            Browse all services
-          </Link>
+          <div className="w-full text-center py-10">
+            <Link
+              to="/services"
+              className="hover:underline font-extralight text-lg text-primary-500 text-center"
+            >
+              Browse all services
+            </Link>
+          </div>
         </div>
       </div>
 

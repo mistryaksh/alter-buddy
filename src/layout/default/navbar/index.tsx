@@ -52,6 +52,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                   <li>
                     <Link to="/">Home</Link>
                   </li>
+
                   <li>
                     <Link to="/services">Our Services</Link>
                   </li>
@@ -215,6 +216,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       Logout
                     </li>
                   )}
+                  <li className="bg-primary-500 px-5 py-2 rounded-md text-white">
+                    <Link to="/">Rant</Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -274,11 +278,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
           leaveTo="opacity-0 scale-95"
         >
           {(ref) => (
-            <div className="md:hidden" id="mobile-menu">
+            <div className="xl:hidden lg:hidden" id="mobile-menu">
               <ul className="flex items-start px-10 flex-col gap-10 pb-5">
                 <li>
-                  <AppLink path="/about" label="About" />
+                  <AppLink path="/" label="Home" />
                 </li>
+
                 <div className="group relative">
                   <Menu as="div" className="relative inline-block text-left">
                     <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
@@ -294,10 +299,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items
-                        className="absolute left-0 mt-2
-                                                            w-[500px] origin-top-right bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-20"
-                      >
+                      <Menu.Items className="absolute left-0 mt-2 w-[500px] origin-top-right bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-20">
                         <div className="">
                           <label
                             htmlFor="service"
@@ -316,8 +318,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                         active
                                           ? "text-primary-500"
                                           : "text-gray-500"
-                                      } group flex w-full
-                                                                                                    font-bold items-center capitalize`}
+                                      } group flex w-full font-bold items-center capitalize`}
                                     >
                                       {label}
                                     </Link>
@@ -416,7 +417,13 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                     </Transition>
                   </Menu>
                 </div>
-                <li className="group relative">
+                <li>
+                  <AppLink path="/about" label="About us" />
+                </li>
+                <li>
+                  <AppLink path="/contact" label="Contact us" />
+                </li>
+                {/* <li className="group relative">
                   <Menu as="div" className="relative inline-block text-left">
                     <div>
                       <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
@@ -455,7 +462,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       </Menu.Items>
                     </Transition>
                   </Menu>
-                </li>
+                </li> */}
                 <li>
                   <AppLink path="/rant" label="rant" />
                 </li>

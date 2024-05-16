@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useCallback, useEffect } from "react";
+import React, { FC, ReactNode, useCallback, useEffect, useState } from "react";
 
 import { MainNavBar, MainFooter } from "../";
 import clsx from "clsx";
@@ -42,6 +42,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
   loading,
 }) => {
   const { mobileMenu, authModal, modalView, error } = useLayoutSlice();
+  const [offerModel, setOfferModel] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { authentication } = useAuthenticationSlice();
   const localStore = getUserToken();
@@ -88,6 +89,9 @@ export const MainLayout: FC<MainLayoutProps> = ({
   ] = useRegisterUserMutation();
 
   useEffect(() => {
+    setTimeout(() => {
+      setOfferModel(true);
+    }, 3000);
     if (isLoginError) {
       if ((loginError as any).data) {
         dispatch(handleError((loginError as any).data.message));
@@ -226,6 +230,60 @@ export const MainLayout: FC<MainLayoutProps> = ({
           children
         )}
       </main>
+      {offerModel && (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    This is demo model if you want to show
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setOfferModel(false)}
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      ×
+                    </span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                    I always felt like I could do anything. That’s the main
+                    thing people are controlled by! Thoughts- their perception
+                    of themselves! They're slowed down by their perception of
+                    themselves. If you're taught you can’t do anything, you
+                    won’t do anything. I was taught I could do everything.
+                  </p>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                  <button
+                    className="text-gray-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setOfferModel(false)}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="bg-primary-500 text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setOfferModel(false)}
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      )}
+
       {!hideNav && <MainFooter />}
       {!authentication && authModal && (
         <AuthModel
