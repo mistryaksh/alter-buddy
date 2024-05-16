@@ -89,9 +89,9 @@ export const MainLayout: FC<MainLayoutProps> = ({
   ] = useRegisterUserMutation();
 
   useEffect(() => {
-    setTimeout(() => {
-      setOfferModel(true);
-    }, 3000);
+    // setTimeout(() => {
+    //   setOfferModel(true);
+    // }, 3000);
     if (isLoginError) {
       if ((loginError as any).data) {
         dispatch(handleError((loginError as any).data.message));

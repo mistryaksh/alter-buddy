@@ -8,6 +8,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { ICategoryProps, ISubCategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
 import { AlterBuddyLogo } from "../../../assets/logo";
+import { useServicesSlice } from "../../../redux/features";
 
 interface MainNavBarProps {
   mobile: boolean;
@@ -30,6 +31,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
   subCategory,
   category,
 }) => {
+  const { pageContent } = useServicesSlice();
   return (
     <div
       className={clsx(
@@ -49,21 +51,25 @@ export const MainNavBar: FC<MainNavBarProps> = ({
               </div>
               <div className="xl:flex-1 hidden md:block w-full xl:flex xl:justify-end ml-5">
                 <ul className="flex items-center justify-end gap-5 w-full">
-                  <li>
-                    <Link to="/">Home</Link>
+                  <li className="bg-primary-500 px-5 py-2 rounded-md text-white">
+                    <Link to="/">Rant</Link>
                   </li>
-
-                  <li>
+                  {/* <li>
                     <Link to="/services">Our Services</Link>
-                  </li>
+                  </li> */}
                   <li>
                     <div className="group relative">
                       <Menu
                         as="div"
                         className="relative inline-block text-left"
                       >
-                        <Menu.Button className="flex items-center gap-1 text-gray-500 capitalize">
-                          Categories
+                        <Menu.Button
+                          onMouseEnter={({ target }) =>
+                            (target as any)?.click()
+                          }
+                          className="flex items-center gap-1 text-gray-500 capitalize"
+                        >
+                          Our Services
                           <FaChevronDown />
                         </Menu.Button>
                         <Transition
@@ -75,7 +81,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute -left-[300px] mt-5 border w-[500px] origin-top-left bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-10">
+                          <Menu.Items className="absolute -left-[300px] mt-5 border w-[600px] origin-top-left bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-10">
                             <div className="">
                               <label
                                 htmlFor="service"
@@ -84,20 +90,19 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                 get help for:
                               </label>
                               <div className="flex flex-1 flex-col gap-3 ">
-                                {subCategory?.map(({ label, _id }) => (
-                                  <div className="flex gap-3" key={_id}>
+                                {pageContent?.map(({ label, id }) => (
+                                  <div className="flex gap-3" key={id}>
                                     <Menu.Item>
                                       {({ active }) => (
                                         <Link
-                                          to={`/category/${_id}`}
+                                          to={`/services/${id}`}
                                           className={`${
                                             active
                                               ? "text-primary-500"
                                               : "text-gray-500"
-                                          } group flex w-full
-                                                                                                    font-bold items-center capitalize`}
+                                          } group flex w-full font-bold items-center capitalize`}
                                         >
-                                          {label}
+                                          {label.toLowerCase()}
                                         </Link>
                                       )}
                                     </Menu.Item>
@@ -198,11 +203,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                   <li>
                     <Link to="/about">About Us</Link>
                   </li>
-
                   <li>
                     <Link to="/blog">Blogs</Link>
                   </li>
-
                   <li>
                     <Link to="/contact">Contact Us</Link>
                   </li>
@@ -216,9 +219,6 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       Logout
                     </li>
                   )}
-                  <li className="bg-primary-500 px-5 py-2 rounded-md text-white">
-                    <Link to="/">Rant</Link>
-                  </li>
                 </ul>
               </div>
             </div>

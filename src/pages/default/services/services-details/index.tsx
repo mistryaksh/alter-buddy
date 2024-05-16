@@ -16,7 +16,12 @@ export const ServicesDetailsPage = () => {
   return (
     <MainLayout>
       <div className="py-20 my-20 xl:px-20 px-5">
-        <h1 className="capitalize text-3xl font-sans2">
+        <img
+          src="https://placehold.co/800x400"
+          alt=""
+          className="rounded-lg xl:h-[60vh] xl:w-[80%] mx-auto"
+        />
+        <h1 className="capitalize text-3xl font-sans2 mt-10">
           {content?.label.toLocaleLowerCase()}
         </h1>
         <h2 className="text-2xl">{content?.title}</h2>
@@ -54,8 +59,14 @@ export const ServicesDetailsPage = () => {
             ))}
           </div>
         </div>
-        <div className="my-10 grid grid-cols-2 gap-10 items-center">
-          <div>{sectionThree?.image}</div>
+        <div className="my-20 grid xl:grid-cols-2 gap-10 items-center">
+          <div>
+            <img
+              className="xl:w-[600px] xl:h-[400px] mx-auto"
+              src="https://placehold.co/400x600"
+              alt=""
+            />
+          </div>
           <ul className="">
             {sectionThree?.points.map((prop) => (
               <li key={prop} className="flex gap-3">
