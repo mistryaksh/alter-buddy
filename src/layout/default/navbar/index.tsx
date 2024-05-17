@@ -81,7 +81,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute -left-[300px] mt-5 border w-[600px] origin-top-left bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-10">
+                          <Menu.Items className="absolute w-[350px] mt-5 border origin-top-left bg-white shadow-lg rounded-md divide-x p-3 divide-gray-500 flex gap-10">
                             <div className="">
                               <label
                                 htmlFor="service"
@@ -89,8 +89,8 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                               >
                                 get help for:
                               </label>
-                              <div className="flex flex-1 flex-col gap-3 ">
-                                {pageContent?.map(({ label, id }) => (
+                              <div className="flex flex-1 flex-col gap-3 mt-5">
+                                {pageContent?.map(({ label, id, subTitle }) => (
                                   <div className="flex gap-3" key={id}>
                                     <Menu.Item>
                                       {({ active }) => (
@@ -108,91 +108,6 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                     </Menu.Item>
                                   </div>
                                 ))}
-                              </div>
-                            </div>
-                            <div className="flex-1 h-full pl-3">
-                              <label
-                                htmlFor="service"
-                                className="uppercase font-semibold text-sm text-primary-500"
-                              >
-                                Therapy for mental wellness:
-                              </label>
-                              <div className="flex flex-col gap-3">
-                                <Link
-                                  className="capitalize text-gray-500 font-bold"
-                                  to="#"
-                                >
-                                  marriage counseling
-                                </Link>
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  relationship counseling
-                                </Link>
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  Depression counseling
-                                </Link>
-
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  LGBTQ therapy
-                                </Link>
-                                <Link
-                                  className="capitalize text-gray-500 font-bold"
-                                  to="#"
-                                >
-                                  marriage counseling
-                                </Link>
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  relationship counseling
-                                </Link>
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  Depression counseling
-                                </Link>
-
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  LGBTQ therapy
-                                </Link>
-                                <Link
-                                  className="capitalize text-gray-500 font-bold"
-                                  to="#"
-                                >
-                                  marriage counseling
-                                </Link>
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  relationship counseling
-                                </Link>
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  Depression counseling
-                                </Link>
-
-                                <Link
-                                  to="#"
-                                  className="capitalize text-gray-500 font-bold"
-                                >
-                                  LGBTQ therapy
-                                </Link>
                               </div>
                             </div>
                           </Menu.Items>
