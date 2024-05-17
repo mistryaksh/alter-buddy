@@ -39,7 +39,7 @@ export const AppRoutes = () => {
       <Route path="user">
         <Route path="mentor/details/:id" element={<UserMentorDetailsPage />} />
         <Route element={<UserPrivateRoutes />}>
-          <Route path="profile" element={<UserProfilePage />} />
+          <Route path="my-profile" element={<UserProfilePage />} />
           <Route path="video/onboard/:id" element={<VideoCallOnboard />} />
         </Route>
       </Route>
