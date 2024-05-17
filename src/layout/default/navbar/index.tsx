@@ -210,19 +210,22 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                     <Link to="/contact">Contact Us</Link>
                   </li>
                   {!authenticated ? (
+                    <li onClick={authModal} className="cursor-pointer">
+                      Login
+                    </li>
+                  ) : (
                     <>
                       <li>
-                        <Link to="/my-profile">Contact Us</Link>
+                        <Link to="/user/my-profile">My Profile</Link>
                       </li>
-                      <li onClick={authModal} className="cursor-pointer">
-                        Login
+                      <li
+                        className="flex items-center gap-3 cursor-pointer text-red-500"
+                        onClick={logout}
+                      >
+                        <AiOutlineLogout size={25} />
+                        Logout
                       </li>
                     </>
-                  ) : (
-                    <li className="flex items-center gap-3" onClick={logout}>
-                      <AiOutlineLogout size={25} />
-                      Logout
-                    </li>
                   )}
                 </ul>
               </div>
