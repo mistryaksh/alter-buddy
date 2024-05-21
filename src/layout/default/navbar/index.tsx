@@ -90,7 +90,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                 get help for:
                               </label>
                               <div className="flex flex-1 flex-col gap-3 mt-5">
-                                {pageContent?.map(({ label, id, subTitle }) => (
+                                {pageContent?.map(({ label, id }) => (
                                   <div className="flex gap-3" key={id}>
                                     <Menu.Item>
                                       {({ active }) => (
