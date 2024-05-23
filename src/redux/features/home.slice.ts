@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { RootState } from "../..";
+import { RootState } from "..";
 
 interface HomeSliceProps {
   problems: {

@@ -1,7 +1,9 @@
 import React, { FC } from "react";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ISubCategoryProps } from "../../../interface";
+import { AppButton } from "../../UI";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 interface ExportMentorsProps {
   image: string;
@@ -20,37 +22,49 @@ export const ExportMentors: FC<ExportMentorsProps> = ({
   status,
   subCategory,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="relative h-auto">
-      <img src={image} alt={name} className="rounded-t-lg shadow-lg" />
+      <img src={image} alt={name} className="rounded-t-lg shadow-lg w-full" />
       <div
         className={clsx(
-          `p-3 flex flex-col gap-5 xl:mb-0`,
+          `p-3 flex flex-col gap-3 xl:mb-0`,
           "bg-gray-100  rounded-b-lg"
         )}
       >
-        <div>
-          <h6 className="text-xl font-semibold flex justify-between items-center capitalize text-gray-900">
+        <div className="flex justify-between items-center">
+          <h6 className="text-xl font-semibold  capitalize text-gray-900">
             {name ? name : "Mistry Aksh"}
-            {/* {status ? (
-              <MdOutlineVerified color="green" size={26} />
-            ) : (
-              <MdOutlineVerified color="gray" size={26} />
-            )} */}
           </h6>
-          <p className="text-md font-extralight capitalize text-gray-500">
-            {specialist}
-          </p>
-          <p className="text-sm font-extralight capitalize text-gray-500">
-            {subCategory.map(({ label }) => (
-              <div>{label}</div>
-            ))}
+          <div className="flex items-center">
+            <AiFillStar className="fill-primary-500" size={22} />
+            <AiFillStar className="fill-primary-500" size={22} />
+            <AiFillStar className="fill-primary-500" size={22} />
+            <AiFillStar className="fill-primary-500" size={22} />
+            <AiOutlineStar size={22} className="fill-gray-500" />
+          </div>
+        </div>
+        <div className="my-2">
+          <p className="text-sm uppercase text-primary-500">{specialist}</p>
+          <p className="text-sm capitalize text-gray-500">
+            <div className="flex gap-2">
+              {subCategory.map(({ label }) => (
+                <p className="text-gray-500">{label}</p>
+              ))}
+            </div>
           </p>
         </div>
-        <div className="flex gap-4 items-center">
-          <Link to={path} className="text-primary-500">
+        <div className="flex justify-between items-center">
+          <p className="text-gray-500 text-xs capitalize">Starts at : ₹10</p>
+          <p className="text-green-500 text-md capitalize">avaliable</p>
+        </div>
+        <div className="flex gap-4 items-end justify-between">
+          <AppButton onClick={() => navigate(path)} filled>
             Connect Now
-          </Link>
+          </AppButton>
+          <p className="underline text-sm text-gray-500 capitalize">
+            2K comments
+          </p>
         </div>
       </div>
     </div>

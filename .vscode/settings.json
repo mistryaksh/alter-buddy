@@ -1,3 +1,4 @@
 {
-     "git.ignoreLimitWarning": true
+  "extensions.experimental.useUtilityProcess": false,
+  "git.ignoreLimitWarning": true
 }

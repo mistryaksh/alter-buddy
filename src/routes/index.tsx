@@ -12,14 +12,14 @@ import {
   UserProfilePage,
   MentorDashboardPage,
   UserMentorDetailsPage,
-  VideoCallOnboard,
-  MentorChatPage,
   MentorCallHistoryPage,
   MentorSchedulesPage,
   MentorSettingsPage,
   PrivacyPolicyPage,
   ServicesPage,
+  MentorVideoCallPage,
   ServicesDetailsPage,
+  UserVideoCallPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 export const AppRoutes = () => {
@@ -40,7 +40,7 @@ export const AppRoutes = () => {
         <Route path="mentor/details/:id" element={<UserMentorDetailsPage />} />
         <Route element={<UserPrivateRoutes />}>
           <Route path="my-profile" element={<UserProfilePage />} />
-          <Route path="video/onboard/:id" element={<VideoCallOnboard />} />
+          <Route path="video-call/:mentorId" element={<UserVideoCallPage />} />
         </Route>
       </Route>
       <Route path="mentor">
@@ -49,7 +49,7 @@ export const AppRoutes = () => {
           <Route path="dashboard" element={<MentorDashboardPage />} />
           <Route path="call-history" element={<MentorCallHistoryPage />} />
           <Route path="schedules" element={<MentorSchedulesPage />} />
-          <Route path="chat/:id" element={<MentorChatPage />} />
+          <Route path="chat/:id" element={<MentorVideoCallPage />} />
           <Route path="settings" element={<MentorSettingsPage />} />
         </Route>
       </Route>

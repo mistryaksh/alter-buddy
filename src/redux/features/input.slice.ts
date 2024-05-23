@@ -1,28 +1,28 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { RootState } from "../..";
+import { RootState } from "..";
 
 interface InputSliceProps {
-     otp?: string;
+  otp?: string;
 }
 
 const initialState: InputSliceProps = {
-     otp: "",
+  otp: "",
 };
 
 const InputSlice = createSlice({
-     initialState,
-     name: "input",
-     reducers: {
-          handleOtpInput: (state, action: PayloadAction<string>) => {
-               state.otp = action.payload;
-          },
-     },
+  initialState,
+  name: "input",
+  reducers: {
+    handleOtpInput: (state, action: PayloadAction<string>) => {
+      state.otp = action.payload;
+    },
+  },
 });
 
 export const useInputSlice = () =>
-     useSelector((state: RootState) => {
-          return state.input;
-     });
+  useSelector((state: RootState) => {
+    return state.input;
+  });
 export const InputReducer = InputSlice.reducer;
 export const { handleOtpInput } = InputSlice.actions;
