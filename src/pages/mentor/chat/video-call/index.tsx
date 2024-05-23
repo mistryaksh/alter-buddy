@@ -11,18 +11,16 @@ import {
 } from "../../../../component";
 import { useParams } from "react-router-dom";
 import { useLazyGetSessionByIdQuery } from "../../../../redux/rtk-api";
+import { callType } from "../../../../interface";
 
 export const MentorVideoCallPage = () => {
   const dispatch = useAppDispatch();
+
   const isConnected = useHMSStore(selectIsConnectedToRoom);
   const { id } = useParams();
   const [
     Session,
-    {
-      isError: isSessionError,
-      error: sessionError,
-      data: sessionData,
-    },
+    { isError: isSessionError, error: sessionError, data: sessionData },
   ] = useLazyGetSessionByIdQuery();
 
   useEffect(() => {
@@ -36,18 +34,30 @@ export const MentorVideoCallPage = () => {
       })();
     }
   }, [dispatch, id, Session, isSessionError, sessionError]);
- const layoutWidth:string = '90%'
+  console.log(sessionData?.data.sessionDetails.callType);
   return (
     <MentorLayout>
       {isConnected && (
         <div className="w-full relative">
-          <CallHeader width={layoutWidth} />
+          <CallHeader width={90} />
           <CallConference />
-          <CallFooter cancellationPath="/mentor/dashboard" width={layoutWidth} />
+          <CallFooter
+            duration={0}
+            isAudioCall={
+              sessionData?.data.sessionDetails.callType === "audio"
+                ? "audio"
+                : ("video" as callType)
+            }
+            cancellationPath="/mentor/dashboard"
+            width={90}
+          />
         </div>
       )}
       {!isConnected && (
         <JoinForm
+          isAudioCall={
+            sessionData?.data.sessionDetails.callType === "audio" ? true : false
+          }
           roomCode={id as string}
           cancellationPath="/mentor/dashboard"
           mentorName={`${sessionData?.data.users.user.name.firstName} ${sessionData?.data.users.user.name.lastName}`}

@@ -1,15 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "..";
+import { callType } from "../../interface";
 
-interface MentorSliceProps {}
+interface MentorSliceProps {
+  selectedCallType: callType;
+}
 
-const initialState: MentorSliceProps = {};
+const initialState: MentorSliceProps = {
+  selectedCallType: "all",
+};
 
 const MentorSlice = createSlice({
   initialState,
   name: "mentors",
-  reducers: {},
+  reducers: {
+    handleCallTypeSelection: (state, action: PayloadAction<callType>) => {
+      state.selectedCallType = action.payload;
+    },
+  },
 });
 
 export const useMentorSlice = () =>
@@ -17,4 +26,4 @@ export const useMentorSlice = () =>
     return state.mentors;
   });
 export const MentorReducer = MentorSlice.reducer;
-export const {} = MentorSlice.actions;
+export const { handleCallTypeSelection } = MentorSlice.actions;

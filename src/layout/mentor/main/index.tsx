@@ -80,13 +80,13 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
 
   const DeclineCall = () => {
     socket.emit("DECLINE_CALL", mentorMeetingConfig.mentorRoomCode);
-    dispatch(handleReceiveCall(false))
+    dispatch(handleReceiveCall(false));
   };
 
   return (
-    <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3 border-4 border-blue-500">
+    <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3">
       {!hideNavs && (
-        <div className="w-[8%] px-5 flex  xl:flex-col xl:items-center xl:justify-center">
+        <div className=" px-5 flex  xl:flex-col xl:items-center xl:justify-center">
           <div className="flex xl:my-0 mb-5 xl:flex-col gap-5">
             <IconLinkButton Icon={MdOutlineHome} path="/mentor/dashboard" />
             <IconLinkButton
@@ -125,6 +125,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
                   {mentorMeetingConfig.roomName}
                 </span>
               </p>
+              <p>{}</p>
               <div className="mt-3 flex justify-end gap-5 items-center">
                 <button
                   onClick={DeclineCall}
@@ -160,9 +161,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
             <p className="text-gray-500 text-2xl">Loading...</p>
           </div>
         ) : (
-          <section>
-            {children}
-          </section>
+          <section>{children}</section>
         )}
       </main>
     </div>

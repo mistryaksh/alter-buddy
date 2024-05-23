@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { AudioLevelIcon } from "@100mslive/react-icons";
 import {
   selectIsLocalAudioPluginPresent,
@@ -22,15 +22,23 @@ import {
 import moment from "moment";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
+import { callType } from "../../../../interface";
 
 const plugin = new HMSKrispPlugin();
 
 interface CallFooterProps {
-  width: string;
-  cancellationPath:string
+  width: number;
+  cancellationPath: string;
+  duration: number;
+  isAudioCall: callType;
 }
 
-export const CallFooter: FC<CallFooterProps> = ({ width ,cancellationPath}) => {
+export const CallFooter: FC<CallFooterProps> = ({
+  width,
+  cancellationPath,
+  isAudioCall,
+  duration,
+}) => {
   const { isLocalAudioEnabled, isLocalVideoEnabled, toggleAudio, toggleVideo } =
     useAVToggle();
   const amIScreenSharing = useHMSStore(selectIsLocalScreenShared);
@@ -42,12 +50,26 @@ export const CallFooter: FC<CallFooterProps> = ({ width ,cancellationPath}) => {
   const isConnected = useHMSStore(selectIsConnectedToRoom);
   const hmsActions = useHMSActions();
   const [isPluginActive, setIsPluginActive] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [startTime] = useState<moment.Moment>(moment());
+  const [elapsedTime, setElapsedTime] = useState<string>("0 seconds");
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const now = moment();
+      const duration = moment.duration(now.diff(startTime)).asSeconds();
+      setElapsedTime(duration.toString());
+    }, 1000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [startTime]);
 
   return (
     <div
+      style={{ width: `${width}%` }}
       className={clsx(
-        `flex gap-10 bg-gray-950 rounded-lg fixed bottom-10 text-white p-5 w-[${width}] justify-start items-center`
+        `flex gap-10 bg-gray-950 rounded-lg fixed bottom-10 text-white p-5  justify-start items-center`
       )}
     >
       <button
@@ -71,16 +93,18 @@ export const CallFooter: FC<CallFooterProps> = ({ width ,cancellationPath}) => {
           <LuScreenShareOff size={30} />
         )}
       </button>
-      <button
-        className={`${isLocalVideoEnabled ? "" : "highlight"}`}
-        onClick={toggleVideo}
-      >
-        {isLocalVideoEnabled ? (
-          <MdOutlineVideocam fontSize={30} />
-        ) : (
-          <MdOutlineVideocamOff fontSize={30} />
-        )}
-      </button>
+      {isAudioCall && (
+        <button
+          className={`${isLocalVideoEnabled ? "" : "highlight"}`}
+          onClick={toggleVideo}
+        >
+          {isLocalVideoEnabled ? (
+            <MdOutlineVideocam fontSize={30} />
+          ) : (
+            <MdOutlineVideocamOff fontSize={30} />
+          )}
+        </button>
+      )}
 
       {room.isNoiseCancellationEnabled ? (
         <button
@@ -108,13 +132,14 @@ export const CallFooter: FC<CallFooterProps> = ({ width ,cancellationPath}) => {
           className="flex items-center"
           onClick={() => {
             hmsActions.leave();
-            navigate(cancellationPath,{replace:true});
+            navigate(cancellationPath, { replace: true });
           }}
         >
           <MdOutlineExitToApp size={30} />
         </button>
       )}
-      <p>{moment(room.startedAt).format("MMMM Do YYYY, h:mm:ss A")}</p>
+      {/* <p>{moment(room.startedAt).format("MMMM Do YYYY, h:mm:ss A")}</p> */}
+      <p>{elapsedTime}</p>
     </div>
   );
 };

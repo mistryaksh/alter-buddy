@@ -15,7 +15,9 @@ import {
   AiOutlineCalendar,
   AiOutlineLoading,
   AiOutlineMessage,
+  AiOutlinePhone,
   AiOutlineStar,
+  AiOutlineVideoCamera,
 } from "react-icons/ai";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
@@ -309,15 +311,30 @@ export const UserMentorDetailsPage = () => {
               <p className="text-gray-500 my-2">
                 Chat with the expert and get instant guidance
               </p>
-              <div className="w-full mt-5">
+              <div className="w-full mt-5 flex gap-3">
                 <AppButton
                   outlined
                   flexed
                   onClick={() =>
-                    navigate(`/user/video-call/${mentor?.data._id}`)
+                    navigate(
+                      `/user/video-call/${mentor?.data._id}?audio_call=false`
+                    )
                   }
                 >
-                  <div className="flex gap-3">Chat now</div>
+                  <AiOutlineVideoCamera size={25} />
+                  Video Call
+                </AppButton>
+                <AppButton
+                  outlined
+                  flexed
+                  onClick={() =>
+                    navigate(
+                      `/user/video-call/${mentor?.data._id}?audio_call=true`
+                    )
+                  }
+                >
+                  <AiOutlinePhone size={25} />
+                  Voice Call
                 </AppButton>
               </div>
             </div>

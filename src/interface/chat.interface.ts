@@ -14,6 +14,7 @@ export interface IChatProps {
     };
     roomName: string;
     description: string;
+    callType: callType;
   };
   message: [
     {
@@ -25,11 +26,14 @@ export interface IChatProps {
       topic: string;
     }
   ];
-  status?: callType;
+  status?: callStatus;
+  createdAt?: string;
+  updatedAt?: string;
 }
-export type callType =
+export type callStatus =
   | "REJECTED"
   | "ONGOING"
   | "COMPLETED"
   | "PENDING"
   | "ACCEPTED";
+export type callType = "video" | "audio" | "chat" | "all";

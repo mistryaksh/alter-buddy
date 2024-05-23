@@ -9,6 +9,7 @@ interface JoinRoomProps {
   userName: string;
   mentorName: string;
   cancellationPath: string;
+  isAudioCall: boolean;
 }
 
 export const JoinForm: FC<JoinRoomProps> = ({
@@ -16,6 +17,7 @@ export const JoinForm: FC<JoinRoomProps> = ({
   userName,
   mentorName,
   cancellationPath,
+  isAudioCall,
 }) => {
   const hmsActions = useHMSActions();
 
@@ -32,6 +34,7 @@ export const JoinForm: FC<JoinRoomProps> = ({
         await hmsActions.join({
           userName: userName,
           authToken,
+          rememberDeviceSelection: true,
         });
       } catch (e) {
         console.log("====================================");

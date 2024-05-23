@@ -13,14 +13,17 @@ import {
   useLazyGetMentorUsingIdQuery,
   useProfileUserQuery,
 } from "../../../redux/rtk-api";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import { socket } from "../../../service";
 
 export const UserVideoCallPage = () => {
   const isConnected = useHMSStore(selectIsConnectedToRoom);
   const { mentorId: id } = useParams();
+  let [searchParams] = useSearchParams();
+  const isAudioCall = searchParams.get("audio_call") === typeof "true";
   const { data: profile } = useProfileUserQuery();
+
   const [
     GetMentor,
     {
@@ -36,8 +39,8 @@ export const UserVideoCallPage = () => {
   const navigate = useNavigate();
 
   const Continue = useCallback(async () => {
-    await StartMeeting();
-  }, [StartMeeting]);
+    await StartMeeting({ audioCall: isAudioCall ? "audio" : "video" });
+  }, [StartMeeting, isAudioCall]);
 
   useEffect(() => {
     if (id) {
@@ -64,6 +67,7 @@ export const UserVideoCallPage = () => {
         room: data?.data.room,
         userId: profile?.data._id,
         mentorId: mentor?.data._id,
+        callType: isAudioCall ? "audio" : "video",
       });
     }
   }, [
@@ -73,22 +77,27 @@ export const UserVideoCallPage = () => {
     mentor?.data._id,
     profile?.data._id,
     data?.data.room,
+    isAudioCall,
   ]);
-
-  const layoutWidth:string = "98%"
 
   return (
     <MainLayout hideNav={isConnected} loading={false}>
       {isConnected && !isLoading ? (
         <div className="h-screen relative p-5 w-full">
-          <CallHeader width={layoutWidth} />
+          <CallHeader width={98} />
           <CallConference />
-          <CallFooter cancellationPath="/" width={layoutWidth} />
+          <CallFooter
+            duration={0}
+            isAudioCall={isAudioCall ? "audio" : "video"}
+            cancellationPath="/"
+            width={98}
+          />
         </div>
       ) : (
         <div>
           {isSuccess ? (
             <JoinForm
+              isAudioCall={isAudioCall}
               cancellationPath={`/user/mentor/details/${mentor?.data._id}`}
               mentorName={`${mentor?.data.name.firstName} ${mentor?.data.name.lastName}`}
               roomCode={data?.data.userCode.code}

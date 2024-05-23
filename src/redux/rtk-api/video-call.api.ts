@@ -1,16 +1,19 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { ApiBaseQuery, baseQueryUser } from "../../utils";
-import { IChatProps } from "../../interface";
+import { callType, IChatProps } from "../../interface";
 
 const VideoCallApi = createApi({
   baseQuery: ApiBaseQuery(baseQueryUser),
   reducerPath: "videoCallApi",
   endpoints: ({ mutation, query }) => ({
-    GetMeetingCodes: mutation<{ data: any }, void>({
-      query: () => {
+    GetMeetingCodes: mutation<{ data: any }, { audioCall: callType }>({
+      query: ({ audioCall }) => {
         return {
           url: "/start-meeting",
           method: "POST",
+          body: {
+            audioCall: audioCall,
+          },
         };
       },
     }),

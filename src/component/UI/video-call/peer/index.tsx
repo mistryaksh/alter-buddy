@@ -25,8 +25,8 @@ export const VideoCallPeer = ({
   const isPeerVideoEnabled = useHMSStore(selectIsPeerVideoEnabled(id));
 
   return (
-    <div className="w-[50%] mt-20 relative">
-      <div className="relative">
+    <div className="w-[100%] flex mt-20 relative">
+      <div className="relative flex-1">
         {isPeerVideoEnabled && (
           <video
             ref={videoRef}
