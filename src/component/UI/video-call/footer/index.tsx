@@ -23,6 +23,7 @@ import moment from "moment";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import { callType } from "../../../../interface";
+import { LeaveModal } from "../../../modal";
 
 const plugin = new HMSKrispPlugin();
 
@@ -39,6 +40,7 @@ export const CallFooter: FC<CallFooterProps> = ({
   isAudioCall,
   duration,
 }) => {
+  const [leaveModal, setLeaveModal] = useState<boolean>(false);
   const { isLocalAudioEnabled, isLocalVideoEnabled, toggleAudio, toggleVideo } =
     useAVToggle();
   const amIScreenSharing = useHMSStore(selectIsLocalScreenShared);
@@ -65,6 +67,10 @@ export const CallFooter: FC<CallFooterProps> = ({
     return () => clearInterval(intervalId);
   }, [startTime]);
 
+  const leaveCall = () => {
+    hmsActions.leave();
+    navigate(cancellationPath, { replace: true });
+  };
   return (
     <div
       style={{ width: `${width}%` }}
@@ -131,8 +137,7 @@ export const CallFooter: FC<CallFooterProps> = ({
           id="leave-btn"
           className="flex items-center"
           onClick={() => {
-            hmsActions.leave();
-            navigate(cancellationPath, { replace: true });
+            setLeaveModal(true);
           }}
         >
           <MdOutlineExitToApp size={30} />
@@ -140,6 +145,12 @@ export const CallFooter: FC<CallFooterProps> = ({
       )}
       {/* <p>{moment(room.startedAt).format("MMMM Do YYYY, h:mm:ss A")}</p> */}
       <p>{elapsedTime}</p>
+      {leaveModal && (
+        <LeaveModal
+          leaveAction={leaveCall}
+          modalHandler={() => setLeaveModal(!leaveModal)}
+        />
+      )}
     </div>
   );
 };
