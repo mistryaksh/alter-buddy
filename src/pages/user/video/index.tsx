@@ -21,7 +21,7 @@ export const UserVideoCallPage = () => {
   const isConnected = useHMSStore(selectIsConnectedToRoom);
   const { mentorId: id } = useParams();
   let [searchParams] = useSearchParams();
-  const isAudioCall = searchParams.get("audio_call") === typeof "true";
+  const isAudioCall = searchParams.get("audio_call") === "true";
   const { data: profile } = useProfileUserQuery();
 
   const [

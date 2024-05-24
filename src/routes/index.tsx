@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import {
   AboutPage,
   AllMentorsPage,
-  BlogPage,
   ComingSoonPage,
   DefaultHome,
   MentorLoginPage,
@@ -20,13 +19,18 @@ import {
   MentorVideoCallPage,
   ServicesDetailsPage,
   UserVideoCallPage,
+  RantHomePage,
+  BuddyTubePage,
+  ContactPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
+
 export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<DefaultHome />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact-us" element={<ContactPage />} />
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/services/:id" element={<ServicesDetailsPage />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
@@ -34,8 +38,8 @@ export const AppRoutes = () => {
       <Route path="/mobile-verification" element={<MobileVerificationPage />} />
       <Route path="/category/:id" element={<SingleCategoryPage />} />
       <Route path="/coming-soon" element={<ComingSoonPage />} />
-      <Route path="/rant" element={<ComingSoonPage />} />
-      <Route path="/blog" element={<BlogPage />} />
+      <Route path="/rant" element={<RantHomePage />} />
+      <Route path="/buddytube" element={<BuddyTubePage />} />
       <Route path="user">
         <Route path="mentor/details/:id" element={<UserMentorDetailsPage />} />
         <Route element={<UserPrivateRoutes />}>

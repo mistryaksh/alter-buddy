@@ -2,6 +2,7 @@ import React from "react";
 import { MainLayout } from "../../../../layout";
 import { useParams } from "react-router-dom";
 import { useServicesSlice } from "../../../../redux/features";
+import { DownloadApp } from "../../../../component";
 
 export const ServicesDetailsPage = () => {
   const { id } = useParams();
@@ -82,6 +83,7 @@ export const ServicesDetailsPage = () => {
             {sectionFour?.author}
           </blockquote>
         </div>
+        <DownloadApp />
       </div>
     </MainLayout>
   );

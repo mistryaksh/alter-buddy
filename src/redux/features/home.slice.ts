@@ -80,7 +80,7 @@ const initialState: HomeSliceProps = {
       body: "our psychologists (your buddies) help you overcome anxiety, stress, and confusion. they will help you gain clarity and confidence in your life's direction.",
       image:
         "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
-      label: "mental health services",
+      label: "mental health",
       path: "#",
     },
     {

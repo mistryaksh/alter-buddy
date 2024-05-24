@@ -10,7 +10,6 @@ import {
   TestimonialsCard,
   TwoHands,
 } from "../../../component";
-import { Link } from "react-router-dom";
 import {
   handleAuthModal,
   handleFaq,
@@ -40,7 +39,7 @@ export const DefaultHome = () => {
   const { problems, helpPoints } = useHomeSlice();
 
   const {
-    data: subCategory,
+    // data: subCategory,
     isError: isSubCategoryError,
     isLoading: isSubCategoryLoading,
     error: subCategoryError,
@@ -134,19 +133,17 @@ export const DefaultHome = () => {
           />
         </div>
       </div>
-      <div className="my-20 py-20">
+      <div className="mt-20 py-20">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           WE UNDERSTAND YOUR{" "}
           <span className="font-semibold text-primary-500">
             PROBLEMS/TRAUMAS
           </span>
         </h6>
-        <p className="text-center text-gray-500 xl:w-[80%] mx-auto">
-          People and sometimes the situations around us are so toxic, that we
-          feel everything bad happens only to us, making us bitter. And
-          unconsciously, we send so many negative energies to the universe, that
-          it has no choice but to return the same back to us, making us even
-          more miserable.
+
+        <p className="xl:w-[80%] text-gray-600 mx-auto text-center">
+          NOTE: (The problems mentioned in a specific age band do not typically
+          fall in that category only. The problems can resonate with anyone )
         </p>
         <div className="mt-10 justify-center gap-20 flex flex-col px-3">
           {problems.map(({ age, points }) => (
@@ -173,9 +170,39 @@ export const DefaultHome = () => {
             </div>
           ))}
         </div>
+        <p className="text-left mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
+          People and sometimes the situations around us are so toxic, that we
+          feel everything bad happens only to us, making us bitter. And
+          unconsciously, we send so many negative energies to the universe, that
+          it has no choice but to return the same back to us, making us even
+          more miserable.
+          {"\n\n"}
+          The universe has made it really simple for us to understand:
+          {"\n\n"}
+          <span className="text-center text-primary-500">
+            ’Whatever you give me, so shall you get back’.
+          </span>
+          {"\n\n"}
+          And we are here to help you become the best version of yourself with
+          only a positive aura all around you, making sure the universe is at
+          your side granting you everything you desire. And we are here to help
+          you become the best version of yourself with only a positive aura all
+          around you, making sure the universe is at your side granting you
+          everything you desire.
+          {"\n\n"}
+          We get you out of all your traumas and negativity, however bad and
+          toxic the situation is for you, healing your wounds from within, at
+          the cellular level.
+          {"\n\n"}
+          We believe that everyone deserves to live a life filled with joy and
+          fulfillment. And we are here to give you exactly that.
+        </p>
+        <div className="flex justify-center my-5">
+          <AppButton filled>TALK TO US</AppButton>
+        </div>
       </div>
 
-      <div className="my-40 ">
+      <div className="mb-40 mt-0 xl:w-[80%] mx-auto">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           HOW DO WE{" "}
           <span className="font-semibold text-primary-500">HELP?</span>
@@ -199,8 +226,7 @@ export const DefaultHome = () => {
       {/* section two */}
       <div className="my-40 container mx-auto w-[80%]">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
-          why{" "}
-          <span className="font-semibold text-primary-500">AlterBuddy?</span>
+          why <span className="font-semibold text-primary-500">Choose Us?</span>
         </h6>
         <p className="text-center text-gray-500">
           At AlterBuddy, we recognize the significance of fostering a positive
@@ -289,6 +315,10 @@ export const DefaultHome = () => {
         <h6 className="text-5xl capitalize text-left font-sans2">
           How Does It <span className="text-primary-500">Works</span>
         </h6>
+        <p className="text-gray-500">
+          Get professional advice and steadfast support whenever and wherever
+          you need it
+        </p>
         <div className="mt-10 flex justify-start">
           <a
             rel="noreferrer"
@@ -345,8 +375,7 @@ export const DefaultHome = () => {
       <div className="">
         <div className="container mx-auto pt-20">
           <h6 className="text-5xl capitalize text-left font-sans2">
-            Client{" "}
-            <span className="text-primary-500 font-semibold">Testimonials</span>
+            Our <span className="text-primary-500 font-semibold">Clients</span>
           </h6>
           <p className="font-extralight text-md text-gray-500 my-5">
             You do not have to take our word for it. Read through the
@@ -422,7 +451,7 @@ export const DefaultHome = () => {
 
       {/* section four */}
       <div className="bg-primary-200 py-20 pb-28 ">
-        <div className="container mx-auto grid items-center px-2 justify-center grid-cols-2 xl:grid-cols-4 lg:grid-cols-4 gap-10 md:col-span-12">
+        <div className="container mx-auto grid items-center px-2 justify-center grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4 gap-10 md:col-span-12">
           {mentor?.data
             .map(({ name, _id, accountStatus, category, subCategory }) => (
               <ExportMentors
@@ -435,12 +464,15 @@ export const DefaultHome = () => {
                 subCategory={subCategory}
               />
             ))
-            .reverse()}
+            .reverse()
+            .sort((a, b) => {
+              return a.props.specialist - b.props.specialist;
+            })}
         </div>
       </div>
 
       {/* section six */}
-      <div>
+      {/* <div>
         <div className=" mx-auto w-[70%] pt-20 pb-10">
           <h6 className="text-5xl capitalize text-left font-sans2">
             We got your{" "}
@@ -469,10 +501,23 @@ export const DefaultHome = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* section five */}
-
+      <div className="xl:w-[80%] mx-auto my-20 flex flex-col items-center">
+        <AppButton filled>Download the app here</AppButton>
+        <div>
+          <p className="text-xl font-sans2 py-5">
+            "“Change your conception of yourself and you will automatically
+            change the world in which you live. Do not try to change people;
+            they are only messengers telling you who you are. Revalue yourself
+            and they will confirm the change.” "
+          </p>
+          <blockquote className="p-4 my-4 border-s-4 border-primary-300 bg-primary-50 text-primary-500 text-xl text-right">
+            -Neville Goddard
+          </blockquote>
+        </div>
+      </div>
       {/* section seven */}
       {faq?.data.length !== 0 && (
         <div className="xl:w-[70%] xl:p-0 px-3 my-20 mx-auto py-20">

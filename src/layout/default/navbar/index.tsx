@@ -49,10 +49,14 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                   <p className="capitalize">FInd Your life’s Brighter Side</p>
                 </Link>
               </div>
+
               <div className="xl:flex-1 hidden md:block w-full xl:flex xl:justify-end ml-5">
                 <ul className="flex items-center justify-end gap-5 w-full">
                   <li className="bg-primary-500 px-5 py-2 rounded-md text-white">
-                    <Link to="/">Rant</Link>
+                    <Link to="/rant">Rant</Link>
+                  </li>
+                  <li>
+                    <Link to="/about">About Us</Link>
                   </li>
                   {/* <li>
                     <Link to="/services">Our Services</Link>
@@ -115,14 +119,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       </Menu>
                     </div>
                   </li>
+
                   <li>
-                    <Link to="/about">About Us</Link>
+                    <Link to="/buddytube">BuddyTube</Link>
                   </li>
                   <li>
-                    <Link to="/blog">Blogs</Link>
-                  </li>
-                  <li>
-                    <Link to="/contact">Contact Us</Link>
+                    <Link to="/contact-us">Contact Us</Link>
                   </li>
                   {!authenticated ? (
                     <li onClick={authModal} className="cursor-pointer">

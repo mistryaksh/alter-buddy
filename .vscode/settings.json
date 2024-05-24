@@ -1,4 +1,6 @@
 {
   "extensions.experimental.useUtilityProcess": false,
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "typescript.suggest.paths": true,
+  "javascript.suggest.paths": true
 }

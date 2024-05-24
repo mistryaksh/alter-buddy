@@ -2,7 +2,7 @@ import React from "react";
 import { MainLayout } from "../../../layout";
 import clsx from "clsx";
 import { useGetMentorsListQuery } from "../../../redux/rtk-api";
-import { ExportMentors } from "../../../component";
+import { DownloadApp, ExportMentors } from "../../../component";
 
 export const AboutPage = () => {
   const { data: mentor } = useGetMentorsListQuery();
@@ -76,7 +76,7 @@ export const AboutPage = () => {
         </div>
       </div>
       <div className="py-20 pb-28 ">
-        <div className="container mx-auto grid items-start px-2 justify-center grid-cols-2 xl:grid-cols-5  lg:grid-cols-4 gap-3 md:col-span-12">
+        <div className="container mx-auto grid items-start px-2 justify-center grid-cols-2 md:grid-cols-3 xl:grid-cols-5  lg:grid-cols-3 gap-3 md:col-span-12">
           {mentor?.data
             .map(({ name, _id, accountStatus, category, subCategory }) => (
               <ExportMentors
@@ -91,6 +91,7 @@ export const AboutPage = () => {
             ))
             .reverse()}
         </div>
+        <DownloadApp />
       </div>
     </MainLayout>
   );
