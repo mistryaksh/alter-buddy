@@ -12,17 +12,17 @@ export const CallConference = () => {
   const presenters = useHMSStore(selectPeersScreenSharing);
 
   return (
-    <div className="items-center flex w-full mt-20 justify-center gap-5">
+    <div className="items-center flex w-full mt-20 justify-center gap-5 flex-wrap">
       <div className="flex-1 flex items-center gap-5">
         {peers.map((peer) => (
           <VideoCallPeer key={peer.id} {...peer} />
         ))}
       </div>
-      <div className="flex-1 mt-20">
-        {presenters.map((peer) => (
+      {presenters.map((peer) => (
+        <div className="flex-1 mt-20 flex flex-col gap-5">
           <ScreenTile key={"screen" + peer.id} peer={peer} />
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };

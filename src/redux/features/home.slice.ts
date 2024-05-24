@@ -1,9 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "..";
 
 interface HomeSliceProps {
   problems: {
+    id: number;
     age: string;
     points: string[];
   }[];
@@ -13,11 +14,13 @@ interface HomeSliceProps {
     label: string;
     path: string;
   }[];
+  selectedAgeGroup: number;
 }
 
 const initialState: HomeSliceProps = {
   problems: [
     {
+      id: 0,
       age: "13-25",
       points: [
         "Your Crush doesn’t notice you?",
@@ -39,6 +42,7 @@ const initialState: HomeSliceProps = {
       ],
     },
     {
+      id: 1,
       age: "25-50",
       points: [
         "Rejection in marriage or love",
@@ -62,6 +66,7 @@ const initialState: HomeSliceProps = {
       ],
     },
     {
+      id: 2,
       age: "above 50",
       points: [
         "Has problems in adjusting to retirement",
@@ -105,12 +110,17 @@ const initialState: HomeSliceProps = {
       path: "#",
     },
   ],
+  selectedAgeGroup: 0,
 };
 
 const HomeSlice = createSlice({
   initialState,
   name: "home",
-  reducers: {},
+  reducers: {
+    handleAgeGroupSelection: (state, action: PayloadAction<number>) => {
+      state.selectedAgeGroup = action.payload;
+    },
+  },
 });
 
 export const HomeReducer = HomeSlice.reducer;
@@ -118,3 +128,4 @@ export const useHomeSlice = () =>
   useSelector((state: RootState) => {
     return state.home;
   });
+export const { handleAgeGroupSelection } = HomeSlice.actions;

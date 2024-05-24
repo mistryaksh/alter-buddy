@@ -11,6 +11,7 @@ import {
   TwoHands,
 } from "../../../component";
 import {
+  handleAgeGroupSelection,
   handleAuthModal,
   handleFaq,
   useAuthenticationSlice,
@@ -36,7 +37,7 @@ export const DefaultHome = () => {
   const { active } = useFaqSlice();
   const { data: mentor } = useGetMentorsListQuery();
   const { authentication } = useAuthenticationSlice();
-  const { problems, helpPoints } = useHomeSlice();
+  const { problems, helpPoints, selectedAgeGroup } = useHomeSlice();
 
   const {
     // data: subCategory,
@@ -145,32 +146,33 @@ export const DefaultHome = () => {
           NOTE: (The problems mentioned in a specific age band do not typically
           fall in that category only. The problems can resonate with anyone )
         </p>
-        <div className="mt-10 justify-center gap-20 flex flex-col px-3">
-          {problems.map(({ age, points }) => (
-            <div className="shadow-lg py-10 border-2 rounded-md overflow-hidden">
-              <h6 className="capitalize text-xl text-center font-semibold text-gray-900">
+        <div className="mt-10 justify-center gap-20 flex flex-row px-3">
+          {problems.map(({ age, id }) => (
+            <button
+              type="button"
+              onClick={() => dispatch(handleAgeGroupSelection(id))}
+              className={clsx(
+                "border-2 border-gray-400 px-5 py-2 rounded-full",
+                selectedAgeGroup === id &&
+                  "bg-primary-500 text-white border-2 border-transparent"
+              )}
+            >
+              <h6 className="capitalize text-md text-center font-semibold">
                 Age Group {age}
               </h6>
-              <div className="marquee flex flex-row gap-10 items-start my-3">
-                {points.map((prop, i) => (
-                  <div
-                    key={i}
-                    className="w-auto hover:bg-primary-500 group text-nowrap px-5 py-2 border border-primary-500 rounded-full"
-                  >
-                    <p className="text-primary-500 group-hover:text-white capitalize select-none">
-                      <span className="pr-3">{i + 1}</span>
-                      {prop}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div className="flex justify-center">
-                <AppButton filled>Get in touch with us?</AppButton>
-              </div>
-            </div>
+            </button>
           ))}
         </div>
-        <p className="text-left mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
+        <div className="border h-[430px] overflow-scroll border-primary-500 px-10 py-5 xl:w-[80%] rounded-md mx-auto mt-10">
+          <ul className="list-disc flex flex-col items-center">
+            {problems[selectedAgeGroup].points.map((elements, i) => (
+              <li className="" key={i}>
+                {elements}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="text-center mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
           People and sometimes the situations around us are so toxic, that we
           feel everything bad happens only to us, making us bitter. And
           unconsciously, we send so many negative energies to the universe, that
@@ -312,14 +314,14 @@ export const DefaultHome = () => {
       </div>
 
       <div className="w-[80%] p-3 mx-auto my-20">
-        <h6 className="text-5xl capitalize text-left font-sans2">
+        <h6 className="text-4xl capitalize text-center font-sans2">
           How Does It <span className="text-primary-500">Works</span>
         </h6>
-        <p className="text-gray-500">
+        <p className="text-gray-500 text-center">
           Get professional advice and steadfast support whenever and wherever
           you need it
         </p>
-        <div className="mt-10 flex justify-start">
+        <div className="my-5 flex justify-center">
           <a
             rel="noreferrer"
             href="http://play.google.com/store/apps/details?"
@@ -374,10 +376,10 @@ export const DefaultHome = () => {
 
       <div className="">
         <div className="container mx-auto pt-20">
-          <h6 className="text-5xl capitalize text-left font-sans2">
+          <h6 className="text-4xl capitalize text-center font-sans2">
             Our <span className="text-primary-500 font-semibold">Clients</span>
           </h6>
-          <p className="font-extralight text-md text-gray-500 my-5">
+          <p className="font-extralight text-center text-md text-gray-500 my-5">
             You do not have to take our word for it. Read through the
             testimonials of users who transformed themselves with the guidance
             of Alterbuddy Experts.
@@ -438,10 +440,10 @@ export const DefaultHome = () => {
       </div>
       {/* section three */}
       <div className="container mx-auto w-[80%] mt-20">
-        <h6 className="text-5xl capitalize text-left font-semibold font-sans2">
+        <h6 className="text-4xl capitalize text-center font-semibold font-sans2">
           meet our <span className="text-primary-500">experts</span>
         </h6>
-        <p className="font-extralight text-md text-gray-500 my-5">
+        <p className="font-extralight text-center text-md text-gray-500 my-5">
           This is your Team section. It's a great place to introduce your team
           and talk about what makes it special, such as your culture and work
           philosophy. Don't be afraid to illustrate personality and character to
@@ -474,7 +476,7 @@ export const DefaultHome = () => {
       {/* section six */}
       {/* <div>
         <div className=" mx-auto w-[70%] pt-20 pb-10">
-          <h6 className="text-5xl capitalize text-left font-sans2">
+          <h6 className="text-5xl capitalize text-center font-sans2">
             We got your{" "}
             <span className="text-primary-500 font-semibold">back for</span>
           </h6>
@@ -507,11 +509,11 @@ export const DefaultHome = () => {
       <div className="xl:w-[80%] mx-auto my-20 flex flex-col items-center">
         <AppButton filled>Download the app here</AppButton>
         <div>
-          <p className="text-xl font-sans2 py-5">
-            "“Change your conception of yourself and you will automatically
+          <p className="text-xl font-sans2 text-center py-5">
+            “Change your conception of yourself and you will automatically
             change the world in which you live. Do not try to change people;
             they are only messengers telling you who you are. Revalue yourself
-            and they will confirm the change.” "
+            and they will confirm the change.”
           </p>
           <blockquote className="p-4 my-4 border-s-4 border-primary-300 bg-primary-50 text-primary-500 text-xl text-right">
             -Neville Goddard
