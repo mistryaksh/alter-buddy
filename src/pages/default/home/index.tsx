@@ -157,14 +157,14 @@ export const DefaultHome = () => {
                   "bg-primary-500 text-white border-2 border-transparent"
               )}
             >
-              <h6 className="capitalize text-md text-center font-semibold">
+              <h6 className="capitalize text-sm font-sans2 text-center font-semibold">
                 Age Group {age}
               </h6>
             </button>
           ))}
         </div>
-        <div className="border h-[430px] overflow-scroll border-primary-500 px-10 py-5 xl:w-[80%] rounded-md mx-auto mt-10">
-          <ul className="list-disc flex flex-col items-center">
+        <div className="border py-20 border-primary-500 px-10  xl:w-[80%] rounded-md mx-auto mt-10">
+          <ul className="list-disc grid grid-cols-2 w-[60%] mx-auto">
             {problems[selectedAgeGroup].points.map((elements, i) => (
               <li className="" key={i}>
                 {elements}
