@@ -37,7 +37,7 @@ export const MainFooter: FC<MainFooterProps> = () => {
                 any query ?
               </p>
               <Link
-                to="#"
+                to="/contact-us"
                 className="py-2.5 px-5 h-9 block w-fit bg-primary-600 rounded-full shadow-sm text-xs text-white mx-auto transition-all  duration-500 hover:bg-primary-700 lg:mx-0"
               >
                 {" "}

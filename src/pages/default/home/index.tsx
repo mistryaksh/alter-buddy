@@ -172,39 +172,60 @@ export const DefaultHome = () => {
             ))}
           </ul>
         </div>
-        <p className="text-center mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
-          People and sometimes the situations around us are so toxic, that we
-          feel everything bad happens only to us, making us bitter. And
-          unconsciously, we send so many negative energies to the universe, that
-          it has no choice but to return the same back to us, making us even
-          more miserable.
-          {"\n\n"}
-          The universe has made it really simple for us to understand:
-          {"\n\n"}
-          <span className="text-center text-primary-500">
-            ’Whatever you give me, so shall you get back’.
-          </span>
-          {"\n\n"}
-          And we are here to help you become the best version of yourself with
-          only a positive aura all around you, making sure the universe is at
-          your side granting you everything you desire. And we are here to help
-          you become the best version of yourself with only a positive aura all
-          around you, making sure the universe is at your side granting you
-          everything you desire.
-          {"\n\n"}
-          We get you out of all your traumas and negativity, however bad and
-          toxic the situation is for you, healing your wounds from within, at
-          the cellular level.
-          {"\n\n"}
-          We believe that everyone deserves to live a life filled with joy and
-          fulfillment. And we are here to give you exactly that.
-        </p>
-        <div className="flex justify-center my-5">
-          <AppButton filled>TALK TO US</AppButton>
+        <div className="grid xl:grid-cols-2 xl:w-[90%] mx-auto mt-20">
+          <div>
+            <p className="text-center mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
+              People and sometimes the situations around us are so toxic, that
+              we feel everything bad happens only to us, making us bitter. And
+              unconsciously, we send so many negative energies to the universe,
+              that it has no choice but to return the same back to us, making us
+              even more miserable.
+              {"\n\n"}
+              The universe has made it really simple for us to understand:
+              {"\n\n"}
+              <span className="text-center text-primary-500">
+                ’Whatever you give me, so shall you get back’.
+              </span>
+            </p>
+          </div>
+          <div className="flex items-center justify-center">
+            <img
+              src="https://images.pexels.com/photos/6624292/pexels-photo-6624292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt=""
+              className="w-[70%] rounded-lg"
+            />
+          </div>
+        </div>
+        <div className="grid xl:grid-cols-2 xl:w-[90%] mx-auto mt-5">
+          <div className="flex items-center justify-center">
+            <img
+              src="https://images.pexels.com/photos/6624287/pexels-photo-6624287.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt=""
+              className="w-[70%] rounded-lg"
+            />
+          </div>
+          <p className="text-center mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
+            And we are here to help you become the best version of yourself with
+            only a positive aura all around you, making sure the universe is at
+            your side granting you everything you desire. And we are here to
+            help you become the best version of yourself with only a positive
+            aura all around you, making sure the universe is at your side
+            granting you everything you desire.
+            {"\n\n"}
+            We get you out of all your traumas and negativity, however bad and
+            toxic the situation is for you, healing your wounds from within, at
+            the cellular level.
+            {"\n\n"}
+            We believe that everyone deserves to live a life filled with joy and
+            fulfillment. And we are here to give you exactly that.
+          </p>
         </div>
       </div>
 
-      <div className="mb-40 mt-0 xl:w-[80%] mx-auto">
+      <div className="flex justify-center mt-10">
+        <AppButton filled>TALK TO US</AppButton>
+      </div>
+      <div className="mb-40 mt-20 xl:w-[80%] mx-auto">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           HOW DO WE{" "}
           <span className="font-semibold text-primary-500">HELP?</span>

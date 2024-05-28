@@ -16,6 +16,7 @@ import {
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import { socket } from "../../../service";
+import { AiOutlinePhone, AiOutlineVideoCamera } from "react-icons/ai";
 
 export const UserVideoCallPage = () => {
   const isConnected = useHMSStore(selectIsConnectedToRoom);
@@ -107,30 +108,35 @@ export const UserVideoCallPage = () => {
             <div className="flex items-center justify-center">
               <div className="my-20 pt-20 flex flex-col w-[40%] p-3 shadow-lg">
                 <AlterBuddyLogo />
-                <h6 className="text-3xl text-primary-500 capitalize">
+                <h6 className="text-xl text-primary-500 capitalize text-left">
                   {mentor?.data.name.firstName} {mentor?.data.name.lastName}
                 </h6>
-                <p className="text-2xl font-semibold">
-                  Mentor's Specialization {mentor?.data.category.title}
+                <p className="capitalize text-xl font-semibold text-left">
+                  Mentor Type : {mentor?.data.category.title}
                 </p>
+                <div className="flex gap-5 items-center my-5">
+                  Session Type -{" "}
+                  {isAudioCall ? (
+                    <div className="flex items-center gap-3">
+                      <AiOutlinePhone /> <p>Audio Call</p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-3">
+                      <AiOutlineVideoCamera /> <p>Video Call</p>
+                    </div>
+                  )}
+                </div>
                 <div className="mb-4">
-                  <h6>You can ask about:</h6>
+                  <h6 className="text-primary-500">You can ask about:</h6>
                   <div className="grid gap-5 xl:grid-cols-3 lg:grid-cols-3 grid-cols-12 items-center">
-                    {mentor?.data.subCategory.map(
-                      ({ label, subTitle, desc }, i) => (
-                        <div key={i} className="">
-                          <p className="text-xl">
-                            <span className="capitalize">{label} </span>
-                          </p>
-                          <p className="text-gray-500">
-                            {subTitle}
-                            {`\n`}
-                            {`\n`}
-                            {desc}
-                          </p>
-                        </div>
-                      )
-                    )}
+                    {mentor?.data.subCategory.map(({ label, subTitle }, i) => (
+                      <div key={i} className="border p-2">
+                        <p className="text-xl font-sans2">
+                          <span className="capitalize">{label} </span>
+                        </p>
+                        <p className="text-gray-500">{subTitle}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <div className="flex gap-5 justify-between">
