@@ -22,6 +22,8 @@ import {
   RantHomePage,
   BuddyTubePage,
   ContactPage,
+  UserChatPage,
+  MentorChatPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 
@@ -42,6 +44,7 @@ export const AppRoutes = () => {
       <Route path="/buddytube" element={<BuddyTubePage />} />
       <Route path="user">
         <Route path="mentor/details/:id" element={<UserMentorDetailsPage />} />
+        <Route path="chat/:id/:roomId" element={<UserChatPage />} />
         <Route element={<UserPrivateRoutes />}>
           <Route path="my-profile" element={<UserProfilePage />} />
           <Route path="video-call/:mentorId" element={<UserVideoCallPage />} />
@@ -52,6 +55,7 @@ export const AppRoutes = () => {
         <Route element={<MentorPrivateRoutes />}>
           <Route path="dashboard" element={<MentorDashboardPage />} />
           <Route path="call-history" element={<MentorCallHistoryPage />} />
+          <Route path="chat/messages" element={<MentorChatPage />} />
           <Route path="schedules" element={<MentorSchedulesPage />} />
           <Route path="chat/:id" element={<MentorVideoCallPage />} />
           <Route path="settings" element={<MentorSettingsPage />} />

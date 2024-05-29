@@ -29,7 +29,7 @@ export const ExportMentors: FC<ExportMentorsProps> = ({
       <div
         className={clsx(
           `p-3 flex flex-col gap-3 xl:mb-0`,
-          "bg-gray-100  rounded-b-lg"
+          "bg-gray-100 rounded-b-lg"
         )}
       >
         <div className="flex justify-between items-center">
@@ -44,7 +44,7 @@ export const ExportMentors: FC<ExportMentorsProps> = ({
             <AiOutlineStar size={22} className="fill-gray-500" />
           </div>
         </div>
-        <div className="my-2">
+        <div className="xl:my-2">
           <p className="text-sm uppercase text-primary-500">{specialist}</p>
           <p className="text-sm capitalize text-gray-500">
             <div className="flex gap-2">
@@ -58,7 +58,7 @@ export const ExportMentors: FC<ExportMentorsProps> = ({
           <p className="text-gray-500 text-xs capitalize">Starts at : ₹10</p>
           <p className="text-green-500 text-md capitalize">avaliable</p>
         </div>
-        <div className="flex gap-4 items-end justify-between">
+        <div className="flex items-end justify-between">
           <AppButton onClick={() => navigate(path)} filled>
             Connect Now
           </AppButton>

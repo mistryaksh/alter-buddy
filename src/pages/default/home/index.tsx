@@ -80,7 +80,7 @@ export const DefaultHome = () => {
       {/* section one */}
       <div
         className={clsx(
-          `flex items-center gap-10 py-10 bg-gradient-to-bl `,
+          `flex items-center gap-10 py-10 bg-gradient-to-bl flex-wrap-reverse`,
           "from-primary-200 to-white"
         )}
       >
@@ -127,7 +127,7 @@ export const DefaultHome = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1">
+        <div className="xl:flex-1">
           <img
             src="https://static.wixstatic.com/media/7cc31a_fd24e6bc5c1147c0a1e69922ca52d1b0~mv2.png/v1/fill/w_708,h_610,al_c,q_90,enc_auto/7cc31a_fd24e6bc5c1147c0a1e69922ca52d1b0~mv2.png"
             alt=""
@@ -146,7 +146,7 @@ export const DefaultHome = () => {
           NOTE: (The problems mentioned in a specific age band do not typically
           fall in that category only. The problems can resonate with anyone )
         </p>
-        <div className="mt-10 justify-center gap-20 flex flex-row px-3">
+        <div className="mt-10 justify-center xl:gap-20 gap-3 flex flex-row px-3">
           {problems.map(({ age, id }) => (
             <button
               type="button"
@@ -157,14 +157,14 @@ export const DefaultHome = () => {
                   "bg-primary-500 text-white border-2 border-transparent"
               )}
             >
-              <h6 className="capitalize text-sm font-sans2 text-center font-semibold">
+              <h6 className="capitalize xl:text-sm text-xs font-sans2 text-center font-semibold">
                 Age Group {age}
               </h6>
             </button>
           ))}
         </div>
-        <div className="border py-20 border-primary-500 px-10  xl:w-[80%] rounded-md mx-auto mt-10">
-          <ul className="list-disc grid grid-cols-2 w-[60%] mx-auto">
+        <div className="border py-20 border-primary-500 px-10 xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
+          <ul className="list-disc grid xl:grid-cols-2 xl:w-[60%] mx-auto">
             {problems[selectedAgeGroup].points.map((elements, i) => (
               <li className="" key={i}>
                 {elements}
@@ -172,7 +172,7 @@ export const DefaultHome = () => {
             ))}
           </ul>
         </div>
-        <div className="grid xl:grid-cols-2 xl:w-[90%] mx-auto mt-20">
+        <div className="grid xl:grid-cols-2 xl:w-[90%] mx-auto xl:mt-20 mt-10 px-3 xl:px-0">
           <div>
             <p className="text-center mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
               People and sometimes the situations around us are so toxic, that
@@ -225,14 +225,14 @@ export const DefaultHome = () => {
       <div className="flex justify-center mt-10">
         <AppButton filled>TALK TO US</AppButton>
       </div>
-      <div className="mb-40 mt-20 xl:w-[80%] mx-auto">
+      <div className="mb-40 mt-20 xl:w-[80%] mx-auto px-3">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           HOW DO WE{" "}
           <span className="font-semibold text-primary-500">HELP?</span>
         </h6>
-        <div className="w-full xl:grid px-3 xl:grid-cols-12 gap-10 mt-10 items-center lg:grid-cols-6 md:grid-cols-12">
+        <div className="w-full xl:grid px-3 gap-y-10 xl:grid-cols-12 gap-10 mt-10 items-center lg:grid-cols-6 md:grid-cols-12">
           {helpPoints.map(({ body, image, label, path }, i) => (
-            <div className="col-span-3">
+            <div className="xl:col-span-3 md:col-span-2 col-span-12 xl:mt-0 mt-10">
               <ServicesCard
                 hideReadMore
                 body={body}
@@ -256,7 +256,7 @@ export const DefaultHome = () => {
           mindset and nurturing mental well-being. That's why we offer trusted
           buddies who are equipped to navigate through any obstacles with you
         </p>
-        <div className="my-20 gap-5 flex">
+        <div className="my-20 gap-5 grid xl:grid-cols-3 md:grid-cols-2">
           <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex-col flex items-center">
             <img
               src="https://images.pexels.com/photos/4672717/pexels-photo-4672717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -351,8 +351,8 @@ export const DefaultHome = () => {
             <AppButton filled>Download app</AppButton>
           </a>
         </div>
-        <ul className="flex flex-wrap items-start mt-10">
-          <li className="flex-1 flex flex-col items-center">
+        <ul className="grid xl:grid-cols-3 md:grid-cols-3 flex-wrap items-start mt-10">
+          <li className=" flex flex-col items-center  xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
               <span className="select-none">01.</span>CHOOSE YOUR MENTOR.
             </h6>
@@ -365,7 +365,7 @@ export const DefaultHome = () => {
               alt=""
             />
           </li>
-          <li className="flex-1  flex flex-col items-center">
+          <li className=" flex flex-col items-center  xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
               <span className="select-none">02.</span> SAY HI OVER A CHAT OR
               CALL
@@ -379,7 +379,7 @@ export const DefaultHome = () => {
               alt=""
             />
           </li>
-          <li className="flex-1 flex flex-col items-center">
+          <li className=" flex flex-col items-center  xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
               <span className="select-none">03.</span> GET HELP INSTANTLY
             </h6>
@@ -474,7 +474,7 @@ export const DefaultHome = () => {
 
       {/* section four */}
       <div className="bg-primary-200 py-20 pb-28 ">
-        <div className="container mx-auto grid items-center px-2 justify-center grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4 gap-10 md:col-span-12">
+        <div className="container mx-auto grid items-center px-2 justify-center grid-cols-1 md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-4 gap-10">
           {mentor?.data
             .map(({ name, _id, accountStatus, category, subCategory }) => (
               <ExportMentors
@@ -493,38 +493,6 @@ export const DefaultHome = () => {
             })}
         </div>
       </div>
-
-      {/* section six */}
-      {/* <div>
-        <div className=" mx-auto w-[70%] pt-20 pb-10">
-          <h6 className="text-5xl capitalize text-center font-sans2">
-            We got your{" "}
-            <span className="text-primary-500 font-semibold">back for</span>
-          </h6>
-        </div>
-        <div className="xl:w-[90%] mx-auto px-5">
-          <div className="w-full xl:grid xl:grid-cols-3 gap-10 mt-10 lg:grid-cols-3 md:grid-cols-12 sm:grid-cols-12 grid-cols-4">
-            {subCategory?.data.map(({ label, desc, _id }) => (
-              <div className="" key={_id}>
-                <ServicesCard
-                  body={desc}
-                  image="https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp"
-                  label={label}
-                  path={`/category/${_id}`}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="w-full text-center py-10">
-            <Link
-              to="/services"
-              className="hover:underline font-extralight text-lg text-primary-500 text-center"
-            >
-              Browse all services
-            </Link>
-          </div>
-        </div>
-      </div> */}
 
       {/* section five */}
       <div className="xl:w-[80%] mx-auto my-20 flex flex-col items-center">

@@ -37,6 +37,7 @@ export interface IMentorProps {
   inCall?: boolean;
   videoLink?: string;
   description?: string;
+  roomName: string;
 }
 
 export interface ITopMentorProps {

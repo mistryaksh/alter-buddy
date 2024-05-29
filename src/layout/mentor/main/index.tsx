@@ -4,6 +4,7 @@ import { IoMdCalendar } from "react-icons/io";
 import {
   AiOutlineClose,
   AiOutlineLoading,
+  AiOutlineMessage,
   AiOutlineSetting,
 } from "react-icons/ai";
 import { AiOutlinePhone } from "react-icons/ai";
@@ -92,6 +93,10 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
             <IconLinkButton
               Icon={FiPhoneIncoming}
               path="/mentor/call-history"
+            />
+            <IconLinkButton
+              Icon={AiOutlineMessage}
+              path="/mentor/chat/messages"
             />
             <IconLinkButton Icon={IoMdCalendar} path="/mentor/schedules" />
             <IconLinkButton Icon={AiOutlineSetting} path="/mentor/settings" />

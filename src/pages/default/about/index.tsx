@@ -8,13 +8,13 @@ export const AboutPage = () => {
   const { data: mentor } = useGetMentorsListQuery();
   return (
     <MainLayout>
-      <div className={clsx("py-32 p-3")}>
+      <div className={clsx("py-32")}>
         <h6 className="text-4xl font-semibold font-sans2 text-center capitalize">
           About <span className="text-primary-500">Us</span>
         </h6>
-        <div className="grid xl:grid-cols-2 xl:gap-10 container mx-auto items-start mt-20">
+        <div className="grid xl:grid-cols-2 xl:gap-10 container items-center mx-auto mt-20 flex-wrap-reverse">
           {/* <hr className="pt-20 border-t-2 border-primary-300" /> */}
-          <div className="flex items-start flex-col container mx-auto flex-wrap">
+          <div className="flex items-start flex-col container mx-auto flex-wrap order-last xl:order-none">
             <div className="">
               <h6 className="capitalize text-2xl text-gray-900 font-semibold">
                 get to know your mentors!
@@ -64,7 +64,7 @@ export const AboutPage = () => {
               </div>
             </div>
           </div>
-          <div className="object-cover mx-auto my-20">
+          <div className="object-cover mx-auto">
             <img
               src="https://static.wixstatic.com/media/a3c153_20122b9a32cc4e9a9faca835b9f82d14~mv2.jpg/v1/fill/w_1768,h_892,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/yiranding-yOWUAKYk46Y-unsplash%252520copy_.jpg"
               alt=""
@@ -77,7 +77,7 @@ export const AboutPage = () => {
         <h6 className="text-3xl mb-5 capitalize font-sans2">
           Meet <span className="text-primary-500">our team</span>
         </h6>
-        <div className=" grid items-start justify-center grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4 gap-3 md:col-span-12">
+        <div className="container mx-auto grid items-center px-2 justify-center grid-cols-1 md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-4 gap-10">
           {mentor?.data
             .map(({ name, _id, accountStatus, category, subCategory }) => (
               <ExportMentors

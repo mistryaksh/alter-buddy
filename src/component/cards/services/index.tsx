@@ -18,7 +18,7 @@ export const ServicesCard: FC<ServicesCardProps> = ({
   hideReadMore,
 }) => {
   return (
-    <div className="relative max-w-xs border border-solid border-gray-200 rounded-2xl transition-all duration-500 ">
+    <div className="relative xl:max-w-xs border border-solid border-gray-200 rounded-2xl transition-all duration-500 ">
       <div className="block overflow-hidden">
         <img src={image} alt={label} />
       </div>

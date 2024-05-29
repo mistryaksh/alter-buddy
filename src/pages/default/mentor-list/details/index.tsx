@@ -27,6 +27,7 @@ import moment from "moment";
 import clsx from "clsx";
 import { MdOutlineFormatQuote } from "react-icons/md";
 import { Helmet } from "react-helmet";
+import { v4 } from "uuid";
 
 export const UserMentorDetailsPage = () => {
   const navigate = useNavigate();
@@ -335,6 +336,16 @@ export const UserMentorDetailsPage = () => {
                 >
                   <AiOutlinePhone size={25} />
                   Voice Call
+                </AppButton>
+                <AppButton
+                  outlined
+                  flexed
+                  onClick={() =>
+                    navigate(`/user/chat/${mentor?.data._id}/${v4()}`)
+                  }
+                >
+                  <AiOutlineMessage size={25} />
+                  Chat
                 </AppButton>
               </div>
             </div>

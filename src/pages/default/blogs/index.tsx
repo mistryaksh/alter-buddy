@@ -25,8 +25,8 @@ export const BuddyTubePage = () => {
 
   return (
     <MainLayout loading={isBlogLoading}>
-      <div className="bg-gradient-to-t from-white to-primary-300 py-20">
-        <div className="border border-primary-500 py-20 px-10 w-[80%] mx-auto bg-white rounded-md flex flex-col gap-5">
+      <div className="bg-gradient-to-t from-white to-primary-300 xl:px-0 px-5 py-20">
+        <div className="border border-primary-500 py-20 px-10 xl:w-[80%] mx-auto bg-white rounded-md flex flex-col gap-5">
           <h1 className="text-3xl">
             Read articles for basic brain development
           </h1>
@@ -40,7 +40,7 @@ export const BuddyTubePage = () => {
             <AppButton filled>Get in touch with mentor</AppButton>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-10 w-[80%] mx-auto mt-20">
+        <div className="grid xl:grid-cols-3 grid-cols-1 gap-10 xl:w-[80%] mx-auto mt-20">
           {blogs?.data.map(
             ({ body, label, subLabel, comment, _id, createdAt }) => (
               <BlogCard

@@ -37,3 +37,8 @@ export type callStatus =
   | "PENDING"
   | "ACCEPTED";
 export type callType = "video" | "audio" | "chat" | "all";
+
+export interface IAgoraChatUserProps {
+  username: string;
+  password: string;
+}

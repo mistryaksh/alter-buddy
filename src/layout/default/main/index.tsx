@@ -220,7 +220,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
       )}
       <main className={clsx(!hideNav && "mt-20", "relative")}>
         {loading && isSubCategoryLoading && isCategoryLoading ? (
-          <div className="flex h-[300px] justify-center items-center">
+          <div className="flex h-[300px] justify-center items-center w-full">
             <AiOutlineLoading
               size={150}
               className="animate-spin text-primary-500"
