@@ -21,7 +21,6 @@ export const BuddyTubePage = () => {
     }
   }, [isBlogError, blogError, dispatch]);
 
-  console.log(blogs?.data);
 
   return (
     <MainLayout loading={isBlogLoading}>

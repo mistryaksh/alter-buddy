@@ -6,19 +6,26 @@ const VideoCallApi = createApi({
   baseQuery: ApiBaseQuery(baseQueryUser),
   reducerPath: "videoCallApi",
   endpoints: ({ mutation, query }) => ({
-    GetMeetingCodes: mutation<{ data: any }, { audioCall: callType }>({
-      query: ({ audioCall }) => {
+    GetMeetingCodes: mutation<
+      { data: any },
+      { audioCall: callType; userIds: string }
+    >({
+      query: ({ audioCall, userIds }) => {
         return {
           url: "/start-meeting",
           method: "POST",
           body: {
             audioCall: audioCall,
+            userIds,
           },
         };
       },
     }),
     GetSessionById: query<{ data: IChatProps }, string>({
       query: (roomCode) => `/get-session/${roomCode}`,
+    }),
+    GetMySessions: query<{ data: IChatProps[] }, void>({
+      query: () => "/user/calls",
     }),
   }),
 });
@@ -29,4 +36,6 @@ export const {
   useGetMeetingCodesMutation,
   useGetSessionByIdQuery,
   useLazyGetSessionByIdQuery,
+  useGetMySessionsQuery,
+  useLazyGetMySessionsQuery,
 } = VideoCallApi;

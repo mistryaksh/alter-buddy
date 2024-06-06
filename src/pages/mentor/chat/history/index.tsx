@@ -8,6 +8,7 @@ import { IChatProps } from "../../../../interface";
 import { useMentorGetMyCallsQuery } from "../../../../redux/rtk-api";
 import {
   AiOutlineLoading,
+  AiOutlineMessage,
   AiOutlinePhone,
   AiOutlineSearch,
   AiOutlineVideoCamera,
@@ -174,25 +175,17 @@ export const MentorCallHistoryPage = () => {
                   </p>
                 ),
               },
-              {
-                sortable: true,
-                id: "sessionDetails.roomId",
-                name: "Meeting ID",
-                width: "200px",
-                cell: (_) => (
-                  <p className="text-sm text-gray-900 flex gap-3">
-                    {_.sessionDetails.roomName}
-                  </p>
-                ),
-              },
 
               {
                 id: "callType",
-                name: "Call Type",
+                name: "Session Type",
                 sortable: true,
                 width: "200px",
                 cell: ({ sessionDetails }) => (
                   <p className="text-sm text-gray-900 flex gap-3 capitalize">
+                    {sessionDetails.callType === "chat" && (
+                      <AiOutlineMessage size={22} />
+                    )}
                     {sessionDetails.callType === "audio" && (
                       <AiOutlinePhone size={22} />
                     )}
@@ -206,15 +199,22 @@ export const MentorCallHistoryPage = () => {
                 sortable: true,
                 id: "status",
                 name: "Duration",
-                cell: ({ createdAt, updatedAt }) => {
-                  const end = moment(updatedAt);
-                  var duration = moment.duration(end.diff(createdAt));
-                  return <span className="">{duration.asSeconds()}</span>;
+                cell: ({ sessionDetails, status }) => {
+                  return (
+                    <span className="">
+                      {sessionDetails.duration ? sessionDetails.duration : 0}
+                    </span>
+                  );
                 },
               },
               {
-                sortable: true,
                 id: "status",
+                name: "Details",
+                selector: (row) => row.status as string,
+              },
+              {
+                sortable: true,
+                id: "time",
                 name: "Call Time",
                 cell: ({ createdAt }) => {
                   return (

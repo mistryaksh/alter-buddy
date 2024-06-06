@@ -34,7 +34,6 @@ export const MentorVideoCallPage = () => {
       })();
     }
   }, [dispatch, id, Session, isSessionError, sessionError]);
-  console.log(sessionData?.data.sessionDetails.callType);
   return (
     <MentorLayout>
       {isConnected && (

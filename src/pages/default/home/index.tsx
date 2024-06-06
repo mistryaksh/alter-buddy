@@ -147,8 +147,9 @@ export const DefaultHome = () => {
           fall in that category only. The problems can resonate with anyone )
         </p>
         <div className="mt-10 justify-center xl:gap-20 gap-3 flex flex-row px-3">
-          {problems.map(({ age, id }) => (
+          {problems.map(({ age, id }, i) => (
             <button
+              key={i}
               type="button"
               onClick={() => dispatch(handleAgeGroupSelection(id))}
               className={clsx(
@@ -164,9 +165,9 @@ export const DefaultHome = () => {
           ))}
         </div>
         <div className="border py-20 border-primary-500 px-10 xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
-          <ul className="list-disc grid xl:grid-cols-2 xl:w-[60%] mx-auto">
+          <ul className="list-disc grid xl:grid-cols-2 gap-x-5 items-start xl:w-[60%] mx-auto">
             {problems[selectedAgeGroup].points.map((elements, i) => (
-              <li className="" key={i}>
+              <li className="capitalize" key={i}>
                 {elements}
               </li>
             ))}
@@ -225,7 +226,7 @@ export const DefaultHome = () => {
       <div className="flex justify-center mt-10">
         <AppButton filled>TALK TO US</AppButton>
       </div>
-      <div className="mb-40 mt-20 xl:w-[80%] mx-auto px-3">
+      <div className="mb-40 mt-20 xl:w-[90%] mx-auto px-3">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           HOW DO WE{" "}
           <span className="font-semibold text-primary-500">HELP?</span>
@@ -483,7 +484,7 @@ export const DefaultHome = () => {
                 image="https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
                 name={`${name?.firstName} ${name?.lastName}`}
                 path={`/user/mentor/details/${_id}`}
-                specialist={category.title}
+                specialist={category?.title}
                 subCategory={subCategory}
               />
             ))

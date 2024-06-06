@@ -112,11 +112,11 @@ export const MentorDashboardPage = () => {
                   <p>{moment(slotsDate).format("Do MMMM YYYY")}</p>
                 </div>
                 <div className="flex items-start gap-3 flex-wrap my-2">
-                  {slots.map(({ time, _id: slotId, booked, userId }) => {
+                  {slots.map(({ time, _id: slotId, booked, userId }, i) => {
                     const main = moment(slotsDate).add(time, "minute");
                     return (
                       <div
-                        key={slotId}
+                        key={i}
                         className={clsx(
                           "p-3 rounded-md flex flex-col items-center   ",
                           !booked ? "bg-primary-300" : "bg-gray-300 "

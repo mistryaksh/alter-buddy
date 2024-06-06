@@ -7,3 +7,4 @@ export * from "./mentor-authentication.api";
 export * from "./user.api";
 export * from "./calls.api";
 export * from "./video-call.api";
+export * from "./features.api";

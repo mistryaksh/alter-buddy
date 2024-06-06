@@ -9,11 +9,13 @@ import { AiOutlineMessage, AiOutlineSend } from "react-icons/ai";
 interface InsiderChatProps {
   channelName: string;
   myUsername: string;
+  mentorCall?: boolean;
 }
 
 export const InsiderChat: FC<InsiderChatProps> = ({
   channelName,
   myUsername,
+  mentorCall,
 }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -49,12 +51,19 @@ export const InsiderChat: FC<InsiderChatProps> = ({
 
   useEffect(scrollToBottom, [messages]);
   return (
-    <div className="px-5 relative h-full">
+    <div className=" relative h-full">
       <div className={clsx("flex flex-col w-full gap-3")}>
-        <div className="w-full flex flex-col gap-3 bg-gray-50 p-2 h-[80vh] overflow-y-scroll no-scrollbar">
+        <div
+          className={clsx(
+            "w-full flex flex-col gap-3 bg-gray-50 rounded-lg p-2 overflow-y-scroll no-scrollbar",
+            !mentorCall ? " h-[80vh] " : "h-[77vh]",
+            mentorCall && "mt-24"
+          )}
+        >
           {messages.length !== 0 &&
-            messages.map(({ data, timestamp }) => (
+            messages.map(({ data, timestamp }, i) => (
               <div
+                key={i}
                 className={clsx(
                   "w-full flex flex-col gap-3",
                   data.username === myUsername ? "items-end" : "items-start"
@@ -84,12 +93,19 @@ export const InsiderChat: FC<InsiderChatProps> = ({
               </div>
             ))}
           {messages.length === 0 && (
-            <div className="h-[300px] flex flex-col items-center justify-center">
+            <div
+              className={clsx(
+                "flex flex-col items-center justify-center",
+                !mentorCall ? "h-[50vh]" : "h-[60vh]"
+              )}
+            >
               <AiOutlineMessage size={300} />
-              <p>No messages found! start sending messages</p>
+              <p className="text-xl text-gray-500 capitalize">
+                start sending messages
+              </p>
             </div>
           )}
-          <div className="w-[97%] pl-3 pr-1 py-1 z-50 rounded-lg absolute bottom-5 shadow-xl bg-white border border-gray-200 items-center gap-2 inline-flex justify-between">
+          <div className="w-[97%] pl-3 pr-1 py-1 z-50 rounded-lg absolute bottom-0 shadow-xl bg-white border border-gray-200 items-center gap-2 inline-flex justify-between">
             <div className="flex items-center gap-2 flex-1">
               <input
                 onKeyPress={(prop) => {

@@ -19,8 +19,11 @@ export const CallConference = () => {
         ))}
       </div>
       {presenters.map((peer) => (
-        <div className="flex-1 mt-20 flex flex-col gap-5">
-          <ScreenTile key={"screen" + peer.id} peer={peer} />
+        <div
+          key={"screen" + peer.id}
+          className="flex-1 mt-20 flex flex-col gap-5"
+        >
+          <ScreenTile peer={peer} />
         </div>
       ))}
     </div>

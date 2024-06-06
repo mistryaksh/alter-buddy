@@ -12,16 +12,14 @@ import {
 } from "../../../../redux/features";
 import { ChannelProvider } from "ably/react";
 import { InsiderChat } from "../../../user/chat/insider-chat";
-import {
-  AiOutlineArrowLeft,
-  AiOutlineLogout,
-  AiOutlineMore,
-} from "react-icons/ai";
+import { AiOutlineArrowLeft, AiOutlineMore } from "react-icons/ai";
 import { CountdownTimerL } from "../../../../component";
+import { useNavigate } from "react-router-dom";
 
 export const MentorChatPage = () => {
   const { data: mentor } = useMentorProfileQuery();
   const { chat } = useVideoCallSlice();
+
   const [GetUser, { data: userData }] = useLazyGetUserByIdQuery();
   const dispatch = useAppDispatch();
 
@@ -53,32 +51,53 @@ export const MentorChatPage = () => {
       socket.removeListener("GET_MENTORS_CHAT_DATA");
     };
   }, [dispatch, mentor?.data._id, GetUser]);
+  const navigate = useNavigate();
 
   return (
     <MentorLayout hideNavs={chat.chatRoomId?.length ? true : false}>
-      <div className="bg-gray-900 py-5 px-3 w-[96%] z-50 top-5 absolute text-white flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <AiOutlineArrowLeft size={26} />
-          <h1 className="text-xl font-sans2 capitalize">
-            {userData?.data.name.firstName} {userData?.data.name.lastName}{" "}
-          </h1>
-        </div>
-        <div className="flex items-center gap-3">
-          <CountdownTimerL mins={30} />
-          <AiOutlineLogout size={26} />
-          <AiOutlineMore size={26} />
-        </div>
-      </div>
-      <div className="mt-14">
-        {chat.chatRoomId && (
+      {chat.chatRoomId && (
+        <div className="h-full relative">
+          <div className="w-full  px-3 py-5 z-50 rounded-lg absolute top-0 shadow-xl bg-gray-900 text-white items-center gap-2 inline-flex justify-between">
+            <div className="flex items-center gap-3">
+              <button
+                className="p-2"
+                onClick={() => {
+                  socket.emit("FINISH_CALL", {
+                    roomId: chat.chatRoomId,
+                    duration: 0,
+                  });
+                  navigate("/mentor/dashboard", { replace: true });
+                  dispatch(
+                    handleMentorChatConfig({ roomCode: null, userId: null })
+                  );
+                }}
+              >
+                <AiOutlineArrowLeft size={24} />
+              </button>
+              <h6 className="">
+                {userData?.data.name.firstName} {userData?.data.name.lastName}
+              </h6>
+            </div>
+            <div className="flex gap-3 items-center">
+              <CountdownTimerL mins={30} />
+              <AiOutlineMore size={24} />
+            </div>
+          </div>
           <ChannelProvider channelName={chat.chatRoomId}>
             <InsiderChat
+              mentorCall
               channelName={chat.chatRoomId}
               myUsername={`${mentor?.data.name.firstName} ${mentor?.data.name.lastName}`}
             />
           </ChannelProvider>
-        )}
-      </div>
+        </div>
+      )}
+      {!chat.chatRoomId && (
+        <div>
+          No chat request until now! once you will notified once user wants to
+          connect you!
+        </div>
+      )}
     </MentorLayout>
   );
 };

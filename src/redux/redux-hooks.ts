@@ -18,6 +18,8 @@ import {
   CallApiReducer,
   VideoCallApiReducer,
   VideoCallApiMiddleware,
+  NotificationApiMiddleware,
+  NotificationApiReducer,
 } from "./rtk-api";
 import {
   AuthenticationReducer,
@@ -28,6 +30,7 @@ import {
   MentorReducer,
   ServicesReducer,
   SlotReducer,
+  UserReducer,
   VideoCallReducer,
 } from "./features";
 
@@ -41,6 +44,7 @@ export const AppMiddlewares: Middleware[] = [
   UserApiMiddleware,
   CallApiMiddleware,
   VideoCallApiMiddleware,
+  NotificationApiMiddleware,
 ];
 export const AppReducers = combineReducers({
   //! APP API REDUCER
@@ -53,6 +57,7 @@ export const AppReducers = combineReducers({
   userApi: UserApiReducer,
   callApi: CallApiReducer,
   videoCallApi: VideoCallApiReducer,
+  notificationApi: NotificationApiReducer,
 
   //! DEFAULT APP REDUCERS
   layout: LayoutReducer,
@@ -64,4 +69,5 @@ export const AppReducers = combineReducers({
   home: HomeReducer,
   services: ServicesReducer,
   videoCall: VideoCallReducer,
+  user: UserReducer,
 });

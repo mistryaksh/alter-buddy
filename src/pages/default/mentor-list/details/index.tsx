@@ -61,7 +61,6 @@ export const UserMentorDetailsPage = () => {
       isLoading: isBookSlotLoading,
       data: bookSlotData,
       error: bookSlotError,
-      isSuccess: isBookSlotSuccess,
     },
   ] = useBookMentorSlotMutation();
 
@@ -78,7 +77,6 @@ export const UserMentorDetailsPage = () => {
         console.log((bookSlotError as any).data);
         dispatch(handleError((bookSlotError as any).data.message));
       } else {
-        console.log(bookSlotError as any);
         console.log(bookSlotError);
       }
     }
@@ -96,9 +94,7 @@ export const UserMentorDetailsPage = () => {
         console.log(profileError);
       }
     }
-    if (isBookSlotSuccess) {
-      console.log(bookSlotData?.data);
-    }
+
     if (id) {
       (async () => {
         await GetMentorSlots(id);
@@ -116,7 +112,6 @@ export const UserMentorDetailsPage = () => {
     profileError,
     isBookSlotError,
     bookSlotError,
-    isBookSlotSuccess,
     bookSlotData,
   ]);
 

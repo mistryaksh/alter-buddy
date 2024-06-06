@@ -68,13 +68,9 @@ export const MainFooter: FC<MainFooterProps> = () => {
               Our Focuses On
             </h4>
             <ul className="text-sm  transition-all duration-500">
-              {category?.data.map(({ title }, i) => (
-                <li className="mb-6">
-                  <Link
-                    to="#"
-                    key={i}
-                    className="text-gray-600 hover:text-gray-900"
-                  >
+              {category?.data?.map(({ title }, i) => (
+                <li className="mb-6" key={i}>
+                  <Link to="#" className="text-gray-600 hover:text-gray-900">
                     {title}
                   </Link>
                 </li>

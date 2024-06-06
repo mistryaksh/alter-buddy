@@ -40,8 +40,11 @@ export const UserVideoCallPage = () => {
   const navigate = useNavigate();
 
   const Continue = useCallback(async () => {
-    await StartMeeting({ audioCall: isAudioCall ? "audio" : "video" });
-  }, [StartMeeting, isAudioCall]);
+    await StartMeeting({
+      audioCall: isAudioCall ? "audio" : "video",
+      userIds: `${profile?.data._id}-${mentor?.data._id}`,
+    });
+  }, [StartMeeting, isAudioCall, mentor?.data._id, profile?.data._id]);
 
   useEffect(() => {
     if (id) {
@@ -106,23 +109,23 @@ export const UserVideoCallPage = () => {
             />
           ) : (
             <div className="flex items-center justify-center">
-              <div className="my-20 pt-20 flex flex-col w-[40%] p-3 shadow-lg">
+              <div className="my-20 pt-20 flex flex-col w-[40%] p-3 shadow-lg rounded-md border">
                 <AlterBuddyLogo />
                 <h6 className="text-xl text-primary-500 capitalize text-left">
-                  {mentor?.data.name.firstName} {mentor?.data.name.lastName}
+                  {mentor?.data.name.firstName} {mentor?.data.name.lastName} is{" "}
+                  <span className="capitalize">
+                    {mentor?.data.category.title}
+                  </span>
                 </h6>
-                <p className="capitalize text-xl font-semibold text-left">
-                  Mentor Type : {mentor?.data.category.title}
-                </p>
-                <div className="flex gap-5 items-center my-5">
+                <div className="flex gap-5 items-center my-3">
                   Session Type -{" "}
                   {isAudioCall ? (
                     <div className="flex items-center gap-3">
-                      <AiOutlinePhone /> <p>Audio Call</p>
+                      <AiOutlinePhone size={20} /> <p>Audio</p>
                     </div>
                   ) : (
                     <div className="flex items-center gap-3">
-                      <AiOutlineVideoCamera /> <p>Video Call</p>
+                      <AiOutlineVideoCamera size={20} /> <p>Video</p>
                     </div>
                   )}
                 </div>
@@ -131,10 +134,10 @@ export const UserVideoCallPage = () => {
                   <div className="grid gap-5 xl:grid-cols-3 lg:grid-cols-3 grid-cols-12 items-center">
                     {mentor?.data.subCategory.map(({ label, subTitle }, i) => (
                       <div key={i} className="border p-2">
-                        <p className="text-xl font-sans2">
+                        <p className="text-xl">
                           <span className="capitalize">{label} </span>
                         </p>
-                        <p className="text-gray-500">{subTitle}</p>
+                        <p className="text-gray-500 text-sm">{subTitle}</p>
                       </div>
                     ))}
                   </div>

@@ -7,3 +7,4 @@ export * from "./mentor.slice";
 export * from "./slot.slice";
 export * from "./static-services.slice";
 export * from "./video-call.slice";
+export * from "./user.slice";

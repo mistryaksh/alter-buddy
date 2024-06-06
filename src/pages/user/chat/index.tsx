@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useLazyGetMentorUsingIdQuery,
   useProfileUserQuery,
@@ -7,6 +7,7 @@ import {
 import {
   AiOutlineArrowLeft,
   AiOutlineLoading,
+  AiOutlineMenu,
   AiOutlineMore,
 } from "react-icons/ai";
 import { ChannelProvider } from "ably/react";
@@ -50,6 +51,7 @@ export const UserChatPage = () => {
     userData?.data._id,
   ]);
   let channelName: string | null = roomId as string;
+  const navigate = useNavigate();
 
   if (isLoading) {
     return (
@@ -68,24 +70,36 @@ export const UserChatPage = () => {
       <div className="relative h-screen">
         <div className="bg-gray-900 py-5 px-3 text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <AiOutlineArrowLeft size={26} />
+            <button
+              className="p-3"
+              onClick={() => {
+                navigate("/", { replace: true });
+              }}
+            >
+              <AiOutlineArrowLeft size={22} />
+            </button>
             <h1 className="text-xl font-sans2 capitalize">
               {mentorData?.data.name.firstName} {mentorData?.data.name.lastName}{" "}
             </h1>
           </div>
           <div className="flex items-center gap-3">
             <CountdownTimerL mins={30} />
-            <AiOutlineMore size={26} />
+            <button className="p-2">
+              <AiOutlineMore size={22} />
+            </button>
+            <button className="p-2">
+              <AiOutlineMenu size={22} />
+            </button>
           </div>
         </div>
         <div className="grid grid-cols-12 mt-5 h-[90vh]">
-          <div className="xl:col-span-8">
+          <div className="xl:col-span-8 col-span-12">
             <InsiderChat
               myUsername={`${userData?.data.name.firstName} ${userData?.data.name.lastName}`}
               channelName={channelName}
             />
           </div>
-          <div className="xl:col-span-4 bg-gray-100 p-3 h-full rounded-lg">
+          <div className="xl:col-span-4 bg-gray-100 p-3 h-full rounded-lg col-span-12 xl:block hidden">
             <h5>Mentor details</h5>
             <h6 className="text-xl capitalize">
               {mentorData?.data.name.firstName} {mentorData?.data.name.lastName}

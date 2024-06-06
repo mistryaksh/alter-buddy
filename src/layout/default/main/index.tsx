@@ -17,6 +17,7 @@ import { AuthModel } from "../../../component";
 import {
   useGetAllCategoryQuery,
   useGetAllSubCategoryQuery,
+  useGetNotificationsQuery,
   useLoginUserMutation,
   useLogoutUserMutation,
   useRegisterUserMutation,
@@ -87,6 +88,13 @@ export const MainLayout: FC<MainLayoutProps> = ({
       data: registerData,
     },
   ] = useRegisterUserMutation();
+  const {
+    isError: isNotificationError,
+    error: notificationError,
+    data: notificationData,
+    isLoading: isNotificationLoading,
+    // isSuccess: isNotificationSuccess,
+  } = useGetNotificationsQuery();
 
   useEffect(() => {
     // setTimeout(() => {
@@ -117,6 +125,11 @@ export const MainLayout: FC<MainLayoutProps> = ({
         dispatch(handleError((logoutError as any).data.message));
       }
     }
+    if (isNotificationError) {
+      if ((notificationError as any).data) {
+        dispatch(handleError((notificationError as any).data.message));
+      }
+    }
     if (isLoginSuccess) {
       dispatch(handleError(null));
       setUserToken(loginData?.data.token as string);
@@ -128,6 +141,9 @@ export const MainLayout: FC<MainLayoutProps> = ({
         );
       }
     }
+    // if (isNotificationSuccess) {
+    //   console.log("NOTIFICATION", notificationData?.data);
+    // }
     if (isRegisterSuccess) {
       dispatch(handleError(null));
       setUserToken(registerData?.data.token as string);
@@ -170,6 +186,10 @@ export const MainLayout: FC<MainLayoutProps> = ({
     subCategoryError,
     isCategoryError,
     categoryError,
+    isNotificationError,
+    notificationError,
+    // isNotificationSuccess,
+    notificationData?.data,
   ]);
 
   const LoginFunc = useCallback(
@@ -219,7 +239,10 @@ export const MainLayout: FC<MainLayoutProps> = ({
         />
       )}
       <main className={clsx(!hideNav && "mt-20", "relative")}>
-        {loading && isSubCategoryLoading && isCategoryLoading ? (
+        {loading &&
+        isSubCategoryLoading &&
+        isCategoryLoading &&
+        isNotificationLoading ? (
           <div className="flex h-[300px] justify-center items-center w-full">
             <AiOutlineLoading
               size={150}

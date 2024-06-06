@@ -36,11 +36,12 @@ export const ServicesDetailsPage = () => {
           </h4>
           <h5 className="text-lg text-gray-500">{sectionOne?.subTitle}</h5>
           <div className="flex flex-wrap gap-5 mt-5">
-            {sectionOne?.points.map((prop) => (
-              <div className="bg-primary-300 hover:bg-primary-500 p-3  group rounded-md border-2 border-transparent hover:border-primary-500">
-                <p key={prop} className=" group-hover:text-white capitalize">
-                  {prop}
-                </p>
+            {sectionOne?.points.map((prop, i) => (
+              <div
+                key={i}
+                className="bg-primary-300 hover:bg-primary-500 p-3  group rounded-md border-2 border-transparent hover:border-primary-500"
+              >
+                <p className=" group-hover:text-white capitalize">{prop}</p>
               </div>
             ))}
           </div>
@@ -69,8 +70,8 @@ export const ServicesDetailsPage = () => {
             />
           </div>
           <ul className="">
-            {sectionThree?.points.map((prop) => (
-              <li key={prop} className="flex gap-3">
+            {sectionThree?.points.map((prop, i) => (
+              <li key={i} className="flex gap-3">
                 - {prop}
               </li>
             ))}

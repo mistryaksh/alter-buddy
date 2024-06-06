@@ -24,6 +24,7 @@ import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import { callType } from "../../../../interface";
 import { LeaveModal } from "../../../modal";
+import { socket } from "../../../../service";
 
 const plugin = new HMSKrispPlugin();
 
@@ -70,6 +71,10 @@ export const CallFooter: FC<CallFooterProps> = ({
   const leaveCall = () => {
     hmsActions.leave();
     navigate(cancellationPath, { replace: true });
+    socket.emit("FINISH_CALL", {
+      roomId: room.id as string,
+      duration: elapsedTime,
+    });
   };
   return (
     <div

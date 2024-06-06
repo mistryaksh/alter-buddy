@@ -6,6 +6,7 @@ import {
   AiOutlineLoading,
   AiOutlineMessage,
   AiOutlineSetting,
+  AiOutlineVideoCamera,
 } from "react-icons/ai";
 import { AiOutlinePhone } from "react-icons/ai";
 import { IconLinkButton } from "../../../component";
@@ -21,7 +22,6 @@ import {
   handleReceiveCall,
   useVideoCallSlice,
 } from "../../../redux/features";
-import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
 interface MentorLayoutProps {
@@ -46,14 +46,15 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
       console.log(userError);
     }
     socket.on("THROW_CALL_REQUEST", (data) => {
-      console.log("DATA", data, moment().fromNow());
       if (data.users.mentor === mentor?.data._id) {
+        console.log(data);
         dispatch(handleReceiveCall(true));
         dispatch(
           handleMentorRoomCode({
             roomCode: data?.sessionDetails?.roomCode?.mentor,
             userName: data.users.user,
             roomName: data.sessionDetails.roomName,
+            callType: data.sessionDetails.callType,
           })
         );
       }
@@ -104,7 +105,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
           </div>
         </div>
       )}
-      <main className="bg-white overflow-y-scroll p-10 rounded-tl-3xl z-10 rounded-bl-3xl mx-3 flex-1 relative">
+      <main className="bg-white overflow-y-scroll p-5 rounded-tl-3xl z-10 rounded-bl-3xl mx-3 flex-1 relative">
         {receivedCall && (
           <div className="absolute border rounded-lg p-3 bg-white right-10 w-[40%] z-[100] shadow-lg bottom-20">
             <div>
@@ -124,13 +125,17 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
                   {user?.data.name.firstName} {user?.data.name.lastName}
                 </p>
               </div>
-              <p className="text-gray-500">
-                Room Name{" "}
+              <p className="text-gray-500 flex items-center gap-3">
+                Session Type{" "}
                 <span className="text-primary-500">
-                  {mentorMeetingConfig.roomName}
+                  {mentorMeetingConfig.callType === "video" && (
+                    <AiOutlineVideoCamera size={22} />
+                  )}
+                  {mentorMeetingConfig.callType === "audio" && (
+                    <AiOutlinePhone size={22} />
+                  )}
                 </span>
               </p>
-              <p>{}</p>
               <div className="mt-3 flex justify-end gap-5 items-center">
                 <button
                   onClick={DeclineCall}

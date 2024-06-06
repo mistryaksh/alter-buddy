@@ -15,6 +15,7 @@ export interface IChatProps {
     roomName: string;
     description: string;
     callType: callType;
+    duration: string;
   };
   message: [
     {
@@ -29,6 +30,7 @@ export interface IChatProps {
   status?: callStatus;
   createdAt?: string;
   updatedAt?: string;
+  _id?: string;
 }
 export type callStatus =
   | "REJECTED"
@@ -37,8 +39,3 @@ export type callStatus =
   | "PENDING"
   | "ACCEPTED";
 export type callType = "video" | "audio" | "chat" | "all";
-
-export interface IAgoraChatUserProps {
-  username: string;
-  password: string;
-}

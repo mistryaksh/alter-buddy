@@ -48,8 +48,10 @@ export const ExportMentors: FC<ExportMentorsProps> = ({
           <p className="text-sm uppercase text-primary-500">{specialist}</p>
           <p className="text-sm capitalize text-gray-500">
             <div className="flex gap-2">
-              {subCategory.map(({ label }) => (
-                <p className="text-gray-500">{label}</p>
+              {subCategory.map(({ label }, i) => (
+                <p className="text-gray-500" key={i}>
+                  {label}
+                </p>
               ))}
             </div>
           </p>
