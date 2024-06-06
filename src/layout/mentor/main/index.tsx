@@ -13,6 +13,7 @@ import { IconLinkButton } from "../../../component";
 import {
   useLazyGetUserByIdQuery,
   useMentorProfileQuery,
+  useMentorSignOutMutation,
 } from "../../../redux/rtk-api";
 import { useAppDispatch } from "../../../redux";
 import { FiPhoneIncoming } from "react-icons/fi";
@@ -23,6 +24,8 @@ import {
   useVideoCallSlice,
 } from "../../../redux/features";
 import { useNavigate } from "react-router-dom";
+import { removeMentorToken } from "../../../utils";
+import { toast } from "react-toastify";
 
 interface MentorLayoutProps {
   children: ReactNode;
@@ -38,12 +41,17 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   const { data: mentor } = useMentorProfileQuery();
   const [GetUser, { isError: isUserError, error: userError, data: user }] =
     useLazyGetUserByIdQuery();
+  const [SignOut, { isError, error, data, isLoading, isSuccess }] =
+    useMentorSignOutMutation();
   const dispatch = useAppDispatch();
   const { receivedCall, mentorMeetingConfig } = useVideoCallSlice();
   const navigate = useNavigate();
   useEffect(() => {
     if (isUserError) {
       console.log(userError);
+    }
+    if (isError) {
+      console.log(error);
     }
     socket.on("THROW_CALL_REQUEST", (data) => {
       if (data.users.mentor === mentor?.data._id) {
@@ -64,6 +72,11 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
         await GetUser(mentorMeetingConfig?.requestedUser as string);
       })();
     }
+    if (isSuccess) {
+      toast(data?.data, { type: "success" });
+      removeMentorToken();
+      navigate("/", { replace: true });
+    }
   }, [
     mentor,
     dispatch,
@@ -71,6 +84,11 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     mentorMeetingConfig.requestedUser,
     isUserError,
     userError,
+    isError,
+    error,
+    isSuccess,
+    navigate,
+    data?.data,
   ]);
 
   const AcceptCall = () => {
@@ -85,11 +103,14 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     dispatch(handleReceiveCall(false));
   };
 
+  const onSignOut = async () => {
+    await SignOut();
+  };
   return (
     <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3">
       {!hideNavs && (
         <div className=" px-5 flex  xl:flex-col xl:items-center xl:justify-center">
-          <div className="flex xl:my-0 mb-5 xl:flex-col gap-5">
+          <div className="flex xl:my-0 mb-5 xl:flex-col gap-5 items-center">
             <IconLinkButton Icon={MdOutlineHome} path="/mentor/dashboard" />
             <IconLinkButton
               Icon={FiPhoneIncoming}
@@ -101,7 +122,9 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
             />
             <IconLinkButton Icon={IoMdCalendar} path="/mentor/schedules" />
             <IconLinkButton Icon={AiOutlineSetting} path="/mentor/settings" />
-            <IconLinkButton Icon={MdLogout} path="/mentor/logout" />
+            <button type="button" onClick={onSignOut}>
+              <MdLogout size={32} className="text-white" />
+            </button>
           </div>
         </div>
       )}
@@ -162,7 +185,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
             </div>
           </div>
         )}
-        {loading ? (
+        {loading && isLoading ? (
           <div className="flex justify-center items-center h-full w-full flex-col gap-10">
             <AiOutlineLoading
               size={150}
