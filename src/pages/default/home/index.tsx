@@ -127,7 +127,7 @@ export const DefaultHome = () => {
             </div>
           </div>
         </div>
-        <div className="xl:flex-1 px-10">
+        <div className="xl:flex-1 px-10 flex items-center justify-center">
           <img
             src={require("../../../assets/image/extra/logo.png")}
             className="w-[60vh] rounded-full"
@@ -263,7 +263,7 @@ export const DefaultHome = () => {
             <img
               src={require("../../../assets/image/extra/personalized-support.jpg")}
               alt=""
-              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
+              className=" mb-4 rounded-lg object-fill xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">
@@ -279,7 +279,7 @@ export const DefaultHome = () => {
             <img
               src={require("../../../assets/image/extra/holistic-approch.jpg")}
               alt=""
-              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
+              className=" mb-4 rounded-lg object-fill xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">
@@ -295,7 +295,7 @@ export const DefaultHome = () => {
             <img
               src={require("../../../assets/image/extra/safe-place.jpg")}
               alt=""
-              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
+              className=" mb-4 rounded-lg object-fill xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">
@@ -350,7 +350,7 @@ export const DefaultHome = () => {
             href="http://play.google.com/store/apps/details?"
             target="_blank"
           >
-            <AppButton filled>Download app</AppButton>
+            {/* <AppButton filled>Download app</AppButton> */}
           </a>
         </div>
         <ul className="grid xl:grid-cols-3 md:grid-cols-3 flex-wrap items-start mt-10">
@@ -361,11 +361,11 @@ export const DefaultHome = () => {
             <p className="text-gray-500 text-center">
               Choose your pick, from the list of our experts.
             </p>
-            <img
+            {/* <img
               src={require("../../../assets/image/app-home-user.jpeg")}
               className="mt-5 w-[70%]"
               alt=""
-            />
+            /> */}
           </li>
           <li className=" flex flex-col items-center  xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
@@ -375,11 +375,11 @@ export const DefaultHome = () => {
             <p className="text-gray-500 text-center">
               Start a conversation with them.
             </p>
-            <img
+            {/* <img
               src={require("../../../assets/image/app-mentor-list.jpeg")}
               className="mt-5 w-[70%]"
               alt=""
-            />
+            /> */}
           </li>
           <li className=" flex flex-col items-center  xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
@@ -388,11 +388,11 @@ export const DefaultHome = () => {
             <p className="text-gray-500 text-center">
               Share your problem and heal beautifully
             </p>
-            <img
+            {/* <img
               src={require("../../../assets/image/app-chat-user.jpeg")}
               className="mt-5 w-[70%]"
               alt=""
-            />
+            /> */}
           </li>
         </ul>
       </div>
