@@ -129,8 +129,8 @@ export const DefaultHome = () => {
         </div>
         <div className="xl:flex-1 px-10 flex items-center justify-center">
           <img
-            src={require("../../../assets/image/extra/logo.png")}
-            className="w-[60vh] rounded-full"
+            src={require("../../../assets/image/extra/hero-section.png")}
+            className="w-[70vh] rounded-full"
             alt=""
           />
         </div>
