@@ -80,7 +80,7 @@ export const CallFooter: FC<CallFooterProps> = ({
     <div
       style={{ width: `${width}%` }}
       className={clsx(
-        `flex gap-10 bg-gray-950 rounded-lg fixed bottom-10 text-white p-5  justify-start items-center`
+        `flex gap-10 bg-gray-950 rounded-lg fixed bottom-5 text-white p-5  justify-start items-center`
       )}
     >
       <button
@@ -150,12 +150,14 @@ export const CallFooter: FC<CallFooterProps> = ({
       )}
       {/* <p>{moment(room.startedAt).format("MMMM Do YYYY, h:mm:ss A")}</p> */}
       <p>{elapsedTime}</p>
-      {leaveModal && (
-        <LeaveModal
-          leaveAction={leaveCall}
-          modalHandler={() => setLeaveModal(!leaveModal)}
-        />
-      )}
+      <div className="z-50">
+        {leaveModal && (
+          <LeaveModal
+            leaveAction={leaveCall}
+            modalHandler={() => setLeaveModal(!leaveModal)}
+          />
+        )}
+      </div>
     </div>
   );
 };

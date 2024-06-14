@@ -13,7 +13,7 @@ export const CallConference = () => {
 
   return (
     <div className="items-center flex w-full mt-20 justify-center gap-5 flex-wrap">
-      <div className="flex-1 flex items-center gap-5">
+      <div className="flex-1 flex items-center gap-5 relative">
         {peers.map((peer) => (
           <VideoCallPeer key={peer.id} {...peer} />
         ))}

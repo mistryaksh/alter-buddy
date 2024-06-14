@@ -260,9 +260,9 @@ export const DefaultHome = () => {
         <div className="my-20 gap-5 grid xl:grid-cols-3 md:grid-cols-2">
           <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex-col flex items-center">
             <img
-              src="https://images.pexels.com/photos/4672717/pexels-photo-4672717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={require("../../../assets/image/extra/personalized-support.jpg")}
               alt=""
-              className="mb-4 rounded-lg"
+              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">
@@ -276,9 +276,9 @@ export const DefaultHome = () => {
           </div>
           <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex items-center  flex-col">
             <img
-              src="https://images.pexels.com/photos/3761504/pexels-photo-3761504.jpeg?auto=compress&cs=tinysrgb&w=800"
+              src={require("../../../assets/image/extra/holistic-approch.jpg")}
               alt=""
-              className=" mb-4 rounded-lg"
+              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">
@@ -292,9 +292,9 @@ export const DefaultHome = () => {
           </div>
           <div className=" p-4 rounded-lg mb-4  gap-3 w-full flex items-center  flex-col">
             <img
-              src="https://images.pexels.com/photos/4672717/pexels-photo-4672717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={require("../../../assets/image/extra/safe-place.jpg")}
               alt=""
-              className="mb-4 rounded-lg"
+              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">

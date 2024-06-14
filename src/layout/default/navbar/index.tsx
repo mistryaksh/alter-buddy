@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { ICategoryProps, ISubCategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
-import { AlterBuddyLogo } from "../../../assets/logo";
 import { useServicesSlice } from "../../../redux/features";
 
 interface MainNavBarProps {
@@ -43,9 +42,15 @@ export const MainNavBar: FC<MainNavBarProps> = ({
           <div className="flex items-center  h-16 w-full">
             <div className="flex items-center w-full justify-between gap-10">
               <div className="">
-                <Link to="/">
-                  <AlterBuddyLogo />
-                  <p className="capitalize">FInd Your life’s Brighter Side</p>
+                <Link to="/" className="flex flex-col items-center">
+                  {/* <AlterBuddyLogo /> */}
+                  <img
+                    src={require("../../../assets/image/extra/logo.png")}
+                    width={100}
+                    className="rounded-full"
+                    alt=""
+                  />
+                  {/* <p className="capitalize">FInd Your life’s Brighter Side</p> */}
                 </Link>
               </div>
 

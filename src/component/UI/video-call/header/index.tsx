@@ -9,7 +9,7 @@ export const CallHeader: FC<CallHeaderProps> = ({ width }) => {
   return (
     <header
       style={{ width: `${width}%` }}
-      className={`fixed top-10  bg-gray-950 rounded-lg backdrop-blur-md gap-3 flex items-center justify-start p-5`}
+      className={`fixed top-5  bg-gray-950 rounded-lg backdrop-blur-md gap-3 flex items-center justify-start p-5`}
     >
       <AlterBuddyLogo />
     </header>

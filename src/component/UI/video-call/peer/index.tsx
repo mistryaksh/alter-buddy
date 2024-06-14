@@ -6,8 +6,8 @@ import {
   useHMSStore,
   HMSPeer,
 } from "@100mslive/react-sdk";
-import { AiOutlineUser } from "react-icons/ai";
-import { MdMic, MdMicOff } from "react-icons/md";
+import clsx from "clsx";
+import { FiMic, FiMicOff } from "react-icons/fi";
 import { IconButton } from "@100mslive/roomkit-react";
 
 export const VideoCallPeer = ({
@@ -25,39 +25,34 @@ export const VideoCallPeer = ({
   const isPeerVideoEnabled = useHMSStore(selectIsPeerVideoEnabled(id));
 
   return (
-    <div className="flex-1 flex mt-20 relative">
-      <div className="relative flex-1">
-        {isPeerVideoEnabled && (
-          <video
-            ref={videoRef}
-            className="w-full h-full rounded-lg"
-            autoPlay
-            muted
-            playsInline
-          />
-        )}
-
-        <div className="absolute bottom-5 right-5 bg-gray-900 bg-opacity-70 p-2 shadow-lg rounded-md">
+    <div
+      className={
+        isLocal
+          ? "absolute bottom-0 z-30 right-0 w-[300px]"
+          : "w-[60hv] h-[60vh] relative"
+      }
+    >
+      {!isLocal && (
+        <div className="absolute px-5 py-3 text-white bg-gray-900 left-0 -bottom-14 rounded-lg flex w-full justify-between items-center">
+          <div className="capitalize ">
+            {name} - {roleName === "host" && "Mentor"}
+          </div>
           <IconButton>
-            {isPeerAudioEnabled ? <MdMic size={25} /> : <MdMicOff size={25} />}
+            {isPeerAudioEnabled ? <FiMic size={20} /> : <FiMicOff size={20} />}
           </IconButton>
         </div>
-        {!isPeerVideoEnabled ? (
-          <div className="w-full h-[22rem] rounded-lg bg-gray-300 flex justify-center items-center">
-            <AiOutlineUser
-              size={100}
-              fill="current"
-              className="fill-primary-500"
-            />
-          </div>
-        ) : null}
-      </div>
-      <div className="absolute bottom-5 left-5 bg-gray-900 rounded-lg bg-opacity-70 p-2">
-        <p className="font-sans capitalize text-sm text-white">
-          {name} <span className="text-gray-500">{isLocal ? "(You)" : ""}</span>
-          {/* {isPeerAudioEnabled ? } */}
-        </p>
-      </div>
+      )}
+      {isPeerVideoEnabled && (
+        <video
+          ref={videoRef}
+          className={clsx(
+            isLocal ? "border-4 border-primary-500 z-30" : "z-20 w-full h-full"
+          )}
+          autoPlay
+          muted
+          playsInline
+        />
+      )}
     </div>
   );
 };
