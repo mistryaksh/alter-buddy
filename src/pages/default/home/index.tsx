@@ -308,7 +308,7 @@ export const DefaultHome = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-12 gap-10 items-center xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6">
+        <div className="grid gap-10 items-center xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6 sm:grid-cols-1 grid-cols-1">
           <div className="flex flex-col justify-center gap-2 items-center">
             <HumanBrainIcon height={100} width={100} />
             <p className="text-xl text-center text-gray-500 font-semibold capitalize">
