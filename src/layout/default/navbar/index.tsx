@@ -27,8 +27,6 @@ export const MainNavBar: FC<MainNavBarProps> = ({
   authenticated,
   logout,
   navLoading,
-  subCategory,
-  category,
 }) => {
   const { pageContent } = useServicesSlice();
   return (
@@ -141,7 +139,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                         onClick={logout}
                       >
                         <AiOutlineLogout size={25} />
-                        Logout
+                        {navLoading ? "please wait..." : "logout"}
                       </li>
                     </>
                   )}
