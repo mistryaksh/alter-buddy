@@ -7,6 +7,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { ICategoryProps, ISubCategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
 import { useServicesSlice } from "../../../redux/features";
+import { AlterBuddyLogo } from "../../../assets/logo";
 
 interface MainNavBarProps {
   mobile: boolean;
@@ -43,14 +44,8 @@ export const MainNavBar: FC<MainNavBarProps> = ({
             <div className="flex items-center w-full justify-between gap-10">
               <div className="">
                 <Link to="/" className="flex flex-col items-center">
-                  {/* <AlterBuddyLogo /> */}
-                  <img
-                    src={require("../../../assets/image/extra/logo.png")}
-                    width={100}
-                    className="rounded-full"
-                    alt=""
-                  />
-                  {/* <p className="capitalize">FInd Your life’s Brighter Side</p> */}
+                  <AlterBuddyLogo />
+                  <p className="capitalize">FInd Your life’s Brighter Side</p>
                 </Link>
               </div>
 

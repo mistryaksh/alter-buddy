@@ -80,7 +80,7 @@ export const DefaultHome = () => {
       {/* section one */}
       <div
         className={clsx(
-          `flex items-center gap-10 py-10 bg-gradient-to-bl flex-wrap-reverse`,
+          `flex items-center gap-10 py-10 bg-gradient-to-bl flex-wrap-reverse flex-row-reverse`,
           "from-primary-200 to-white"
         )}
       >
@@ -127,9 +127,10 @@ export const DefaultHome = () => {
             </div>
           </div>
         </div>
-        <div className="xl:flex-1">
+        <div className="xl:flex-1 px-10">
           <img
-            src="https://static.wixstatic.com/media/7cc31a_fd24e6bc5c1147c0a1e69922ca52d1b0~mv2.png/v1/fill/w_708,h_610,al_c,q_90,enc_auto/7cc31a_fd24e6bc5c1147c0a1e69922ca52d1b0~mv2.png"
+            src={require("../../../assets/image/extra/logo.png")}
+            className="w-[60vh] rounded-full"
             alt=""
           />
         </div>
