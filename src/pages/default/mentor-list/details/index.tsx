@@ -230,7 +230,7 @@ export const UserMentorDetailsPage = () => {
               </div>
             </div>
           </div>
-          <div className="xl:col-span-4 col-span-12 shadow-xl border border-gray-300 p-5 rounded-lg">
+          <div className="xl:col-span-4 sticky top-0 col-span-12 shadow-xl border border-gray-300 p-5 rounded-lg">
             {slotData?.data.length !== 0 && (
               <div>
                 <p className="text-gray-500 my-2">

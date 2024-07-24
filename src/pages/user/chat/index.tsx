@@ -95,6 +95,7 @@ export const UserChatPage = () => {
         <div className="grid grid-cols-12 mt-5 h-[90vh]">
           <div className="xl:col-span-8 col-span-12">
             <InsiderChat
+              roomId={roomId as string}
               myUsername={`${userData?.data.name.firstName} ${userData?.data.name.lastName}`}
               channelName={channelName}
             />

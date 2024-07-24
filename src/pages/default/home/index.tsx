@@ -249,7 +249,7 @@ export const DefaultHome = () => {
       </div>
 
       {/* section two */}
-      <div className="my-40 container mx-auto w-[80%]">
+      <div className="my-40 container mx-auto xl:w-[80%]">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           why <span className="font-semibold text-primary-500">Choose Us?</span>
         </h6>
@@ -258,12 +258,12 @@ export const DefaultHome = () => {
           mindset and nurturing mental well-being. That's why we offer trusted
           buddies who are equipped to navigate through any obstacles with you
         </p>
-        <div className="my-20 gap-5 grid xl:grid-cols-3 md:grid-cols-2">
+        <div className="my-20 gap-5 grid xl:grid-cols-3 md:grid-cols-3 lg:grid-cols-2">
           <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex-col flex items-center">
             <img
               src={require("../../../assets/image/extra/personalized-support.jpg")}
               alt=""
-              className=" mb-4 rounded-lg object-fill xl:h-[300px]"
+              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">
@@ -279,7 +279,7 @@ export const DefaultHome = () => {
             <img
               src={require("../../../assets/image/extra/holistic-approch.jpg")}
               alt=""
-              className=" mb-4 rounded-lg object-fill xl:h-[300px]"
+              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">
@@ -291,11 +291,11 @@ export const DefaultHome = () => {
               </p>
             </div>
           </div>
-          <div className=" p-4 rounded-lg mb-4  gap-3 w-full flex items-center  flex-col">
+          <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex items-center  flex-col">
             <img
               src={require("../../../assets/image/extra/safe-place.jpg")}
               alt=""
-              className=" mb-4 rounded-lg object-fill xl:h-[300px]"
+              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
             />
             <div className="flex-1">
               <p className="text-2xl font-bold mb-2 capitalize">

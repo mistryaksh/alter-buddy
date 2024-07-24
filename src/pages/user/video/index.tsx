@@ -17,6 +17,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import { socket } from "../../../service";
 import { AiOutlinePhone, AiOutlineVideoCamera } from "react-icons/ai";
+import { HMSPrebuilt } from "@100mslive/roomkit-react";
 
 export const UserVideoCallPage = () => {
   const isConnected = useHMSStore(selectIsConnectedToRoom);
@@ -83,18 +84,23 @@ export const UserVideoCallPage = () => {
     data?.data.room,
     isAudioCall,
   ]);
+  console.log(data?.data);
 
   return (
     <MainLayout hideNav={isConnected} loading={false}>
       {isConnected && !isLoading ? (
         <div className="h-screen relative p-5 w-full">
-          <CallHeader width={98} />
+          {/* <CallHeader width={98} />
           <CallConference />
           <CallFooter
             duration={0}
             isAudioCall={isAudioCall ? "audio" : "video"}
             cancellationPath="/"
             width={98}
+          /> */}
+          <HMSPrebuilt
+            roomCode={data?.data.userCode.code}
+            logo={require("../../../assets/AlterBuddy-Icon.png")}
           />
         </div>
       ) : (

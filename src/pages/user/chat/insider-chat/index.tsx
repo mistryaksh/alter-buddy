@@ -5,24 +5,34 @@ import moment from "moment";
 import clsx from "clsx";
 import { IoMdAttach } from "react-icons/io";
 import { AiOutlineMessage, AiOutlineSend } from "react-icons/ai";
+import { useSaveChatMutation } from "../../../../redux/rtk-api";
+import { useVideoCallSlice } from "../../../../redux/features";
+import { v4 } from "uuid";
 
 interface InsiderChatProps {
   channelName: string;
   myUsername: string;
   mentorCall?: boolean;
+  roomId: string;
 }
 
 export const InsiderChat: FC<InsiderChatProps> = ({
   channelName,
   myUsername,
   mentorCall,
+  roomId,
 }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const { chat } = useVideoCallSlice();
   const messageEndRef = useRef<HTMLDivElement>(null);
   const { channel } = useChannel(channelName);
-
+  const [SaveChat, { isError, error, isLoading, isSuccess, data }] =
+    useSaveChatMutation();
   useEffect(() => {
+    if (isError) {
+      console.log(error);
+    }
     channel.subscribe((msg) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
     });
@@ -30,10 +40,30 @@ export const InsiderChat: FC<InsiderChatProps> = ({
     return () => {
       channel.unsubscribe();
     };
-  }, [channel, channelName, myUsername]);
+  }, [
+    channel,
+    channelName,
+    myUsername,
+    isError,
+    error,
+    SaveChat,
+    chat.chatRoomId,
+  ]);
 
   const sendMessage = async () => {
     if (input.trim() !== "") {
+      console.log(chat?.chatRoomId);
+      await SaveChat({
+        chatId: roomId as string,
+        message: {
+          message: input.trim(),
+          messageId: v4(),
+          senderId: "a",
+          senderName: myUsername as string,
+          timestamp: new Date().toString() as string,
+          topic: "chat",
+        },
+      });
       await channel.publish({
         name: channelName,
         data: {

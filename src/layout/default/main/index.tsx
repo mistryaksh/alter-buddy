@@ -101,32 +101,38 @@ export const MainLayout: FC<MainLayoutProps> = ({
     //   setOfferModel(true);
     // }, 3000);
     if (isLoginError) {
-      if ((loginError as any).data) {
+      if ((loginError as any)?.data) {
         dispatch(handleError((loginError as any).data.message));
+      } else {
+        console.log(loginError);
       }
     }
     if (isRegisterError) {
-      if ((registerError as any).data) {
+      if ((registerError as any)?.data) {
         dispatch(handleError((registerError as any).data.message));
+      } else {
+        console.log(registerError);
       }
     }
     if (isSubCategoryError) {
-      if ((subCategoryError as any).data) {
+      if ((subCategoryError as any)?.data) {
         dispatch(handleError((subCategoryError as any).data.message));
       }
     }
     if (isCategoryError) {
-      if ((categoryError as any).data) {
+      if ((categoryError as any)?.data) {
         dispatch(handleError((categoryError as any).data.message));
       }
     }
     if (isLogoutError) {
-      if ((logoutError as any).data) {
+      if ((logoutError as any)?.data) {
         dispatch(handleError((logoutError as any).data.message));
+      } else {
+        console.log(logoutError);
       }
     }
     if (isNotificationError) {
-      if ((notificationError as any).data) {
+      if ((notificationError as any)?.data) {
         dispatch(handleError((notificationError as any).data.message));
       }
     }
