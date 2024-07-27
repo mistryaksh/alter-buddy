@@ -27,8 +27,14 @@ export const InsiderChat: FC<InsiderChatProps> = ({
   const { chat } = useVideoCallSlice();
   const messageEndRef = useRef<HTMLDivElement>(null);
   const { channel } = useChannel(channelName);
-  const [SaveChat, { isError, error, isLoading, isSuccess, data }] =
-    useSaveChatMutation();
+  const [
+    SaveChat,
+    {
+      isError,
+      error,
+      // isLoading, isSuccess, data
+    },
+  ] = useSaveChatMutation();
   useEffect(() => {
     if (isError) {
       console.log(error);
@@ -81,7 +87,7 @@ export const InsiderChat: FC<InsiderChatProps> = ({
 
   useEffect(scrollToBottom, [messages]);
   return (
-    <div className=" relative h-full">
+    <div className="relative h-full">
       <div className={clsx("flex flex-col w-full gap-3")}>
         <div
           className={clsx(
@@ -135,7 +141,7 @@ export const InsiderChat: FC<InsiderChatProps> = ({
               </p>
             </div>
           )}
-          <div className="w-[97%] pl-3 pr-1 py-1 z-50 rounded-lg absolute bottom-0 shadow-xl bg-white border border-gray-200 items-center gap-2 inline-flex justify-between">
+          <div className="w-[97%] pl-3 pr-1 py-1 z-50  mb-5 rounded-lg absolute bottom-0 shadow-xl bg-white border border-gray-200 items-center gap-2 inline-flex justify-between">
             <div className="flex items-center gap-2 flex-1">
               <input
                 onKeyPress={(prop) => {

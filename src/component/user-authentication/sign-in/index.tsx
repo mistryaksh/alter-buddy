@@ -22,7 +22,7 @@ export const SignInBody: FC<SignInBodyProps> = ({
   loading,
 }) => {
   return (
-    <div className="flex flex-col items-center gap-5 mx-auto w-[60%]  h-full justify-center">
+    <div className="flex flex-col items-center gap-5 mx-auto w-[60%] h-full justify-center">
       <AuthModalBody
         modalTitle="Continue with sign in"
         header={{
@@ -51,7 +51,7 @@ export const SignInBody: FC<SignInBodyProps> = ({
                   value={values.mobile}
                   onChange={handleChange("mobile")}
                   onBlur={handleBlur("mobile")}
-                  placeholder="8669026895"
+                  placeholder="1234567890"
                   label="Enter mobile"
                   type="number"
                   error={errors.mobile}

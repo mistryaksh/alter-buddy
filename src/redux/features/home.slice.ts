@@ -7,6 +7,7 @@ interface HomeSliceProps {
     id: number;
     age: string;
     points: string[];
+    subPoints?: string[];
   }[];
   helpPoints: {
     body: string;
@@ -23,7 +24,7 @@ const initialState: HomeSliceProps = {
       id: 0,
       age: "13-25",
       points: [
-        "Your Crush doesn’t notice you?",
+        "Unnoticed Admiration",
         "Relationship Issues",
         "Academic pressure or exam stress",
         "Social anxiety",
@@ -37,9 +38,8 @@ const initialState: HomeSliceProps = {
         "Substance abuse",
         "Addiction of any sort",
         "Facing Issues In Coping with transitions such as:",
-        "moving away from home",
-        "starting college",
       ],
+      subPoints: ["Moving away from home or ", "Starting college"],
     },
     {
       id: 1,
@@ -63,6 +63,7 @@ const initialState: HomeSliceProps = {
         "Career Problems",
         "Feeling stuck or unfulfilled in life",
         "Dealing with children leaving home",
+        "Want to leave 9-5 and start your own business but don't know how to get started",
       ],
     },
     {
@@ -82,28 +83,28 @@ const initialState: HomeSliceProps = {
   ],
   helpPoints: [
     {
-      body: "our psychologists (your buddies) help you overcome anxiety, stress, and confusion. they will help you gain clarity and confidence in your life's direction.",
+      body: "Our psychologists (your buddies) help you overcome anxiety, stress, and confusion. they will help you gain clarity and confidence in your life's direction.",
       image:
         "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
       label: "mental health",
       path: "#",
     },
     {
-      body: "our coaches (your genies) will guide you in manifesting your desires for love, relationships, success, money, and good health, helping you transform your reality and create the life you always desired.",
+      body: "Our coaches (your genies) will guide you in manifesting your desires for love, relationships, success, money, and good health, helping you transform your reality and create the life you always desired.",
       image:
         "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
       label: "manifestation",
       path: "#",
     },
     {
-      body: "our compassionate healers offer emotional and spiritual healing to help you heal past traumas, find inner peace, and rediscover balance and harmony in your life..",
+      body: "Our compassionate healers offer emotional and spiritual healing to help you heal past traumas, find inner peace, and rediscover balance and harmony in your life..",
       image:
         "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
       label: "healing",
       path: "#",
     },
     {
-      body: "feeling overwhelmed? just vent it out. we are here to listen. our rant-out buddies provide a safe space for you to vent your frustrations and emotions without fear of judgment.",
+      body: "Feeling overwhelmed? just vent it out. we are here to listen. our rant-out buddies provide a safe space for you to vent your frustrations and emotions without fear of judgment.",
       image:
         "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
       label: "rant (vent out) services",

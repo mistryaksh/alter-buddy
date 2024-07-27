@@ -23,6 +23,7 @@ module.exports = {
       fontFamily: {
         sans: ["'avnir', sans-serif"],
         sans2: ["'avnir_bold', sans-serif"],
+        libre: ['"Libre Franklin", sans-serif'],
       },
     },
   },

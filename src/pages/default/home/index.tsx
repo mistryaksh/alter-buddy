@@ -2,8 +2,11 @@ import React, { useEffect } from "react";
 import { MainLayout } from "../../../layout";
 import {
   AppButton,
+  CallAndVideoIcon,
+  ChooseUsIcon,
   DayHours,
   ExportMentors,
+  HelpAndSupport,
   HumanBrainIcon,
   ServicesCard,
   ShopUser,
@@ -20,12 +23,7 @@ import {
 } from "../../../redux/features";
 import { useAppDispatch } from "../../../redux";
 import clsx from "clsx";
-import {
-  FaAngleDown,
-  FaAngleUp,
-  FaGooglePlay,
-  FaAppStore,
-} from "react-icons/fa";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import {
   useGetAllFaqQuery,
   useGetAllSubCategoryQuery,
@@ -33,6 +31,7 @@ import {
 } from "../../../redux/rtk-api";
 import { getUserToken } from "../../../utils";
 import { AiOutlineCheck, AiOutlinePhone } from "react-icons/ai";
+import { FiChevronUp } from "react-icons/fi";
 export const DefaultHome = () => {
   const { active } = useFaqSlice();
   const { data: mentor } = useGetMentorsListQuery();
@@ -77,8 +76,14 @@ export const DefaultHome = () => {
 
   return (
     <MainLayout loading={isSubCategoryLoading || isFaqLoading}>
+      <div className="z-50 right-10 bottom-10 bg-primary-500 p-3 rounded-xl fixed text-white shadow-xl">
+        <a href="#sectionOne" className="w-full h-full">
+          <FiChevronUp size={30} />
+        </a>
+      </div>
       {/* section one */}
       <div
+        id="sectionOne"
         className={clsx(
           `flex items-center gap-10 py-10 bg-gradient-to-bl flex-wrap-reverse flex-row-reverse`,
           "from-primary-200 to-white"
@@ -86,8 +91,8 @@ export const DefaultHome = () => {
       >
         <div className="flex-1 p-10">
           <h3 className="text-2xl mt-3 capitalize font-bold font-sans2 whitespace-pre-wrap">
-            DISCOVER LIFE’S BRIGHTER SIDE WITH YOUR PERSONAL COACHES AT ALTER
-            BUDDY :
+            DISCOVER LIFE’S BRIGHTER SIDE WITH YOUR PERSONAL COACHES AT
+            ALTERBUDDY :
           </h3>
           <ul className="my-5">
             <li className="flex items-center gap-3">
@@ -109,7 +114,9 @@ export const DefaultHome = () => {
               <p className="text-gray-500 capitalize">MANIFESTATION GENIES</p>
             </li>
           </ul>
-          <p>Take your first step to create a life you desire.</p>
+          <p className="text-xl font-libre font-semibold">
+            Take your first step to create a life you desire.
+          </p>
           <div className="">
             <div className="flex items-center mt-10 gap-5">
               <div onClick={() => dispatch(handleAuthModal())}>
@@ -118,12 +125,12 @@ export const DefaultHome = () => {
                   <span>talk to buddy</span>
                 </AppButton>
               </div>
-              <div>
+              {/* <div>
                 <FaGooglePlay className="fill-primary-500" size={50} />
               </div>
               <div className="">
                 <FaAppStore size={50} className="fill-primary-500" />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -136,10 +143,10 @@ export const DefaultHome = () => {
         </div>
       </div>
       <div className="mt-20 py-20">
-        <h6 className="font-light text-4xl text-center capitalize font-sans2">
-          WE UNDERSTAND YOUR{" "}
+        <h6 className="text-4xl text-center capitalize font-sans2">
+          We Understand your{" "}
           <span className="font-semibold text-primary-500">
-            PROBLEMS/TRAUMAS
+            Problems/Traumas
           </span>
         </h6>
 
@@ -168,15 +175,21 @@ export const DefaultHome = () => {
         <div className="border py-20 border-primary-500 px-10 xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
           <ul className="list-disc grid xl:grid-cols-2 gap-x-5 items-start xl:w-[60%] mx-auto">
             {problems[selectedAgeGroup].points.map((elements, i) => (
-              <li className="capitalize" key={i}>
-                {elements}
-              </li>
+              <li key={i}>{elements}</li>
             ))}
+            <ul className="list-desc grid xl:grid-cols-1 gap-x-5">
+              <li></li>
+            </ul>
+            <ul className="grid xl:grid-cols-1 gap-x-5">
+              {problems[selectedAgeGroup].subPoints?.map((element2, i) => (
+                <li key={i}>- {element2}</li>
+              ))}
+            </ul>
           </ul>
         </div>
         <div className="grid xl:grid-cols-2 xl:w-[90%] mx-auto xl:mt-20 mt-10 px-3 xl:px-0">
           <div>
-            <p className="text-center mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
+            <p className=" mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line text-justify">
               People and sometimes the situations around us are so toxic, that
               we feel everything bad happens only to us, making us bitter. And
               unconsciously, we send so many negative energies to the universe,
@@ -206,7 +219,7 @@ export const DefaultHome = () => {
               className="w-[70%] rounded-lg"
             />
           </div>
-          <p className="text-center mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
+          <p className="text-justify mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
             And we are here to help you become the best version of yourself with
             only a positive aura all around you, making sure the universe is at
             your side granting you everything you desire. And we are here to
@@ -253,7 +266,7 @@ export const DefaultHome = () => {
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           why <span className="font-semibold text-primary-500">Choose Us?</span>
         </h6>
-        <p className="text-center text-gray-500">
+        <p className="text-center text-gray-500 mt-5">
           At AlterBuddy, we recognize the significance of fostering a positive
           mindset and nurturing mental well-being. That's why we offer trusted
           buddies who are equipped to navigate through any obstacles with you
@@ -338,7 +351,7 @@ export const DefaultHome = () => {
 
       <div className="w-[80%] p-3 mx-auto my-20">
         <h6 className="text-4xl capitalize text-center font-sans2">
-          How Does It <span className="text-primary-500">Works</span>
+          How Does It <span className="text-primary-500">Work</span>
         </h6>
         <p className="text-gray-500 text-center">
           Get professional advice and steadfast support whenever and wherever
@@ -353,7 +366,7 @@ export const DefaultHome = () => {
             {/* <AppButton filled>Download app</AppButton> */}
           </a>
         </div>
-        <ul className="grid xl:grid-cols-3 md:grid-cols-3 flex-wrap items-start mt-10">
+        <ul className="grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 flex-wrap items-start mt-10 gap-20">
           <li className=" flex flex-col items-center  xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
               <span className="select-none">01.</span>CHOOSE YOUR MENTOR.
@@ -361,13 +374,11 @@ export const DefaultHome = () => {
             <p className="text-gray-500 text-center">
               Choose your pick, from the list of our experts.
             </p>
-            {/* <img
-              src={require("../../../assets/image/app-home-user.jpeg")}
-              className="mt-5 w-[70%]"
-              alt=""
-            /> */}
+            <div className="mt-10">
+              <ChooseUsIcon height={300} />
+            </div>
           </li>
-          <li className=" flex flex-col items-center  xl:mt-0 mt-10">
+          <li className=" flex flex-col items-center xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
               <span className="select-none">02.</span> SAY HI OVER A CHAT OR
               CALL
@@ -375,11 +386,9 @@ export const DefaultHome = () => {
             <p className="text-gray-500 text-center">
               Start a conversation with them.
             </p>
-            {/* <img
-              src={require("../../../assets/image/app-mentor-list.jpeg")}
-              className="mt-5 w-[70%]"
-              alt=""
-            /> */}
+            <div className="mt-16">
+              <CallAndVideoIcon height={270} />
+            </div>
           </li>
           <li className=" flex flex-col items-center  xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
@@ -388,11 +397,9 @@ export const DefaultHome = () => {
             <p className="text-gray-500 text-center">
               Share your problem and heal beautifully
             </p>
-            {/* <img
-              src={require("../../../assets/image/app-chat-user.jpeg")}
-              className="mt-5 w-[70%]"
-              alt=""
-            /> */}
+            <div className="mt-10">
+              <HelpAndSupport height={350} />
+            </div>
           </li>
         </ul>
       </div>
@@ -400,7 +407,8 @@ export const DefaultHome = () => {
       <div className="">
         <div className="container mx-auto pt-20">
           <h6 className="text-4xl capitalize text-center font-sans2">
-            Our <span className="text-primary-500 font-semibold">Clients</span>
+            Hear from{" "}
+            <span className="text-primary-500 font-semibold">Our clients</span>
           </h6>
           <p className="font-extralight text-center text-md text-gray-500 my-5">
             You do not have to take our word for it. Read through the
@@ -506,7 +514,7 @@ export const DefaultHome = () => {
             they are only messengers telling you who you are. Revalue yourself
             and they will confirm the change.”
           </p>
-          <blockquote className="p-4 my-4 border-s-4 border-primary-300 bg-primary-50 text-primary-500 text-xl text-right">
+          <blockquote className="p-4 my-4 w-auto border-s-4 border-primary-300 bg-primary-50 text-primary-500 text-xl text-left">
             -Neville Goddard
           </blockquote>
         </div>

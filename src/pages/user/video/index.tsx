@@ -1,13 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { MainLayout } from "../../../layout";
 import { selectIsConnectedToRoom, useHMSStore } from "@100mslive/react-sdk";
-import {
-  AppButton,
-  CallConference,
-  CallFooter,
-  CallHeader,
-  JoinForm,
-} from "../../../component";
+import { AppButton, JoinForm } from "../../../component";
 import {
   useGetMeetingCodesMutation,
   useLazyGetMentorUsingIdQuery,
