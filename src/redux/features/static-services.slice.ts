@@ -7,6 +7,8 @@ interface ServicesSliceProps {
     label: string;
     id: number;
     title: string;
+    banner: string;
+    secondaryImage: string;
     subTitle: string;
     sectionOne: {
       title: string;
@@ -34,6 +36,8 @@ interface ServicesSliceProps {
 const initialState: ServicesSliceProps = {
   pageContent: [
     {
+      banner: require("../../assets/image/mental-health-2.jpg"),
+      secondaryImage: require("../../assets/image/youssef-naddam-iJ2IG8ckCpA-unsplash.jpg"),
       label: "mental health",
       id: 1,
       title: "Your Journey to Mental Wellness Begins Here",
@@ -121,6 +125,8 @@ const initialState: ServicesSliceProps = {
       },
     },
     {
+      secondaryImage: require("../../assets/image/manifestation-secondary.jpeg"),
+      banner: require("../../assets/image/image2.jpg"),
       label: "MANIFESTATION",
       id: 2,
       title: "Ready To Manifest Your Next Level of Abundance and Success?",
@@ -135,7 +141,7 @@ const initialState: ServicesSliceProps = {
         highlightDescription: "",
       },
       conclusion: {
-        title: "Download the app now",
+        title: "",
         author: " - Unknown",
         description:
           "True manifestation is not about changing the world around you, but rather, changing the world within you. When you align your thoughts, emotions, and actions with your deepest desires, miracles happen.",
@@ -143,12 +149,12 @@ const initialState: ServicesSliceProps = {
       sectionFour: {
         image: "",
         points: [
-          "✔ Living With Your Loving Soulmate",
-          "✔ Scaling the heights of Success",
-          "✔ Making Immense amounts of Money ",
-          "✔ Attracting Top- Notch, High-paying Clients",
-          "✔ Having That Perfect Dream Body",
-          "✔ Living a Purpose-Driven Life ",
+          "Living With Your Loving Soulmate",
+          "Scaling the heights of Success",
+          "Making Immense amounts of Money",
+          "Attracting Top- Notch, High-paying Clients",
+          "Having That Perfect Dream Body",
+          "Living a Purpose-Dranriven Life",
         ],
       },
       sectionThree: [
@@ -161,6 +167,8 @@ const initialState: ServicesSliceProps = {
       ],
     },
     {
+      secondaryImage: require("../../assets/image/image5.jpg"),
+      banner: require("../../assets/image/manifestation2.jpeg"),
       label: "HEALING",
       id: 3,
       title: "Transform Pain into Power: Embrace Healing and Wholeness",
@@ -277,6 +285,8 @@ const initialState: ServicesSliceProps = {
       },
     },
     {
+      secondaryImage: require("../../assets/image/rant.jpeg"),
+      banner: require("../../assets/image/rant-background.jpeg"),
       label: "RANT (VENT IT OUT)",
       id: 4,
       title: "Release, Renew, Reclaim: Embrace relief with our Rant Support",

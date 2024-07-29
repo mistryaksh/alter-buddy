@@ -30,6 +30,8 @@ import {
 } from "../../../interface";
 import { getUserToken, removeUserToken, setUserToken } from "../../../utils";
 import { AiOutlineLoading } from "react-icons/ai";
+import Aos from "aos";
+import { FiChevronUp } from "react-icons/fi";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -229,9 +231,12 @@ export const MainLayout: FC<MainLayoutProps> = ({
       dispatch(handleAuthModalView("signin"));
     }
   };
+  useEffect(() => {
+    Aos.init({});
+  }, []);
 
   return (
-    <div className="relative z-10 overflow-x-hidden">
+    <div className="relative z-10 scrol">
       {!hideNav && (
         <MainNavBar
           category={category?.data as ICategoryProps[]}
@@ -244,7 +249,17 @@ export const MainLayout: FC<MainLayoutProps> = ({
           handleMenu={() => dispatch(handleMobileMenu())}
         />
       )}
-      <main className={clsx(!hideNav && "mt-20", "relative")}>
+      <div className="">
+        <div className="z-50 bg-primary-500 shadow-primary-300 scrollTop p-3 rounded-xl fixed text-white shadow-xl">
+          <a href="#sectionOne" className="w-full h-full">
+            <FiChevronUp size={30} />
+          </a>
+        </div>
+      </div>
+      <main
+        data-aos="fade-in"
+        className={clsx(!hideNav && "mt-20", "relative", "z-10")}
+      >
         {loading &&
         isSubCategoryLoading &&
         isCategoryLoading &&

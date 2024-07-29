@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { AppButton } from "../../UI";
 
 interface ServicesCardProps {
   image: string;
@@ -18,9 +17,9 @@ export const ServicesCard: FC<ServicesCardProps> = ({
   hideReadMore,
 }) => {
   return (
-    <div className="relative xl:max-w-xs border border-solid border-gray-200 rounded-2xl transition-all duration-500 ">
-      <div className="block overflow-hidden">
-        <img src={image} alt={label} />
+    <div className="border border-solid border-gray-200 rounded-2xl transition-all duration-500 flex flex-col justify-between">
+      <div className="w-full object-cover">
+        <img src={image} className="w-full h-[200px]" alt={label} />
       </div>
       <div className="p-4">
         <h4 className="text-base font-semibold text-gray-900 mb-2 capitalize transition-all duration-500 ">
@@ -30,8 +29,8 @@ export const ServicesCard: FC<ServicesCardProps> = ({
           {body}
         </p>
         {hideReadMore && (
-          <Link to={path}>
-            <AppButton link>Read More</AppButton>
+          <Link to={path} className="text-primary-500 ">
+            Read More
           </Link>
         )}
       </div>

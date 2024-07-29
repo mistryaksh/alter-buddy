@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from "react";
+import React, { FC, Fragment, useEffect } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 import clsx from "clsx";
@@ -8,6 +8,7 @@ import { ICategoryProps, ISubCategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
 import { useServicesSlice } from "../../../redux/features";
 import { AlterBuddyLogo } from "../../../assets/logo";
+import Aos from "aos";
 
 interface MainNavBarProps {
   mobile: boolean;
@@ -28,9 +29,13 @@ export const MainNavBar: FC<MainNavBarProps> = ({
   logout,
   navLoading,
 }) => {
+  useEffect(() => {
+    Aos.init({});
+  }, []);
   const { pageContent } = useServicesSlice();
   return (
     <div
+      data-aos="fade-in"
       className={clsx(
         "fixed w-full top-0 z-20 bg-opacity-60 backdrop-blur-lg bg-white"
       )}
@@ -50,14 +55,17 @@ export const MainNavBar: FC<MainNavBarProps> = ({
               <div className="xl:flex-1 hidden md:hidden w-full xl:flex xl:justify-end ml-5">
                 <ul className="flex items-center justify-end gap-5 w-full">
                   <li className="bg-primary-500 px-5 py-2 rounded-md text-white">
-                    <Link to="/rant">Rant</Link>
+                    <a
+                      href="http://localhost:3001/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Rant
+                    </a>
                   </li>
                   <li className="xl:text-md text-sm">
                     <Link to="/about">About Us</Link>
                   </li>
-                  {/* <li>
-                    <Link to="/services">Our Services</Link>
-                  </li> */}
                   <li>
                     <div className="group relative">
                       <Menu
@@ -65,10 +73,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                         className="relative inline-block text-left"
                       >
                         <Menu.Button
-                          onMouseEnter={({ target }) =>
-                            (target as any)?.click()
-                          }
-                          className="flex items-center gap-1 xl:text-md text-sm text-gray-500 capitalize"
+                          onMouseEnter={({ target }) => {
+                            if (target) {
+                              (target as any)?.click();
+                            }
+                          }}
+                          className="flex items-center gap-1 xl:text-md text-sm capitalize"
                         >
                           Our Services
                           <FaChevronDown />

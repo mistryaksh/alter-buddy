@@ -78,3 +78,40 @@ video {
     transform: translateX(-100%);
   }
 }
+
+@layer base, theme;
+@import "stream-chat-react/dist/css/v2/index.css" layer(base);
+
+.text-primary {
+  color: theme("colors.primary.500");
+}
+
+::-webkit-scrollbar {
+  /* Customize the scrollbar width */
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  /* Customize the scrollbar track */
+  background: theme("backgroundColor.primary.100");
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: theme("backgroundColor.primary.500");
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: theme("backgroundColor.primary.300");
+}
+
+.scrollTop {
+  position: fixed;
+  right: 20;
+  bottom: 20;
+}
+
+.flip-image {
+  transform: scaleX(-1);
+}

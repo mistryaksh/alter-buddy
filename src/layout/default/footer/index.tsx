@@ -3,6 +3,7 @@ import { useGetAllCategoryQuery } from "../../../redux/rtk-api";
 import { Link } from "react-router-dom";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import { useServicesSlice } from "../../../redux/features";
+import Aos from "aos";
 
 interface MainFooterProps {}
 
@@ -18,10 +19,11 @@ export const MainFooter: FC<MainFooterProps> = () => {
     if (isCategoryError) {
       console.log(categoryError);
     }
+    Aos.init();
   }, [isCategoryError, categoryError]);
 
   return (
-    <footer className="w-full bg-gray-100">
+    <footer data-aos="fade-up" className="w-full bg-gray-100">
       <div className="px-10">
         <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-8 py-10 ">
           <div className="col-span-full mb-10 2xl:col-span-2 lg:mb-0 flex items-center flex-col 2xl:items-start">
@@ -32,10 +34,10 @@ export const MainFooter: FC<MainFooterProps> = () => {
               <AlterBuddyLogo />
             </a>
             <div className="flex items-center justify-between w-full max-w-xl mx-auto flex-col  2xl:flex-col 2xl:items-start">
-              <p className="py-8 text-sm text-gray-500 lg:max-w-xs text-center lg:text-left">
+              {/* <p className="py-8 text-sm text-gray-500 lg:max-w-xs text-center lg:text-left">
                 Trusted in more than 100 countries & 5 million customers. Have
                 any query ?
-              </p>
+              </p> */}
               <Link
                 to="/contact-us"
                 className="py-2.5 px-5 h-9 block w-fit bg-primary-600 rounded-full shadow-sm text-xs text-white mx-auto transition-all  duration-500 hover:bg-primary-700 lg:mx-0"

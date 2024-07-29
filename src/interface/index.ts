@@ -7,3 +7,4 @@ export * from "./chat.interface";
 export * from "./schedule.interface";
 export * from "./agora.interface";
 export * from "./notification.interface";
+export * from "./team.interface";

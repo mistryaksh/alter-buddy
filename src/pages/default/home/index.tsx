@@ -5,7 +5,6 @@ import {
   CallAndVideoIcon,
   ChooseUsIcon,
   DayHours,
-  ExportMentors,
   HelpAndSupport,
   HumanBrainIcon,
   ServicesCard,
@@ -31,12 +30,21 @@ import {
 } from "../../../redux/rtk-api";
 import { getUserToken } from "../../../utils";
 import { AiOutlineCheck, AiOutlinePhone } from "react-icons/ai";
-import { FiChevronUp } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import Aos from "aos";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-cards";
+
 export const DefaultHome = () => {
   const { active } = useFaqSlice();
   const { data: mentor } = useGetMentorsListQuery();
   const { authentication } = useAuthenticationSlice();
   const { problems, helpPoints, selectedAgeGroup } = useHomeSlice();
+  const navigate = useNavigate();
 
   const {
     // data: subCategory,
@@ -56,6 +64,7 @@ export const DefaultHome = () => {
 
   const localStore = getUserToken();
   useEffect(() => {
+    Aos.init({});
     if (isSubCategoryError) {
       console.log(subCategoryError);
       // dispatch(handleError((subCategoryError as any).data));
@@ -76,13 +85,10 @@ export const DefaultHome = () => {
 
   return (
     <MainLayout loading={isSubCategoryLoading || isFaqLoading}>
-      <div className="z-50 right-10 bottom-10 bg-primary-500 p-3 rounded-xl fixed text-white shadow-xl">
-        <a href="#sectionOne" className="w-full h-full">
-          <FiChevronUp size={30} />
-        </a>
-      </div>
       {/* section one */}
+
       <div
+        data-aos="fade-up"
         id="sectionOne"
         className={clsx(
           `flex items-center gap-10 py-10 bg-gradient-to-bl flex-wrap-reverse flex-row-reverse`,
@@ -119,11 +125,21 @@ export const DefaultHome = () => {
           </p>
           <div className="">
             <div className="flex items-center mt-10 gap-5">
-              <div onClick={() => dispatch(handleAuthModal())}>
-                <AppButton filled>
-                  <AiOutlinePhone size={26} className="rotate-90" />
-                  <span>talk to buddy</span>
-                </AppButton>
+              <div
+                onClick={() => {
+                  if (!authentication) {
+                    dispatch(handleAuthModal());
+                  } else {
+                    navigate("/mentor/list");
+                  }
+                }}
+              >
+                <div className="animate-pulse transition-colors duration-100">
+                  <AppButton filled>
+                    <AiOutlinePhone size={26} className="rotate-90" />
+                    <span>talk to buddy</span>
+                  </AppButton>
+                </div>
               </div>
               {/* <div>
                 <FaGooglePlay className="fill-primary-500" size={50} />
@@ -142,8 +158,9 @@ export const DefaultHome = () => {
           />
         </div>
       </div>
-      <div className="mt-20 py-20">
-        <h6 className="text-4xl text-center capitalize font-sans2">
+      {/* section two */}
+      <div data-aos="fade-up" className="mt-20 py-20">
+        <h6 className="text-4xl text-center capitalize font-sans2 mb-5">
           We Understand your{" "}
           <span className="font-semibold text-primary-500">
             Problems/Traumas
@@ -151,8 +168,8 @@ export const DefaultHome = () => {
         </h6>
 
         <p className="xl:w-[80%] text-gray-600 mx-auto text-center">
-          NOTE: (The problems mentioned in a specific age band do not typically
-          fall in that category only. The problems can resonate with anyone )
+          NOTE:- Problems mentioned in a specific age band can resonate with
+          anyone, not just limited to that group.
         </p>
         <div className="mt-10 justify-center xl:gap-20 gap-3 flex flex-row px-3">
           {problems.map(({ age, id }, i) => (
@@ -161,9 +178,10 @@ export const DefaultHome = () => {
               type="button"
               onClick={() => dispatch(handleAgeGroupSelection(id))}
               className={clsx(
-                "border-2 border-gray-400 px-5 py-2 rounded-full",
-                selectedAgeGroup === id &&
-                  "bg-primary-500 text-white border-2 border-transparent"
+                "border-2 border-gray-500 px-5 py-2 rounded-full",
+                selectedAgeGroup === id
+                  ? "bg-primary-500 text-white border-2 border-transparent"
+                  : "text-black"
               )}
             >
               <h6 className="capitalize xl:text-sm text-xs font-sans2 text-center font-semibold">
@@ -172,23 +190,44 @@ export const DefaultHome = () => {
             </button>
           ))}
         </div>
-        <div className="border py-20 border-primary-500 px-10 xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
-          <ul className="list-disc grid xl:grid-cols-2 gap-x-5 items-start xl:w-[60%] mx-auto">
-            {problems[selectedAgeGroup].points.map((elements, i) => (
-              <li key={i}>{elements}</li>
-            ))}
-            <ul className="list-desc grid xl:grid-cols-1 gap-x-5">
-              <li></li>
-            </ul>
-            <ul className="grid xl:grid-cols-1 gap-x-5">
-              {problems[selectedAgeGroup].subPoints?.map((element2, i) => (
-                <li key={i}>- {element2}</li>
+        <div className="border shadow-2xl shadow-primary-100 py-5 px-5 h-auto xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
+          <ul className="flex flex-wrap gap-5 xl:w-[90%] mx-auto">
+            {problems[selectedAgeGroup].points
+              .map((elements, i) => (
+                <div key={i} className="group relative flex justify-center">
+                  <button className="rounded bg-primary-300 px-4 py-2 shadow-sm z-10">
+                    {elements}
+                  </button>
+                  <span className="absolute bottom-12 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100 z-20">
+                    ✨ You hover me!
+                  </span>
+                </div>
+              ))
+              .splice(0, 13)}
+          </ul>
+          <ul className="flex flex-col gap-3  w-[90%] mx-auto mt-20">
+            <div className="group relative gap-3 flex justify-start">
+              {problems[14]?.subPoints?.map((element2, i) => (
+                <>
+                  <button className="rounded bg-primary-300 px-4 py-2 shadow-sm z-10">
+                    {element2}
+                  </button>
+                  <span className="absolute bottom-12 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100 z-20">
+                    ✨ You hover me!
+                  </span>
+                  <span className="absolute top-12 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100 z-20">
+                    ✨ You hover 1 me!
+                  </span>{" "}
+                </>
               ))}
-            </ul>
+            </div>
           </ul>
         </div>
-        <div className="grid xl:grid-cols-2 xl:w-[90%] mx-auto xl:mt-20 mt-10 px-3 xl:px-0">
-          <div>
+        <div
+          data-aos="fade-up"
+          className="grid xl:grid-cols-2 xl:w-[90%] mx-auto xl:mt-20 mt-10 px-3 xl:px-0"
+        >
+          <div className="">
             <p className=" mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line text-justify">
               People and sometimes the situations around us are so toxic, that
               we feel everything bad happens only to us, making us bitter. And
@@ -211,43 +250,54 @@ export const DefaultHome = () => {
             />
           </div>
         </div>
-        <div className="grid xl:grid-cols-2 xl:w-[90%] mx-auto mt-5">
-          <div className="flex items-center justify-center">
+        <div
+          data-aos="fade-up"
+          className="grid xl:grid-cols-2 xl:w-[90%] mx-auto mt-5 px-5"
+        >
+          <div className="flex items-center justify-center  xl:order-last order-1">
             <img
               src="https://images.pexels.com/photos/6624287/pexels-photo-6624287.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt=""
               className="w-[70%] rounded-lg"
             />
           </div>
-          <p className="text-justify mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
-            And we are here to help you become the best version of yourself with
-            only a positive aura all around you, making sure the universe is at
-            your side granting you everything you desire. And we are here to
-            help you become the best version of yourself with only a positive
-            aura all around you, making sure the universe is at your side
-            granting you everything you desire.
-            {"\n\n"}
-            We get you out of all your traumas and negativity, however bad and
-            toxic the situation is for you, healing your wounds from within, at
-            the cellular level.
-            {"\n\n"}
-            We believe that everyone deserves to live a life filled with joy and
-            fulfillment. And we are here to give you exactly that.
-          </p>
+          <div className=" xl:order-last order-1">
+            <p className="text-justify mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
+              And we are here to help you become the best version of yourself
+              with only a positive aura all around you, making sure the universe
+              is at your side granting you everything you desire. And we are
+              here to help you become the best version of yourself with only a
+              positive aura all around you, making sure the universe is at your
+              side granting you everything you desire.
+              {"\n\n"}
+              We get you out of all your traumas and negativity, however bad and
+              toxic the situation is for you, healing your wounds from within,
+              at the cellular level.
+              {"\n\n"}
+              We believe that everyone deserves to live a life filled with joy
+              and fulfillment. And we are here to give you exactly that.
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-10 animate-pulse">
         <AppButton filled>TALK TO US</AppButton>
       </div>
-      <div className="mb-40 mt-20 xl:w-[90%] mx-auto px-3">
+      <div data-aos="fade-up" className="mb-40 mt-20 xl:w-[90%] mx-auto px-3">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
-          HOW DO WE{" "}
-          <span className="font-semibold text-primary-500">HELP?</span>
+          How do we{" "}
+          <span className="font-semibold text-primary-500">help?</span>
         </h6>
-        <div className="w-full xl:grid px-3 gap-y-10 xl:grid-cols-12 gap-10 mt-10 items-center lg:grid-cols-6 md:grid-cols-12">
+        <p className="xl:w-[80%] text-gray-600 mx-auto text-center">
+          Explore well-being through our four key sections: Mental Health,
+          Manifestation, Healing, and Rant (Vent Out). Find support for mental
+          health, learn to manifest desires, access tools for holistic healing,
+          and safely vent frustrations.
+        </p>
+        <div className="w-full xl:grid px-3 gap-y-10 xl:grid-cols-12 gap-10 mt-20 items-stretch lg:grid-cols-6 md:grid-cols-12">
           {helpPoints.map(({ body, image, label, path }, i) => (
-            <div className="xl:col-span-3 md:col-span-2 col-span-12 xl:mt-0 mt-10">
+            <div className="xl:col-span-3 md:col-span-2 col-span-12 xl:mt-0">
               <ServicesCard
                 hideReadMore
                 body={body}
@@ -262,7 +312,7 @@ export const DefaultHome = () => {
       </div>
 
       {/* section two */}
-      <div className="my-40 container mx-auto xl:w-[80%]">
+      <div data-aos="fade-up" className="my-40 container mx-auto xl:w-[80%]">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           why <span className="font-semibold text-primary-500">Choose Us?</span>
         </h6>
@@ -271,7 +321,10 @@ export const DefaultHome = () => {
           mindset and nurturing mental well-being. That's why we offer trusted
           buddies who are equipped to navigate through any obstacles with you
         </p>
-        <div className="my-20 gap-5 grid xl:grid-cols-3 md:grid-cols-3 lg:grid-cols-2">
+        <div
+          data-aos="fade-up"
+          className="my-20 gap-5 grid xl:grid-cols-3 md:grid-cols-3 lg:grid-cols-2"
+        >
           <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex-col flex items-center">
             <img
               src={require("../../../assets/image/extra/personalized-support.jpg")}
@@ -321,7 +374,10 @@ export const DefaultHome = () => {
             </div>
           </div>
         </div>
-        <div className="grid gap-10 items-center xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6 sm:grid-cols-1 grid-cols-1">
+        <div
+          data-aos="fade-up"
+          className="grid gap-10 items-center xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6 sm:grid-cols-1 grid-cols-1"
+        >
           <div className="flex flex-col justify-center gap-2 items-center">
             <HumanBrainIcon height={100} width={100} />
             <p className="text-xl text-center text-gray-500 font-semibold capitalize">
@@ -349,7 +405,7 @@ export const DefaultHome = () => {
         </div>
       </div>
 
-      <div className="w-[80%] p-3 mx-auto my-20">
+      <div data-aos="fade-up" className="w-[80%] p-3 mx-auto my-20">
         <h6 className="text-4xl capitalize text-center font-sans2">
           How Does It <span className="text-primary-500">Work</span>
         </h6>
@@ -366,8 +422,11 @@ export const DefaultHome = () => {
             {/* <AppButton filled>Download app</AppButton> */}
           </a>
         </div>
-        <ul className="grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 flex-wrap items-start mt-10 gap-20">
-          <li className=" flex flex-col items-center  xl:mt-0 mt-10">
+        <ul
+          data-aos="fade-up"
+          className="grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 flex-wrap items-start mt-10"
+        >
+          <li className=" flex flex-col items-center xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
               <span className="select-none">01.</span>CHOOSE YOUR MENTOR.
             </h6>
@@ -375,7 +434,7 @@ export const DefaultHome = () => {
               Choose your pick, from the list of our experts.
             </p>
             <div className="mt-10">
-              <ChooseUsIcon height={300} />
+              <ChooseUsIcon width={250} height={250} />
             </div>
           </li>
           <li className=" flex flex-col items-center xl:mt-0 mt-10">
@@ -387,10 +446,10 @@ export const DefaultHome = () => {
               Start a conversation with them.
             </p>
             <div className="mt-16">
-              <CallAndVideoIcon height={270} />
+              <CallAndVideoIcon width={250} height={250} />
             </div>
           </li>
-          <li className=" flex flex-col items-center  xl:mt-0 mt-10">
+          <li className=" flex flex-col items-center xl:mt-0 mt-10">
             <h6 className="text-gray-900 text-xl font-bold">
               <span className="select-none">03.</span> GET HELP INSTANTLY
             </h6>
@@ -398,13 +457,13 @@ export const DefaultHome = () => {
               Share your problem and heal beautifully
             </p>
             <div className="mt-10">
-              <HelpAndSupport height={350} />
+              <HelpAndSupport width={250} height={250} />
             </div>
           </li>
         </ul>
       </div>
 
-      <div className="">
+      <div data-aos="fade-up" className="">
         <div className="container mx-auto pt-20">
           <h6 className="text-4xl capitalize text-center font-sans2">
             Hear from{" "}
@@ -416,7 +475,10 @@ export const DefaultHome = () => {
             of Alterbuddy Experts.
           </p>
         </div>
-        <div className="flex gap-5 relative px-10 overflow-x-scroll items-center no-scrollbar">
+        <div
+          data-aos="fade-up"
+          className="flex gap-5 relative px-10 overflow-x-scroll items-center no-scrollbar"
+        >
           <div className="w-[400px]">
             <TestimonialsCard
               body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
@@ -470,7 +532,7 @@ export const DefaultHome = () => {
         </div>
       </div>
       {/* section three */}
-      <div className="container mx-auto w-[80%] mt-20">
+      <div data-aos="fade-up" className="container mx-auto w-[80%] mt-20">
         <h6 className="text-4xl capitalize text-center font-semibold font-sans2">
           meet our <span className="text-primary-500">experts</span>
         </h6>
@@ -483,51 +545,93 @@ export const DefaultHome = () => {
       </div>
 
       {/* section four */}
-      <div className="bg-primary-200 py-20 pb-28 ">
-        <div className="container mx-auto grid items-center px-2 justify-center grid-cols-1 md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-4 gap-10">
-          {mentor?.data
-            .map(({ name, _id, accountStatus, category, subCategory }) => (
-              <ExportMentors
-                status={accountStatus.verification}
-                key={_id}
-                image="https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
-                name={`${name?.firstName} ${name?.lastName}`}
-                path={`/user/mentor/details/${_id}`}
-                specialist={category?.title}
-                subCategory={subCategory}
-              />
-            ))
-            .reverse()
-            .sort((a, b) => {
-              return a.props.specialist - b.props.specialist;
-            })}
+      <div data-aos="fade-up">
+        <div className="relative py-6 flex justify-center z-30">
+          <Swiper
+            spaceBetween={30}
+            slidesPerView={3.5}
+            pagination={{ clickable: true }}
+            centeredSlides={false}
+            speed={3000}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: true,
+            }}
+            grabCursor={true}
+            modules={[Autoplay]}
+            className="bg-white"
+          >
+            {mentor?.data
+              .map(({ name, category, subCategory }, i) => (
+                <SwiperSlide key={i}>
+                  <div className=" bg-gray-100 h-full group flex flex-col justify-between">
+                    <div className="object-cover z-50 group-hover:bg-primary-500 group-hover:bg-opacity-50">
+                      <img
+                        src={
+                          "https://www.shutterstock.com/shutterstock/photos/2141124049/display_1500/stock-photo-successful-caucasian-young-man-student-freelancer-using-laptop-watching-webinars-working-remotely-2141124049.jpg"
+                        }
+                        className="rounded-md z-10 shadow-xl"
+                        alt=""
+                      />
+                    </div>
+                    <div className="px-3 pb-3">
+                      <p className="capitalize text-2xl font-semibold mt-3">
+                        {name?.firstName} {name?.lastName}
+                      </p>
+                      <p className="uppercase text-gray-500 font-semibold">
+                        {category?.title}
+                      </p>
+                      {subCategory?.map((prop, i) => (
+                        <div key={i} className="capitalize text-gray-500">
+                          {prop.label ? prop.label : "N/A"}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))
+              .reverse()
+              .sort((a, b) => {
+                return a.props.specialist - b.props.specialist;
+              })}
+          </Swiper>
         </div>
       </div>
 
       {/* section five */}
-      <div className="xl:w-[80%] mx-auto my-20 flex flex-col items-center">
-        <AppButton filled>Download the app here</AppButton>
-        <div>
+      <div
+        data-aos="fade-up"
+        className="xl:w-[80%] mx-auto my-20 flex flex-col items-center"
+      >
+        {/* <AppButton filled>Download the app here</AppButton> */}
+        <div data-aos="fade-up">
           <p className="text-xl font-sans2 text-center py-5">
             “Change your conception of yourself and you will automatically
             change the world in which you live. Do not try to change people;
             they are only messengers telling you who you are. Revalue yourself
             and they will confirm the change.”
           </p>
-          <blockquote className="p-4 my-4 w-auto border-s-4 border-primary-300 bg-primary-50 text-primary-500 text-xl text-left">
+          <blockquote className="p-4 my-4 w-auto border-s-4 border-primary-300 bg-primary-50 text-primary-500 text-xl text-center">
             -Neville Goddard
           </blockquote>
         </div>
       </div>
       {/* section seven */}
       {faq?.data.length !== 0 && (
-        <div className="xl:w-[70%] xl:p-0 px-3 my-20 mx-auto py-20">
+        <div
+          data-aos="fade-up"
+          className="xl:w-[70%] xl:p-0 px-3 my-20 mx-auto py-20"
+        >
           <h6 className="text-4xl font-bold capitalize text-center font-sans2">
-            Frequently asked questions
+            Frequently asked <span className="text-primary-500">questions</span>
           </h6>
           <div className="mt-10">
             {faq?.data.map(({ question, answer }, i: number) => (
-              <div key={i} onClick={() => dispatch(handleFaq(i))}>
+              <div
+                data-aos="fade-up"
+                key={i}
+                onClick={() => dispatch(handleFaq(i))}
+              >
                 <div className="border-b py-8 border-gray-900">
                   <div className="flex items-center justify-between">
                     <h6

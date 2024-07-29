@@ -22,9 +22,10 @@ const initialState: HomeSliceProps = {
   problems: [
     {
       id: 0,
-      age: "13-25",
+      age: "18-25",
       points: [
-        "Unnoticed Admiration",
+        "Does the person you admire seem unaware?",
+        "Do your feelings get unreciprocated?",
         "Relationship Issues",
         "Academic pressure or exam stress",
         "Social anxiety",
@@ -84,29 +85,25 @@ const initialState: HomeSliceProps = {
   helpPoints: [
     {
       body: "Our psychologists (your buddies) help you overcome anxiety, stress, and confusion. they will help you gain clarity and confidence in your life's direction.",
-      image:
-        "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
+      image: require("../../assets/image/image3.jpg"),
       label: "mental health",
       path: "#",
     },
     {
       body: "Our coaches (your genies) will guide you in manifesting your desires for love, relationships, success, money, and good health, helping you transform your reality and create the life you always desired.",
-      image:
-        "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
+      image: require("../../assets/image/image2.jpg"),
       label: "manifestation",
       path: "#",
     },
     {
       body: "Our compassionate healers offer emotional and spiritual healing to help you heal past traumas, find inner peace, and rediscover balance and harmony in your life..",
-      image:
-        "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
+      image: require("../../assets/image/image1.jpg"),
       label: "healing",
       path: "#",
     },
     {
       body: "Feeling overwhelmed? just vent it out. we are here to listen. our rant-out buddies provide a safe space for you to vent your frustrations and emotions without fear of judgment.",
-      image:
-        "https://res.cloudinary.com/nowandme/image/upload/v1699332230/landing/services/card/sadness_eylxtc.webp",
+      image: require("../../assets/image/image7.jpeg"),
       label: "rant (vent out) services",
       path: "#",
     },

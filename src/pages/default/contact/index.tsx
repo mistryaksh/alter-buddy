@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import { AppButton, TextField } from "../../../component";
 import { MainLayout } from "../../../layout";
+import {
+  AiOutlineFacebook,
+  AiOutlineInstagram,
+  AiOutlineLinkedin,
+  AiOutlineWhatsApp,
+} from "react-icons/ai";
+import { RiTwitterXFill } from "react-icons/ri";
+import { FaTelegramPlane } from "react-icons/fa";
 
 export const ContactPage = () => {
   return (
@@ -52,7 +60,7 @@ export const ContactPage = () => {
                       ></path>
                     </svg>
                     <h5 className="text-black text-base font-normal leading-6 ml-5">
-                      470-601-1911
+                      +91 77188 45776
                     </h5>
                   </Link>
                   <Link to="#" className="flex items-center mb-6">
@@ -74,10 +82,10 @@ export const ContactPage = () => {
                       cheer@alterbuddy.com
                     </h5>
                   </Link>
-                  <Link to="#" className="flex items-center mb-6">
+                  <Link to="#" className="flex items-start mb-6">
                     <svg
-                      width="30"
-                      height="30"
+                      width="70"
+                      height="70"
                       viewBox="0 0 30 30"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -94,30 +102,13 @@ export const ContactPage = () => {
                       ></path>
                     </svg>
                     <h5 className="text-black text-base font-normal leading-6 ml-5">
-                      789 Oak Lane, Lakeside, TX 54321
+                      F-801/02, Whispering Palms xx_clusive, Lokhandwala
+                      Complex, Kandivali East, Mumbai- 400101
                     </h5>
                   </Link>
-                  <div className="flex items-center justify-end border-t border-gray-100 pt-6">
+                  <div className="flex items-center justify-between border-t border-gray-100 pt-6">
                     <Link to="#" className="mr-6">
-                      <svg
-                        width="31"
-                        height="30"
-                        viewBox="0 0 31 30"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect
-                          x="0.0683594"
-                          width="30"
-                          height="30"
-                          rx="15"
-                          fill="#337FFF"
-                        ></rect>
-                        <path
-                          d="M18.5094 15.937L18.9369 13.2236H16.3038V11.4599C16.3038 10.7179 16.6714 9.99293 17.8469 9.99293H19.0608V7.68231C18.3539 7.56968 17.6396 7.50874 16.9236 7.5C14.7565 7.5 13.3417 8.80158 13.3417 11.1546V13.2236H10.9395V15.937H13.3417V22.5H16.3038V15.937H18.5094Z"
-                          fill="white"
-                        ></path>
-                      </svg>
+                      <AiOutlineWhatsApp className="fill-[#25D366]" size={30} />
                     </Link>
                     <Link to="#" className="mr-6">
                       <svg
@@ -158,25 +149,20 @@ export const ContactPage = () => {
                       </svg>
                     </Link>
                     <Link to="#" className="mr-6">
-                      <svg
-                        width="31"
-                        height="30"
-                        viewBox="0 0 31 30"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect
-                          x="0.884766"
-                          width="30"
-                          height="30"
-                          rx="15"
-                          fill="#33CCFF"
-                        ></rect>
-                        <path
-                          d="M23.5888 10.2039C23.0935 10.4171 22.5727 10.5655 22.0394 10.6456C22.2888 10.6028 22.6556 10.154 22.8017 9.97236C23.0235 9.69835 23.1926 9.38555 23.3003 9.04985C23.3003 9.02491 23.3253 8.9893 23.3003 8.97149C23.2878 8.96463 23.2737 8.96103 23.2594 8.96103C23.2451 8.96103 23.231 8.96463 23.2184 8.97149C22.6393 9.28508 22.023 9.52442 21.3841 9.68385C21.3618 9.69066 21.3381 9.69127 21.3155 9.68562C21.2929 9.67997 21.2723 9.66828 21.2558 9.6518C21.2061 9.59257 21.1526 9.53665 21.0956 9.48439C20.8349 9.25089 20.5393 9.05979 20.2193 8.91806C19.7875 8.74088 19.321 8.66415 18.8552 8.69366C18.4031 8.72221 17.9618 8.84345 17.5586 9.04985C17.1616 9.26745 16.8127 9.56306 16.5328 9.91894C16.2384 10.2852 16.0259 10.7103 15.9095 11.1656C15.8135 11.5986 15.8027 12.0462 15.8775 12.4835C15.8775 12.5583 15.8775 12.5689 15.8133 12.5583C13.2738 12.1843 11.1901 11.2831 9.48752 9.34904C9.41272 9.26356 9.37354 9.26356 9.31299 9.34904C8.57213 10.4746 8.93187 12.2555 9.85795 13.1353C9.98261 13.2528 10.1108 13.3668 10.2462 13.4737C9.82159 13.4435 9.40736 13.3284 9.02804 13.1353C8.9568 13.089 8.91762 13.1139 8.91406 13.1994C8.90397 13.3179 8.90397 13.4371 8.91406 13.5556C8.98838 14.1235 9.21222 14.6616 9.56267 15.1147C9.91313 15.5678 10.3776 15.9197 10.9087 16.1343C11.0381 16.1898 11.173 16.2316 11.3112 16.259C10.9181 16.3364 10.515 16.3484 10.118 16.2946C10.0325 16.2768 10.0004 16.3231 10.0325 16.405C10.5561 17.8298 11.6923 18.2643 12.5258 18.5065C12.6397 18.5243 12.7537 18.5243 12.882 18.5528C12.882 18.5528 12.882 18.5528 12.8606 18.5742C12.6148 19.023 11.6211 19.3258 11.1651 19.4825C10.333 19.7814 9.44574 19.8956 8.565 19.8173C8.42609 19.7959 8.39403 19.7995 8.35842 19.8173C8.3228 19.8351 8.35842 19.8743 8.3976 19.9099C8.57569 20.0274 8.75378 20.1307 8.939 20.2305C9.49038 20.5312 10.0733 20.7701 10.6772 20.9428C13.8045 21.8048 17.3236 21.1708 19.6708 18.8378C21.5158 17.007 22.1641 14.4817 22.1641 11.9527C22.1641 11.8566 22.2816 11.7996 22.3493 11.7497C22.8161 11.386 23.2276 10.9565 23.571 10.4746C23.6305 10.4027 23.661 10.3113 23.6565 10.2181C23.6565 10.1647 23.6565 10.1754 23.5888 10.2039Z"
-                          fill="white"
-                        ></path>
-                      </svg>
+                      <AiOutlineFacebook className="fill-[#1877F2]" size={30} />
+                    </Link>
+                    <Link
+                      to="https://www.linkedin.com/company/alterbuddy/"
+                      target="_blank"
+                      className="mr-6"
+                    >
+                      <AiOutlineLinkedin className="fill-[#0A66C2]" size={30} />
+                    </Link>
+                    <Link to="#" className="mr-6">
+                      <RiTwitterXFill className="fill-[#000]" size={30} />
+                    </Link>
+                    <Link to="#" className="mr-6">
+                      <FaTelegramPlane className="fill-[#0088CC]" size={30} />
                     </Link>
                   </div>
                 </div>
