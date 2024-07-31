@@ -192,22 +192,20 @@ export const DefaultHome = () => {
         </div>
         <div className="border shadow-2xl shadow-primary-100 py-5 px-5 h-auto xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
           <ul className="flex flex-wrap gap-5 xl:w-[90%] mx-auto">
-            {problems[selectedAgeGroup].points
-              .map((elements, i) => (
-                <div key={i} className="group relative flex justify-center">
-                  <button className="rounded bg-primary-300 px-4 py-2 shadow-sm z-10">
-                    {elements}
-                  </button>
-                  <span className="absolute bottom-12 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100 z-20">
-                    ✨ You hover me!
-                  </span>
-                </div>
-              ))
-              .splice(0, 13)}
+            {problems[selectedAgeGroup].points.map((elements, i) => (
+              <div key={i} className="group relative flex justify-center">
+                <button className="rounded bg-primary-300 px-4 py-2 shadow-sm z-10">
+                  {elements}
+                </button>
+                <span className="absolute bottom-12 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100 z-20">
+                  ✨ You hover me!
+                </span>
+              </div>
+            ))}
           </ul>
-          <ul className="flex flex-col gap-3  w-[90%] mx-auto mt-20">
+          <ul className="flex flex-col gap-3  w-[90%] mx-auto mt-5">
             <div className="group relative gap-3 flex justify-start">
-              {problems[14]?.subPoints?.map((element2, i) => (
+              {problems[selectedAgeGroup]?.subPoints?.map((element2, i) => (
                 <>
                   <button className="rounded bg-primary-300 px-4 py-2 shadow-sm z-10">
                     {element2}
@@ -494,8 +492,7 @@ export const DefaultHome = () => {
           <div className="w-[400px]">
             <TestimonialsCard
               body="The self-care tools provided by AlterBuddy have been a game-changer for me. I feel more in control of my mental health now."
-              user="Robert Rose
-"
+              user="Robert Rose"
             />
           </div>
           <div className="w-[400px]">

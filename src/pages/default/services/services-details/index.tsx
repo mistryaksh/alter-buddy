@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useServicesSlice } from "../../../../redux/features";
 import Aos from "aos";
 import clsx from "clsx";
+import { AppButton } from "../../../../component";
 
 export const ServicesDetailsPage = () => {
   const { id } = useParams();
@@ -38,25 +39,23 @@ export const ServicesDetailsPage = () => {
           <div>
             <h1
               data-aos="fade-out"
-              className="capitalize text-3xl mt-10 text-primary-500"
+              className="capitalize text-3xl mt-10 text-primary-500 text-center"
             >
               {content?.label.toLocaleLowerCase()}
             </h1>
-            <h2 data-aos="fade-out" className="text-2xl">
+            <h2 data-aos="fade-out" className="text-2xl text-center ">
               {content?.title}
             </h2>
             <h3
               data-aos="fade-out"
-              className="text-md text-gray-300 whitespace-pre-wrap"
+              className="text-md text-center text-gray-300 whitespace-pre-wrap"
             >
               {content?.subTitle}
             </h3>
             <div className="my-10" data-aos="fade-out">
-              <h4 className="capitalize font-sans2 whitespace-pre-wrap">
-                {sectionOne?.subTitle.length !== 0 &&
-                  sectionOne?.title.toLocaleLowerCase()}
-              </h4>
+              <h5 className="text-lg text-gray-400">{sectionOne?.title}</h5>
               <h5 className="text-lg text-gray-300">{sectionOne?.subTitle}</h5>
+              <p>{sectionOne?.highlightDescription}</p>
               <div className="flex flex-wrap gap-5 mt-5">
                 {sectionOne?.points.map((prop, i) => (
                   <div
@@ -116,15 +115,21 @@ export const ServicesDetailsPage = () => {
               </ul>
             </div>
             <div className="w-[70%] mx-auto" data-aos="fade-out">
-              <h6 className="font-sans2 text-xl">{sectionFour?.title}</h6>
+              <h6 className="font-sans2 text-xl text-center">
+                {sectionFour?.title}
+              </h6>
               <p className="italic my-5 text-lg">
                 "{sectionFour?.description}"
               </p>
-              <blockquote className="inline-flex text-xl text-primary-500 text-right">
+              <blockquote className="inline-flex text-center text-xl text-primary-500">
                 {sectionFour?.author}
               </blockquote>
             </div>
           </div>
+          <div className="flex justify-center mt-10">
+            <AppButton outlined> TALK TO US NOW!</AppButton>
+          </div>
+
           {/* <DownloadApp /> */}
         </div>
       </div>
