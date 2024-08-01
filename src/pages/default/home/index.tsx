@@ -265,10 +265,7 @@ export const DefaultHome = () => {
             <p className="text-justify mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
               And we are here to help you become the best version of yourself
               with only a positive aura all around you, making sure the universe
-              is at your side granting you everything you desire. And we are
-              here to help you become the best version of yourself with only a
-              positive aura all around you, making sure the universe is at your
-              side granting you everything you desire.
+              is at your side granting you everything you desire.
               {"\n\n"}
               We get you out of all your traumas and negativity, however bad and
               toxic the situation is for you, healing your wounds from within,
@@ -282,7 +279,18 @@ export const DefaultHome = () => {
       </div>
 
       <div className="flex justify-center mt-10 animate-pulse">
-        <AppButton filled>TALK TO US</AppButton>
+        <AppButton
+          filled
+          onClick={() => {
+            if (!authentication) {
+              dispatch(handleAuthModal());
+            } else {
+              navigate("/mentor/list");
+            }
+          }}
+        >
+          TALK TO US
+        </AppButton>
       </div>
 
       <div data-aos="fade-up" className="my-20">

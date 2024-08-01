@@ -31,6 +31,10 @@ interface ServicesSliceProps {
       image: string;
       points: string[];
     };
+    solution?: {
+      title: string;
+      paragraph: string;
+    };
     conclusion: {
       title: string;
       description: string;
@@ -75,7 +79,7 @@ const initialState: ServicesSliceProps = {
         highlightDescription:
           "But we also know that it doesn't have to be this way. You deserve to experience a life filled with joy, purpose, and fulfilment. You deserve to embrace your inner peace and navigate life's challenges with confidence and resilience.",
         points: [
-          "Anxiety",
+          "do you struggle with anxiety",
           "Depression",
           "Stress Management",
           "Self-esteem and self-confidence",
@@ -140,6 +144,11 @@ const initialState: ServicesSliceProps = {
           "Discover the peace and clarity that comes from embracing your inner wisdom and resilience.",
         ],
       },
+      solution: {
+        title: "The Solution",
+        paragraph:
+          "At Alter Buddy, we offer more than just a listening ear or a shoulder to lean on. We provide a safe and nurturing space where you can explore your feelings, unpack your thoughts, and embark on a journey of self-discovery and healing.",
+      },
       conclusion: {
         title: "IN SHORT ‘YOU GET TO MEET THE BEST VERSION OF YOURSELF’",
         description:
@@ -193,6 +202,11 @@ const initialState: ServicesSliceProps = {
     {
       secondaryImage: require("../../assets/image/image5.jpg"),
       banner: require("../../assets/image/manifestation2.jpeg"),
+      solution: {
+        title: "The Solution",
+        paragraph:
+          "At Alter Buddy, we're more than just listeners. Here, we create a safe sanctuary for your innermost thoughts and emotions to flourish. It's a journey of self-discovery and healing, where every step is embraced with warmth and compassion",
+      },
       label: "HEALING",
       id: 3,
       title: "Transform Pain into Power: Embrace Healing and Wholeness",

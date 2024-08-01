@@ -17,18 +17,19 @@ export const AboutPage = () => {
       <div className={clsx("py-32")}>
         <h6 className="text-4xl font-semibold font-sans2 text-center capitalize">
           About <span className="text-primary-500">Us</span>
+          <div className="mt-10 w-full">
+            <h6 className="capitalize text-2xl text-gray-900 font-semibold text-center">
+              get to know about us!
+            </h6>
+            <p className="text-lg font-sans2 text-primary-500 italic text-center">
+              "Discover the Power Within, Transform Your Life."
+            </p>
+          </div>
         </h6>
         <div className="grid xl:grid-cols-2 xl:gap-10 container items-center mx-auto mt-20 flex-wrap-reverse">
           {/* <hr className="pt-20 border-t-2 border-primary-300" /> */}
+
           <div className="flex items-start flex-col container mx-auto flex-wrap order-last xl:order-none lg:pl-10 xl:pl-10">
-            <div className="">
-              <h6 className="capitalize text-2xl text-gray-900 font-semibold text-left">
-                get to know about us!
-              </h6>
-              <p className="text-lg font-sans2 text-primary-500 italic my-5">
-                "Discover the Power Within, Transform Your Life."
-              </p>
-            </div>
             <div className="flex-1">
               <p className="text-lg text-gray-800 whitespace-pre-line">
                 At times we are lost and filled with negativity all around us,
