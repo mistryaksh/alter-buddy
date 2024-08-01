@@ -17,6 +17,7 @@ import {
   ServicesDetailsPage,
   BuddyTubePage,
   ContactPage,
+  TeamPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 
@@ -25,6 +26,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<DefaultHome />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/our-team" element={<TeamPage />} />
       <Route path="/contact-us" element={<ContactPage />} />
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/mentor/list" element={<AllMentorsPage />} />

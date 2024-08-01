@@ -66,6 +66,10 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                   <li className="xl:text-md text-sm">
                     <Link to="/about">About Us</Link>
                   </li>
+
+                  <li className="xl:text-md text-sm">
+                    <Link to="/our-team">Our Team</Link>
+                  </li>
                   <li>
                     <div className="group relative">
                       <Menu
