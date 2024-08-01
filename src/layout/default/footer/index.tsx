@@ -53,7 +53,7 @@ export const MainFooter: FC<MainFooterProps> = () => {
             </h4>
             <ul className="text-sm  transition-all duration-500 ">
               {pageContent.map(({ label, id }, i) => (
-                <li className="mb-6" key={i}>
+                <li className="mb-3" key={i}>
                   <a
                     href={`/services/${id}`}
                     className="text-gray-600 capitalize hover:text-gray-900"
@@ -71,8 +71,11 @@ export const MainFooter: FC<MainFooterProps> = () => {
             </h4>
             <ul className="text-sm  transition-all duration-500">
               {category?.data?.map(({ title }, i) => (
-                <li className="mb-6" key={i}>
-                  <Link to="#" className="text-gray-600 hover:text-gray-900">
+                <li className="mb-3" key={i}>
+                  <Link
+                    to="#"
+                    className="text-gray-600 hover:text-gray-900 capitalize"
+                  >
                     {title}
                   </Link>
                 </li>
@@ -82,17 +85,17 @@ export const MainFooter: FC<MainFooterProps> = () => {
           <div className="lg:mx-auto text-left">
             <h4 className="text-lg text-gray-900 font-medium mb-7">Sitemap</h4>
             <ul className="text-sm  transition-all duration-500">
-              <li className="mb-6">
+              <li className="mb-3">
                 <Link to="/" className="text-gray-600 hover:text-gray-900">
                   Home
                 </Link>
               </li>
-              <li className="mb-6">
+              <li className="mb-3">
                 <Link to="#" className=" text-gray-600 hover:text-gray-900">
                   BuddyTube
                 </Link>
               </li>
-              <li className="mb-6">
+              <li className="mb-3">
                 <Link to="#" className=" text-gray-600 hover:text-gray-900">
                   New Updates
                 </Link>
@@ -103,6 +106,22 @@ export const MainFooter: FC<MainFooterProps> = () => {
                 </Link>
               </li>
             </ul>
+          </div>
+        </div>
+        <div className="w-full py-3 my-10">
+          <div className="xl:w-[50%] rounded-md bg-primary-100 text-primary-500  mx-auto py px-10 p-5">
+            ⓘ <span className="font-sans2">AlterBuddy</span> is not a crisis or
+            suicide helpline. If you or anyone you know requires immediate help,
+            please reach out to the nearest emergency services. You can find
+            professional help in your country{" "}
+            <Link
+              className="font-semibold underline"
+              to="https://www.iasp.info/crisis-centres-helplines/"
+              target="_blank"
+            >
+              here
+            </Link>
+            .
           </div>
         </div>
         <div className="py-7 border-t border-gray-200">
@@ -147,7 +166,8 @@ export const MainFooter: FC<MainFooterProps> = () => {
                 </svg>
               </Link>
               <Link
-                to="#"
+                target="_blank"
+                to="https://www.linkedin.com/company/alterbuddy/"
                 className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-primary-600"
               >
                 <svg

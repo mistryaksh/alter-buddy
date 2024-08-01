@@ -236,7 +236,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
   }, []);
 
   return (
-    <div className="relative z-10 scrol">
+    <div className="relative z-10">
       {!hideNav && (
         <MainNavBar
           category={category?.data as ICategoryProps[]}
@@ -250,7 +250,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
         />
       )}
       <div className="">
-        <div className="z-50 bg-primary-500 shadow-primary-300 scrollTop p-3 rounded-xl fixed text-white shadow-xl">
+        <div className="z-50 bg-primary-500 shadow-primary-300 scrollTop p-3 mb-20 rounded-xl fixed text-white shadow-xl">
           <a href="#sectionOne" className="w-full h-full">
             <FiChevronUp size={30} />
           </a>

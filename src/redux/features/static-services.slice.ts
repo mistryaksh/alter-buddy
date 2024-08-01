@@ -3,6 +3,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "..";
 
 interface ServicesSliceProps {
+  howWeWish: {
+    mainTitle: string;
+    points: string[];
+    conclusionTitle: string;
+    conclusion: string;
+  };
   pageContent: {
     label: string;
     id: number;
@@ -34,6 +40,23 @@ interface ServicesSliceProps {
 }
 
 const initialState: ServicesSliceProps = {
+  howWeWish: {
+    conclusion:
+      "With our services,we help you manifest and attract the right energies towards you, with the right mindset.",
+    conclusionTitle: "And what if I say that any or all of these are possible?",
+    mainTitle:
+      "There would come a Genie, who would come out of a lamp and say:",
+    points: [
+      "You will have the most loving soulmate in the entire universe.",
+      "You will have the person you crave for, chase you like crazy.",
+      "You will attract plenty of money.",
+      "You will have the most awesome career.",
+      "You will reach ladders of success like nobody else.",
+      "You will live the healthiest Life.",
+      "You will have the looks of an angel.",
+      "You will live a life of contentment and satisfaction.",
+    ],
+  },
   pageContent: [
     {
       banner: require("../../assets/image/mental-health-2.jpg"),
@@ -142,7 +165,7 @@ const initialState: ServicesSliceProps = {
       },
       conclusion: {
         title: "",
-        author: " - Unknown",
+        author: "",
         description:
           "True manifestation is not about changing the world around you, but rather, changing the world within you. When you align your thoughts, emotions, and actions with your deepest desires, miracles happen.",
       },
@@ -155,6 +178,7 @@ const initialState: ServicesSliceProps = {
           "Attracting Top- Notch, High-paying Clients",
           "Having That Perfect Dream Body",
           "Living a Purpose-Dranriven Life",
+          "Legal Issue",
         ],
       },
       sectionThree: [
@@ -339,7 +363,7 @@ const initialState: ServicesSliceProps = {
       },
       conclusion: {
         title: "",
-        author: "-Unknown",
+        author: "",
         description:
           "Sometimes, the most powerful thing you can do is simply let it out. By giving voice to your struggles and frustrations, you create space for healing and transformation to occur.",
       },

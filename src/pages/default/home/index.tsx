@@ -19,6 +19,7 @@ import {
   useAuthenticationSlice,
   useFaqSlice,
   useHomeSlice,
+  useServicesSlice,
 } from "../../../redux/features";
 import { useAppDispatch } from "../../../redux";
 import clsx from "clsx";
@@ -44,6 +45,7 @@ export const DefaultHome = () => {
   const { data: mentor } = useGetMentorsListQuery();
   const { authentication } = useAuthenticationSlice();
   const { problems, helpPoints, selectedAgeGroup } = useHomeSlice();
+  const { howWeWish } = useServicesSlice();
   const navigate = useNavigate();
 
   const {
@@ -282,7 +284,32 @@ export const DefaultHome = () => {
       <div className="flex justify-center mt-10 animate-pulse">
         <AppButton filled>TALK TO US</AppButton>
       </div>
-      <div data-aos="fade-up" className="mb-40 mt-20 xl:w-[90%] mx-auto px-3">
+
+      <div data-aos="fade-up" className="my-20">
+        <h6 className="font-light text-4xl text-center capitalize font-sans2">
+          How we <span className="font-semibold text-primary-500">Wish?</span>
+        </h6>
+        <div className="p-3 rounded-md xl:w-[60%] mx-auto mt-5 flex-col flex gap-5">
+          <h5 className="text-3xl text-center font-semibold">
+            {howWeWish.mainTitle}
+          </h5>
+          <div className="flex flex-col gap-3">
+            {howWeWish.points.map((prop, i) => (
+              <div key={i} className="text-lg text-gray-500" data-aos="fade-up">
+                {prop}
+              </div>
+            ))}
+          </div>
+        </div>
+        <h6 className="text-gray-50-950 text-xl text-center mt-10">
+          {howWeWish.conclusionTitle}
+        </h6>
+        <p className="text-md text-gray-500 text-center mt-3">
+          {howWeWish.conclusion}
+        </p>
+      </div>
+
+      <div data-aos="fade-up" className="mb-20 mt-20 xl:w-[90%] mx-auto px-3">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           How do we{" "}
           <span className="font-semibold text-primary-500">help?</span>
