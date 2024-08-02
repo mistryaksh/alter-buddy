@@ -79,7 +79,7 @@ export const DefaultHome = () => {
 
       <div
         data-aos="fade-up"
-        id="sectionOne"
+        // id="sectionOne"
         className={clsx(
           `flex items-center gap-10 py-10 bg-gradient-to-bl flex-wrap-reverse flex-row-reverse`,
           "from-primary-200 to-white"
@@ -547,66 +547,58 @@ export const DefaultHome = () => {
         <h6 className="text-4xl capitalize text-center font-semibold font-sans2">
           meet our <span className="text-primary-500">experts</span>
         </h6>
-        <p className="font-extralight text-center text-md text-gray-500 my-5">
-          This is your Team section. It's a great place to introduce your team
-          and talk about what makes it special, such as your culture and work
-          philosophy. Don't be afraid to illustrate personality and character to
-          help users connect with your team.
-        </p>
       </div>
 
       {/* section four */}
-      <div data-aos="fade-up">
-        <div className="relative py-6 flex justify-center z-30">
-          <Swiper
-            spaceBetween={30}
-            slidesPerView={3.5}
-            pagination={{ clickable: true }}
-            centeredSlides={false}
-            speed={3000}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: true,
-            }}
-            grabCursor={true}
-            modules={[Autoplay]}
-            className="bg-white"
-          >
-            {mentor?.data
-              .map(({ name, category, subCategory }, i) => (
-                <SwiperSlide key={i}>
-                  <div className=" bg-gray-100 h-full group flex flex-col justify-between">
-                    <div className="object-cover z-50 group-hover:bg-primary-500 group-hover:bg-opacity-50">
-                      <img
-                        src={
-                          "https://www.shutterstock.com/shutterstock/photos/2141124049/display_1500/stock-photo-successful-caucasian-young-man-student-freelancer-using-laptop-watching-webinars-working-remotely-2141124049.jpg"
-                        }
-                        className="rounded-md z-10 shadow-xl"
-                        alt=""
-                      />
-                    </div>
-                    <div className="px-3 pb-3">
-                      <p className="capitalize text-2xl font-semibold mt-3">
-                        {name?.firstName} {name?.lastName}
-                      </p>
-                      <p className="uppercase text-gray-500 font-semibold">
-                        {category?.title}
-                      </p>
-                      {subCategory?.map((prop, i) => (
-                        <div key={i} className="capitalize text-gray-500">
-                          {prop.label ? prop.label : "N/A"}
-                        </div>
-                      ))}
-                    </div>
+      <div data-aos="fade-up" className="mt-10">
+        <Swiper
+          spaceBetween={30}
+          slidesPerView={3.5}
+          pagination={{ clickable: true }}
+          centeredSlides={false}
+          speed={3000}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: true,
+          }}
+          grabCursor={true}
+          modules={[Autoplay]}
+          className="bg-white gap-10 flex space-x-20"
+        >
+          {mentor?.data
+            .map(({ name, category, subCategory }, i) => (
+              <SwiperSlide key={i}>
+                <div className=" bg-gray-100 xl:w-auto  group flex xl:flex-col xl:justify-between">
+                  <div className="object-cover z-50 group-hover:bg-primary-500 group-hover:bg-opacity-50">
+                    <img
+                      src={
+                        "https://www.shutterstock.com/shutterstock/photos/2141124049/display_1500/stock-photo-successful-caucasian-young-man-student-freelancer-using-laptop-watching-webinars-working-remotely-2141124049.jpg"
+                      }
+                      className="rounded-md z-10 xl:w-full w-1/2 shadow-xl"
+                      alt=""
+                    />
                   </div>
-                </SwiperSlide>
-              ))
-              .reverse()
-              .sort((a, b) => {
-                return a.props.specialist - b.props.specialist;
-              })}
-          </Swiper>
-        </div>
+                  <div className="px-3 pb-3">
+                    <p className="capitalize text-2xl font-semibold mt-3">
+                      {name?.firstName} {name?.lastName}
+                    </p>
+                    <p className="uppercase text-gray-500 font-semibold">
+                      {category?.title}
+                    </p>
+                    {subCategory?.map((prop, i) => (
+                      <div key={i} className="capitalize text-gray-500">
+                        {prop.label ? prop.label : "N/A"}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))
+            .reverse()
+            .sort((a, b) => {
+              return a.props.specialist - b.props.specialist;
+            })}
+        </Swiper>
       </div>
 
       {/* section five */}
