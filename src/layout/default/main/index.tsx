@@ -31,7 +31,6 @@ import {
 import { getUserToken, removeUserToken, setUserToken } from "../../../utils";
 import { AiOutlineLoading } from "react-icons/ai";
 import Aos from "aos";
-import { FiChevronUp } from "react-icons/fi";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -259,13 +258,13 @@ export const MainLayout: FC<MainLayoutProps> = ({
           handleMenu={() => dispatch(handleMobileMenu())}
         />
       )}
-      <div className="">
+      {/* <div className="">
         <div className="z-50 bg-primary-500 shadow-primary-300 scrollTop p-3 mb-20 rounded-xl fixed text-white shadow-xl">
           <a href="#sectionOne" className="w-full h-full">
             <FiChevronUp size={30} />
           </a>
         </div>
-      </div>
+      </div> */}
       <main
         data-aos="fade-in"
         className={clsx(!hideNav && "mt-20", "relative", "z-10")}
