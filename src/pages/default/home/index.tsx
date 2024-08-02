@@ -30,7 +30,7 @@ import {
   useGetMentorsListQuery,
 } from "../../../redux/rtk-api";
 import { getUserToken } from "../../../utils";
-import { AiOutlineCheck, AiOutlinePhone } from "react-icons/ai";
+import { AiOutlinePhone } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Aos from "aos";
 import { Autoplay } from "swiper/modules";
@@ -39,6 +39,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cards";
+import { MdStarPurple500 } from "react-icons/md";
+import { Popover } from "@headlessui/react";
 
 export const DefaultHome = () => {
   const { active } = useFaqSlice();
@@ -105,19 +107,19 @@ export const DefaultHome = () => {
           <ul className="my-5">
             <li className="flex items-center gap-3">
               <div className=" text-primary-500 p-2 rounded-full">
-                <AiOutlineCheck size={30} />
+                <MdStarPurple500 size={30} />
               </div>
               <p className="text-gray-500 capitalize">MENTAL HEALTH BUDDIES</p>
             </li>
             <li className="flex items-center gap-3">
               <div className=" text-primary-500 p-2 rounded-full">
-                <AiOutlineCheck size={30} />
+                <MdStarPurple500 size={30} />
               </div>
               <p className="text-gray-500 capitalize">COMPASSIONATE HEALERS </p>
             </li>
             <li className="flex items-center gap-3">
               <div className=" text-primary-500 p-2 rounded-full">
-                <AiOutlineCheck size={30} />
+                <MdStarPurple500 size={30} />
               </div>
               <p className="text-gray-500 capitalize">MANIFESTATION GENIES</p>
             </li>
@@ -169,9 +171,10 @@ export const DefaultHome = () => {
           </span>
         </h6>
 
-        <p className="xl:w-[80%] text-gray-600 mx-auto text-center">
-          NOTE:- Problems mentioned in a specific age band can resonate with
-          anyone, not just limited to that group.
+        <p className="xl:w-[80%] text-gray-600 mx-auto text-center text-xl font-semibold">
+          NOTE:- Problems mentioned in a specific age band{" "}
+          <span className="text-primary-500">can resonate with anyone</span>,
+          not just limited to that group.
         </p>
         <div className="mt-10 justify-center xl:gap-20 gap-3 flex flex-row px-3">
           {problems.map(({ age, id }, i) => (
@@ -192,35 +195,25 @@ export const DefaultHome = () => {
             </button>
           ))}
         </div>
-        <div className="border shadow-2xl shadow-primary-100 py-5 px-5 h-auto xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
+        <div className="border shadow-2xl shadow-primary-100 py-20 px-5 h-auto xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
           <ul className="flex flex-wrap gap-5 xl:w-[90%] mx-auto">
-            {problems[selectedAgeGroup].points.map((elements, i) => (
-              <div key={i} className="group relative flex justify-center">
-                <button className="rounded bg-primary-300 px-4 py-2 shadow-sm z-10">
-                  {elements}
-                </button>
-                <span className="absolute bottom-12 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100 z-20">
-                  ✨ You hover me!
-                </span>
-              </div>
-            ))}
-          </ul>
-          <ul className="flex flex-col gap-3  w-[90%] mx-auto mt-5">
-            <div className="group relative gap-3 flex justify-start">
-              {problems[selectedAgeGroup]?.subPoints?.map((element2, i) => (
-                <>
-                  <button className="rounded bg-primary-300 px-4 py-2 shadow-sm z-10">
-                    {element2}
-                  </button>
-                  <span className="absolute bottom-12 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100 z-20">
-                    ✨ You hover me!
-                  </span>
-                  <span className="absolute top-12 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100 z-20">
-                    ✨ You hover 1 me!
-                  </span>{" "}
-                </>
-              ))}
-            </div>
+            {problems[selectedAgeGroup].points.map(
+              ({ issue, explanation, subPoints }, i) => (
+                <li>
+                  <div className="group relative flex">
+                    <div className="bg-primary-500 p-3 text-md text-white rounded-lg capitalize">
+                      {issue}
+                    </div>
+                    <span
+                      style={{ zIndex: 100 }}
+                      className="absolute top-14 scale-0 transition-all rounded bg-primary-800 p-3 text-sm text-white group-hover:scale-100 shadow-lg"
+                    >
+                      {subPoints?.length ? subPoints.join(", ") : explanation}
+                    </span>
+                  </div>
+                </li>
+              )
+            )}
           </ul>
         </div>
         <div

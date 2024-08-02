@@ -52,7 +52,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                 </Link>
               </div>
 
-              <div className="xl:flex-1 hidden md:hidden w-full xl:flex xl:justify-end ml-5">
+              <div className="xl:flex-1 hidden md:hidden w-full xl:flex xl:justify-end">
                 <ul className="flex items-center justify-end gap-5 w-full">
                   <li className="bg-primary-500 px-5 py-2 rounded-md text-white">
                     <a
@@ -63,13 +63,10 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       Rant
                     </a>
                   </li>
-                  <li className="xl:text-md text-sm">
+                  <li className="xl:text-md text-sm hover:text-primary-500">
                     <Link to="/about">About Us</Link>
                   </li>
 
-                  <li className="xl:text-md text-sm">
-                    <Link to="/our-team">Our Team</Link>
-                  </li>
                   <li>
                     <div className="group relative">
                       <Menu
@@ -82,7 +79,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                               (target as any)?.click();
                             }
                           }}
-                          className="flex items-center gap-1 xl:text-md text-sm capitalize"
+                          className="flex items-center gap-1 xl:text-md text-sm capitalize xl:text-md hover:text-primary-500"
                         >
                           Our Services
                           <FaChevronDown />
@@ -130,11 +127,14 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       </Menu>
                     </div>
                   </li>
-                  <li className="xl:text-md text-sm">
+                  <li className="xl:text-md text-sm hover:text-primary-500">
                     <Link to="/buddytube">BuddyTube</Link>
                   </li>
-                  <li className="xl:text-md text-sm">
+                  <li className="xl:text-md text-sm hover:text-primary-500">
                     <Link to="/contact-us">Contact Us</Link>
+                  </li>
+                  <li className="xl:text-md text-sm hover:text-primary-500">
+                    <Link to="/our-team">Our Team</Link>
                   </li>
                   {!authenticated ? (
                     <li
@@ -289,7 +289,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                 {!authenticated ? (
                   <li
                     onClick={authModal}
-                    className="cursor-pointer xl:text-md text-sm"
+                    className="cursor-pointer xl:text-md text-sm hover:text-primary-500"
                   >
                     Login
                   </li>
@@ -307,6 +307,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                     </li>
                   </>
                 )}
+                <li className="xl:text-md text-sm">
+                  <Link to="/our-team">Our Team</Link>
+                </li>
               </ul>
             </div>
           )}
