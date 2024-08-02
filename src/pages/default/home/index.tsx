@@ -25,7 +25,6 @@ import { useAppDispatch } from "../../../redux";
 import clsx from "clsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import {
-  useGetAllFaqQuery,
   useGetAllSubCategoryQuery,
   useGetMentorsListQuery,
 } from "../../../redux/rtk-api";
@@ -40,14 +39,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { MdStarPurple500 } from "react-icons/md";
-import { Popover } from "@headlessui/react";
 
 export const DefaultHome = () => {
   const { active } = useFaqSlice();
   const { data: mentor } = useGetMentorsListQuery();
   const { authentication } = useAuthenticationSlice();
   const { problems, helpPoints, selectedAgeGroup } = useHomeSlice();
-  const { howWeWish } = useServicesSlice();
+  const { howWeWish, FAQ } = useServicesSlice();
   const navigate = useNavigate();
 
   const {
@@ -56,13 +54,6 @@ export const DefaultHome = () => {
     isLoading: isSubCategoryLoading,
     error: subCategoryError,
   } = useGetAllSubCategoryQuery();
-
-  const {
-    data: faq,
-    isError: isFaqError,
-    error: faqError,
-    isLoading: isFaqLoading,
-  } = useGetAllFaqQuery();
 
   const dispatch = useAppDispatch();
 
@@ -73,22 +64,17 @@ export const DefaultHome = () => {
       console.log(subCategoryError);
       // dispatch(handleError((subCategoryError as any).data));
     }
-    if (isFaqError) {
-      console.log(faqError);
-      // dispatch(handleError((faqError as any).data.message));
-    }
   }, [
     authentication,
     dispatch,
     isSubCategoryError,
     subCategoryError,
-    isFaqError,
-    faqError,
+
     localStore,
   ]);
 
   return (
-    <MainLayout loading={isSubCategoryLoading || isFaqLoading}>
+    <MainLayout loading={isSubCategoryLoading}>
       {/* section one */}
 
       <div
@@ -642,7 +628,7 @@ export const DefaultHome = () => {
         </div>
       </div>
       {/* section seven */}
-      {faq?.data.length !== 0 && (
+      {FAQ?.length !== 0 && (
         <div
           data-aos="fade-up"
           className="xl:w-[70%] xl:p-0 px-3 my-20 mx-auto py-20"
@@ -651,7 +637,7 @@ export const DefaultHome = () => {
             Frequently asked <span className="text-primary-500">questions</span>
           </h6>
           <div className="mt-10">
-            {faq?.data.map(({ question, answer }, i: number) => (
+            {FAQ?.map(({ question, answer }, i: number) => (
               <div
                 data-aos="fade-up"
                 key={i}
@@ -675,7 +661,10 @@ export const DefaultHome = () => {
                     )}
                   </div>
                   {i === active && (
-                    <p className="mt-3 font-extralight">{answer}</p>
+                    <p
+                      className="prose customContent"
+                      dangerouslySetInnerHTML={{ __html: answer }}
+                    />
                   )}
                 </div>
               </div>

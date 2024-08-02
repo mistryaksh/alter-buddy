@@ -17,7 +17,7 @@ import { AuthModel } from "../../../component";
 import {
   useGetAllCategoryQuery,
   useGetAllSubCategoryQuery,
-  useGetNotificationsQuery,
+  useLazyGetNotificationsQuery,
   useLoginUserMutation,
   useLogoutUserMutation,
   useRegisterUserMutation,
@@ -90,18 +90,26 @@ export const MainLayout: FC<MainLayoutProps> = ({
       data: registerData,
     },
   ] = useRegisterUserMutation();
-  const {
-    isError: isNotificationError,
-    error: notificationError,
-    data: notificationData,
-    isLoading: isNotificationLoading,
-    // isSuccess: isNotificationSuccess,
-  } = useGetNotificationsQuery();
+  const [
+    GetNotification,
+    {
+      isError: isNotificationError,
+      error: notificationError,
+      data: notificationData,
+      isLoading: isNotificationLoading,
+      // isSuccess: isNotificationSuccess,
+    },
+  ] = useLazyGetNotificationsQuery();
 
   useEffect(() => {
     // setTimeout(() => {
     //   setOfferModel(true);
     // }, 3000);
+    if (authentication) {
+      (async () => {
+        await GetNotification();
+      })();
+    }
     if (isLoginError) {
       if ((loginError as any)?.data) {
         dispatch(handleError((loginError as any).data.message));
@@ -198,6 +206,8 @@ export const MainLayout: FC<MainLayoutProps> = ({
     notificationError,
     // isNotificationSuccess,
     notificationData?.data,
+    GetNotification,
+    authentication,
   ]);
 
   const LoginFunc = useCallback(

@@ -15,8 +15,9 @@ export const TeamPage = () => {
           {team?.data
             .map(({ name, image, dept }, i) => (
               <div
+                data-aos="fade-up"
                 key={i}
-                className="flex flex-col xl:flex-row lg:flex-row md:flex-row items-center my-4 gap-5 container mx-auto border rounded-md"
+                className="flex flex-col xl:flex-row lg:flex-row md:flex-row items-center my-4 gap-5 container mx-auto rounded-md"
               >
                 {i % 2 === 0 ? (
                   <>
@@ -27,7 +28,7 @@ export const TeamPage = () => {
                           : `https://pfpassets.fra1.cdn.digitaloceanspaces.com/media/v1/prompts/176_office-sorporate.png`
                       }
                       alt={name}
-                      className="w-1/4"
+                      className="w-1/4 pr-5"
                     />
                     <div className="w-full p-4">
                       <h2 className="text-2xl font-bold">{name}</h2>
@@ -41,7 +42,7 @@ export const TeamPage = () => {
                   </>
                 ) : (
                   <>
-                    <div className="w-full p-4">
+                    <div className="w-full p-4 text-right">
                       <h2 className="text-2xl font-bold">{name}</h2>
                       <p className="uppercase">{dept}</p>
                       <p className="text-lg text-gray-500">

@@ -115,3 +115,7 @@ video {
 .flip-image {
   transform: scaleX(-1);
 }
+
+.customContent {
+  all: unset;
+}
