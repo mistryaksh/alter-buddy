@@ -209,7 +209,18 @@ export const DefaultHome = () => {
           </ul>
         </div>
         <div className="flex justify-center mt-5">
-          <AppButton filled>GET WHAT YOU WANT WITH US!</AppButton>
+          <AppButton
+            onClick={() => {
+              if (!authentication) {
+                dispatch(handleAuthModal());
+              } else {
+                navigate("/mentor/list");
+              }
+            }}
+            filled
+          >
+            GET WHAT YOU WANT WITH US!
+          </AppButton>
         </div>
         <div
           data-aos="fade-up"
