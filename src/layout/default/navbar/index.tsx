@@ -9,6 +9,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { useServicesSlice } from "../../../redux/features";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import Aos from "aos";
+import { AppButton } from "../../../component";
 
 interface MainNavBarProps {
   mobile: boolean;
@@ -135,12 +136,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                   </li>
 
                   {!authenticated ? (
-                    <li
-                      onClick={authModal}
-                      className="cursor-pointer xl:text-md text-sm"
-                    >
+                    <AppButton onClick={authModal} filled>
                       Login
-                    </li>
+                    </AppButton>
                   ) : (
                     <>
                       <li className="xl:text-md text-sm">

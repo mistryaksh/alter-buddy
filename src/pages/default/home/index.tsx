@@ -75,12 +75,10 @@ export const DefaultHome = () => {
 
   return (
     <MainLayout loading={isSubCategoryLoading}>
-      {/* section one */}
       <div
         data-aos="fade-up"
-        // id="sectionOne"
         className={clsx(
-          `flex items-center gap-10 py-10 bg-gradient-to-bl flex-wrap-reverse flex-row-reverse`,
+          `flex items-center gap-10 py-10 bg-gradient-to-bl flex-wrap-reverse flex-row-reverse mt-10`,
           "from-primary-200 to-white"
         )}
       >
@@ -141,7 +139,6 @@ export const DefaultHome = () => {
           />
         </div>
       </div>
-      {/* section two */}
       <div data-aos="fade-up" className="mt-20 py-20">
         <h6 className="text-4xl text-center capitalize font-sans2 mb-5">
           We Understand your{" "}
@@ -178,12 +175,12 @@ export const DefaultHome = () => {
           <ul className="flex flex-wrap gap-5 xl:w-[90%] mx-auto">
             {problems[selectedAgeGroup].points.map(
               ({ issue, explanation, subPoints }, i) => (
-                <li>
+                <li key={i}>
                   <div className="group relative flex">
                     <div className="bg-primary-500 p-3 text-md text-white rounded-lg capitalize">
                       {issue}
                     </div>
-                    <span
+                    <div
                       style={{ zIndex: 100 }}
                       className={clsx(
                         "absolute gap-10 top-14 scale-0 transition-all rounded bg-primary-800 p-3 text-sm text-white group-hover:scale-100 shadow-lg",
@@ -201,14 +198,14 @@ export const DefaultHome = () => {
                             </div>
                           ))
                         : explanation}
-                    </span>
+                    </div>
                   </div>
                 </li>
               )
             )}
           </ul>
         </div>
-        <div className="flex justify-center mt-5">
+        <div className="flex justify-center mt-10">
           <AppButton
             onClick={() => {
               if (!authentication) {
@@ -219,7 +216,7 @@ export const DefaultHome = () => {
             }}
             filled
           >
-            GET WHAT YOU WANT WITH US!
+            Talk to us!
           </AppButton>
         </div>
         <div
