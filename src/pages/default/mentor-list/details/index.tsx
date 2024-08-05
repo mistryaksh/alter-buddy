@@ -183,7 +183,7 @@ export const UserMentorDetailsPage = () => {
               </div>
               <div>
                 <h6 className="text-2xl font-sans2 capitalize text-primary-500">
-                  {mentor?.data.category.title} Video Introduction
+                  {mentor?.data?.category?.title} Video Introduction
                 </h6>
                 <div className="mt-3">
                   <iframe

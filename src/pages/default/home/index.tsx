@@ -9,7 +9,6 @@ import {
   HumanBrainIcon,
   ServicesCard,
   ShopUser,
-  TestimonialsCard,
   TwoHands,
 } from "../../../component";
 import {
@@ -32,13 +31,13 @@ import { getUserToken } from "../../../utils";
 import { AiOutlinePhone } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Aos from "aos";
-import { Autoplay } from "swiper/modules";
+import { MdStarPurple500 } from "react-icons/md";
+// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/effect-cards";
-import { MdStarPurple500 } from "react-icons/md";
+import "swiper/css/pagination";
 
 export const DefaultHome = () => {
   const { active } = useFaqSlice();
@@ -121,7 +120,7 @@ export const DefaultHome = () => {
                   }
                 }}
               >
-                <div className="animate-pulse transition-colors duration-100">
+                <div className="transition-colors duration-100">
                   <AppButton filled>
                     <AiOutlinePhone size={26} className="rotate-90" />
                     <span>talk to buddy</span>
@@ -172,7 +171,7 @@ export const DefaultHome = () => {
           ))}
         </div>
         <div className="border shadow-2xl shadow-primary-100 py-20 px-5 h-auto xl:w-[80%] rounded-md  mt-10 xl:mx-auto mx-2">
-          <ul className="flex flex-wrap gap-5 xl:w-[90%] mx-auto">
+          <ul className="flex flex-wrap gap-5 xl:w-[90%] mx-auto justify-center">
             {problems[selectedAgeGroup].points.map(
               ({ issue, explanation, subPoints }, i) => (
                 <li key={i}>
@@ -219,64 +218,67 @@ export const DefaultHome = () => {
             Talk to us!
           </AppButton>
         </div>
-        <div
-          data-aos="fade-up"
-          className="grid xl:grid-cols-2 xl:w-[90%] mx-auto xl:mt-20 mt-10 px-3 xl:px-0"
-        >
-          <div className="">
-            <p className=" mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line text-justify">
-              People and sometimes the situations around us are so toxic, that
-              we feel everything bad happens only to us, making us bitter. And
-              unconsciously, we send so many negative energies to the universe,
-              that it has no choice but to return the same back to us,{" "}
-              <span className="text-primary-500 font-extrabold">
-                making us even more miserable.
-              </span>
-              {"\n\n"}
-              The universe has made it really simple for us to understand:
-              {"\n\n"}
-              <span className="text-center text-primary-500">
-                ’Whatever you give me, so shall you get back’.
-              </span>
-            </p>
+        <div className="container mx-auto mt-10 shadow-xl py-5 border rounded-lg">
+          <div
+            data-aos="fade-up"
+            className="grid xl:grid-cols-2 xl:w-[90%] mx-auto px-3 xl:px-0"
+          >
+            <div className="">
+              <p className=" mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line text-justify">
+                People and sometimes the situations around us are so toxic, that
+                we feel everything bad happens only to us, making us bitter. And
+                unconsciously, we send so many negative energies to the
+                universe, that it has no choice but to return the same back to
+                us,{" "}
+                <span className="text-primary-500 font-extrabold">
+                  making us even more miserable.
+                </span>
+                {"\n\n"}
+                The universe has made it really simple for us to understand:
+                {"\n\n"}
+                <span className="text-center text-primary-500">
+                  ’Whatever you give me, so shall you get back’.
+                </span>
+              </p>
+            </div>
+            <div className="flex items-center justify-center">
+              <img
+                src="https://images.pexels.com/photos/6624292/pexels-photo-6624292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt=""
+                className="w-[70%] rounded-lg"
+              />
+            </div>
           </div>
-          <div className="flex items-center justify-center">
-            <img
-              src="https://images.pexels.com/photos/6624292/pexels-photo-6624292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt=""
-              className="w-[70%] rounded-lg"
-            />
-          </div>
-        </div>
-        <div
-          data-aos="fade-up"
-          className="grid xl:grid-cols-2 xl:w-[90%] mx-auto mt-5 px-5"
-        >
-          <div className="flex items-center justify-center  xl:order-last order-1">
-            <img
-              src="https://images.pexels.com/photos/6624287/pexels-photo-6624287.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt=""
-              className="w-[70%] rounded-lg"
-            />
-          </div>
-          <div className=" xl:order-last order-1">
-            <p className="text-justify mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
-              And we are here to help you become the best version of yourself
-              with only a positive aura all around you, making sure the universe
-              is at your side granting you everything you desire.
-              {"\n\n"}
-              We get you out of all your traumas and negativity, however bad and
-              toxic the situation is for you, healing your wounds from within,
-              at the cellular level.
-              {"\n\n"}
-              We believe that everyone deserves to live a life filled with joy
-              and fulfillment. And we are here to give you exactly that.
-            </p>
+          <div
+            data-aos="fade-up"
+            className="grid xl:grid-cols-2 xl:w-[90%] mx-auto mt-5 px-5"
+          >
+            <div className="flex items-center justify-center  xl:order-last order-1">
+              <img
+                src="https://images.pexels.com/photos/6624287/pexels-photo-6624287.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt=""
+                className="w-[70%] rounded-lg"
+              />
+            </div>
+            <div className=" xl:order-last order-1">
+              <p className="text-justify mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line">
+                And we are here to help you become the best version of yourself
+                with only a positive aura all around you, making sure the
+                universe is at your side granting you everything you desire.
+                {"\n\n"}
+                We get you out of all your traumas and negativity, however bad
+                and toxic the situation is for you, healing your wounds from
+                within, at the cellular level.
+                {"\n\n"}
+                We believe that everyone deserves to live a life filled with joy
+                and fulfillment. And we are here to give you exactly that.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-center mt-10 animate-pulse">
+      <div className="flex justify-center">
         <AppButton
           filled
           onClick={() => {
@@ -291,7 +293,7 @@ export const DefaultHome = () => {
         </AppButton>
       </div>
 
-      <div data-aos="fade-up" className="my-20">
+      <div data-aos="fade-up" className="my-20 container mx-auto ">
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           How we <span className="font-semibold text-primary-500">Wish?</span>
         </h6>
@@ -319,7 +321,10 @@ export const DefaultHome = () => {
         </p>
       </div>
 
-      <div data-aos="fade-up" className="mb-20 mt-20 xl:w-[90%] mx-auto px-3">
+      <div
+        data-aos="fade-up"
+        className="mb-20 mt-20 xl:w-[90%] mx-auto px-3 container shadow-lg rounded-lg border py-10"
+      >
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           How do we{" "}
           <span className="font-semibold text-primary-500">help?</span>
@@ -348,64 +353,67 @@ export const DefaultHome = () => {
 
       {/* section two */}
       <div data-aos="fade-up" className="my-40 container mx-auto xl:w-[80%]">
-        <h6 className="font-light text-4xl text-center capitalize font-sans2">
-          why <span className="font-semibold text-primary-500">Choose Us?</span>
-        </h6>
-        <p className="text-center text-gray-500 mt-5">
-          At AlterBuddy, we recognize the significance of fostering a positive
-          mindset and nurturing mental well-being. That's why we offer trusted
-          buddies who are equipped to navigate through any obstacles with you
-        </p>
-        <div
-          data-aos="fade-up"
-          className="my-20 gap-5 grid xl:grid-cols-3 md:grid-cols-3 lg:grid-cols-2"
-        >
-          <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex-col flex items-center">
-            <img
-              src={require("../../../assets/image/extra/personalized-support.jpg")}
-              alt=""
-              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
-            />
-            <div className="flex-1">
-              <p className="text-2xl font-bold mb-2 capitalize">
-                personalised support
-              </p>
-              <p className="text-gray-700">
-                Our team offers 1 on 1 tailored guidance and support to address
-                your unique needs and goals.
-              </p>
+        <div className="shadow-xl border rounded-lg mb-10 py-10">
+          <h6 className="font-light text-4xl text-center capitalize font-sans2">
+            why{" "}
+            <span className="font-semibold text-primary-500">Choose Us?</span>
+          </h6>
+          <p className="text-center text-gray-500">
+            At AlterBuddy, we recognize the significance of fostering a positive
+            mindset and nurturing mental well-being. That's why we offer trusted
+            buddies who are equipped to navigate through any obstacles with you
+          </p>
+          <div
+            data-aos="fade-up"
+            className=" gap-5 grid xl:grid-cols-3 md:grid-cols-3 lg:grid-cols-2"
+          >
+            <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex-col flex items-center">
+              <img
+                src={require("../../../assets/image/extra/personalized-support.jpg")}
+                alt=""
+                className=" mb-4 rounded-lg object-cover xl:h-[300px]"
+              />
+              <div className="flex-1">
+                <p className="text-2xl font-bold mb-2 capitalize">
+                  personalised support
+                </p>
+                <p className="text-gray-700">
+                  Our team offers 1 on 1 tailored guidance and support to
+                  address your unique needs and goals.
+                </p>
+              </div>
             </div>
-          </div>
-          <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex items-center  flex-col">
-            <img
-              src={require("../../../assets/image/extra/holistic-approch.jpg")}
-              alt=""
-              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
-            />
-            <div className="flex-1">
-              <p className="text-2xl font-bold mb-2 capitalize">
-                HOLISTIC APPROACH
-              </p>
-              <p className="text-gray-700">
-                From mental wellness to manifestation and healing, we provide
-                comprehensive services to nurture your mind, body, and spirit
-              </p>
+            <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex items-center  flex-col">
+              <img
+                src={require("../../../assets/image/extra/holistic-approch.jpg")}
+                alt=""
+                className=" mb-4 rounded-lg object-cover xl:h-[300px]"
+              />
+              <div className="flex-1">
+                <p className="text-2xl font-bold mb-2 capitalize">
+                  HOLISTIC APPROACH
+                </p>
+                <p className="text-gray-700">
+                  From mental wellness to manifestation and healing, we provide
+                  comprehensive services to nurture your mind, body, and spirit
+                </p>
+              </div>
             </div>
-          </div>
-          <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex items-center  flex-col">
-            <img
-              src={require("../../../assets/image/extra/safe-place.jpg")}
-              alt=""
-              className=" mb-4 rounded-lg object-cover xl:h-[300px]"
-            />
-            <div className="flex-1">
-              <p className="text-2xl font-bold mb-2 capitalize">
-                your safe space{" "}
-              </p>
-              <p className="text-gray-700">
-                Feel heard, understood, and supported in a judgment-free
-                environment where you can explore, heal, and transform.
-              </p>
+            <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex items-center  flex-col">
+              <img
+                src={require("../../../assets/image/extra/safe-place.jpg")}
+                alt=""
+                className=" mb-4 rounded-lg object-cover xl:h-[300px]"
+              />
+              <div className="flex-1">
+                <p className="text-2xl font-bold mb-2 capitalize">
+                  your safe space{" "}
+                </p>
+                <p className="text-gray-700">
+                  Feel heard, understood, and supported in a judgment-free
+                  environment where you can explore, heal, and transform.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -498,7 +506,7 @@ export const DefaultHome = () => {
         </ul>
       </div>
 
-      <div className="w-[40%] mx-auto border shadow-xl rounded-lg p-6 flex flex-col items-center">
+      <div className="xl:w-[40%] mx-auto border shadow-xl rounded-lg p-6 flex flex-col justify-end items-center">
         <h6 className="text-2xl font-extrabold text-primary-500">
           Reach Out Our Experts Now!
         </h6>
@@ -507,9 +515,12 @@ export const DefaultHome = () => {
           you need it.
         </p>
         <p className="text-md">Talk to us @ just ₹1</p>
+        <div className="mt-5 flex justify-end w-full">
+          <AppButton filled>Connect Now</AppButton>
+        </div>
       </div>
 
-      <div data-aos="fade-up" className="">
+      {/* <div data-aos="fade-up" className="">
         <div className="container mx-auto pt-20">
           <h6 className="text-4xl capitalize text-center font-sans2">
             Hear from{" "}
@@ -575,7 +586,7 @@ export const DefaultHome = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
       {/* section three */}
       <div data-aos="fade-up" className="container mx-auto w-[80%] mt-20">
         <h6 className="text-4xl capitalize text-center font-semibold font-sans2">
@@ -584,65 +595,72 @@ export const DefaultHome = () => {
       </div>
 
       {/* section four */}
-      <div data-aos="fade-up" className="mt-10">
-        <Swiper
-          spaceBetween={30}
-          slidesPerView={3.5}
-          pagination={{ clickable: true }}
-          centeredSlides={false}
-          speed={3000}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: true,
-          }}
-          grabCursor={true}
-          modules={[Autoplay]}
-          className="bg-white gap-10 flex space-x-20"
-        >
-          {mentor?.data
-            .map(({ name, category, subCategory }, i) => (
-              <SwiperSlide key={i}>
-                <div className=" bg-gray-100 xl:w-auto  group flex xl:flex-col xl:justify-between">
-                  <div className="object-cover z-50 group-hover:bg-primary-500 group-hover:bg-opacity-50">
-                    <img
-                      src={
-                        "https://www.shutterstock.com/shutterstock/photos/2141124049/display_1500/stock-photo-successful-caucasian-young-man-student-freelancer-using-laptop-watching-webinars-working-remotely-2141124049.jpg"
-                      }
-                      className="rounded-md z-10 xl:w-full w-1/2 shadow-xl"
-                      alt=""
-                    />
-                  </div>
-                  <div className="px-3 pb-3">
-                    <p className="capitalize text-2xl font-semibold mt-3">
-                      {name?.firstName} {name?.lastName}
-                    </p>
-                    <p className="uppercase text-gray-500 font-semibold">
-                      {category?.title}
-                    </p>
-                    {subCategory?.map((prop, i) => (
-                      <div key={i} className="capitalize text-gray-500">
-                        {prop.label ? prop.label : "N/A"}
-                      </div>
-                    ))}
+      <section className=" bg-primary-100 mb-10 mt-10 py-10">
+        <div className="lg:mx-auto h-[450px] pl-5">
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={10}
+            pagination={{
+              clickable: true,
+            }}
+            navigation
+            breakpoints={{
+              "@0.00": {
+                slidesPerView: 1.5,
+                spaceBetween: 10,
+              },
+              "@0.75": {
+                slidesPerView: 2.5,
+                spaceBetween: 20,
+              },
+              "@1.00": {
+                slidesPerView: 3.5,
+                spaceBetween: 40,
+              },
+              "@1.50": {
+                slidesPerView: 3.5,
+                spaceBetween: 50,
+              },
+            }}
+            className="mySwiper mx-10"
+          >
+            {mentor?.data.map(({ name, category, _id }) => (
+              <SwiperSlide className="h-[450px] flex flex-col justify-between items-stretch">
+                <img
+                  src="https://img.freepik.com/premium-photo/portrait-confident-male-doctor-standing-with-arms-crossed-hospital-corridor-ai-generated_632984-111.jpg"
+                  alt=""
+                />
+                <div className="py-5 px-5  flex flex-col justify-between border bg-white">
+                  <h6 className="text-2xl font-libre capitalize">
+                    {name?.firstName} {name?.lastName}
+                  </h6>
+                  <p className="uppercase text-gray-500 my-5">
+                    {category?.title}
+                  </p>
+                  <div className="flex justify-between items-center gap-5 w-full">
+                    <AppButton outlined>Book Session</AppButton>
+                    <AppButton
+                      onClick={() => navigate(`/user/mentor/details/${_id}`)}
+                      filled
+                    >
+                      Connect Now
+                    </AppButton>
                   </div>
                 </div>
               </SwiperSlide>
-            ))
-            .reverse()
-            .sort((a, b) => {
-              return a.props.specialist - b.props.specialist;
-            })}
-        </Swiper>
-      </div>
+            ))}
+          </Swiper>
+        </div>
+      </section>
 
       {/* section five */}
       <div
         data-aos="fade-up"
-        className="xl:w-[80%] mx-auto my-20 flex flex-col items-center"
+        className="xl:w-[80%] mx-auto flex flex-col items-center"
       >
         {/* <AppButton filled>Download the app here</AppButton> */}
         <div data-aos="fade-up">
-          <p className="text-xl font-sans2 text-center py-5">
+          <p className="text-xl font-sans2 text-center">
             “Change your conception of yourself and you will automatically
             change the world in which you live. Do not try to change people;
             they are only messengers telling you who you are. Revalue yourself

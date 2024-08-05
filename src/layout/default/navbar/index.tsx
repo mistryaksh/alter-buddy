@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { ICategoryProps, ISubCategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
-import { useServicesSlice } from "../../../redux/features";
+import { handleAuthModal, useServicesSlice } from "../../../redux/features";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import Aos from "aos";
-import { AppButton } from "../../../component";
+import { useAppDispatch } from "../../../redux";
 
 interface MainNavBarProps {
   mobile: boolean;
@@ -30,6 +30,8 @@ export const MainNavBar: FC<MainNavBarProps> = ({
   logout,
   navLoading,
 }) => {
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     Aos.init({});
   }, []);
@@ -136,9 +138,12 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                   </li>
 
                   {!authenticated ? (
-                    <AppButton onClick={authModal} filled>
+                    <div
+                      onClick={() => dispatch(handleAuthModal())}
+                      className="text-primary-500 capitalize cursor-pointer font-sans2"
+                    >
                       Login
-                    </AppButton>
+                    </div>
                   ) : (
                     <>
                       <li className="xl:text-md text-sm">

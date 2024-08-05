@@ -94,7 +94,7 @@ export const MentalHealthPage = () => {
             feel impossible to bear, and feelings that might overpower us.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-3 w-full py-10">
+        <div className="grid xl:grid-cols-2 gap-3 w-full py-10">
           <div>
             <ul className="list-inside space-y-3">
               <li className="list-disc text-lg">
@@ -216,7 +216,7 @@ export const MentalHealthPage = () => {
               </div>
             )).slice(0, 4)}
           </div>
-          <div className="mt-5 border w-[50%] mx-auto hover:cursor-pointer hover:bg-primary-50 transition-colors duration-150 group rounded-lg p-3">
+          <div className="mt-5 border xl:w-[50%] mx-auto hover:cursor-pointer hover:bg-primary-50 transition-colors duration-150 group rounded-lg p-3">
             <h6 className="text-xl group-hover:text-primary-500 font-semibold text-center">
               Positive Psychology Interventions
             </h6>

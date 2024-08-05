@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 
 import { MainLayout } from "../../../layout";
 import clsx from "clsx";
-import "swiper/css/effect-fade";
-import "swiper/css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -70,8 +68,7 @@ export const AboutPage = () => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 data-name="Layer 1"
-                width={500}
-                height={500}
+                className="w-[400px] h-[400px]"
                 viewBox="0 0 872.69856 590.1815"
               >
                 <path
