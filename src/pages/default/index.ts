@@ -3,7 +3,12 @@ export * from "./about";
 export * from "./mentor-list";
 export * from "./blogs";
 export * from "./privacy-policy";
-export * from "./services";
+export {
+  MentalHealthPage,
+  ManifestationPage,
+  HealingPage,
+  RantPage,
+} from "./services";
 export * from "./contact";
 export * from "./about";
 export * from "./team";

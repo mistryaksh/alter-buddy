@@ -102,19 +102,19 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                 get help for:
                               </label>
                               <div className="flex flex-1 flex-col gap-3 mt-5">
-                                {pageContent?.map(({ label, id }) => (
-                                  <div className="flex gap-3" key={id}>
+                                {pageContent?.map(({ pageTitle, path }) => (
+                                  <div className="flex gap-3" key={path}>
                                     <Menu.Item>
                                       {({ active }) => (
                                         <Link
-                                          to={`/services/${id}`}
+                                          to={`/services/${path}`}
                                           className={`${
                                             active
                                               ? "text-primary-500"
                                               : "text-gray-500"
                                           } group flex w-full font-bold items-center capitalize`}
                                         >
-                                          {label.toLowerCase()}
+                                          {pageTitle.toLowerCase()}
                                         </Link>
                                       )}
                                     </Menu.Item>
@@ -133,9 +133,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                   <li className="xl:text-md text-sm hover:text-primary-500">
                     <Link to="/contact-us">Contact Us</Link>
                   </li>
-                  <li className="xl:text-md text-sm hover:text-primary-500">
-                    <Link to="/our-team">Our Team</Link>
-                  </li>
+
                   {!authenticated ? (
                     <li
                       onClick={authModal}
@@ -157,6 +155,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       </li>
                     </>
                   )}
+                  <li className="xl:text-md text-sm hover:text-primary-500">
+                    <Link to="/our-team">Our Team</Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -255,19 +256,19 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                               get help for:
                             </label>
                             <div className="flex flex-1 flex-col gap-3 mt-5">
-                              {pageContent?.map(({ label, id }) => (
-                                <div className="flex gap-3" key={id}>
+                              {pageContent?.map(({ path, pageTitle }) => (
+                                <div className="flex gap-3" key={path}>
                                   <Menu.Item>
                                     {({ active }) => (
                                       <Link
-                                        to={`/services/${id}`}
+                                        to={`/services/${path}`}
                                         className={`${
                                           active
                                             ? "text-primary-500"
                                             : "text-gray-500"
                                         } group flex w-full font-bold items-center capitalize`}
                                       >
-                                        {label.toLowerCase()}
+                                        {pageTitle}
                                       </Link>
                                     )}
                                   </Menu.Item>

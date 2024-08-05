@@ -13,11 +13,13 @@ import {
   UserMentorDetailsPage,
   MentorSettingsPage,
   PrivacyPolicyPage,
-  ServicesPage,
-  ServicesDetailsPage,
   BuddyTubePage,
   ContactPage,
   TeamPage,
+  MentalHealthPage,
+  ManifestationPage,
+  HealingPage,
+  RantPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 
@@ -28,9 +30,13 @@ export const AppRoutes = () => {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/our-team" element={<TeamPage />} />
       <Route path="/contact-us" element={<ContactPage />} />
-      <Route path="/services" element={<ServicesPage />} />
+      <Route path="services">
+        <Route path="mental-health" element={<MentalHealthPage />} />
+        <Route path="manifestation" element={<ManifestationPage />} />
+        <Route path="healing" element={<HealingPage />} />
+        <Route path="rant" element={<RantPage />} />
+      </Route>
       <Route path="/mentor/list" element={<AllMentorsPage />} />
-      <Route path="/services/:id" element={<ServicesDetailsPage />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/mentor/category/:id" element={<AllMentorsPage />} />
       <Route path="/mobile-verification" element={<MobileVerificationPage />} />

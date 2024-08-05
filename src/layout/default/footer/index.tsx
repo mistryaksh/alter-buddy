@@ -52,13 +52,13 @@ export const MainFooter: FC<MainFooterProps> = () => {
               Our Services
             </h4>
             <ul className="text-sm  transition-all duration-500 ">
-              {pageContent.map(({ label, id }, i) => (
+              {pageContent.map(({ pageTitle }, i) => (
                 <li className="mb-3" key={i}>
                   <a
-                    href={`/services/${id}`}
+                    href={`/services/${pageTitle}`}
                     className="text-gray-600 capitalize hover:text-gray-900"
                   >
-                    {label.toLowerCase()}
+                    {pageTitle}
                   </a>
                 </li>
               ))}

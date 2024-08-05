@@ -76,7 +76,6 @@ export const DefaultHome = () => {
   return (
     <MainLayout loading={isSubCategoryLoading}>
       {/* section one */}
-
       <div
         data-aos="fade-up"
         // id="sectionOne"
@@ -131,12 +130,6 @@ export const DefaultHome = () => {
                   </AppButton>
                 </div>
               </div>
-              {/* <div>
-                <FaGooglePlay className="fill-primary-500" size={50} />
-              </div>
-              <div className="">
-                <FaAppStore size={50} className="fill-primary-500" />
-              </div> */}
             </div>
           </div>
         </div>
@@ -192,15 +185,31 @@ export const DefaultHome = () => {
                     </div>
                     <span
                       style={{ zIndex: 100 }}
-                      className="absolute top-14 scale-0 transition-all rounded bg-primary-800 p-3 text-sm text-white group-hover:scale-100 shadow-lg"
+                      className={clsx(
+                        "absolute gap-10 top-14 scale-0 transition-all rounded bg-primary-800 p-3 text-sm text-white group-hover:scale-100 shadow-lg",
+                        subPoints?.length !== 0 &&
+                          "flex gap-5 bg-transparent shadow-none p-3  top-12"
+                      )}
                     >
-                      {subPoints?.length ? subPoints.join(", ") : explanation}
+                      {subPoints?.length
+                        ? subPoints.map((element) => (
+                            <div
+                              className="bg-primary-800 rounded-lg p-3"
+                              key={element}
+                            >
+                              {element}
+                            </div>
+                          ))
+                        : explanation}
                     </span>
                   </div>
                 </li>
               )
             )}
           </ul>
+        </div>
+        <div className="flex justify-center mt-5">
+          <AppButton filled>GET WHAT YOU WANT WITH US!</AppButton>
         </div>
         <div
           data-aos="fade-up"
@@ -211,8 +220,10 @@ export const DefaultHome = () => {
               People and sometimes the situations around us are so toxic, that
               we feel everything bad happens only to us, making us bitter. And
               unconsciously, we send so many negative energies to the universe,
-              that it has no choice but to return the same back to us, making us
-              even more miserable.
+              that it has no choice but to return the same back to us,{" "}
+              <span className="text-primary-500 font-extrabold">
+                making us even more miserable.
+              </span>
               {"\n\n"}
               The universe has made it really simple for us to understand:
               {"\n\n"}
@@ -268,7 +279,7 @@ export const DefaultHome = () => {
             }
           }}
         >
-          TALK TO US
+          GET WHAT YOU WANT WITH US!
         </AppButton>
       </div>
 
@@ -280,13 +291,17 @@ export const DefaultHome = () => {
           <h5 className="text-3xl text-center font-semibold">
             {howWeWish.mainTitle}
           </h5>
-          <div className="flex flex-col gap-3">
+          <ul className="flex flex-col gap-3 list-outside">
             {howWeWish.points.map((prop, i) => (
-              <div key={i} className="text-lg text-gray-500" data-aos="fade-up">
+              <li
+                key={i}
+                className="list-disc text-lg text-gray-500"
+                data-aos="fade-up"
+              >
                 {prop}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
         <h6 className="text-gray-50-950 text-xl text-center mt-10">
           {howWeWish.conclusionTitle}
@@ -473,6 +488,17 @@ export const DefaultHome = () => {
             </div>
           </li>
         </ul>
+      </div>
+
+      <div className="w-[40%] mx-auto border shadow-xl rounded-lg p-6 flex flex-col items-center">
+        <h6 className="text-2xl font-extrabold text-primary-500">
+          Reach Out Our Experts Now!
+        </h6>
+        <p className="text-lg text-center py-5">
+          Get professional advice and steadfast support whenever and wherever
+          you need it.
+        </p>
+        <p className="text-md">Talk to us @ just ₹1</p>
       </div>
 
       <div data-aos="fade-up" className="">

@@ -51,14 +51,12 @@ export const AboutPage = () => {
                 Where we guide you on your journey to mental wellness and
                 transformation for:
                 <br />
-                - Better relationships
-                <br />
-                - Better health
-                <br />
-                - Better career
-                <br />
-                - Better inflow of money
-                <br />
+                <div className="my-5">
+                  <p className="text-extrabold">- Better relationships</p>
+                  <p className="text-extrabold">- Better health</p>
+                  <p className="text-extrabold">- Better career</p>
+                  <p className="text-extrabold">- Better inflow of money</p>
+                </div>
               </p>
 
               <p className="font-sans2 mt-5 text-lg">
