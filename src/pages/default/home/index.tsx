@@ -184,7 +184,7 @@ export const DefaultHome = () => {
                       style={{ zIndex: 100 }}
                       className={clsx(
                         "absolute gap-10 top-14 scale-0 transition-all rounded bg-primary-800 p-3 text-sm text-white group-hover:scale-100 shadow-lg",
-                        subPoints?.length !== 0 &&
+                        subPoints?.length &&
                           "flex gap-5 bg-transparent shadow-none p-3  top-12"
                       )}
                     >
