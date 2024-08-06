@@ -44,7 +44,7 @@ export const ManifestationPage = () => {
   ];
   return (
     <MainLayout>
-      <div className="py-10 flex items-center flex-col space-y-6 px-10">
+      <div className="py-10 flex items-center flex-col space-y-6 xl:px-32">
         <h1 className="text-4xl text-primary-500 font-semibold">
           MANIFESTATION
         </h1>
@@ -52,7 +52,7 @@ export const ManifestationPage = () => {
           Ready To Manifest Your Next Level of Abundance and Success?
         </h3>
         <div className="text-left w-full">
-          <p className="text-lg mt-3 text-gray-500">
+          <p className="text-lg mt-3 text-gray-500 text-center">
             We all have that one desire- and that is having a perfect life. A
             life where we are:
           </p>
@@ -131,10 +131,10 @@ export const ManifestationPage = () => {
             And believe us when we say that, we have seen amazing results
             happening.
           </p>
-          <h5 className="text-lg font-bold  text-primary-500 pt-5">
+          <h5 className="text-lg font-bold  text-primary-500 pt-5 text-center">
             IMAGINE IF YOU COULD:
           </h5>
-          <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
+          <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 mt-10">
             <div>
               <ul className="space-y-3 mt-5">
                 {imaginPoints.map((element) => (

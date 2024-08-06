@@ -358,14 +358,14 @@ export const DefaultHome = () => {
             why{" "}
             <span className="font-semibold text-primary-500">Choose Us?</span>
           </h6>
-          <p className="text-center text-gray-500">
+          <p className="text-center text-gray-500 px-10">
             At AlterBuddy, we recognize the significance of fostering a positive
             mindset and nurturing mental well-being. That's why we offer trusted
             buddies who are equipped to navigate through any obstacles with you
           </p>
           <div
             data-aos="fade-up"
-            className=" gap-5 grid xl:grid-cols-3 md:grid-cols-3 lg:grid-cols-2"
+            className="px-10 gap-5 grid xl:grid-cols-3 md:grid-cols-3 lg:grid-cols-2"
           >
             <div className=" p-4 rounded-lg mb-4 gap-3 w-full flex-col flex items-center">
               <img
@@ -419,7 +419,7 @@ export const DefaultHome = () => {
         </div>
         <div
           data-aos="fade-up"
-          className="grid gap-10 items-center xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6 sm:grid-cols-1 grid-cols-1"
+          className="grid mt-32 gap-10 items-center xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-6 sm:grid-cols-1 grid-cols-1"
         >
           <div className="flex flex-col justify-center gap-2 items-center">
             <HumanBrainIcon height={100} width={100} />
@@ -514,21 +514,18 @@ export const DefaultHome = () => {
           Get professional advice and steadfast support whenever and wherever
           you need it.
         </p>
-        <p className="text-md">Talk to us @ just ₹1</p>
-        <div className="mt-5 flex justify-end w-full">
-          <button
-            className="text-primary-500 capitalize font-libre"
-            onClick={() => {
-              if (!authentication) {
-                dispatch(handleAuthModal());
-              } else {
-                navigate("/mentor/list");
-              }
-            }}
-          >
-            Get Started Now
-          </button>
-        </div>
+        <p
+          className="text-md text-primary-500 cursor-pointer"
+          onClick={() => {
+            if (!authentication) {
+              dispatch(handleAuthModal());
+            } else {
+              navigate("/mentor/list");
+            }
+          }}
+        >
+          Talk to us @ just ₹1
+        </p>
       </div>
 
       {/* <div data-aos="fade-up" className="">

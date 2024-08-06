@@ -108,7 +108,7 @@ export const HealingPage = () => {
   ];
   return (
     <MainLayout>
-      <div className="py-10 flex items-center flex-col space-y-6 px-10">
+      <div className="py-10 flex items-center flex-col space-y-6  xl:px-32">
         <h1 className="text-4xl text-primary-500 font-semibold">HEALING</h1>
         <h3 className="text-3xl">
           Transform Pain into Power: Embrace Healing and Wholeness
@@ -118,10 +118,10 @@ export const HealingPage = () => {
           Emotional, and Spiritual Level
         </p>
         <div className="text-left w-full">
-          <h5 className="text-lg font-bold text-primary-500">
+          <h5 className="text-xl font-bold text-primary-500 text-center">
             WE UNDERSTAND YOUR PAINS:
           </h5>
-          <p className="text-lg mt-3 text-gray-500">
+          <p className="text-lg mt-3 text-gray-500 text-center">
             Our spiritual and emotional scars from life's journey can be very
             heavy on our hearts and souls. Unsolved sorrow, unsolved traumas,
             and lingering emotions can weigh us down and prevent us from
@@ -190,7 +190,7 @@ export const HealingPage = () => {
           with warmth and compassion
         </p>
         <div>
-          <h5 className="text-lg font-bold text-primary-500">
+          <h5 className="text-lg font-bold text-primary-500 text-center">
             WE UNDERSTAND YOUR PAINS:
           </h5>
           <div className="gap-5 flex flex-wrap mt-3">
@@ -210,7 +210,7 @@ export const HealingPage = () => {
           </AppButton>
         </div>
         <div>
-          <h5 className="text-lg font-bold text-primary-500">
+          <h5 className="text-lg font-bold text-primary-500 text-center">
             OUR METHODOLOGIES:
           </h5>
           <div className="grid items-center  mt-5 gap-5 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-cols-1">
@@ -240,7 +240,7 @@ export const HealingPage = () => {
           </div>
         </div>
         <div className="w-full">
-          <h5 className="text-lg font-bold text-primary-500">
+          <h5 className="text-lg font-bold text-primary-500 text-center">
             WHAT DO YOU GET?
           </h5>
           <div className="grid grid-cols-1 pt-5 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 items-center">

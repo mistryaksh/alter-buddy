@@ -138,6 +138,16 @@ export const SignUpBody: FC<SignUpBodyProps> = ({
                     }}
                     className="underline text-primary-500 cursor-pointer"
                   >
+                    Terms & Condition
+                  </span>{" "}
+                  &{" "}
+                  <span
+                    onClick={() => {
+                      dispatch(handleAuthModal());
+                      navigate("/privacy-policy");
+                    }}
+                    className="underline text-primary-500 cursor-pointer"
+                  >
                     Privacy Policy
                   </span>
                 </label>

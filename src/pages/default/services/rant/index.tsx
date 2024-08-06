@@ -44,7 +44,7 @@ export const RantPage = () => {
   ];
   return (
     <MainLayout>
-      <div className="py-10 flex items-center flex-col space-y-6 px-10">
+      <div className="py-10 flex items-center flex-col space-y-6 xl:px-32">
         <h1 className="text-4xl text-primary-500 font-semibold">
           RANT (VENT IT OUT)
         </h1>
@@ -75,11 +75,12 @@ export const RantPage = () => {
             </p>
           </div>
         </div>
+
+        <h5 className="text-lg font-bold text-primary-500 text-center py-10">
+          WE UNDERSTAND YOUR PAINS:
+        </h5>
         <div className="grid w-full items-center grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
           <div>
-            <h5 className="text-lg font-bold text-primary-500">
-              WE UNDERSTAND YOUR PAINS:
-            </h5>
             <ul className="list-inside space-y-3 mt-5 pl-8">
               {understandPoint.map((element, i) => (
                 <li key={element} className="text-lg">
@@ -121,7 +122,7 @@ export const RantPage = () => {
         </p>
       </div>
       <div className="w-full px-10">
-        <h5 className="text-lg font-bold  text-primary-500">
+        <h5 className="text-lg font-bold  text-primary-500 text-center">
           OUR METHODOLOGIES:
         </h5>
         <div className="grid items-center  mt-5 gap-5 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 grid-cols-1">
@@ -141,7 +142,7 @@ export const RantPage = () => {
         </div>
 
         <div className="py-10 px-10">
-          <h5 className="text-lg font-bold  text-primary-500">
+          <h5 className="text-lg font-bold text-primary-500 text-center">
             WHAT DO YOU GET?
           </h5>
           <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mt-5 items-center">

@@ -72,7 +72,7 @@ export const MentalHealthPage = () => {
   ];
   return (
     <MainLayout>
-      <div className="py-10 flex items-center flex-col space-y-6 px-10">
+      <div className="py-10 flex items-center flex-col space-y-6  xl:px-32">
         <h1 className="text-4xl text-primary-500 font-semibold">
           MENTAL HEALTH
         </h1>
@@ -184,8 +184,10 @@ export const MentalHealthPage = () => {
           </p>
         </div>
         <div className="text-left w-full">
-          <h5 className="text-lg font-bold  text-primary-500">WE HELP WITH:</h5>
-          <div className="gap-5 flex flex-wrap mt-3">
+          <h5 className="text-xl font-bold  text-primary-500 text-center">
+            WE HELP WITH:
+          </h5>
+          <div className="gap-5 flex flex-wrap mt-3 justify-center">
             {helpPoint.map((element) => (
               <div
                 key={element}
@@ -202,7 +204,7 @@ export const MentalHealthPage = () => {
           </AppButton>
         </div>
         <div className="w-full">
-          <h5 className="text-lg font-bold  text-primary-500">
+          <h5 className="text-2xl font-bold  text-primary-500 text-center">
             OUR METHODOLOGIES:
           </h5>
           <div className="grid justify-center mt-5 gap-5 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-cols-1">
@@ -232,7 +234,7 @@ export const MentalHealthPage = () => {
           </div>
         </div>
         <div className="py-10">
-          <h5 className="text-lg font-bold  text-primary-500">
+          <h5 className="text-2xl font-bold  text-primary-500 text-center">
             WHAT DO YOU GET?
           </h5>
           <div className="mt-3 container mx-auto items-center grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
