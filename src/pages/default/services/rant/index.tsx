@@ -89,7 +89,11 @@ export const RantPage = () => {
             </ul>
           </div>
           <div>
-            <img src="" alt={understandPoint[0]} />
+            <img
+              src={require("../../../../assets/image/rant.jpeg")}
+              alt={understandPoint[0]}
+              className="w-[70%] rounded-lg"
+            />
           </div>
         </div>
         <div className="space-y-5 mt-10 w-full text-lg">
@@ -140,14 +144,18 @@ export const RantPage = () => {
           <h5 className="text-lg font-bold  text-primary-500">
             WHAT DO YOU GET?
           </h5>
-          <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mt-5">
-            <div>
-              <img src="" alt={getPoint[0]} />
+          <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mt-5 items-center">
+            <div className="flex justify-center items-center">
+              <img
+                src={require("../../../../assets/image/rant-background.jpeg")}
+                alt={getPoint[0]}
+                className="w-[70%] rounded-lg"
+              />
             </div>
             <div>
-              <ul className="list-inside">
+              <ul className="list-inside space-y-5">
                 {getPoint.map((element) => (
-                  <li key={element} className="list-disc">
+                  <li key={element} className="list-disc text-lg">
                     {element}
                   </li>
                 ))}

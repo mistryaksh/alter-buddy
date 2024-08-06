@@ -516,7 +516,18 @@ export const DefaultHome = () => {
         </p>
         <p className="text-md">Talk to us @ just ₹1</p>
         <div className="mt-5 flex justify-end w-full">
-          <AppButton filled>Connect Now</AppButton>
+          <button
+            className="text-primary-500 capitalize font-libre"
+            onClick={() => {
+              if (!authentication) {
+                dispatch(handleAuthModal());
+              } else {
+                navigate("/mentor/list");
+              }
+            }}
+          >
+            Get Started Now
+          </button>
         </div>
       </div>
 
@@ -596,7 +607,7 @@ export const DefaultHome = () => {
 
       {/* section four */}
       <section className=" bg-primary-100 mb-10 mt-10 py-10">
-        <div className="lg:mx-auto h-[450px] pl-5">
+        <div className="lg:mx-auto h-[500px] pl-5">
           <Swiper
             slidesPerView={1}
             spaceBetween={10}
@@ -656,7 +667,7 @@ export const DefaultHome = () => {
       {/* section five */}
       <div
         data-aos="fade-up"
-        className="xl:w-[80%] mx-auto flex flex-col items-center"
+        className="xl:w-[80%] mx-auto flex flex-col items-center mt-10 pt-10"
       >
         {/* <AppButton filled>Download the app here</AppButton> */}
         <div data-aos="fade-up">

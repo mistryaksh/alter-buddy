@@ -128,7 +128,7 @@ export const HealingPage = () => {
             reaching true peace and clarity.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-5 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 items-center">
           <div>
             <ul className="space-y-3 list-item">
               <li className="list-disc text-lg">
@@ -168,8 +168,12 @@ export const HealingPage = () => {
               </li>
             </ul>
           </div>
-          <div>
-            <img src="" alt={"pic"} />
+          <div className="flex justify-center items-center">
+            <img
+              src={require("../../../../assets/image/manifestation2.jpeg")}
+              alt={"pic"}
+              className="w-[60%] rounded-lg"
+            />
           </div>
         </div>
         <p className="text-lg">
@@ -239,9 +243,13 @@ export const HealingPage = () => {
           <h5 className="text-lg font-bold text-primary-500">
             WHAT DO YOU GET?
           </h5>
-          <div className="grid grid-cols-1 pt-5 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-            <div>
-              <img src="" alt={GetPoinst[0]} />
+          <div className="grid grid-cols-1 pt-5 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 items-center">
+            <div className="flex items-center justify-center">
+              <img
+                src={require("../../../../assets/image/image5.jpg")}
+                alt={GetPoinst[0]}
+                className="w-[70%] rounded-lg"
+              />
             </div>
             <div>
               <ul className="list-inside space-y-3">

@@ -58,8 +58,12 @@ export const ManifestationPage = () => {
           </p>
         </div>
         <div className="py-10 grid grid-cols-1 w-full xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-          <div>
-            <img src="" alt={desirePoints[0]} />
+          <div className="flex justify-center items-center">
+            <img
+              src={require("../../../../assets/image/manifestation.jpeg")}
+              alt={desirePoints[0]}
+              className="w-[70%] rounded-md"
+            />
           </div>
           <div>
             <ul className="space-y-3">
@@ -145,8 +149,12 @@ export const ManifestationPage = () => {
                 <p>THIS CAN ALL BE YOURS!</p>
               </div>
             </div>
-            <div>
-              <img src="" alt={imaginPoints[0]} />
+            <div className="flex justify-center items-center">
+              <img
+                src={require("../../../../assets/image/manifestation-secondary.jpeg")}
+                alt={imaginPoints[0]}
+                className="w-[70%] rounded-md"
+              />
             </div>
           </div>
         </div>

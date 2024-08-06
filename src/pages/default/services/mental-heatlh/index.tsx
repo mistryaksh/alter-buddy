@@ -94,7 +94,7 @@ export const MentalHealthPage = () => {
             feel impossible to bear, and feelings that might overpower us.
           </p>
         </div>
-        <div className="grid xl:grid-cols-2 gap-3 w-full py-10">
+        <div className="grid xl:grid-cols-2 gap-3 w-full py-10 items-center">
           <div>
             <ul className="list-inside space-y-3">
               <li className="list-disc text-lg">
@@ -147,7 +147,11 @@ export const MentalHealthPage = () => {
             </ul>
           </div>
           <div>
-            <img src="" alt={"pic"} />
+            <img
+              src={require("../../../../assets/image/mental-health-2.jpg")}
+              alt={"pic"}
+              className="rounded-lg"
+            />
           </div>
         </div>
         <div className="space-y-5 w-full text-left">
@@ -231,11 +235,15 @@ export const MentalHealthPage = () => {
           <h5 className="text-lg font-bold  text-primary-500">
             WHAT DO YOU GET?
           </h5>
-          <div className="mt-3 items-center grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-            <div>
-              <img src="" alt={whatToGet[0]} />
+          <div className="mt-3 container mx-auto items-center grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
+            <div className="object-cover flex justify-center items-center col-span-1">
+              <img
+                src={require("../../../../assets/image/youssef-naddam-iJ2IG8ckCpA-unsplash.jpg")}
+                alt={whatToGet[0]}
+                className="rounded-lg w-[50%]"
+              />
             </div>
-            <div>
+            <div className="col-span-1">
               <ul className="list-inside space-y-3">
                 {whatToGet.map((element) => (
                   <li key={element} className="list-disc text-lg">

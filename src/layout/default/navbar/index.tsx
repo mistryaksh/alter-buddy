@@ -293,7 +293,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                 {!authenticated ? (
                   <li
                     onClick={authModal}
-                    className="cursor-pointer xl:text-md text-sm hover:text-primary-500"
+                    className="cursor-pointer xl:text-md font-libre text-sm hover:text-primary-500"
                   >
                     Login
                   </li>
