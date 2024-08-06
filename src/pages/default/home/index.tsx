@@ -218,7 +218,7 @@ export const DefaultHome = () => {
             Talk to us!
           </AppButton>
         </div>
-        <div className="container mx-auto mt-10 shadow-xl py-5 border rounded-lg">
+        <div className="container mx-auto mt-10 shadow-xl  shadow-primary-100 py-5 border rounded-lg">
           <div
             data-aos="fade-up"
             className="grid xl:grid-cols-2 xl:w-[90%] mx-auto px-3 xl:px-0"
@@ -323,7 +323,7 @@ export const DefaultHome = () => {
 
       <div
         data-aos="fade-up"
-        className="mb-20 mt-20 xl:w-[90%] mx-auto px-3 container shadow-lg rounded-lg border py-10"
+        className="mb-20 mt-20 xl:w-[90%] mx-auto px-3 container shadow-lg  shadow-primary-100 rounded-lg border py-10"
       >
         <h6 className="font-light text-4xl text-center capitalize font-sans2">
           How do we{" "}
@@ -353,7 +353,7 @@ export const DefaultHome = () => {
 
       {/* section two */}
       <div data-aos="fade-up" className="my-40 container mx-auto xl:w-[80%]">
-        <div className="shadow-xl border rounded-lg mb-10 py-10">
+        <div className="shadow-xl  shadow-primary-100 border rounded-lg mb-10 py-10">
           <h6 className="font-light text-4xl text-center capitalize font-sans2">
             why{" "}
             <span className="font-semibold text-primary-500">Choose Us?</span>
@@ -506,7 +506,7 @@ export const DefaultHome = () => {
         </ul>
       </div>
 
-      <div className="xl:w-[40%] mx-auto border shadow-xl rounded-lg p-6 flex flex-col justify-end items-center">
+      <div className="xl:w-[40%] mx-auto border shadow-xl  shadow-primary-100 rounded-lg p-6 flex flex-col justify-end items-center">
         <h6 className="text-2xl font-extrabold text-primary-500">
           Reach Out Our Experts Now!
         </h6>
