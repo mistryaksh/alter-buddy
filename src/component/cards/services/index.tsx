@@ -25,7 +25,7 @@ export const ServicesCard: FC<ServicesCardProps> = ({
         <h4 className="text-base font-semibold text-gray-900 mb-2 capitalize transition-all duration-500 ">
           {label}
         </h4>
-        <p className="text-sm font-normal text-gray-500 transition-all duration-500 leading-5 mb-5">
+        <p className="font-normal text-gray-500 transition-all duration-500 mb-5 text-lg">
           {body}
         </p>
         {hideReadMore && (

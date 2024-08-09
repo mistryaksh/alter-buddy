@@ -28,9 +28,15 @@ import {
   UserLoginProps,
   UserRegisterProps,
 } from "../../../interface";
-import { getUserToken, removeUserToken, setUserToken } from "../../../utils";
+import {
+  getMentorToken,
+  getUserToken,
+  removeUserToken,
+  setUserToken,
+} from "../../../utils";
 import { AiOutlineLoading } from "react-icons/ai";
 import Aos from "aos";
+import { useNavigate } from "react-router-dom";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -99,6 +105,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
       // isSuccess: isNotificationSuccess,
     },
   ] = useLazyGetNotificationsQuery();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // setTimeout(() => {
@@ -242,7 +249,10 @@ export const MainLayout: FC<MainLayoutProps> = ({
   };
   useEffect(() => {
     Aos.init({});
-  }, []);
+    if (getMentorToken()?.length) {
+      navigate("/mentor/dashboard");
+    }
+  }, [navigate]);
 
   return (
     <div className="relative z-10">

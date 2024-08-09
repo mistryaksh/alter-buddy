@@ -4,7 +4,6 @@ import { IoMdCalendar } from "react-icons/io";
 import {
   AiOutlineClose,
   AiOutlineLoading,
-  AiOutlineMessage,
   AiOutlineSetting,
   AiOutlineVideoCamera,
 } from "react-icons/ai";
@@ -110,15 +109,11 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3">
       {!hideNavs && (
         <div className=" px-5 flex  xl:flex-col xl:items-center xl:justify-center">
-          <div className="flex xl:my-0 mb-5 xl:flex-col gap-5 items-center">
+          <div className="flex xl:my-0 mb-5 lg:flex-row xl:flex-col md:flex-row w-full justify-center gap-5 items-center">
             <IconLinkButton Icon={MdOutlineHome} path="/mentor/dashboard" />
             <IconLinkButton
               Icon={FiPhoneIncoming}
               path="/mentor/call-history"
-            />
-            <IconLinkButton
-              Icon={AiOutlineMessage}
-              path="/mentor/chat/messages"
             />
             <IconLinkButton Icon={IoMdCalendar} path="/mentor/schedules" />
             <IconLinkButton Icon={AiOutlineSetting} path="/mentor/settings" />
@@ -128,7 +123,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
           </div>
         </div>
       )}
-      <main className="bg-white overflow-y-scroll p-5 rounded-tl-3xl z-10 rounded-bl-3xl mx-3 flex-1 relative">
+      <main className="bg-primary-50 overflow-y-scroll p-5 rounded-tl-3xl z-10 rounded-bl-3xl flex-1 relative">
         {receivedCall && (
           <div className="absolute border rounded-lg p-3 bg-white right-10 w-[40%] z-[100] shadow-lg bottom-20">
             <div>
@@ -194,7 +189,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
             <p className="text-gray-500 text-2xl">Loading...</p>
           </div>
         ) : (
-          <section>{children}</section>
+          <section className="bg-primary-50 h-full p-3">{children}</section>
         )}
       </main>
     </div>

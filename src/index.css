@@ -119,3 +119,43 @@ video {
 .customContent {
   all: unset;
 }
+
+.react-calendar {
+  border: none !important;
+  background-color: transparent !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.react-calendar__tile--active {
+  background-color: theme("backgroundColor.primary.500") !important;
+  border-radius: theme("borderRadius.lg");
+}
+
+.react-calendar__tile {
+  font-size: theme("fontSize.2xl") !important;
+  height: theme("height.20") !important;
+  width: theme("width.20") !important;
+}
+.react-calendar__tile:hover {
+  border-radius: theme("borderRadius.lg") !important;
+}
+.has-slot-tile {
+  border: 1px solid theme("backgroundColor.primary.500") !important;
+  border-radius: theme("borderRadius.lg");
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  font-size: theme("fontSize.lg");
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.react-calendar__century-view .react-calendar__tile {
+  font-size: theme("fontSize.lg") !important;
+}
+
+.react-calendar__tile--now {
+  background-color: theme("textColor.gray.300") !important;
+  border-radius: theme("borderRadius.lg");
+}

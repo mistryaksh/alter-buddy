@@ -20,8 +20,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["'avnir', sans-serif"],
-        sans2: ["'avnir_bold', sans-serif"],
+        sans: ["'Libre Franklin', sans-serif"],
+        sans2: ["'Libre Franklin', sans-serif"],
         libre: ['"Libre Franklin", sans-serif'],
       },
     },

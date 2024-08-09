@@ -23,9 +23,9 @@ export const AppButton: FC<
         filled &&
           `bg-primary-500 hover:bg-primary-600 text-white disabled:bg-primary-300`,
         outlined &&
-          `border-2 border-primary-500 text-primary-500 hover:text-white hover:dark:bg-primary-600 text-sm hover:bg-primary-200 duration-150 disabled:border-opacity-50 disabled:hover:bg-gray-200 disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-500`,
+          `border-2 border-primary-500 text-primary-500 hover:text-white hover:dark:bg-primary-600 hover:bg-primary-200 duration-150 disabled:border-opacity-50 disabled:hover:bg-gray-200 disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-500`,
         flexed && `flex-1 w-full`,
-        `py-2 px-5 rounded-lg capitalize flex items-center gap-2 justify-center`,
+        `px-5 py-2 rounded-lg capitalize flex items-center gap-2 justify-center`,
         link && `text-primary-500 px-0 py-0`,
         "select-none"
       )}
@@ -39,7 +39,7 @@ export const AppButton: FC<
           color="#fff"
         />
       )}
-      {loading ? "please wait" : children}
+      {loading ? "Loading..." : children}
     </button>
   );
 };

@@ -138,7 +138,7 @@ export const UserMentorDetailsPage = () => {
         </title>
         <meta name="description" content="Helmet application" />
       </Helmet>
-      <div className="xl:px-10 px-5 py-10 border">
+      <div className="xl:px-10 px-5 pt-20 border">
         <div className="grid xl:grid-cols-12 grid-cols-12 items-start gap-20 justify-between flex-wrap">
           <div className="xl:col-span-8 col-span-12">
             <div className="flex gap-10 justify-between w-full items-center">
@@ -230,7 +230,7 @@ export const UserMentorDetailsPage = () => {
               </div>
             </div>
           </div>
-          <div className="xl:col-span-4 sticky top-0 col-span-12 shadow-xl border border-gray-300 p-5 rounded-lg">
+          <div className="xl:col-span-4 sticky top-0 col-span-12 shadow-xl border border-gray-300 p-5 rounded-lg mt-10">
             {slotData?.data.length !== 0 && (
               <div>
                 <p className="text-gray-500 my-2">

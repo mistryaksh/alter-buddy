@@ -10,6 +10,7 @@ import { handleAuthModal, useServicesSlice } from "../../../redux/features";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import Aos from "aos";
 import { useAppDispatch } from "../../../redux";
+import { useProfileUserQuery } from "../../../redux/rtk-api";
 
 interface MainNavBarProps {
   mobile: boolean;
@@ -31,6 +32,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
   navLoading,
 }) => {
   const dispatch = useAppDispatch();
+  const { data: profile } = useProfileUserQuery();
 
   useEffect(() => {
     Aos.init({});
@@ -57,14 +59,21 @@ export const MainNavBar: FC<MainNavBarProps> = ({
 
               <div className="xl:flex-1 hidden md:hidden w-full xl:flex xl:justify-end">
                 <ul className="flex items-center justify-end gap-5 w-full">
-                  <li className="bg-primary-500 px-5 py-2 rounded-md text-white">
-                    <a
-                      href="http://localhost:3001/"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Rant
-                    </a>
+                  <li
+                    className="bg-primary-500 px-5 py-2 rounded-md text-white"
+                    onClick={() => {
+                      if (profile?.data) {
+                        window.location.replace(
+                          `http://localhost:3001/rant?appToken=${localStorage.getItem(
+                            "USER_TOKEN"
+                          )}`
+                        );
+                      } else {
+                        dispatch(handleAuthModal());
+                      }
+                    }}
+                  >
+                    Rant
                   </li>
                   <li className="xl:text-md text-sm hover:text-primary-500">
                     <Link to="/about">About Us</Link>

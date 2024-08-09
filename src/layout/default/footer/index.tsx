@@ -27,20 +27,16 @@ export const MainFooter: FC<MainFooterProps> = () => {
       <div className="px-10">
         <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-8 py-10 ">
           <div className="col-span-full mb-10 2xl:col-span-2 lg:mb-0 flex items-center flex-col 2xl:items-start">
-            <a
-              href="https://pagedone.io/"
-              className="flex justify-center lg:justify-start"
-            >
+            <Link to="/" className="flex justify-center lg:justify-start">
               <AlterBuddyLogo />
-            </a>
+            </Link>
             <div className="flex items-center justify-between w-full max-w-xl mx-auto flex-col  2xl:flex-col 2xl:items-start">
-              {/* <p className="py-8 text-sm text-gray-500 lg:max-w-xs text-center lg:text-left">
-                Trusted in more than 100 countries & 5 million customers. Have
-                any query ?
-              </p> */}
+              <p className="py-0 text-gray-950 lg:max-w-xs text-center text-lg lg:text-left">
+                Your Alternate buddy to Alter Your Life
+              </p>
               <Link
                 to="/contact-us"
-                className="py-2.5 px-5 h-9 block w-fit bg-primary-600 rounded-full shadow-sm text-xs text-white mx-auto transition-all  duration-500 hover:bg-primary-700 lg:mx-0"
+                className="px-5 py-3 mt-5 block w-fit bg-primary-600 rounded-full shadow-sm text-md text-white mx-auto transition-all  duration-500 hover:bg-primary-700 lg:mx-0"
               >
                 {" "}
                 Contact us{" "}
@@ -52,14 +48,14 @@ export const MainFooter: FC<MainFooterProps> = () => {
               Our Services
             </h4>
             <ul className="text-sm  transition-all duration-500 ">
-              {pageContent.map(({ pageTitle }, i) => (
+              {pageContent.map(({ pageTitle, path }, i) => (
                 <li className="mb-3" key={i}>
-                  <a
-                    href={`/services/${pageTitle}`}
+                  <Link
+                    to={`/services/${path}`}
                     className="text-gray-600 capitalize hover:text-gray-900"
                   >
                     {pageTitle}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -126,9 +122,19 @@ export const MainFooter: FC<MainFooterProps> = () => {
         </div>
         <div className="py-7 border-t border-gray-200">
           <div className="flex items-center justify-center flex-col lg:justify-between lg:flex-row">
-            <span className="text-sm text-gray-500 ">
-              ©<a href="/">AlterBuddy</a> 2024, All rights reserved.
-            </span>
+            <div>
+              <span className="text-sm text-gray-500 ">
+                ©<a href="/">AlterBuddy</a> 2024, All rights reserved
+              </span>{" "}
+              |{" "}
+              <Link to="/privacy-policy" className="text-primary-500">
+                Terms & Condition
+              </Link>{" "}
+              |{" "}
+              <Link to="/privacy-policy" className="text-primary-500">
+                Privacy Policy
+              </Link>
+            </div>
             <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-0 ">
               <Link
                 to="#"
@@ -168,7 +174,7 @@ export const MainFooter: FC<MainFooterProps> = () => {
               <Link
                 target="_blank"
                 to="https://www.linkedin.com/company/alterbuddy/"
-                className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-primary-600"
+                className="w-9 h-9 rrnded-full bg-gray-700 flex justify-center items-center hover:bg-primary-600"
               >
                 <svg
                   className="w-[1rem] h-[1rem] text-white"

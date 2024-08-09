@@ -14,14 +14,14 @@ const CallApi = createApi({
       query: () => `/mentor/schedule`,
       providesTags: ["callApi"],
     }),
-    MentorCreateSchedule: mutation<{ data: string }, any>({
-      query: ({ slotsDate, time }: { time: string[]; slotsDate: string }) => {
+    MentorCreateSchedule: mutation<{ data: string }, IMentorCallScheduleProps>({
+      query: ({ slotsDate, slots }) => {
         return {
           url: `/mentor/schedule`,
           method: "POST",
           body: {
-            time: time,
-            slotsDate: slotsDate,
+            slots,
+            slotsDate,
           },
         };
       },

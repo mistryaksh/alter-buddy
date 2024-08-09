@@ -25,7 +25,7 @@ export const MentorCard: FC<MentorCardProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="border border-primary-500 p-3 rounded-lg bg-white shadow-xl">
+    <div className="border border-primary-500 p-3 rounded-lg bg-white shadow-primary-100 shadow-xl">
       <div className="flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3">
           <div className="object-cover w-[30%]">
@@ -64,7 +64,7 @@ export const MentorCard: FC<MentorCardProps> = ({
         >
           View more
         </AppButton>
-        <AppButton filled flexed>
+        <AppButton filled flexed disabled>
           Schedule now
         </AppButton>
       </div>
