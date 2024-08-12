@@ -1,3 +1,3 @@
 import { io } from "socket.io-client";
 
-export const socket = io(process.env.REACT_APP_SOCKET_SERVER as string);
+export const socket = io("http://localhost:8080" as string);

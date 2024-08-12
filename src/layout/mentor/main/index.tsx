@@ -1,14 +1,8 @@
-import React, { FC, ReactNode, useEffect } from "react";
-import { MdLogout, MdOutlineHome } from "react-icons/md";
+import React, { FC, ReactNode, useEffect, useState } from "react";
+import { MdLogout, MdMessage, MdOutlineHome } from "react-icons/md";
 import { IoMdCalendar } from "react-icons/io";
-import {
-  AiOutlineClose,
-  AiOutlineLoading,
-  AiOutlineSetting,
-  AiOutlineVideoCamera,
-} from "react-icons/ai";
-import { AiOutlinePhone } from "react-icons/ai";
-import { IconLinkButton } from "../../../component";
+import { AiOutlineLoading, AiOutlineSetting } from "react-icons/ai";
+import { AppButton, IconLinkButton } from "../../../component";
 import {
   useLazyGetUserByIdQuery,
   useMentorProfileQuery,
@@ -16,15 +10,11 @@ import {
 } from "../../../redux/rtk-api";
 import { useAppDispatch } from "../../../redux";
 import { FiPhoneIncoming } from "react-icons/fi";
-import { socket } from "../../../service";
-import {
-  handleMentorRoomCode,
-  handleReceiveCall,
-  useVideoCallSlice,
-} from "../../../redux/features";
+import { useVideoCallSlice } from "../../../redux/features";
 import { useNavigate } from "react-router-dom";
 import { removeMentorToken } from "../../../utils";
 import { toast } from "react-toastify";
+import { socket } from "../../../service";
 
 interface MentorLayoutProps {
   children: ReactNode;
@@ -37,13 +27,14 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   loading,
   hideNavs,
 }) => {
+  const [notification, setNotification] = useState<boolean>(false);
   const { data: mentor } = useMentorProfileQuery();
-  const [GetUser, { isError: isUserError, error: userError, data: user }] =
+  const [GetUser, { isError: isUserError, error: userError }] =
     useLazyGetUserByIdQuery();
   const [SignOut, { isError, error, data, isLoading, isSuccess }] =
     useMentorSignOutMutation();
   const dispatch = useAppDispatch();
-  const { receivedCall, mentorMeetingConfig } = useVideoCallSlice();
+  const { mentorMeetingConfig } = useVideoCallSlice();
   const navigate = useNavigate();
   useEffect(() => {
     if (isUserError) {
@@ -52,20 +43,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     if (isError) {
       console.log(error);
     }
-    socket.on("THROW_CALL_REQUEST", (data) => {
-      if (data.users.mentor === mentor?.data._id) {
-        console.log(data);
-        dispatch(handleReceiveCall(true));
-        dispatch(
-          handleMentorRoomCode({
-            roomCode: data?.sessionDetails?.roomCode?.mentor,
-            userName: data.users.user,
-            roomName: data.sessionDetails.roomName,
-            callType: data.sessionDetails.callType,
-          })
-        );
-      }
-    });
+
     if (mentorMeetingConfig?.requestedUser) {
       (async () => {
         await GetUser(mentorMeetingConfig?.requestedUser as string);
@@ -90,23 +68,35 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     data?.data,
   ]);
 
-  const AcceptCall = () => {
-    socket.emit("ACCEPT_CALL", mentorMeetingConfig.mentorRoomCode);
-    navigate(`/mentor/chat/${mentorMeetingConfig.mentorRoomCode}`, {
-      replace: true,
-    });
-  };
-
-  const DeclineCall = () => {
-    socket.emit("DECLINE_CALL", mentorMeetingConfig.mentorRoomCode);
-    dispatch(handleReceiveCall(false));
-  };
-
   const onSignOut = async () => {
     await SignOut();
   };
+
+  useEffect(() => {
+    socket.on("rantDataTransfer", (data) => {
+      console.log(data);
+      if (data) {
+        setNotification(true);
+      }
+    });
+  }, []);
+
+  const rantAccepted = () => {
+    socket.on("accepted", (roomId) => {
+      window.location.replace(`http://localhost:3001/rant/${roomId}`);
+    });
+    socket.emit("rantAccepted");
+  };
+
   return (
-    <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3">
+    <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3 relative">
+      <div className="absolute bottom-20 right-20 z-50">
+        {notification && (
+          <AppButton filled onClick={rantAccepted} type="button">
+            Accept Rant Request
+          </AppButton>
+        )}
+      </div>
       {!hideNavs && (
         <div className=" px-5 flex  xl:flex-col xl:items-center xl:justify-center">
           <div className="flex xl:my-0 mb-5 lg:flex-row xl:flex-col md:flex-row w-full justify-center gap-5 items-center">
@@ -116,6 +106,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
               path="/mentor/call-history"
             />
             <IconLinkButton Icon={IoMdCalendar} path="/mentor/schedules" />
+            <IconLinkButton Icon={MdMessage} path="/mentor/rant" />
             <IconLinkButton Icon={AiOutlineSetting} path="/mentor/settings" />
             <button type="button" onClick={onSignOut}>
               <MdLogout size={32} className="text-white" />
@@ -124,62 +115,6 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
         </div>
       )}
       <main className="bg-primary-50 overflow-y-scroll p-5 rounded-tl-3xl z-10 rounded-bl-3xl flex-1 relative">
-        {receivedCall && (
-          <div className="absolute border rounded-lg p-3 bg-white right-10 w-[40%] z-[100] shadow-lg bottom-20">
-            <div>
-              <div className="flex items-center justify-between">
-                <p className="text-2xl font-sans2">Call Notification</p>
-                <button onClick={() => dispatch(handleReceiveCall(false))}>
-                  <AiOutlineClose color="gray" />
-                </button>
-              </div>
-              <div className="flex my-3 items-center gap-3">
-                <img
-                  src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
-                  alt={user?.data.name.firstName}
-                  className="w-[10%]"
-                />
-                <p className="text-primary-500 text-xl">
-                  {user?.data.name.firstName} {user?.data.name.lastName}
-                </p>
-              </div>
-              <p className="text-gray-500 flex items-center gap-3">
-                Session Type{" "}
-                <span className="text-primary-500">
-                  {mentorMeetingConfig.callType === "video" && (
-                    <AiOutlineVideoCamera size={22} />
-                  )}
-                  {mentorMeetingConfig.callType === "audio" && (
-                    <AiOutlinePhone size={22} />
-                  )}
-                </span>
-              </p>
-              <div className="mt-3 flex justify-end gap-5 items-center">
-                <button
-                  onClick={DeclineCall}
-                  type="button"
-                  className="bg-red-300 rounded-md flex gap-3 items-center group transition-all duration-100 hover:bg-red-500 p-2"
-                >
-                  <AiOutlineClose
-                    size={25}
-                    className="group-hover:text-white"
-                  />
-                  <span className="mt-1 group-hover:text-white">Decline</span>
-                </button>
-                <button
-                  onClick={AcceptCall}
-                  type="button"
-                  className="bg-primary-300 rounded-md group transition-all duration-100 hover:bg-primary-500 p-2"
-                >
-                  <AiOutlinePhone
-                    size={25}
-                    className="group-hover:text-white"
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
         {loading && isLoading ? (
           <div className="flex justify-center items-center h-full w-full flex-col gap-10">
             <AiOutlineLoading

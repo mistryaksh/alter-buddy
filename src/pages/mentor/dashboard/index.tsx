@@ -99,7 +99,7 @@ export const MentorDashboardPage = () => {
                     <p>{moment(slotsDate).format("Do MMMM YYYY")}</p>
                   </div>
                   <div className="flex items-start gap-3 flex-wrap my-2">
-                    {slots.map(({ time, _id: slotId, booked, userId }, i) => {
+                    {slots.map(({ time, booked, userId }, i) => {
                       const main = moment(slotsDate).add(time, "minute");
                       return (
                         <div
