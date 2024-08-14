@@ -53,15 +53,15 @@ export const MainNavBar: FC<MainNavBarProps> = ({
               <div className="">
                 <Link to="/" className="flex flex-col items-center">
                   <AlterBuddyLogo />
-                  <p className="capitalize">Find Your life’s Brighter Side</p>
+                  <p className="capitalize">Find Your life's Brighter Side</p>
                 </Link>
               </div>
 
               <div className="xl:flex-1 hidden md:hidden w-full xl:flex xl:justify-end">
                 <ul className="flex items-center justify-end gap-5 w-full">
                   <li
-                    className="bg-primary-500 px-5 py-2 rounded-md text-white"
-                    onClick={(e) => {
+                    className="bg-primary-500 px-5 py-2 rounded-md text-white cursor-pointer"
+                    onClick={() => {
                       if (profile?.data) {
                         return window.location.replace(
                           `http://localhost:3001/rant?appToken=${localStorage.getItem(

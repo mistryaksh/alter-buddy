@@ -28,6 +28,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   hideNavs,
 }) => {
   const [notification, setNotification] = useState<boolean>(false);
+  const [chatRequest, setChatRequest] = useState<any>(null);
   const { data: mentor } = useMentorProfileQuery();
   const [GetUser, { isError: isUserError, error: userError }] =
     useLazyGetUserByIdQuery();
@@ -73,28 +74,42 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   };
 
   useEffect(() => {
-    socket.on("rantDataTransfer", (data) => {
-      console.log(data);
-      if (data) {
-        setNotification(true);
-      }
+    socket.on('receiveChatRequest', (data) => {
+      setChatRequest(data);
+      setNotification(true);
     });
+
+    return () => {
+      socket.off('receiveChatRequest');
+    };
   }, []);
 
   const rantAccepted = () => {
-    socket.on("accepted", (roomId) => {
-      window.location.replace(`http://localhost:3001/rant/${roomId}`);
-    });
-    socket.emit("rantAccepted");
+    if (chatRequest) {
+      socket.emit('acceptChat', { roomId: chatRequest.roomId, accepted: true }, () => {
+        console.log('Chat request accepted');
+        if (chatRequest.endAt) {
+          // Set timing for rant chat or audio
+          localStorage.setItem('endRantChatOrAudioAt', JSON.stringify(chatRequest.endAt));
+        }
+
+        setNotification(false);
+        window.location.replace(`http://localhost:3001/rant/chat?roomId=rant-chat-${chatRequest.roomId}&mentorToken=${localStorage.getItem(
+          "MENTOR_TOKEN"
+        )}`);
+      });
+    }
   };
 
   return (
     <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3 relative">
       <div className="absolute bottom-20 right-20 z-50">
         {notification && (
-          <AppButton filled onClick={rantAccepted} type="button">
-            Accept Rant Request
-          </AppButton>
+          <div className="animate__animated animate__bounceInRight">
+            <AppButton filled onClick={rantAccepted} type="button">
+              Accept Rant Request
+            </AppButton>
+          </div>
         )}
       </div>
       {!hideNavs && (

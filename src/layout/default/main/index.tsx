@@ -111,6 +111,11 @@ export const MainLayout: FC<MainLayoutProps> = ({
     // setTimeout(() => {
     //   setOfferModel(true);
     // }, 3000);
+    if (isNotificationError) {
+      console.log("Error", error);
+      return;
+    }
+
     if (authentication) {
       (async () => {
         await GetNotification();
