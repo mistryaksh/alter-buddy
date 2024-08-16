@@ -91,12 +91,11 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
         if (chatRequest.endAt) {
           // Set timing for rant chat or audio
           localStorage.setItem('endRantChatOrAudioAt', JSON.stringify(chatRequest.endAt));
+          setNotification(false);
+          window.location.replace(`http://localhost:3001/rant/chat?roomId=${chatRequest.roomId}&mentorToken=${localStorage.getItem(
+            "MENTOR_TOKEN"
+          )}&endAt=${chatRequest.endAt}`);
         }
-
-        setNotification(false);
-        window.location.replace(`http://localhost:3001/rant/chat?roomId=rant-chat-${chatRequest.roomId}&mentorToken=${localStorage.getItem(
-          "MENTOR_TOKEN"
-        )}`);
       });
     }
   };
