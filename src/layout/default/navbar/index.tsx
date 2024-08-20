@@ -61,7 +61,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                     onClick={() => {
                       if (profile?.data) {
                         return window.location.replace(
-                          `http://localhost:3001/rant?appToken=${localStorage.getItem(
+                          `https://rant-alterbudd.netlify.app/rant?appToken=${localStorage.getItem(
                             "USER_TOKEN"
                           )}`
                         );
