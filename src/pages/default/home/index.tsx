@@ -547,7 +547,7 @@ export const DefaultHome = () => {
             }}
             className="mySwiper mx-10"
           >
-            {mentor?.data.map(({ name, category, _id }) => (
+            {mentor?.data?.map(({ name, category, _id }) => (
               <SwiperSlide
                 className="h-[450px] flex flex-col justify-between items-stretch rounded-md"
                 key={_id}
@@ -561,11 +561,11 @@ export const DefaultHome = () => {
                     {name?.firstName} {name?.lastName}
                   </h6>
                   <p className="uppercase text-gray-500 my-5">
-                    {
-                      (category as ICategoryProps[]).map((prop) => {
-                        return prop.title;
-                      }) as unknown as string
-                    }
+                    {category?.length
+                      ? ((category as ICategoryProps[])?.map((prop) => {
+                          return prop?.title;
+                        }) as any)
+                      : (category as unknown as ICategoryProps)?.title}
                   </p>
                   <div className="flex justify-end items-center gap-5 w-full">
                     <AppButton

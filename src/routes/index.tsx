@@ -58,8 +58,8 @@ export const AppRoutes = () => {
           <Route path="payment" element={<UserPaymentStatus />} />
         </Route>
       </Route>
+      <Route path="/mentor/login" element={<MentorLoginPage />} />
       <Route path="mentor">
-        <Route path="login" element={<MentorLoginPage />} />
         <Route element={<MentorPrivateRoutes />}>
           <Route path="dashboard" element={<MentorDashboardPage />} />
           <Route path="call-history" element={<MentorCallHistoryPage />} />
