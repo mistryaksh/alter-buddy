@@ -4,3 +4,4 @@ export * from "./cards";
 export * from "./modal";
 export * from "./user-authentication";
 export * from "./auth";
+export * from "./tabs";

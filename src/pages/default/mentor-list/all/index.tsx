@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { MainLayout } from "../../../../layout";
 import {
   useGetAllCategoryQuery,
@@ -9,15 +10,16 @@ import { handleError } from "../../../../redux/features";
 import { MentorCard } from "../../../../component";
 import { useParams } from "react-router-dom";
 import clsx from "clsx";
+import { ICategoryProps } from "../../../../interface";
 
 export const AllMentorsPage = () => {
   const { id } = useParams();
   const [filter, setFilter] = useState<string>("all");
   const {
-    data: subCategory,
-    isError: isSubCategoryError,
-    error: subCategoryError,
-    isLoading: isSubCategoryLoading,
+    data: category,
+    isError: isCategoryError,
+    error: categorError,
+    isLoading: isCategoryLoading,
   } = useGetAllCategoryQuery();
 
   const {
@@ -29,11 +31,11 @@ export const AllMentorsPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isSubCategoryError) {
-      if ((subCategoryError as any).data) {
-        dispatch(handleError((subCategoryError as any).data.message));
+    if (isCategoryError) {
+      if ((categorError as any).data) {
+        dispatch(handleError((categorError as any).data.message));
       } else {
-        console.log(subCategoryError);
+        console.log(categorError);
       }
     }
     if (isMentorError) {
@@ -43,24 +45,22 @@ export const AllMentorsPage = () => {
         console.log(mentorError);
       }
     }
-  }, [
-    isSubCategoryError,
-    subCategoryError,
-    isMentorError,
-    mentorError,
-    dispatch,
-    id,
-  ]);
+  }, [isCategoryError, categorError, isMentorError, mentorError, dispatch, id]);
+
+  const categoryIds = category?.data.map((cat) => cat._id);
 
   return (
-    <MainLayout loading={isMentorLoading || isSubCategoryLoading}>
+    <MainLayout loading={isMentorLoading || isCategoryLoading}>
       <div className="bg-gradient-to-t from-white via-white  to-primary-200">
         <div className=" py-20">
           <div className="container mx-auto xl:w-[65%] w-[95%] lg:w-[60%] shadow-xl px-10 bg-white rounded-md py-10">
             <div className="flex flex-wrap-reverse items-center gap-10">
               <div className="flex-1 flex flex-col gap-3">
                 <h1 className="text-5xl capitalize font-bold">
-                  Talk to your <span className="text-primary-500">buddy</span>
+                  Talk to your{" "}
+                  <span className="text-primary-500">
+                    {filter === "all" ? "Mentor" : filter}
+                  </span>
                 </h1>
                 <p className="text-gray-500">
                   Feeling lonely, anxious? Relationship problems? Let us help
@@ -88,7 +88,9 @@ export const AllMentorsPage = () => {
               >
                 <p className="capitalize">All</p>
               </div>
-              {subCategory?.data
+              {category?.data
+                .slice()
+                .sort((a, b) => a.title.localeCompare(b.title))
                 .map(({ _id, title }) => (
                   <div
                     key={_id}
@@ -102,37 +104,46 @@ export const AllMentorsPage = () => {
                   >
                     <p className="capitalize">{title}</p>
                   </div>
-                ))
-                .sort((a: any, b: any) => {
-                  if (a.title < b.title) {
-                    return -1;
-                  }
-                  if (a.title > b.title) {
-                    return 1;
-                  }
-                  return 0;
-                })}
+                ))}
             </div>
           </div>
           <div className="container mx-auto xl:px-0 lg:px-0 px-5">
             <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-10">
               {(mentor?.data.length as number) > 0 &&
                 mentor?.data
-                  .filter((props) => {
+                  .filter((item) => {
                     if (filter === "all") {
-                      return props;
-                    } else {
-                      return filter === props?.category?.title;
+                      return true; // No filtering
                     }
+                    // Filter by category if filter is set
+                    return item.category.some(
+                      (cat) =>
+                        categoryIds.includes(cat._id) && cat.title === filter
+                    );
                   })
                   .map(
-                    ({ name, accountStatus, category, specialists, _id }) => (
+                    ({
+                      name,
+                      accountStatus,
+                      category,
+                      specialists,
+                      _id,
+                      image,
+                    }) => (
                       <MentorCard
                         key={_id}
-                        expertise={category?.title}
+                        expertise={
+                          (category as ICategoryProps[]).map((prop) => {
+                            return prop.title;
+                          }) as unknown as string
+                        }
                         fname={name.firstName}
                         lname={name.lastName}
-                        image="https://static.wixstatic.com/media/413494fe1952433685bef1305e765971.jpg/v1/fill/w_574,h_646,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Personal%20Trainer.jpg"
+                        image={
+                          image
+                            ? image
+                            : "https://qph.cf2.quoracdn.net/main-qimg-5b495cdeb2ebb79cff41634e5f9ea076"
+                        }
                         specialist={specialists}
                         verified={accountStatus.verification}
                         id={_id as string}

@@ -12,3 +12,4 @@ export {
 export * from "./contact";
 export * from "./about";
 export * from "./team";
+export * from "./payment";

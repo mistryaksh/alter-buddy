@@ -1,31 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../../layout";
 import {
-  useGetMySessionsQuery,
   useProfileUserQuery,
+  useUpdateUserProfileMutation,
 } from "../../../redux/rtk-api";
-import { RootState, useAppDispatch } from "../../../redux";
-import {
-  handleCallFilter,
-  handleChatDetails,
-  handleError,
-} from "../../../redux/features";
-import { Tab } from "@headlessui/react";
-import clsx from "clsx";
-import { AppButton, TextField } from "../../../component";
-import { Link } from "react-router-dom";
-import {
-  AiOutlineMessage,
-  AiOutlinePhone,
-  AiOutlineVideoCamera,
-} from "react-icons/ai";
-import moment from "moment";
-import { useSelector } from "react-redux";
-import { MdOutlinePlaylistRemove } from "react-icons/md";
+import { useAppDispatch } from "../../../redux";
+import { handleError } from "../../../redux/features";
+import { AppButton, AppTabs, TextField } from "../../../component";
 
-const tabs = ["profile", "my Sessions", "my wallet", "my orders", "settings"];
+import { Formik } from "formik";
+import { UserProps } from "../../../interface";
+import { toast } from "react-toastify";
+import {
+  useGetMyTransactionQuery,
+  useGetMyWalletQuery,
+  useRechargeWalletMutation,
+} from "../../../redux/rtk-api/buddy-coin.api";
+import moment from "moment";
+import clsx from "clsx";
+import { AiOutlineClockCircle } from "react-icons/ai";
 
 export const UserProfilePage = () => {
+  const [selectedTab, setSelectedTab] = useState<number>(0);
+  const [amount, setAmount] = useState<number>();
   const {
     data: profile,
     isError: isProfileError,
@@ -33,15 +30,33 @@ export const UserProfilePage = () => {
     error: profileError,
   } = useProfileUserQuery();
   const {
-    data: session,
-    isError: isSessionError,
-    error: sessionError,
-    isLoading: isSessionLoading,
-  } = useGetMySessionsQuery();
+    data: transactions,
+    isError: isTransactionError,
+    error: transactionError,
+  } = useGetMyTransactionQuery();
+  const [
+    UpdateProfile,
+    {
+      isError: isUpdateError,
+      error: updateError,
+      data: updateData,
+      isLoading: isUpdateLoading,
+      isSuccess: isUpdateSuccess,
+    },
+  ] = useUpdateUserProfileMutation();
+  const { data: wallet } = useGetMyWalletQuery();
+  const [
+    RechargeWallet,
+    {
+      isError: isRechargeError,
+      error: rechargeError,
+      data: rechargeData,
+      isLoading: isRechargeLoading,
+      isSuccess: isRechargeSuccess,
+    },
+  ] = useRechargeWalletMutation();
+
   const dispatch = useAppDispatch();
-  const { selectedCallDetails, callFilter } = useSelector(
-    (state: RootState) => state.user
-  );
 
   useEffect(() => {
     if (isProfileError) {
@@ -51,291 +66,371 @@ export const UserProfilePage = () => {
         console.log(profileError);
       }
     }
-    if (isSessionError) {
-      if ((sessionError as any).data) {
-        dispatch(handleError((sessionError as any).data.message));
+  }, [isProfileError, profileError, dispatch]);
+
+  useEffect(() => {
+    if (isTransactionError) {
+      console.log(transactionError);
+    }
+  }, [isTransactionError, transactionError]);
+
+  useEffect(() => {
+    if (isUpdateError) {
+      if ((updateError as any)?.data) {
+        dispatch(handleError((updateError as any).data.message));
       } else {
-        console.log(sessionError);
+        console.log(updateError);
       }
     }
-  }, [
-    isProfileError,
-    profileError,
-    dispatch,
-    isSessionError,
-    sessionError,
-    session?.data,
-    selectedCallDetails,
-  ]);
+  }, [isUpdateError, updateError, dispatch]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success(updateData?.data);
+    }
+  }, [isUpdateSuccess, updateData?.data]);
+
+  useEffect(() => {
+    if (isRechargeError) {
+      console.log(rechargeError);
+      const error = rechargeError as any;
+      if (error.data) {
+        toast.error(error.data.message);
+      } else {
+        toast.error(error);
+      }
+    }
+  }, [isRechargeError, rechargeError]);
+
+  const handleSubmit = async (prop: any) => {
+    await UpdateProfile({ ...prop });
+  };
+
+  const handleUpdatePassword = async ({
+    confirmNewPassword,
+    newPassword,
+  }: {
+    newPassword: string;
+    confirmNewPassword: string;
+  }) => {
+    if (newPassword !== confirmNewPassword) {
+      toast.warn("both password should be same");
+    } else {
+      await UpdateProfile({ password: confirmNewPassword });
+    }
+  };
+
+  const RenewWallet = async () => {
+    // await RechargeWallet()
+    if (!amount) {
+      toast.warn("please enter amount");
+    } else {
+      await RechargeWallet(amount);
+    }
+  };
+
+  useEffect(() => {
+    if (isRechargeSuccess) {
+      toast.success(rechargeData?.data.message);
+      window.location.replace(rechargeData.data.razorPay.short_url);
+    }
+  }, [isRechargeSuccess, rechargeData]);
+
+  const UserProfile = (
+    <div>
+      <h6 className="text-2xl">My Profile</h6>
+      <Formik
+        enableReinitialize
+        onSubmit={handleSubmit}
+        initialValues={
+          {
+            name: {
+              firstName: profile?.data.name.firstName || "",
+              lastName: profile?.data.name.lastName || "",
+            },
+            email: profile?.data.email || "",
+            mobile: profile?.data.mobile || "",
+          } as UserProps
+        }
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleBlur,
+          handleChange,
+          handleSubmit,
+        }) => (
+          <form className="mt-5 space-y-5" onSubmit={handleSubmit}>
+            <div className="flex gap-5 flex-wrap xl:flex-nowrap">
+              <TextField
+                outlined
+                label="First Name"
+                value={values.name.firstName}
+                onChange={handleChange("name.firstName")}
+                onBlur={handleBlur("name.firstName")}
+                touched={touched.firstName as boolean}
+                error={errors.firstName as string}
+              />
+              <TextField
+                outlined
+                label="Last Name"
+                value={values.name.lastName}
+                onChange={handleChange("name.lastName")}
+                onBlur={handleBlur("name.lastName")}
+                touched={touched.lastName as boolean}
+                error={errors.lastName as string}
+              />
+            </div>
+            <div>
+              <TextField
+                outlined
+                label="Email Address"
+                value={values.email}
+                onChange={handleChange("email")}
+                onBlur={handleBlur("email")}
+                touched={touched.email as boolean}
+                error={errors.email as string}
+              />
+            </div>
+            <div>
+              <TextField
+                outlined
+                label="Mobile Number"
+                value={values.mobile}
+                onChange={handleChange("mobile")}
+                onBlur={handleBlur("mobile")}
+                touched={touched.mobile as boolean}
+                error={errors.mobile as string}
+              />
+            </div>
+            <div className="flex justify-end gap-5">
+              <AppButton onClick={() => setSelectedTab(4)}>
+                Update Password
+              </AppButton>
+              <AppButton type="submit" outlined loading={isUpdateLoading}>
+                Save Changes
+              </AppButton>
+            </div>
+          </form>
+        )}
+      </Formik>
+    </div>
+  );
+
+  const amountOption = [100, 200, 500, 800, 1000];
+  const BuddyCoins = (
+    <div className="space-y-3">
+      <div className="mx-auto w-[60%] bg-white overflow-hidden mt-10">
+        <div className="px-6 py-4">
+          <h1 className="text-2xl text-gray-800">
+            BuddyCoin{" "}
+            <span className="text-primary-500 font-semibold">Wallet</span>
+          </h1>
+          <div className="flex items-start justify-between mt-4">
+            <div>
+              <h2 className="text-lg text-gray-600">Coins</h2>
+              <p className="text-3xl font-bold text-black">
+                {wallet?.data.balance}
+              </p>
+            </div>
+            <p className="text-gray-500 text-sm uppercase flex items-center gap-3">
+              <AiOutlineClockCircle size={24} />{" "}
+              {moment(wallet?.data.updatedAt).format("LLLL")}
+            </p>
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                RenewWallet();
+              }}
+            >
+              <div className="flex justify-end mt-5 gap-10">
+                <div className="gap-10 flex items-center">
+                  <TextField
+                    type="number"
+                    outlined
+                    placeholder="Enter Amount"
+                    value={amount}
+                    onChange={(e) =>
+                      setAmount(parseInt(e.target.value) as number)
+                    }
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                >
+                  {isRechargeLoading ? "Redirecting..." : "Recharge"}
+                </button>
+              </div>
+            </form>
+
+            <div className="flex items-center gap-3 mt-5">
+              {amountOption.map((selectedAmount) => (
+                <button
+                  className={clsx(
+                    amount === selectedAmount &&
+                      "focus:ring-2 focus:ring-primary-500 bg-primary-100 ",
+                    "py-2 rounded-md px-5 bg-gray-100"
+                  )}
+                  onClick={() => setAmount(selectedAmount)}
+                >
+                  {selectedAmount}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+  const Activity = <div>Activity</div>;
+  const Transactions = (
+    <div>
+      <h6 className="text-2xl font-semibold">
+        Buddy Coin <span className="text-primary-500">Transactions</span>
+      </h6>
+      <h6 className="text-xl text-gray-500">
+        Hey! Your BuddyCoins Transactions are here
+      </h6>
+      {!transactions?.data.length && (
+        <div>
+          <p>No transaction found</p>
+        </div>
+      )}
+      {transactions?.data.length && (
+        <div className="space-y-5 w-[60%]">
+          {transactions?.data.map(
+            (
+              { transactionType, creditAmt, debitAmt, status, createdAt },
+              i
+            ) => (
+              <div className="bg-white rounded-md p-3 flex justify-between items-center">
+                <div>
+                  <p key={i} className="text-lg capitalize cursor-pointer">
+                    {transactionType ? transactionType : "N/A"}
+                  </p>
+                  <p className="text-gray-500 text-sm">
+                    {moment(createdAt).format("LLL")}
+                  </p>
+                </div>
+                <div>
+                  {creditAmt && (
+                    <p className="text-green-500 text-xl">+{creditAmt}</p>
+                  )}
+                  {debitAmt && (
+                    <p className="text-red-500 text-xl">-{debitAmt}</p>
+                  )}
+                  {status === "success" && (
+                    <p className="bg-green-500 text-white px-3 py-1 uppercase rounded-lg">
+                      {status}
+                    </p>
+                  )}
+                  {status === "failed" && (
+                    <p className="bg-red-500">{status}</p>
+                  )}
+                </div>
+              </div>
+            )
+          )}
+        </div>
+      )}
+    </div>
+  );
+  const Security = (
+    <div>
+      <Formik
+        onSubmit={handleUpdatePassword}
+        initialValues={{ confirmNewPassword: "", newPassword: "" }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleBlur,
+          handleChange,
+          handleSubmit,
+        }) => (
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <h6 className="text-3xl">
+                Account <span className="text-primary-500">Security</span>
+              </h6>
+              <p className="text-gray-500">
+                We are encrypt your password so no one misuse even they got the
+                password
+              </p>
+            </div>
+            <div className="mt-5">
+              <TextField
+                outlined
+                value={values.newPassword}
+                onChange={handleChange("newPassword")}
+                onBlur={handleBlur("newPassword")}
+                touched={touched.newPassword}
+                error={errors.newPassword}
+                label="Enter New Password"
+                placeholder="New Password Must be 12 character long"
+              />
+            </div>
+            <div>
+              <TextField
+                outlined
+                value={values.confirmNewPassword}
+                onChange={handleChange("confirmNewPassword")}
+                onBlur={handleBlur("confirmNewPassword")}
+                touched={touched.confirmNewPassword}
+                error={errors.confirmNewPassword}
+                label="Confirm New Password"
+                placeholder="Type your new password again"
+              />
+            </div>
+            <div className="flex justify-end">
+              <AppButton onClick={() => setSelectedTab(0)} type="button">
+                Change Profile Details
+              </AppButton>
+              <AppButton type="submit" filled>
+                Change Password
+              </AppButton>
+            </div>
+          </form>
+        )}
+      </Formik>
+    </div>
+  );
 
   return (
-    <MainLayout loading={isProfileLoading || isSessionLoading}>
-      <div className="p-3 my-10 mt-20 pt-20">
-        <div className="xl:w-[90%] mx-auto  bg-white">
-          <div className="border p-3">
-            <Tab.Group>
-              <Tab.List className="flex items-center gap-10">
-                {({ selectedIndex }) => (
-                  <>
-                    {tabs.map((element, i) => (
-                      <Tab
-                        key={i}
-                        className={clsx(
-                          selectedIndex === i
-                            ? " border-primary-500 text-primary-500"
-                            : "border-transparent",
-                          "border-t-2 uppercase pt-1 font-sans2 xl:text-md text-sm focus:outline-none"
-                        )}
-                      >
-                        {element}
-                      </Tab>
-                    ))}
-                  </>
-                )}
-              </Tab.List>
-              <Tab.Panels className="h-[60vh] overflow-y-scroll">
-                <Tab.Panel>
-                  <div className="py-10 flex flex-col gap-10 xl:w-[80%] mx-auto">
-                    <div className="">
-                      <h6 className="text-2xl font-sans2 capitalize group-hover:text-primary-500">
-                        Update or{" "}
-                        <span className="text-primary-500">
-                          share your profile
-                        </span>
-                      </h6>
-                      <p className="text-sm text-gray-500">
-                        Registered On -{" "}
-                        {moment(profile?.data.createdAt).format(
-                          "Do MMM YYYY hh:mm A"
-                        )}
-                      </p>
-                    </div>
-                    <div className="flex gap-3 items-center">
-                      <TextField
-                        label="First Name"
-                        value={profile?.data.name.firstName}
-                      />
-                      <TextField
-                        label="Last Name"
-                        value={profile?.data.name.lastName}
-                      />
-                    </div>
-                    <div>
-                      <TextField label="email" value={profile?.data.email} />
-                    </div>
-                    <div>
-                      <TextField label="mobile" value={profile?.data.mobile} />
-                    </div>
-                    <Link
-                      to="/forgot-password"
-                      className="underline  text-primary-500"
-                    >
-                      Forgot your password?
-                    </Link>
-                    <div>
-                      <AppButton outlined>Save changes</AppButton>
-                    </div>
-                  </div>
-                </Tab.Panel>
-                <Tab.Panel>
-                  <div className="my-5 flex items-center justify-between">
-                    <div>
-                      <h6 className="text-2xl capitalize text-gray-900 font-sans2">
-                        Your{" "}
-                        <span className="text-primary-500">
-                          session history
-                        </span>
-                      </h6>
-                      <p className="text-gray-500">
-                        This is visible only to you! you can report if any issue
-                        are being followed!
-                      </p>
-                    </div>
-                    <div>
-                      <ul className="flex gap-3">
-                        <button
-                          onClick={() => dispatch(handleCallFilter("all"))}
-                          className={clsx(
-                            callFilter === "all" && "text-primary-500"
-                          )}
-                        >
-                          All
-                        </button>
-                        <button
-                          className={clsx(
-                            callFilter === "video" && "text-primary-500"
-                          )}
-                          onClick={() => dispatch(handleCallFilter("video"))}
-                        >
-                          Video
-                        </button>
-                        <button
-                          className={clsx(
-                            callFilter === "audio" && "text-primary-500"
-                          )}
-                          onClick={() => dispatch(handleCallFilter("audio"))}
-                        >
-                          Audio
-                        </button>
-                        <button
-                          className={clsx(
-                            callFilter === "chat" && "text-primary-500"
-                          )}
-                          onClick={() => dispatch(handleCallFilter("chat"))}
-                        >
-                          Chat
-                        </button>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="">
-                    <div className="grid grid-cols-12 gap-4">
-                      <div className="col-span-12 xl:col-span-8 lg:col-span-8 md:col-span-8 sm:col-span-12">
-                        <div className="space-y-4">
-                          {session?.data.map(
-                            (
-                              {
-                                users,
-                                sessionDetails: { callType },
-                                createdAt,
-                              },
-                              i
-                            ) => (
-                              <div
-                                key={i}
-                                onClick={() =>
-                                  dispatch(
-                                    handleChatDetails({
-                                      name: `${users.mentor.name.firstName} ${users.mentor.name.lastName}`,
-                                      callType: callType as any,
-                                      time: createdAt?.toString() as string,
-                                      _id: users.mentor._id as string,
-                                    })
-                                  )
-                                }
-                                className="border p-3 flex items-center justify-between rounded-lg group cursor-pointer hover:bg-primary-50 duration-200 hover:border-primary-500"
-                              >
-                                <div>
-                                  <h6 className="text-md font-sans2 capitalize group-hover:text-primary-500">
-                                    {users?.mentor?.name.firstName}{" "}
-                                    {users?.mentor?.name.lastName}
-                                  </h6>
-                                  <p className="text-sm text-gray-500">
-                                    {moment(createdAt).format(
-                                      "Do MMM YYYY hh:mm A"
-                                    )}
-                                  </p>
-                                </div>
-                                <button>
-                                  {callType === "audio" && (
-                                    <AiOutlinePhone size={26} />
-                                  )}
-                                  {callType === "video" && (
-                                    <AiOutlineVideoCamera size={26} />
-                                  )}
-                                  {callType === "chat" && (
-                                    <AiOutlineMessage size={26} />
-                                  )}
-                                </button>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </div>
-                      <div className="col-span-12 xl:col-span-4 lg:col-span-4 md:col-span-4 sm:col-span-12">
-                        {selectedCallDetails && (
-                          <div className="bg-gray-100 p-3  w-full top-0 border">
-                            <h5 className="font-sans2 text-gray-500 text-xl">
-                              Selected Call Details
-                            </h5>
-                            <div className="flex items-center gap-4">
-                              <h6 className="text-xl text-gray-500 capitalize">
-                                Mentor - {selectedCallDetails?.name}
-                              </h6>
-                            </div>
-                            <p className="text-sm">
-                              Last Session with this Mentor{" "}
-                              {moment(selectedCallDetails?.time).format(
-                                "Do MMM YYYY hh:mm A"
-                              )}
-                            </p>
-                            <button className="my-3 bg-white p-3 rounded-lg">
-                              {selectedCallDetails?.callType === "audio" && (
-                                <AiOutlinePhone size={26} />
-                              )}
-                              {selectedCallDetails?.callType === "video" && (
-                                <AiOutlineVideoCamera size={26} />
-                              )}
-                              {selectedCallDetails?.callType === "chat" && (
-                                <AiOutlineMessage size={26} />
-                              )}
-                            </button>
-                            <div className="space-y-4 px-2 bg-white mt-3 sticky h-[50vh] overflow-y-scroll">
-                              <h5 className="font-sans2 text-gray-500 text-xl">
-                                All session with this mentor
-                              </h5>
-                              <div className="space-y-4">
-                                {session?.data
-                                  .filter(
-                                    (props) =>
-                                      (props?.users?.mentor?._id as string) ===
-                                      (selectedCallDetails?._id as string)
-                                  )
-                                  .map(
-                                    ({
-                                      sessionDetails: { callType },
-                                      createdAt,
-                                      status,
-                                      _id,
-                                    }) => (
-                                      <div
-                                        key={_id}
-                                        className="flex items-center justify-between border px-3 py-2 rounded-md"
-                                      >
-                                        <p>
-                                          {moment(createdAt).format(
-                                            "Do MMM YYYY hh:mm A"
-                                          )}
-                                        </p>
-                                        <div className="flex items-center gap-3">
-                                          <p className="text-sm">{status}</p>
-                                          {callType === "audio" && (
-                                            <AiOutlinePhone size={26} />
-                                          )}
-                                          {callType === "video" && (
-                                            <AiOutlineVideoCamera size={26} />
-                                          )}
-                                          {callType === "chat" && (
-                                            <AiOutlineMessage size={26} />
-                                          )}
-                                        </div>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                        {!selectedCallDetails && (
-                          <div className="flex flex-col items-center justify-center gap-2">
-                            <MdOutlinePlaylistRemove size={300} />
-                            <h6>Select call details to expanded view</h6>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </Tab.Panel>
-                <Tab.Panel>Content 3</Tab.Panel>
-                <Tab.Panel>Content 3</Tab.Panel>
-                <Tab.Panel>
-                  <div className="py-5">
-                    <h1 className="text-2xl">Settings</h1>
-                  </div>
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-          </div>
+    <MainLayout loading={isProfileLoading} hideNav={false}>
+      <div className="p-3 mt-24 xl:container mx-auto">
+        <div className="xl:mt-10">
+          <AppTabs
+            selectedTab={selectedTab}
+            setSelectedTab={setSelectedTab}
+            tabs={[
+              {
+                Component: UserProfile,
+                label: "profile",
+              },
+              {
+                Component: BuddyCoins,
+                label: "Buddy Coins",
+              },
+              {
+                Component: Activity,
+                label: "Activity",
+              },
+              {
+                Component: Transactions,
+                label: "Transactions",
+              },
+              {
+                Component: Security,
+                label: "Security",
+              },
+            ]}
+          />
         </div>
       </div>
     </MainLayout>

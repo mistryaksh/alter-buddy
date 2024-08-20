@@ -13,7 +13,6 @@ import {
 } from "../../../component";
 import {
   handleAgeGroupSelection,
-  handleAuthModal,
   handleFaq,
   useAuthenticationSlice,
   useFaqSlice,
@@ -23,21 +22,19 @@ import {
 import { useAppDispatch } from "../../../redux";
 import clsx from "clsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import {
-  useGetAllSubCategoryQuery,
-  useGetMentorsListQuery,
-} from "../../../redux/rtk-api";
-import { getUserToken } from "../../../utils";
+import { useGetMentorsListQuery } from "../../../redux/rtk-api";
 import { AiOutlinePhone } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Aos from "aos";
 import { MdStarPurple500 } from "react-icons/md";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { ICategoryProps } from "../../../interface";
 
 export const DefaultHome = () => {
   const { active } = useFaqSlice();
@@ -47,33 +44,14 @@ export const DefaultHome = () => {
   const { howWeWish, FAQ } = useServicesSlice();
   const navigate = useNavigate();
 
-  const {
-    // data: subCategory,
-    isError: isSubCategoryError,
-    isLoading: isSubCategoryLoading,
-    error: subCategoryError,
-  } = useGetAllSubCategoryQuery();
-
   const dispatch = useAppDispatch();
 
-  const localStore = getUserToken();
   useEffect(() => {
     Aos.init({});
-    if (isSubCategoryError) {
-      console.log(subCategoryError);
-      // dispatch(handleError((subCategoryError as any).data));
-    }
-  }, [
-    authentication,
-    dispatch,
-    isSubCategoryError,
-    subCategoryError,
-
-    localStore,
-  ]);
+  }, []);
 
   return (
-    <MainLayout loading={isSubCategoryLoading}>
+    <MainLayout>
       <div
         data-aos="fade-up"
         className={clsx(
@@ -114,7 +92,7 @@ export const DefaultHome = () => {
               <div
                 onClick={() => {
                   if (!authentication) {
-                    dispatch(handleAuthModal());
+                    navigate("/sign-in");
                   } else {
                     navigate("/mentor/list");
                   }
@@ -208,7 +186,7 @@ export const DefaultHome = () => {
           <AppButton
             onClick={() => {
               if (!authentication) {
-                dispatch(handleAuthModal());
+                navigate("/sign-in");
               } else {
                 navigate("/mentor/list");
               }
@@ -283,7 +261,7 @@ export const DefaultHome = () => {
           filled
           onClick={() => {
             if (!authentication) {
-              dispatch(handleAuthModal());
+              navigate("/sign-in");
             } else {
               navigate("/mentor/list");
             }
@@ -337,14 +315,16 @@ export const DefaultHome = () => {
         </p>
         <div className="w-full xl:grid px-3 gap-y-10 xl:grid-cols-12 gap-10 mt-20 items-stretch lg:grid-cols-6 md:grid-cols-12">
           {helpPoints.map(({ body, image, label, path }, i) => (
-            <div className="xl:col-span-3 md:col-span-2 col-span-12 xl:mt-0">
+            <div
+              className="xl:col-span-3 md:col-span-2 col-span-12 xl:mt-0"
+              key={i}
+            >
               <ServicesCard
                 hideReadMore
                 body={body}
                 image={image}
                 label={label}
                 path={path}
-                key={i}
               />
             </div>
           ))}
@@ -518,7 +498,7 @@ export const DefaultHome = () => {
           className="text-md text-primary-500 cursor-pointer"
           onClick={() => {
             if (!authentication) {
-              dispatch(handleAuthModal());
+              navigate("/sign-in");
             } else {
               navigate("/mentor/list");
             }
@@ -528,73 +508,6 @@ export const DefaultHome = () => {
         </p>
       </div>
 
-      {/* <div data-aos="fade-up" className="">
-        <div className="container mx-auto pt-20">
-          <h6 className="text-4xl capitalize text-center font-sans2">
-            Hear from{" "}
-            <span className="text-primary-500 font-semibold">Our clients</span>
-          </h6>
-          <p className="font-extralight text-center text-md text-gray-500 my-5">
-            You do not have to take our word for it. Read through the
-            testimonials of users who transformed themselves with the guidance
-            of Alterbuddy Experts.
-          </p>
-        </div>
-        <div
-          data-aos="fade-up"
-          className="flex gap-5 relative px-10 overflow-x-scroll items-center no-scrollbar"
-        >
-          <div className="w-[400px]">
-            <TestimonialsCard
-              body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
-              user="Samantha Smith"
-            />
-          </div>
-          <div className="w-[400px]">
-            <TestimonialsCard
-              body="AlterBuddy helped me find the perfect therapist who understood my needs and supported me through a difficult time in my life."
-              user="Robert Cooper"
-            />
-          </div>
-          <div className="w-[400px]">
-            <TestimonialsCard
-              body="The self-care tools provided by AlterBuddy have been a game-changer for me. I feel more in control of my mental health now."
-              user="Robert Rose"
-            />
-          </div>
-          <div className="w-[400px]">
-            <TestimonialsCard
-              body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
-              user=" Samantha Smith"
-            />
-          </div>
-          <div className="w-[400px]">
-            <TestimonialsCard
-              body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
-              user="Samantha Smith"
-            />
-          </div>
-          <div className="w-[400px]">
-            <TestimonialsCard
-              body="AlterBuddy helped me find the perfect therapist who understood my needs and supported me through a difficult time in my life."
-              user="Robert Cooper"
-            />
-          </div>
-          <div className="w-[400px]">
-            <TestimonialsCard
-              body="The self-care tools provided by AlterBuddy have been a game-changer for me. I feel more in control of my mental health now."
-              user="Robert Rose
-"
-            />
-          </div>
-          <div className="w-[400px]">
-            <TestimonialsCard
-              body="I was hesitant to try online therapy but AlterBuddy made it easy and convenient for me. I highly recommend it."
-              user=" Samantha Smith"
-            />
-          </div>
-        </div>
-      </div> */}
       {/* section three */}
       <div data-aos="fade-up" className="container mx-auto w-[80%] mt-20">
         <h6 className="text-4xl capitalize text-center font-semibold font-sans2">
@@ -608,6 +521,8 @@ export const DefaultHome = () => {
           <Swiper
             slidesPerView={1}
             spaceBetween={10}
+            autoplay
+            modules={[Autoplay]}
             pagination={{
               clickable: true,
             }}
@@ -633,7 +548,10 @@ export const DefaultHome = () => {
             className="mySwiper mx-10"
           >
             {mentor?.data.map(({ name, category, _id }) => (
-              <SwiperSlide className="h-[450px] flex flex-col justify-between items-stretch">
+              <SwiperSlide
+                className="h-[450px] flex flex-col justify-between items-stretch rounded-md"
+                key={_id}
+              >
                 <img
                   src="https://img.freepik.com/premium-photo/portrait-confident-male-doctor-standing-with-arms-crossed-hospital-corridor-ai-generated_632984-111.jpg"
                   alt=""
@@ -643,10 +561,13 @@ export const DefaultHome = () => {
                     {name?.firstName} {name?.lastName}
                   </h6>
                   <p className="uppercase text-gray-500 my-5">
-                    {category?.title}
+                    {
+                      (category as ICategoryProps[]).map((prop) => {
+                        return prop.title;
+                      }) as unknown as string
+                    }
                   </p>
-                  <div className="flex justify-between items-center gap-5 w-full">
-                    <AppButton outlined>Book Session</AppButton>
+                  <div className="flex justify-end items-center gap-5 w-full">
                     <AppButton
                       onClick={() => navigate(`/user/mentor/details/${_id}`)}
                       filled

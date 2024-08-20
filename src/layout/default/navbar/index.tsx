@@ -2,42 +2,39 @@ import React, { FC, Fragment, useEffect } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
-import { ICategoryProps, ISubCategoryProps } from "../../../interface";
+import { ICategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
-import { handleAuthModal, useServicesSlice } from "../../../redux/features";
+import { useServicesSlice } from "../../../redux/features";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import Aos from "aos";
-import { useAppDispatch } from "../../../redux";
 import { useProfileUserQuery } from "../../../redux/rtk-api";
+import { toast } from "react-toastify";
 
 interface MainNavBarProps {
   mobile: boolean;
   handleMenu: () => void;
-  authModal: () => void;
   authenticated: boolean;
   logout: () => void;
   navLoading?: boolean;
-  subCategory: ISubCategoryProps[];
   category: ICategoryProps[];
 }
 
 export const MainNavBar: FC<MainNavBarProps> = ({
   handleMenu,
   mobile,
-  authModal,
   authenticated,
   logout,
   navLoading,
 }) => {
-  const dispatch = useAppDispatch();
   const { data: profile } = useProfileUserQuery();
 
   useEffect(() => {
     Aos.init({});
   }, []);
   const { pageContent } = useServicesSlice();
+  const navigate = useNavigate();
   return (
     <div
       data-aos="fade-in"
@@ -69,7 +66,8 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                           )}`
                         );
                       } else {
-                        dispatch(handleAuthModal());
+                        toast.warn("please login first");
+                        navigate("/sign-in");
                       }
                     }}
                   >
@@ -148,7 +146,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
 
                   {!authenticated ? (
                     <div
-                      onClick={() => dispatch(handleAuthModal())}
+                      onClick={() => navigate("/sign-in")}
                       className="text-primary-500 capitalize cursor-pointer font-sans2"
                     >
                       Login
@@ -301,7 +299,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                 </li>
                 {!authenticated ? (
                   <li
-                    onClick={authModal}
+                    onClick={() => navigate}
                     className="cursor-pointer xl:text-md font-libre text-sm hover:text-primary-500"
                   >
                     Login

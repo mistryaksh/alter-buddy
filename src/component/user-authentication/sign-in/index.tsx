@@ -8,30 +8,23 @@ import {
   SignInValidationSchema,
 } from "../../../validation";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../redux";
-import { handleAuthModal } from "../../../redux/features";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 interface SignInBodyProps {
-  viewSwitcher: () => void;
   loginFunc: ({ mobile, password }: UserLoginProps) => void;
   loading?: boolean;
-  error: string | null;
 }
 
-export const SignInBody: FC<SignInBodyProps> = ({
-  viewSwitcher,
-  loginFunc,
-  error,
-  loading,
-}) => {
+export const SignInBody: FC<SignInBodyProps> = ({ loginFunc, loading }) => {
   const [accept, setAccept] = useState<boolean>(false);
 
   const handlePrivacyAccept = () => {
     setAccept(!accept);
   };
 
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [password, showPassword] = useState<boolean>(false);
+
   return (
     <div className="flex flex-col items-center gap-5 mx-auto w-[60%] h-full justify-center">
       <AuthModalBody
@@ -39,7 +32,7 @@ export const SignInBody: FC<SignInBodyProps> = ({
         header={{
           btnLabel: "create account",
           title: "Not have an account?",
-          switcher: viewSwitcher,
+          switcher: () => navigate("/sign-up"),
         }}
       >
         {/* {error?.length && <p className="text-red-500 uppercase text-center">{error}</p>} */}
@@ -62,22 +55,30 @@ export const SignInBody: FC<SignInBodyProps> = ({
                   value={values.mobile}
                   onChange={handleChange("mobile")}
                   onBlur={handleBlur("mobile")}
-                  placeholder="1234567890"
-                  label="Enter mobile"
-                  type="number"
+                  placeholder="Mobile Number / Email Address"
+                  label="Enter email / mobile"
                   error={errors.mobile}
                   touched={touched.mobile}
                 />
-                <TextField
-                  placeholder="choose secure password"
-                  label="enter password"
-                  type="password"
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  onBlur={handleBlur("password")}
-                  error={errors.password}
-                  touched={touched.password}
-                />
+                <div className="flex items-center">
+                  <TextField
+                    placeholder="choose secure password"
+                    label="enter password"
+                    type={!password ? "password" : "text"}
+                    value={values.password}
+                    onChange={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                    error={errors.password}
+                    touched={touched.password}
+                  />
+                  <button type="button" onClick={() => showPassword(!password)}>
+                    {password ? (
+                      <AiOutlineEyeInvisible size={24} />
+                    ) : (
+                      <AiOutlineEye size={24} />
+                    )}
+                  </button>
+                </div>
               </div>
               <div className="flex gap-3 items-center pl-3 py-3">
                 <input
@@ -92,7 +93,6 @@ export const SignInBody: FC<SignInBodyProps> = ({
                   Accept{" "}
                   <span
                     onClick={() => {
-                      dispatch(handleAuthModal());
                       navigate("/privacy-policy");
                     }}
                     className="underline text-primary-500 cursor-pointer"
@@ -102,7 +102,6 @@ export const SignInBody: FC<SignInBodyProps> = ({
                   &{" "}
                   <span
                     onClick={() => {
-                      dispatch(handleAuthModal());
                       navigate("/privacy-policy");
                     }}
                     className="underline text-primary-500 cursor-pointer"
@@ -111,15 +110,22 @@ export const SignInBody: FC<SignInBodyProps> = ({
                   </span>
                 </label>
               </div>
-              <AppButton
-                disabled={!accept}
-                loading={loading}
-                type="submit"
-                filled
-                flexed
-              >
-                Continue to login
-              </AppButton>
+              <div className="mt-4">
+                <AppButton
+                  disabled={!accept}
+                  loading={loading}
+                  type="submit"
+                  filled
+                  flexed
+                >
+                  Continue to login
+                </AppButton>
+              </div>
+              <div className="mt-4">
+                <AppButton flexed type="button">
+                  Back to Home
+                </AppButton>
+              </div>
             </form>
           )}
         </Formik>

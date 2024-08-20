@@ -7,7 +7,6 @@ import {
   DefaultHome,
   MentorLoginPage,
   MobileVerificationPage,
-  SingleCategoryPage,
   UserProfilePage,
   MentorDashboardPage,
   UserMentorDetailsPage,
@@ -22,6 +21,9 @@ import {
   RantPage,
   MentorCallHistoryPage,
   SchedulesMentorPage,
+  UserPaymentStatus,
+  SignInPage,
+  SignUpPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 
@@ -29,6 +31,8 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<DefaultHome />} />
+      <Route path="/sign-in" element={<SignInPage />} />
+      <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/our-team" element={<TeamPage />} />
       <Route path="/contact-us" element={<ContactPage />} />
@@ -42,7 +46,6 @@ export const AppRoutes = () => {
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/mentor/category/:id" element={<AllMentorsPage />} />
       <Route path="/mobile-verification" element={<MobileVerificationPage />} />
-      <Route path="/category/:id" element={<SingleCategoryPage />} />
       <Route path="/coming-soon" element={<ComingSoonPage />} />
       <Route path="user">
         <Route element={<UserPrivateRoutes />}>
@@ -52,6 +55,7 @@ export const AppRoutes = () => {
           />
           <Route path="buddytube" element={<BuddyTubePage />} />
           <Route path="my-profile" element={<UserProfilePage />} />
+          <Route path="payment" element={<UserPaymentStatus />} />
         </Route>
       </Route>
       <Route path="mentor">

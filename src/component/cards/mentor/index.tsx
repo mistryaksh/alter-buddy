@@ -25,17 +25,17 @@ export const MentorCard: FC<MentorCardProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="border border-primary-500 p-3 rounded-lg bg-white shadow-primary-100 shadow-xl">
+    <div className="p-3 rounded-lg bg-white shadow-primary-100 shadow-xl">
       <div className="flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3">
           <div className="object-cover w-[30%]">
-            <img src={image} alt={fname + lname} className="rounded-full" />
+            <img src={image} alt={fname + lname} className="rounded-lg" />
           </div>
-          <div>
+          <div className="flex-1">
             <p className="text-2xl font-semibold capitalize">
               {lname} {fname}
             </p>
-            {specialist.join(", ")}
+            {specialist?.join(", ")}
             <div className="flex items-center">
               <MdStarRate size={20} className="text-yellow-500" />
               <MdStarRate size={20} className="text-yellow-500" />
@@ -64,7 +64,7 @@ export const MentorCard: FC<MentorCardProps> = ({
         >
           View more
         </AppButton>
-        <AppButton filled flexed disabled>
+        <AppButton filled flexed>
           Schedule now
         </AppButton>
       </div>

@@ -1,4 +1,4 @@
-import { ICategoryProps, ISubCategoryProps } from "./category.interface";
+import { ICategoryProps } from "./category.interface";
 
 interface IMentorNameProps {
   firstName: string;
@@ -26,18 +26,18 @@ export interface IMentorProps {
   name: IMentorNameProps;
   contact: IMentorContactProps;
   auth: IMentorAuthProps;
-  category: ICategoryProps;
+  category: ICategoryProps[] | string[];
+  specialists: string[];
   accountStatus: IMentorAccountStatus;
   acType: "MENTOR";
-  subCategory: ISubCategoryProps[];
-  specialists: string[];
-  _id?: string;
-  createdAt?: string;
-  updatedAt?: string;
   inCall?: boolean;
   videoLink?: string;
   description?: string;
-  roomName: string;
+  image: string;
+  languages: string[];
+  _id?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ITopMentorProps {

@@ -1,11 +1,10 @@
 import React from "react";
 import { MainLayout } from "../../../../layout";
 import { AppButton } from "../../../../component";
-import { handleAuthModal } from "../../../../redux/features";
-import { useAppDispatch } from "../../../../redux";
+import { useNavigate } from "react-router-dom";
 
 export const ManifestationPage = () => {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const desirePoints: string[] = [
     "✔ Living With Your Loving Soulmate",
@@ -122,7 +121,7 @@ export const ManifestationPage = () => {
           </div>
         </div>
         <div className="py-5">
-          <AppButton onClick={() => dispatch(handleAuthModal())} outlined>
+          <AppButton onClick={() => navigate("/sign-in")} outlined>
             TALK TO US NOW!
           </AppButton>
         </div>
@@ -159,7 +158,7 @@ export const ManifestationPage = () => {
           </div>
         </div>
         <div className="py-10">
-          <AppButton onClick={() => dispatch(handleAuthModal())} outlined>
+          <AppButton onClick={() => navigate("/sign-in")} outlined>
             TALK TO US NOW!
           </AppButton>
         </div>
@@ -185,7 +184,7 @@ export const ManifestationPage = () => {
           <p className="font-extrabold">THIS IS WHAT WE CALL MANIFESTING.</p>
         </div>
         <div className="py-10">
-          <AppButton onClick={() => dispatch(handleAuthModal())} outlined>
+          <AppButton onClick={() => navigate("/sign-in")} outlined>
             TALK TO US NOW!
           </AppButton>
         </div>

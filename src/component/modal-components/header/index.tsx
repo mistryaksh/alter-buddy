@@ -1,22 +1,25 @@
 import React, { FC } from "react";
 
 interface AuthModalHeaderProps {
-     title: string;
-     subTitle?: string;
-     btn: {
-          label: string;
-          switcher?: (btnType: string | null) => void;
-     };
+  title: string;
+  subTitle?: string;
+  btnText: string;
+  action: () => void;
 }
 
-export const AuthModalHeader: FC<AuthModalHeaderProps> = ({ title, subTitle, btn }) => {
-     const { label, switcher } = btn;
-     return (
-          <div className="flex gap-2 justify-center w-full">
-               <span className="capitalize">{title}</span>{" "}
-               <button className="text-primary-500 capitalize" onClick={switcher as unknown as any}>
-                    {label}
-               </button>
-          </div>
-     );
+export const AuthModalHeader: FC<AuthModalHeaderProps> = ({
+  title,
+  action,
+  btnText,
+  subTitle,
+}) => {
+  return (
+    <div className="flex gap-2 justify-center w-full">
+      <span className="capitalize text-center">{title}</span>{" "}
+      {subTitle && <span className="capitalize">{subTitle}</span>}
+      <button className="text-primary-500 capitalize" onClick={action}>
+        {btnText}
+      </button>
+    </div>
+  );
 };

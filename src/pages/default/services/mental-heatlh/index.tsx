@@ -1,11 +1,10 @@
 import React from "react";
 import { MainLayout } from "../../../../layout";
 import { AppButton } from "../../../../component";
-import { useAppDispatch } from "../../../../redux";
-import { handleAuthModal } from "../../../../redux/features";
+import { useNavigate } from "react-router-dom";
 
 export const MentalHealthPage = () => {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const helpPoint: string[] = [
     "Anxiety",
@@ -199,7 +198,12 @@ export const MentalHealthPage = () => {
           </div>
         </div>
         <div className="py-10">
-          <AppButton onClick={() => dispatch(handleAuthModal())} outlined>
+          <AppButton
+            onClick={() => {
+              navigate("/sign-in");
+            }}
+            outlined
+          >
             TALK TO US NOW!
           </AppButton>
         </div>
@@ -269,7 +273,12 @@ export const MentalHealthPage = () => {
           <p className="text-lg">- Brene Brown</p>
         </div>
         <div className="py-10">
-          <AppButton onClick={() => dispatch(handleAuthModal())} outlined>
+          <AppButton
+            onClick={() => {
+              navigate("/sign-in");
+            }}
+            outlined
+          >
             TALK TO US NOW!
           </AppButton>
         </div>

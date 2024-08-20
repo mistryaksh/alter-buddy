@@ -1,10 +1,8 @@
-import React, { FC, ReactNode, useCallback, useEffect, useState } from "react";
+import React, { FC, ReactNode, useEffect, useState } from "react";
 
 import { MainNavBar, MainFooter } from "../";
 import clsx from "clsx";
 import {
-  handleAuthModal,
-  handleAuthModalView,
   handleError,
   handleMobileMenu,
   handleUserAuthentication,
@@ -13,27 +11,13 @@ import {
   useLayoutSlice,
 } from "../../../redux/features";
 import { useAppDispatch } from "../../../redux";
-import { AuthModel } from "../../../component";
 import {
   useGetAllCategoryQuery,
-  useGetAllSubCategoryQuery,
   useLazyGetNotificationsQuery,
-  useLoginUserMutation,
   useLogoutUserMutation,
-  useRegisterUserMutation,
 } from "../../../redux/rtk-api";
-import {
-  ICategoryProps,
-  ISubCategoryProps,
-  UserLoginProps,
-  UserRegisterProps,
-} from "../../../interface";
-import {
-  getMentorToken,
-  getUserToken,
-  removeUserToken,
-  setUserToken,
-} from "../../../utils";
+import { ICategoryProps } from "../../../interface";
+import { getMentorToken, getUserToken, removeUserToken } from "../../../utils";
 import { AiOutlineLoading } from "react-icons/ai";
 import Aos from "aos";
 import { useNavigate } from "react-router-dom";
@@ -49,17 +33,12 @@ export const MainLayout: FC<MainLayoutProps> = ({
   hideNav,
   loading,
 }) => {
-  const { mobileMenu, authModal, modalView, error } = useLayoutSlice();
+  const { mobileMenu, error } = useLayoutSlice();
   const [offerModel, setOfferModel] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { authentication } = useAuthenticationSlice();
   const localStore = getUserToken();
-  const {
-    data: subCategory,
-    isError: isSubCategoryError,
-    isLoading: isSubCategoryLoading,
-    error: subCategoryError,
-  } = useGetAllSubCategoryQuery();
+
   const {
     data: category,
     isError: isCategoryError,
@@ -75,26 +54,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
       error: logoutError,
     },
   ] = useLogoutUserMutation();
-  const [
-    LoginApi,
-    {
-      isError: isLoginError,
-      error: loginError,
-      isLoading: isLoginLoading,
-      isSuccess: isLoginSuccess,
-      data: loginData,
-    },
-  ] = useLoginUserMutation();
-  const [
-    RegisterApi,
-    {
-      isError: isRegisterError,
-      error: registerError,
-      isLoading: isRegisterLoading,
-      isSuccess: isRegisterSuccess,
-      data: registerData,
-    },
-  ] = useRegisterUserMutation();
+
   const [
     GetNotification,
     {
@@ -121,25 +81,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
         await GetNotification();
       })();
     }
-    if (isLoginError) {
-      if ((loginError as any)?.data) {
-        dispatch(handleError((loginError as any).data.message));
-      } else {
-        console.log(loginError);
-      }
-    }
-    if (isRegisterError) {
-      if ((registerError as any)?.data) {
-        dispatch(handleError((registerError as any).data.message));
-      } else {
-        console.log(registerError);
-      }
-    }
-    if (isSubCategoryError) {
-      if ((subCategoryError as any)?.data) {
-        dispatch(handleError((subCategoryError as any).data.message));
-      }
-    }
+
     if (isCategoryError) {
       if ((categoryError as any)?.data) {
         dispatch(handleError((categoryError as any).data.message));
@@ -157,35 +99,16 @@ export const MainLayout: FC<MainLayoutProps> = ({
         dispatch(handleError((notificationError as any).data.message));
       }
     }
-    if (isLoginSuccess) {
-      dispatch(handleError(null));
-      setUserToken(loginData?.data.token as string);
-      if (localStore) {
-        dispatch(
-          handleUserAuthentication({
-            token: loginData?.data.token as string,
-          })
-        );
-      }
-    }
+
     // if (isNotificationSuccess) {
     //   console.log("NOTIFICATION", notificationData?.data);
     // }
-    if (isRegisterSuccess) {
-      dispatch(handleError(null));
-      setUserToken(registerData?.data.token as string);
-      if (localStore) {
-        dispatch(
-          handleUserAuthentication({
-            token: loginData?.data.token as string,
-          })
-        );
-      }
-    }
+
     if (isLogoutSuccess) {
       dispatch(handleUserLogout());
       dispatch(handleError(null));
       removeUserToken();
+      navigate("/", { replace: true });
     }
     if (localStorage.getItem("USER_TOKEN")) {
       dispatch(
@@ -197,61 +120,26 @@ export const MainLayout: FC<MainLayoutProps> = ({
     window.scrollTo(0, 0);
   }, [
     dispatch,
-    isLoginError,
-    loginError,
-    isRegisterError,
-    registerError,
-    isLoginSuccess,
-    isRegisterSuccess,
-    loginData,
-    registerData,
     localStore,
     isLogoutError,
     logoutError,
     isLogoutSuccess,
-    isSubCategoryError,
-    subCategoryError,
     isCategoryError,
     categoryError,
+    navigate,
     isNotificationError,
     notificationError,
     // isNotificationSuccess,
     notificationData?.data,
     GetNotification,
     authentication,
+    error,
   ]);
 
-  const LoginFunc = useCallback(
-    async ({ mobile, password }: UserLoginProps) => {
-      await LoginApi({ mobile, password });
-    },
-    [LoginApi]
-  );
-
-  const RegisterFunc = async ({
-    email,
-    fname,
-    lname,
-    mobile,
-    password,
-  }: UserRegisterProps) => {
-    await RegisterApi({ email, fname, lname, mobile, password });
-  };
   const LogoutFunc = async () => {
     return LogoutApi();
   };
 
-  const viewSwitcher = (btnType: string | null) => {
-    if (btnType === "onboard") {
-      dispatch(handleAuthModalView("signin"));
-    }
-    if (btnType === "signin") {
-      dispatch(handleAuthModalView("signup"));
-    }
-    if (btnType === "signup") {
-      dispatch(handleAuthModalView("signin"));
-    }
-  };
   useEffect(() => {
     Aos.init({});
     if (getMentorToken()?.length) {
@@ -264,11 +152,9 @@ export const MainLayout: FC<MainLayoutProps> = ({
       {!hideNav && (
         <MainNavBar
           category={category?.data as ICategoryProps[]}
-          subCategory={subCategory?.data as ISubCategoryProps[]}
           navLoading={isLogoutLoading}
           logout={LogoutFunc}
           authenticated={authentication}
-          authModal={() => dispatch(handleAuthModal())}
           mobile={mobileMenu}
           handleMenu={() => dispatch(handleMobileMenu())}
         />
@@ -284,10 +170,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
         data-aos="fade-in"
         className={clsx(!hideNav && "mt-20", "relative", "z-10")}
       >
-        {loading &&
-        isSubCategoryLoading &&
-        isCategoryLoading &&
-        isNotificationLoading ? (
+        {loading && isCategoryLoading && isNotificationLoading ? (
           <div className="flex h-[300px] justify-center items-center w-full">
             <AiOutlineLoading
               size={150}
@@ -353,17 +236,6 @@ export const MainLayout: FC<MainLayoutProps> = ({
       )}
 
       {!hideNav && <MainFooter />}
-      {!authentication && authModal && (
-        <AuthModel
-          loading={isLoginLoading || isRegisterLoading}
-          error={error}
-          loginFunc={LoginFunc}
-          registerFunc={RegisterFunc}
-          viewSwitcher={() => viewSwitcher(modalView)}
-          viewType={modalView}
-          modalHandler={() => dispatch(handleAuthModal())}
-        />
-      )}
     </div>
   );
 };

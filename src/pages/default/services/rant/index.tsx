@@ -1,11 +1,10 @@
 import React from "react";
 import { MainLayout } from "../../../../layout";
 import { AppButton } from "../../../../component";
-import { handleAuthModal } from "../../../../redux/features";
-import { useAppDispatch } from "../../../../redux";
+import { useNavigate } from "react-router-dom";
 
 export const RantPage = () => {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const understandPoint: string[] = [
     "Overwhelming Stress",
@@ -109,7 +108,12 @@ export const RantPage = () => {
           </p>
         </div>
         <div className="py-10">
-          <AppButton onClick={() => dispatch(handleAuthModal())} outlined>
+          <AppButton
+            onClick={() => {
+              navigate("/sign-in");
+            }}
+            outlined
+          >
             FEEL FREE TO CONNECT WITH US
           </AppButton>
         </div>
@@ -165,7 +169,12 @@ export const RantPage = () => {
           </div>
         </div>
         <div className="py-10 flex justify-center">
-          <AppButton onClick={() => dispatch(handleAuthModal())} outlined>
+          <AppButton
+            onClick={() => {
+              navigate("/sign-in");
+            }}
+            outlined
+          >
             FEEL FREE TO CONNECT WITH US
           </AppButton>
         </div>

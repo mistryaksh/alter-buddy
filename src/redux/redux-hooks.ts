@@ -37,6 +37,10 @@ import {
   UserReducer,
   VideoCallReducer,
 } from "./features";
+import {
+  BuddyCoinsApiMiddleware,
+  BuddyCoinsApiReducer,
+} from "./rtk-api/buddy-coin.api";
 
 export const AppMiddlewares: Middleware[] = [
   AuthenticationMiddleware,
@@ -51,6 +55,7 @@ export const AppMiddlewares: Middleware[] = [
   NotificationApiMiddleware,
   ChatApiMiddleware,
   TeamApiMiddleware,
+  BuddyCoinsApiMiddleware,
 ];
 export const AppReducers = combineReducers({
   //! APP API REDUCER
@@ -66,6 +71,7 @@ export const AppReducers = combineReducers({
   notificationApi: NotificationApiReducer,
   mentorChatApi: ChatApiReducer,
   teamApi: TeamApiReducer,
+  buddyCoinApi: BuddyCoinsApiReducer,
 
   //! DEFAULT APP REDUCERS
   layout: LayoutReducer,
