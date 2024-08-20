@@ -9,9 +9,9 @@ export const ApiBaseQuery = (baseQuery?: (headers: Headers) => void) => {
 };
 
 export const baseQueryUser = (headers: Headers) => {
-  headers.set("Authorization", getUserToken() || `{}`);
+  headers.set("Authorization", getUserToken() || null);
 };
 
 export const baseQueryMentor = (headers: Headers) => {
-  headers.set("Authorization", getMentorToken() || `{}`);
+  headers.set("Authorization", getMentorToken() || null);
 };

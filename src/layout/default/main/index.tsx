@@ -110,7 +110,7 @@ export const MainLayout: FC<MainLayoutProps> = ({
       removeUserToken();
       navigate("/", { replace: true });
     }
-    if (localStorage.getItem("USER_TOKEN")) {
+    if (localStorage?.getItem("USER_TOKEN")) {
       dispatch(
         handleUserAuthentication({
           token: localStore as string,
