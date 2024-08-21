@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { MainLayout } from "../../../layout";
 import { useValidateWalletMutation } from "../../../redux/rtk-api/buddy-coin.api";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -11,6 +11,7 @@ export const UserPaymentStatus = () => {
   const payamentLinkId = param.get("razorpay_payment_id");
   const linkStatus = param.get("razorpay_payment_link_status");
   const navigate = useNavigate();
+  const hasValidated = useRef(false);
 
   useEffect(() => {
     if (isError) {
@@ -19,22 +20,22 @@ export const UserPaymentStatus = () => {
   }, [isError, error]);
 
   useEffect(() => {
-    if (payamentLinkId) {
-      (async () => {
-        await ValidateRecharge(payamentLinkId);
-      })();
-    }
-  }, [payamentLinkId, ValidateRecharge]);
-
-  useEffect(() => {
     if (isSuccess) {
       toast.success(data?.data.message);
-      // toast.success(data?.data.payment.)
       setInterval(() => {
         navigate("/user/my-profile", { replace: true });
       }, 3000);
     }
   }, [isSuccess, data?.data.message, navigate]);
+
+  useEffect(() => {
+    if (payamentLinkId && !hasValidated.current) {
+      hasValidated.current = true; // Mark as validated to prevent multiple calls
+      (async () => {
+        await ValidateRecharge(payamentLinkId);
+      })();
+    }
+  }, [payamentLinkId, ValidateRecharge]);
 
   return (
     <MainLayout hideNav>

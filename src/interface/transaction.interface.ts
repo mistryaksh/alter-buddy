@@ -9,6 +9,7 @@ export interface ITransactionProps {
   walletId: IBuddyCoins;
   transactionType: string;
   status: "success" | "failed";
+  transactionId: string;
   createdAt?: string;
   updatedAt?: string;
   _id?: string;

@@ -74,29 +74,40 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   };
 
   useEffect(() => {
-    socket.on('receiveChatRequest', (data) => {
+    socket.on("receiveChatRequest", (data) => {
       setChatRequest(data);
       setNotification(true);
     });
 
     return () => {
-      socket.off('receiveChatRequest');
+      socket.off("receiveChatRequest");
     };
   }, []);
 
   const rantAccepted = () => {
     if (chatRequest) {
-      socket.emit('acceptChat', { roomId: chatRequest.roomId, accepted: true }, () => {
-        console.log('Chat request accepted');
-        if (chatRequest.endAt) {
-          // Set timing for rant chat or audio
-          localStorage.setItem('endRantChatOrAudioAt', JSON.stringify(chatRequest.endAt));
-          setNotification(false);
-          window.location.replace(`http://localhost:3001/rant/chat?roomId=${chatRequest.roomId}&mentorToken=${localStorage.getItem(
-            "MENTOR_TOKEN"
-          )}&endAt=${chatRequest.endAt}`);
+      socket.emit(
+        "acceptChat",
+        { roomId: chatRequest.roomId, accepted: true },
+        () => {
+          console.log("Chat request accepted");
+          if (chatRequest.endAt) {
+            // Set timing for rant chat or audio
+            localStorage.setItem(
+              "endRantChatOrAudioAt",
+              JSON.stringify(chatRequest.endAt)
+            );
+            setNotification(false);
+            window.location.replace(
+              `https://rant-alterbudd.netlify.app/rant/audio?roomId=${
+                chatRequest.roomId
+              }&mentorToken=${localStorage.getItem("MENTOR_TOKEN")}&endAt=${
+                chatRequest.endAt
+              }`
+            );
+          }
         }
-      });
+      );
     }
   };
 
