@@ -99,7 +99,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
             );
             setNotification(false);
             window.location.replace(
-              `https://rant-alterbudd.netlify.app/rant/audio?roomId=${
+              `https://rant-alterbudd.netlify.app/rant/chat?roomId=${
                 chatRequest.roomId
               }&mentorToken=${localStorage.getItem("MENTOR_TOKEN")}&endAt=${
                 chatRequest.endAt
