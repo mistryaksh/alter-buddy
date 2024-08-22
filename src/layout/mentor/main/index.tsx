@@ -28,7 +28,6 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   hideNavs,
 }) => {
   const [notification, setNotification] = useState<boolean>(false);
-  const [chatRequest, setChatRequest] = useState<any>(null);
   const { data: mentor } = useMentorProfileQuery();
   const [GetUser, { isError: isUserError, error: userError }] =
     useLazyGetUserByIdQuery();
@@ -75,53 +74,20 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
 
   useEffect(() => {
     socket.on("receiveChatRequest", (data) => {
-      setChatRequest(data);
-      setNotification(true);
+      if (data) {
+        localStorage.setItem('chatRequestData', JSON.stringify(data));
+        setNotification(true);
+      }
     });
 
     return () => {
       socket.off("receiveChatRequest");
+      setNotification(false);
     };
   }, []);
 
-  const rantAccepted = () => {
-    if (chatRequest) {
-      socket.emit(
-        "acceptChat",
-        { roomId: chatRequest.roomId, accepted: true },
-        () => {
-          console.log("Chat request accepted");
-          if (chatRequest.endAt) {
-            // Set timing for rant chat or audio
-            localStorage.setItem(
-              "endRantChatOrAudioAt",
-              JSON.stringify(chatRequest.endAt)
-            );
-            setNotification(false);
-            window.location.replace(
-              `https://rant-alterbudd.netlify.app/rant/chat?roomId=${
-                chatRequest.roomId
-              }&mentorToken=${localStorage.getItem("MENTOR_TOKEN")}&endAt=${
-                chatRequest.endAt
-              }`
-            );
-          }
-        }
-      );
-    }
-  };
-
   return (
     <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3 relative">
-      <div className="absolute bottom-20 right-20 z-50">
-        {notification && (
-          <div className="animate__animated animate__bounceInRight">
-            <AppButton filled onClick={rantAccepted} type="button">
-              Accept Rant Request
-            </AppButton>
-          </div>
-        )}
-      </div>
       {!hideNavs && (
         <div className=" px-5 flex  xl:flex-col xl:items-center xl:justify-center">
           <div className="flex xl:my-0 mb-5 lg:flex-row xl:flex-col md:flex-row w-full justify-center gap-5 items-center">
@@ -131,7 +97,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
               path="/mentor/call-history"
             />
             <IconLinkButton Icon={IoMdCalendar} path="/mentor/schedules" />
-            <IconLinkButton Icon={MdMessage} path="/mentor/rant" />
+            <IconLinkButton Icon={MdMessage} path="/mentor/rant" isHighlighted={notification} />
             <IconLinkButton Icon={AiOutlineSetting} path="/mentor/settings" />
             <button type="button" onClick={onSignOut}>
               <MdLogout size={32} className="text-white" />
