@@ -24,6 +24,7 @@ import {
   UserPaymentStatus,
   SignInPage,
   SignUpPage,
+  MentorRantPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 
@@ -65,6 +66,7 @@ export const AppRoutes = () => {
           <Route path="call-history" element={<MentorCallHistoryPage />} />
           <Route path="schedules" element={<SchedulesMentorPage />} />
           <Route path="settings" element={<MentorSettingsPage />} />
+          <Route path="rant" element={<MentorRantPage />} />
         </Route>
       </Route>
     </Routes>
