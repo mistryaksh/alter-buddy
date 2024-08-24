@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { MdVerified, MdStarRate } from "react-icons/md";
+import { MdVerified } from "react-icons/md";
 import { BiCertification } from "react-icons/bi";
 import { AppButton } from "../../UI";
 import { useNavigate } from "react-router-dom";
@@ -12,37 +12,31 @@ interface MentorCardProps {
   verified: boolean;
   expertise: string;
   id: string;
+  description: string;
+  languages: string;
 }
 
 export const MentorCard: FC<MentorCardProps> = ({
   fname,
   image,
   lname,
-  specialist,
+  languages,
   verified,
   expertise,
   id,
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="p-3 rounded-lg bg-white shadow-primary-100 shadow-xl">
+    <div className="p-3 rounded-lg bg-white shadow-primary-100 shadow-xl border">
       <div className="flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3">
           <div className="object-cover w-[30%]">
             <img src={image} alt={fname + lname} className="rounded-lg" />
           </div>
           <div className="flex-1">
-            <p className="text-2xl font-semibold capitalize">
+            <p className="text-2xl capitalize">
               {lname} {fname}
             </p>
-            {specialist?.join(", ")}
-            <div className="flex items-center">
-              <MdStarRate size={20} className="text-yellow-500" />
-              <MdStarRate size={20} className="text-yellow-500" />
-              <MdStarRate size={20} className="text-yellow-500" />
-              <MdStarRate size={20} className="text-yellow-500" />
-              <MdStarRate size={20} className="text-yellow-500" />
-            </div>
           </div>
         </div>
         {verified && <MdVerified size={28} className="text-blue-500" />}{" "}
@@ -51,7 +45,14 @@ export const MentorCard: FC<MentorCardProps> = ({
         <div className="flex gap-3 items-center">
           <BiCertification size={24} className="text-primary-500" />
           <p className="capitalize font-light">
-            Expert for <span className="text-primary-500">{expertise}</span>
+            Expert for{" "}
+            <span className="text-primary-500 capitalize">{expertise}</span>
+          </p>
+        </div>
+        <div className="flex gap-3 items-center">
+          <BiCertification size={24} className="text-primary-500" />
+          <p className="capitalize font-light">
+            Languages for <span className="text-primary-500">{languages}</span>
           </p>
         </div>
       </div>

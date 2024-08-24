@@ -127,7 +127,7 @@ export const MainFooter: FC<MainFooterProps> = () => {
                 ©<a href="/">AlterBuddy</a> 2024, All rights reserved
               </span>{" "}
               |{" "}
-              <Link to="/privacy-policy" className="text-primary-500">
+              <Link to="/terms-and-condition" className="text-primary-500">
                 Terms & Condition
               </Link>{" "}
               |{" "}

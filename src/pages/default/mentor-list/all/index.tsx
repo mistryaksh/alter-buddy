@@ -129,16 +129,22 @@ export const AllMentorsPage = () => {
                       specialists,
                       _id,
                       image,
+                      description,
+                      languages,
                     }) => (
                       <MentorCard
                         key={_id}
                         expertise={
-                          (category as ICategoryProps[]).map((prop) => {
-                            return prop.title;
-                          }) as unknown as string
+                          (category as ICategoryProps[])
+                            .map((prop) => {
+                              return prop.title.toLowerCase();
+                            })
+                            .join(", ") as unknown as string
                         }
+                        languages={languages.join(", ")}
                         fname={name.firstName}
                         lname={name.lastName}
+                        description={description}
                         image={
                           image
                             ? image

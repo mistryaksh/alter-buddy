@@ -25,6 +25,7 @@ import {
   SignInPage,
   SignUpPage,
   MentorRantPage,
+  TermsAndConditionPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 
@@ -45,6 +46,7 @@ export const AppRoutes = () => {
       </Route>
       <Route path="/mentor/list" element={<AllMentorsPage />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+      <Route path="/terms-and-condition" element={<TermsAndConditionPage />} />
       <Route path="/mentor/category/:id" element={<AllMentorsPage />} />
       <Route path="/mobile-verification" element={<MobileVerificationPage />} />
       <Route path="/coming-soon" element={<ComingSoonPage />} />

@@ -11,12 +11,10 @@ import {
 import { handleError } from "../../../../redux/features";
 import { AppButton } from "../../../../component";
 import {
-  AiFillStar,
   AiOutlineCalendar,
   AiOutlineLoading,
   AiOutlineMessage,
   AiOutlinePhone,
-  AiOutlineStar,
   AiOutlineVideoCamera,
 } from "react-icons/ai";
 import "react-date-picker/dist/DatePicker.css";
@@ -144,28 +142,20 @@ export const UserMentorDetailsPage = () => {
             <div className="flex gap-10 justify-between w-full items-center">
               <div className="flex gap-10 items-center">
                 <img
-                  src="https://www.freepnglogos.com/uploads/doctor-png/doctor-bulk-billing-doctors-chapel-hill-health-care-medical-3.png"
+                  src={mentor?.data?.image}
                   alt="mentor "
-                  className="w-[25%] rounded-lg border-2 p-2 border-dashed border-primary-500"
+                  className="w-[25%] h-full rounded-lg border-2 p-2 border-dashed border-primary-500"
                 />
                 <div className="flex items-start flex-col">
                   <h6 className="text-3xl capitalize">
                     {mentor?.data.name.firstName}{" "}
                     {mentor?.data.name.lastName.charAt(0)}.
                   </h6>
-                  <p className="capitalize">
-                    {mentor?.data.specialists.join(", ")}
+                  <p className="capitalize text-gray-500">
+                    {mentor?.data.category
+                      .map((props) => props.title)
+                      .join(", ")}
                   </p>
-                  <div className="flex items-center gap-3 my-2">
-                    <p className="text-gray-500">Ratings</p>
-                    <div className="flex items-center">
-                      <AiFillStar className="fill-primary-500" size={22} />
-                      <AiFillStar className="fill-primary-500" size={22} />
-                      <AiFillStar className="fill-primary-500" size={22} />
-                      <AiFillStar className="fill-primary-500" size={22} />
-                      <AiOutlineStar size={20} />
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -182,28 +172,26 @@ export const UserMentorDetailsPage = () => {
                 />
               </div>
               <div>
-                <h6 className="text-2xl font-sans2 capitalize text-primary-500">
-                  {mentor?.data?.category?.title} Video Introduction
-                </h6>
                 <div className="mt-3">
-                  <iframe
-                    className="w-full xl:h-[500px]"
+                  <video
+                    className="w-full"
                     src={
                       mentor?.data.videoLink
                         ? mentor.data.videoLink
                         : "https://www.youtube.com/embed/6stlCkUDG_s?si=pxr8czVHVOTT3JN0"
                     }
                     title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen={false}
-                  ></iframe>
+                    autoPlay={false}
+                    controls
+                    controlsList="nodownload nofullscreen noremoteplayback"
+                  />
                 </div>
               </div>
               <div className="bg-primary-100 p-3">
                 <h6 className="text-2xl font-sans2 mb-2 capitalize text-primary-500">
                   What can you ask me:
                 </h6>
-                {mentor?.data.subCategory.map(({ desc }, i) => {
+                {mentor?.data?.specialists?.map((props, i) => {
                   return (
                     <div key={i} className="flex items-end gap-3">
                       <MdOutlineFormatQuote
@@ -211,7 +199,9 @@ export const UserMentorDetailsPage = () => {
                         className="fill-primary-500"
                         fill="currentColor"
                       />
-                      <p className="text-md text-gray-500 capitalize">{desc}</p>
+                      <p className="text-md text-gray-500 capitalize">
+                        {props}
+                      </p>
                     </div>
                   );
                 })}
@@ -230,7 +220,7 @@ export const UserMentorDetailsPage = () => {
               </div>
             </div>
           </div>
-          <div className="xl:col-span-4 sticky top-0 col-span-12 shadow-xl border border-gray-300 p-5 rounded-lg mt-10">
+          <div className="xl:col-span-4 sticky top-40 col-span-12 shadow-xl border border-gray-300 p-5 rounded-lg mt-10">
             {slotData?.data.length !== 0 && (
               <div>
                 <p className="text-gray-500 my-2">
