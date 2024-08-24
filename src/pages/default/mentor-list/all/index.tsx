@@ -146,7 +146,7 @@ export const AllMentorsPage = () => {
                         lname={name.lastName}
                         description={description}
                         image={
-                          image
+                          image?.length
                             ? image
                             : "https://qph.cf2.quoracdn.net/main-qimg-5b495cdeb2ebb79cff41634e5f9ea076"
                         }

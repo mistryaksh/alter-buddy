@@ -19,8 +19,6 @@ import {
 } from "react-icons/ai";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
-import { BsGraphUpArrow } from "react-icons/bs";
-import { FaRegCommentDots } from "react-icons/fa6";
 import moment from "moment";
 import clsx from "clsx";
 import { MdOutlineFormatQuote } from "react-icons/md";
@@ -136,7 +134,7 @@ export const UserMentorDetailsPage = () => {
         </title>
         <meta name="description" content="Helmet application" />
       </Helmet>
-      <div className="xl:px-10 px-5 pt-20 border">
+      <div className="xl:px-10 px-5 pt-20 mb-10">
         <div className="grid xl:grid-cols-12 grid-cols-12 items-start gap-20 justify-between flex-wrap">
           <div className="xl:col-span-8 col-span-12">
             <div className="flex gap-10 justify-between w-full items-center">
@@ -144,7 +142,7 @@ export const UserMentorDetailsPage = () => {
                 <img
                   src={mentor?.data?.image}
                   alt="mentor "
-                  className="w-[25%] h-full rounded-lg border-2 p-2 border-dashed border-primary-500"
+                  className="object-cover aspect-square w-[20%] rounded-md border-2 p-2 border-dashed border-primary-500"
                 />
                 <div className="flex items-start flex-col">
                   <h6 className="text-3xl capitalize">
@@ -187,8 +185,8 @@ export const UserMentorDetailsPage = () => {
                   />
                 </div>
               </div>
-              <div className="bg-primary-100 p-3">
-                <h6 className="text-2xl font-sans2 mb-2 capitalize text-primary-500">
+              <div className="bg-primary-100 p-3 rounded-md">
+                <h6 className="text-xl font-sans2 mb-2 capitalize text-primary-500">
                   What can you ask me:
                 </h6>
                 {mentor?.data?.specialists?.map((props, i) => {
@@ -206,18 +204,18 @@ export const UserMentorDetailsPage = () => {
                   );
                 })}
               </div>
-              <div className="flex items-center gap-5">
+              {/* <div className="flex items-center gap-5">
                 <div className="bg-primary-200 p-3 rounded-lg">
                   <BsGraphUpArrow size={20} className="fill-primary-500" />
                 </div>
                 <p className="text-md capitalize text-gray-500">20 Sessions</p>
-              </div>
-              <div className="flex items-center gap-5">
+              </div> */}
+              {/* <div className="flex items-center gap-5">
                 <div className="bg-primary-200 p-3 rounded-lg">
                   <FaRegCommentDots size={20} className="fill-primary-500" />
                 </div>
                 <p className="text-md capitalize text-gray-500">20 comments</p>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="xl:col-span-4 sticky top-40 col-span-12 shadow-xl border border-gray-300 p-5 rounded-lg mt-10">
@@ -297,7 +295,7 @@ export const UserMentorDetailsPage = () => {
               <p className="text-gray-500 my-2">
                 Chat with the expert and get instant guidance
               </p>
-              <div className="w-full mt-5 flex gap-3">
+              <div className="w-full mt-5 flex gap-3 flex-wrap">
                 <AppButton
                   outlined
                   flexed

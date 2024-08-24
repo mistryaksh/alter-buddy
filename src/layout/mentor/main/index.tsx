@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useEffect, useState } from "react";
 import { MdLogout, MdMessage, MdOutlineHome } from "react-icons/md";
 import { IoMdCalendar } from "react-icons/io";
 import { AiOutlineLoading, AiOutlineSetting } from "react-icons/ai";
-import { AppButton, IconLinkButton } from "../../../component";
+import {  IconLinkButton } from "../../../component";
 import {
   useLazyGetUserByIdQuery,
   useMentorProfileQuery,

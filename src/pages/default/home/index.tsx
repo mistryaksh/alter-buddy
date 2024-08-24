@@ -517,7 +517,7 @@ export const DefaultHome = () => {
 
       {/* section four */}
       <section className=" bg-primary-100 mb-10 mt-10 py-10">
-        <div className="lg:mx-auto h-[500px] pl-5">
+        <div className="lg:mx-auto pl-5">
           <Swiper
             slidesPerView={1}
             spaceBetween={10}
@@ -547,14 +547,15 @@ export const DefaultHome = () => {
             }}
             className="mySwiper mx-10"
           >
-            {mentor?.data?.map(({ name, category, _id }) => (
+            {mentor?.data?.map(({ name, category, _id, image }) => (
               <SwiperSlide
-                className="h-[450px] flex flex-col justify-between items-stretch rounded-md"
+                className="flex flex-col justify-between items-stretch rounded-md"
                 key={_id}
               >
                 <img
-                  src="https://img.freepik.com/premium-photo/portrait-confident-male-doctor-standing-with-arms-crossed-hospital-corridor-ai-generated_632984-111.jpg"
-                  alt=""
+                  src={image}
+                  className="object-cover aspect-square object-top w-full"
+                  alt={name.firstName}
                 />
                 <div className="py-5 px-5  flex flex-col justify-between border bg-white">
                   <h6 className="text-2xl font-libre capitalize">

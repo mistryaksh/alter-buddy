@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { MdVerified } from "react-icons/md";
 import { BiCertification } from "react-icons/bi";
 import { AppButton } from "../../UI";
 import { useNavigate } from "react-router-dom";
@@ -30,16 +29,19 @@ export const MentorCard: FC<MentorCardProps> = ({
     <div className="p-3 rounded-lg bg-white shadow-primary-100 shadow-xl border">
       <div className="flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3">
-          <div className="object-cover w-[30%]">
-            <img src={image} alt={fname + lname} className="rounded-lg" />
+          <div className="object-cover w-[40%]">
+            <img
+              src={image}
+              alt={fname + lname}
+              className="rounded-lg object-cover aspect-square object-center"
+            />
           </div>
           <div className="flex-1">
-            <p className="text-2xl capitalize">
+            <p className="text-xl capitalize">
               {lname} {fname}
             </p>
           </div>
         </div>
-        {verified && <MdVerified size={28} className="text-blue-500" />}{" "}
       </div>
       <div className="py-5 flex flex-col gap-3">
         <div className="flex gap-3 items-center">
