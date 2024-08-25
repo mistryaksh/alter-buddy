@@ -27,7 +27,7 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
     setAccept(!accept);
   };
   return (
-    <div className="flex flex-col items-center gap-3 mx-auto w-[70%] shadow-lg border py-10 rounded-lg">
+    <div className="flex flex-col items-center gap-3 mx-auto xl:lg:md:w-[70%] shadow-lg border py-10 rounded-lg">
       <h1 className="text-3xl font-semibold text-center capitalize">
         Create New Account
       </h1>
@@ -59,7 +59,7 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
         }) => (
           <form onSubmit={handleSubmit} className="w-full">
             <div className="p-3 w-full flex flex-col gap-5 px-5">
-              <div className="flex w-full gap-5">
+              <div className="flex w-full gap-5 flex-wrap">
                 <TextField
                   placeholder="Jhon"
                   label="First Name"
@@ -162,10 +162,17 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
                 </span>
               </label>
             </div>
-            <div className="flex justify-end px-5 gap-5">
-              <AppButton flexed type="button" onClick={() => navigate("/")}>
-                Back to Home
-              </AppButton>
+            <div className="flex justify-end px-5 gap-5 mt-5">
+              <div>
+                <AppButton
+                  flexed
+                  type="button"
+                  outlined
+                  onClick={() => navigate("/")}
+                >
+                  Back to Home
+                </AppButton>
+              </div>
               <AppButton
                 disabled={!accept}
                 loading={loading}

@@ -26,7 +26,7 @@ export const SignInBody: FC<SignInBodyProps> = ({ loginFunc, loading }) => {
   const [password, showPassword] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col items-center gap-5 mx-auto w-[60%] h-full justify-center">
+    <div className="flex flex-col items-center gap-5 mx-auto xl:lg:md:px-0 px-5 xl:lg:md:w-[60%] h-full justify-center">
       <AuthModalBody
         modalTitle="Continue with sign in"
         header={{

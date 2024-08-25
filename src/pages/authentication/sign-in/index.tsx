@@ -60,7 +60,7 @@ export const SignInPage = () => {
   );
 
   return (
-    <div className="w-[60%] mx-auto">
+    <div className="xl:lg:md:w-[60%] mx-auto">
       <SignInBody loginFunc={LoginFunc} loading={isLoginLoading} />
     </div>
   );
