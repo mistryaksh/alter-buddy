@@ -148,6 +148,29 @@ export const TeamPage = () => {
       uniqueFact:
         "I believe in the power of creativity and strategy combined. My mission is to create impactful digital experiences that not only engage but also inspire. If you interact with our brand, I want you to leave feeling more connected and informed.",
     },
+    {
+      image: require("../../../assets/team-members/placeholder.png"),
+      name: "SHARDUL RASAL",
+      desc: "As the Technical Head of AlterBuddy, I am responsible for overseeing and managing all technical aspects of our platform. My focus is on ensuring that our technology is robust, efficient, and scalable, providing a seamless experience for all our users.",
+      title: "TECHNICAL HEAD",
+      company: "AlterBuddy",
+      responsibilities: [
+        "Over 6 years of experience in the tech industry",
+        "Specialized in software development and system architecture",
+        "Expertise in maintaining and optimizing technical infrastructure",
+        "Proficient in leading technical teams and driving innovation",
+      ],
+      expertise: {
+        yearsOfExperience: 3,
+        specializations: [],
+        skills: [],
+      },
+      contact: {
+        email: "info@creativecornerindia.in",
+      },
+      uniqueFact:
+        "I am passionate about leveraging technology to create solutions that make a difference. At AlterBuddy, my goal is to ensure that our platform runs smoothly, so every user can focus on their journey to happiness and healing.",
+    },
   ];
 
   return (

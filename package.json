@@ -12,6 +12,10 @@
     ]
   },
   "dependencies": {
+    "@100mslive/hms-noise-cancellation": "^0.0.1",
+    "@100mslive/react-icons": "^0.10.18",
+    "@100mslive/react-sdk": "^0.10.18",
+    "@100mslive/roomkit-react": "^0.3.18",
     "@babel/cli": "^7.24.8",
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",

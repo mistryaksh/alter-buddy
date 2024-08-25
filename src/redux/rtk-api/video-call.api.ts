@@ -6,17 +6,13 @@ const VideoCallApi = createApi({
   baseQuery: ApiBaseQuery(baseQueryUser),
   reducerPath: "videoCallApi",
   endpoints: ({ mutation, query }) => ({
-    GetMeetingCodes: mutation<
-      { data: any },
-      { audioCall: callType; userIds: string }
-    >({
-      query: ({ audioCall, userIds }) => {
+    GetMeetingCodes: mutation<{ data: any }, { audioCall: callType }>({
+      query: ({ audioCall }) => {
         return {
           url: "/start-meeting",
           method: "POST",
           body: {
             audioCall: audioCall,
-            userIds,
           },
         };
       },

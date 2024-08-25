@@ -162,7 +162,10 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
                 </span>
               </label>
             </div>
-            <div className="flex justify-end px-5">
+            <div className="flex justify-end px-5 gap-5">
+              <AppButton flexed type="button" onClick={() => navigate("/")}>
+                Back to Home
+              </AppButton>
               <AppButton
                 disabled={!accept}
                 loading={loading}

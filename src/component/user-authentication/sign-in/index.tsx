@@ -122,7 +122,7 @@ export const SignInBody: FC<SignInBodyProps> = ({ loginFunc, loading }) => {
                 </AppButton>
               </div>
               <div className="mt-4">
-                <AppButton flexed type="button">
+                <AppButton flexed type="button" onClick={() => navigate("/")}>
                   Back to Home
                 </AppButton>
               </div>

@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from "react";
 
-import { AppButton } from '../../../component';
+import { AppButton } from "../../../component";
 import { socket } from "../../../service";
-import { MentorLayout } from '../../../layout';
-import { AlterBuddyLogo } from '../../../assets/logo';
+import { MentorLayout } from "../../../layout";
+import { AlterBuddyLogo } from "../../../assets/logo";
 
 export const MentorRantPage: FC = () => {
   const [notification, setNotification] = useState<boolean>(false);
@@ -12,30 +12,30 @@ export const MentorRantPage: FC = () => {
   const rantAccepted = () => {
     if (chatRequest) {
       socket.emit(
-        'acceptChat',
+        "acceptChat",
         { roomId: chatRequest.roomId, accepted: true },
         () => {
-          console.log('Chat request accepted');
+          console.log("Chat request accepted");
           setNotification(false);
 
           if (chatRequest.endAt) {
             // Set timing for rant chat or audio
             localStorage.setItem(
-              'endRantChatOrAudioAt',
+              "endRantChatOrAudioAt",
               JSON.stringify(chatRequest.endAt)
             );
 
-            let redirectionUrl = `https://rant-alterbudd.netlify.app/rant`;
+            let redirectionUrl = `https://rant.alterbuddy.com/rant`;
             const redirectionUrlSearchParams = new URLSearchParams({
               roomId: chatRequest.roomId,
               mentorToken: localStorage.getItem("MENTOR_TOKEN"),
-              endAt: chatRequest.endAt
+              endAt: chatRequest.endAt,
             });
 
-            if (chatRequest.requestType === 'audio') {
-              redirectionUrl += '/audio';
+            if (chatRequest.requestType === "audio") {
+              redirectionUrl += "/audio";
             } else {
-              redirectionUrl += '/chat';
+              redirectionUrl += "/chat";
             }
 
             redirectionUrl += `?${redirectionUrlSearchParams.toString()}`;
@@ -48,7 +48,7 @@ export const MentorRantPage: FC = () => {
   };
 
   useEffect(() => {
-    const chatRequestData = localStorage.getItem('chatRequestData');
+    const chatRequestData = localStorage.getItem("chatRequestData");
 
     if (chatRequestData) {
       setChatRequest(JSON.parse(chatRequestData));
@@ -70,7 +70,7 @@ export const MentorRantPage: FC = () => {
         )}
       </div>
     </MentorLayout>
-  )
-}
+  );
+};
 
 export default MentorRantPage;
