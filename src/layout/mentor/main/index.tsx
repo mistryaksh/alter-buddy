@@ -124,7 +124,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   return (
     <div className="flex xl:flex-row lg:flex-row flex-col h-screen bg-primary-500 py-3 relative">
       {!hideNavs && (
-        <div className=" px-5 flex  xl:flex-col xl:items-center xl:justify-center">
+        <div className="px-5 flex  xl:flex-col xl:items-center xl:justify-center">
           <div className="flex xl:my-0 mb-5 lg:flex-row xl:flex-col md:flex-row w-full justify-center gap-5 items-center">
             <IconLinkButton Icon={MdOutlineHome} path="/mentor/dashboard" />
             <IconLinkButton

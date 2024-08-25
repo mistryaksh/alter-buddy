@@ -70,8 +70,8 @@ export const MentorLoginPage = () => {
 
   return (
     <MainLayout hideNav>
-      <div className="flex flex-row h-screen">
-        <div className="flex-1 xl:flex flex-col justify-center items-center lg:flex  md:hidden sm:hidden h-full">
+      <div className="flex flex-row xl:lg:md:h-screen flex-wrap">
+        <div className="flex-1 xl:lg:md:visible invisible xl:flex flex-col justify-center items-center lg:flex  md:hidden sm:hidden h-full">
           <AlterBuddyLogo height={75} />
           <img
             className="w-[50%]"

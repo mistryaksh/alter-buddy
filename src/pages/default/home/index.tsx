@@ -519,7 +519,6 @@ export const DefaultHome = () => {
       <section className=" bg-primary-100 mb-10 mt-10 py-10">
         <div className="lg:mx-auto pl-5 h-[520px]">
           <Swiper
-            slidesPerView={1}
             spaceBetween={10}
             autoplay
             modules={[Autoplay]}
@@ -528,24 +527,30 @@ export const DefaultHome = () => {
             }}
             navigation
             breakpoints={{
-              "@0.00": {
+              0: {
                 slidesPerView: 1.5,
                 spaceBetween: 10,
               },
-              "@0.75": {
+              // Small tablets
+              768: {
                 slidesPerView: 2.5,
                 spaceBetween: 20,
               },
-              "@1.00": {
+              // Tablets and small desktops
+              992: {
                 slidesPerView: 3.5,
                 spaceBetween: 40,
               },
-              "@1.50": {
+              // Large desktops
+              1200: {
+                slidesPerView: 3.5,
+                spaceBetween: 50,
+              },
+              1300: {
                 slidesPerView: 3.5,
                 spaceBetween: 50,
               },
             }}
-            className="mySwiper mx-10"
           >
             {mentor?.data?.map(({ name, category, _id, image }) => (
               <SwiperSlide
@@ -557,8 +562,8 @@ export const DefaultHome = () => {
                   className="object-cover aspect-square object-top w-full"
                   alt={name.firstName}
                 />
-                <div className="py-5 px-5  flex flex-col justify-between border bg-white">
-                  <h6 className="text-2xl font-libre capitalize">
+                <div className="py-5 px-5 flex flex-col justify-between border bg-white">
+                  <h6 className="text-2xl font-libre capitalize truncate">
                     {name?.firstName} {name?.lastName}
                   </h6>
                   <p className="uppercase text-gray-500 my-3">

@@ -126,8 +126,8 @@ export const SchedulesMentorPage = () => {
       {!isLoading && (
         <>
           <div>
-            <div className="flex justify-between items-center gap-10">
-              <div className="flex-1">
+            <div className="flex justify-between items-center xl:lg:md:gap-10  flex-wrap">
+              <div className="xl:md:lg:flex-1">
                 <h5 className="text-3xl font-semibold">
                   Manage your{" "}
                   <span className="text-primary-500">
@@ -141,14 +141,14 @@ export const SchedulesMentorPage = () => {
                   are up-to-date.
                 </p>
               </div>
-              <div>
+              <div className="xl:lg:md:w-[15%] mt-5 xl:lg:md:mt-0 flex justify-end">
                 <AppButton onClick={() => setIsOpen(true)} filled>
                   Schedule New
                 </AppButton>
               </div>
             </div>
           </div>
-          <div className="flex mt-20 gap-5">
+          <div className="flex mt-20 gap-5 flex-wrap pb-10">
             <Calendar
               onChange={handleDateChange}
               tileClassName={getTileClassName}
