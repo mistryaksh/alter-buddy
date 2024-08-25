@@ -563,9 +563,11 @@ export const DefaultHome = () => {
                   </h6>
                   <p className="uppercase text-gray-500 my-5">
                     {category?.length
-                      ? ((category as ICategoryProps[])?.map((prop) => {
-                          return prop?.title;
-                        }) as any)
+                      ? (
+                          (category as ICategoryProps[])?.map((prop) => {
+                            return prop?.title;
+                          }) as any[]
+                        ).join(" / ")
                       : (category as unknown as ICategoryProps)?.title}
                   </p>
                   <div className="flex justify-end items-center gap-5 w-full">
