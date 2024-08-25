@@ -51,7 +51,7 @@ export const TeamPage = () => {
       image: require("../../../assets/team-members/ramandeep.jpeg"),
       name: "Ramandeep Kaur",
       desc: "As a Healer at AlterBuddy, I guide others on their spiritual paths, helping them heal from past traumas and uncover deeper truths. My work involves leading meditation sessions and providing personalized healing practices that align the body, mind, and soul.",
-      title: "Healer",
+      title: "Managing Director",
       company: "AlterBuddy",
       responsibilities: [
         "Guiding others on their spiritual paths",
@@ -176,10 +176,10 @@ export const TeamPage = () => {
   return (
     <MainLayout>
       <div className="py-20 pb-28 container mx-auto" id="sectionOne">
-        <h6 className="text-4xl mb-10 capitalize font-sans2">
+        <h6 className="text-4xl capitalize font-sans2 text-center font-semibold mb-20">
           Meet <span className="text-primary-500">our team</span>
         </h6>
-        <div className="container mx-auto">
+        <div className="px-5 space-y-20">
           {teamMembers
             .map(
               (
@@ -199,126 +199,120 @@ export const TeamPage = () => {
                 <div
                   data-aos="fade-up"
                   key={i}
-                  className="flex xl:lg:md:flex-col xl:flex-row lg:flex-row md:flex-row items-center my-4 gap-5  rounded-md"
+                  className="flex border w-full flex-wrap xl:lg:md:flex-col xl:flex-row lg:flex-row md:flex-row items-center my-4 gap-5  rounded-md"
                 >
-                  {i % 2 === 0 ? (
-                    <div className="flex xl:lg:md:flex-row items-start bg-white shadow-lg rounded-lg overflow-hidden mx-auto max-w-4xl">
-                      <div
-                        className="
-                      w-1/3 h-full object-cover"
-                      >
-                        <>
-                          <img className="" src={image} alt={`${name}'s`} />
-                          <p className="font-semibold my-2 pl-3">Contact:</p>
-                          <p className="text-gray-700 pl-3">
-                            Email:{" "}
-                            <a
-                              href={`mailto:${contact.email}`}
-                              className="text-blue-500"
-                            >
-                              {contact.email}
-                            </a>
-                          </p>
-                        </>
-                      </div>
-                      <div className="p-6 w-2/3">
-                        <div className="font-bold text-2xl mb-2">{name}</div>
-                        <h2 className="text-xl text-gray-700 mb-2">{title}</h2>
-                        <p className="text-gray-500 mb-4">{company}</p>
-                        <p className="text-gray-700 mb-4">{desc}</p>
-                        <p className="font-semibold mb-2">Responsibilities:</p>
-                        <ul className="list-disc list-inside mb-4">
-                          {responsibilities.map((resp, index) => (
-                            <li key={index} className="text-gray-700">
-                              {resp}
-                            </li>
-                          ))}
-                        </ul>
-                        <p className="font-semibold mb-2">Expertise:</p>
-                        <ul className="list-disc list-inside mb-4">
-                          {expertise.yearsOfExperience && (
+                  <div className="flex flex-col xl:lg:md:flex-row items-start bg-white shadow-lg rounded-lg overflow-hidden mx-auto">
+                    <div className="xl:lg:md:w-1/5 h-full object-cover">
+                      <img className="" src={image} alt={`${name}'s`} />
+                      <p className="font-semibold my-2 pl-3">Contact:</p>
+                      <p className="text-gray-700 pl-3">
+                        Email:{" "}
+                        <a
+                          href={`mailto:${contact.email}`}
+                          className="text-blue-500"
+                        >
+                          {contact.email}
+                        </a>
+                      </p>
+                    </div>
+                    <div className="px-3 py-5 w-2/3">
+                      <div className="font-bold text-2xl mb-2">{name}</div>
+                      <h2 className="text-xl text-gray-700 mb-2">{title}</h2>
+                      <p className="text-gray-500 mb-4">{company}</p>
+                      <p className="text-gray-700 mb-4">{desc}</p>
+                      <p className="font-semibold mb-2">Responsibilities:</p>
+                      <ul className="list-disc list-inside mb-4">
+                        {responsibilities.map((resp, index) => (
+                          <li key={index} className="text-gray-700">
+                            {resp}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="font-semibold mb-2">Expertise:</p>
+                      <ul className="list-disc list-inside mb-4">
+                        {expertise.yearsOfExperience && (
+                          <li className="text-gray-700">
+                            Years of Experience: {expertise.yearsOfExperience}
+                          </li>
+                        )}
+                        {expertise.specializations &&
+                          expertise.specializations.length > 0 && (
                             <li className="text-gray-700">
-                              Years of Experience: {expertise.yearsOfExperience}
+                              Specializations:{" "}
+                              {expertise.specializations.join(", ")}
                             </li>
                           )}
-                          {expertise.specializations &&
-                            expertise.specializations.length > 0 && (
-                              <li className="text-gray-700">
-                                Specializations:{" "}
-                                {expertise.specializations.join(", ")}
-                              </li>
-                            )}
-                          {expertise.skills && expertise.skills.length > 0 && (
-                            <li className="text-gray-700">
-                              Skills: {expertise.skills.join(", ")}
-                            </li>
-                          )}
-                        </ul>
+                        {expertise.skills && expertise.skills.length > 0 && (
+                          <li className="text-gray-700">
+                            Skills: {expertise.skills.join(", ")}
+                          </li>
+                        )}
+                      </ul>
 
-                        <p className="italic text-gray-500 mb-4">
-                          Unique Fact: {uniqueFact}
-                        </p>
-                      </div>
+                      <p className="italic text-gray-500 mb-4">
+                        Unique Fact: {uniqueFact}
+                      </p>
                     </div>
-                  ) : (
-                    <div className="flex items-start bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl">
-                      <div className="p-6 w-2/3">
-                        <div className="font-bold text-2xl mb-2">{name}</div>
-                        <h2 className="text-xl text-gray-700 mb-2">{title}</h2>
-                        <p className="text-gray-500 mb-4">{company}</p>
-                        <p className="text-gray-700 mb-4">{desc}</p>
-                        <p className="font-semibold mb-2">Responsibilities:</p>
-                        <ul className="list-disc list-inside mb-4">
-                          {responsibilities.map((resp, index) => (
-                            <li key={index} className="text-gray-700">
-                              {resp}
-                            </li>
-                          ))}
-                        </ul>
-                        <p className="font-semibold mb-2">Expertise:</p>
-                        <ul className="list-disc list-inside mb-4">
-                          {expertise.yearsOfExperience && (
+                  </div>
+                  {/* ) : ( */}
+                  {/* <div className="flex flex-wrap items-start bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl">
+                    <div className="p-6 w-2/3">
+                      <div className="font-bold text-2xl mb-2">{name}</div>
+                      <h2 className="text-xl text-gray-700 mb-2">{title}</h2>
+                      <p className="text-gray-500 mb-4">{company}</p>
+                      <p className="text-gray-700 mb-4">{desc}</p>
+                      <p className="font-semibold mb-2">Responsibilities:</p>
+                      <ul className="list-disc list-inside mb-4">
+                        {responsibilities.map((resp, index) => (
+                          <li key={index} className="text-gray-700">
+                            {resp}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="font-semibold mb-2">Expertise:</p>
+                      <ul className="list-disc list-inside mb-4">
+                        {expertise.yearsOfExperience && (
+                          <li className="text-gray-700">
+                            Years of Experience: {expertise.yearsOfExperience}
+                          </li>
+                        )}
+                        {expertise.specializations &&
+                          expertise.specializations.length > 0 && (
                             <li className="text-gray-700">
-                              Years of Experience: {expertise.yearsOfExperience}
+                              Specializations:{" "}
+                              {expertise.specializations.join(", ")}
                             </li>
                           )}
-                          {expertise.specializations &&
-                            expertise.specializations.length > 0 && (
-                              <li className="text-gray-700">
-                                Specializations:{" "}
-                                {expertise.specializations.join(", ")}
-                              </li>
-                            )}
-                          {expertise.skills && expertise.skills.length > 0 && (
-                            <li className="text-gray-700">
-                              Skills: {expertise.skills.join(", ")}
-                            </li>
-                          )}
-                        </ul>
-                        <p className="italic text-gray-500 mb-4">
-                          Unique Fact: {uniqueFact}
-                        </p>
-                      </div>
-                      <div
-                        className="
+                        {expertise.skills && expertise.skills.length > 0 && (
+                          <li className="text-gray-700">
+                            Skills: {expertise.skills.join(", ")}
+                          </li>
+                        )}
+                      </ul>
+                      <p className="italic text-gray-500 mb-4">
+                        Unique Fact: {uniqueFact}
+                      </p>
+                    </div>
+                    <div
+                      className="
                       w-1/3 h-full object-cover"
-                      >
-                        <>
-                          <img className="" src={image} alt={`${name}'s`} />
-                          <p className="font-semibold my-2 pl-3">Contact:</p>
-                          <p className="text-gray-700 pl-3">
-                            Email:{" "}
-                            <a
-                              href={`mailto:${contact.email}`}
-                              className="text-blue-500"
-                            >
-                              {contact.email}
-                            </a>
-                          </p>
-                        </>
-                      </div>
+                    >
+                      <>
+                        <img className="" src={image} alt={`${name}'s`} />
+                        <p className="font-semibold my-2 pl-3">Contact:</p>
+                        <p className="text-gray-700 pl-3">
+                          Email:{" "}
+                          <a
+                            href={`mailto:${contact.email}`}
+                            className="text-blue-500"
+                          >
+                            {contact.email}
+                          </a>
+                        </p>
+                      </>
                     </div>
-                  )}
+                  </div> */}
+                  {/* )} */}
                 </div>
               )
             )
