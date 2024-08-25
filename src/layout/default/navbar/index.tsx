@@ -137,9 +137,9 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       </Menu>
                     </div>
                   </li>
-                  <li className="xl:text-md text-sm hover:text-primary-500">
+                  {/* <li className="xl:text-md text-sm hover:text-primary-500">
                     <Link to="/buddytube">BuddyTube</Link>
-                  </li>
+                  </li> */}
                   <li className="xl:text-md text-sm hover:text-primary-500">
                     <Link to="/contact-us">Contact Us</Link>
                   </li>

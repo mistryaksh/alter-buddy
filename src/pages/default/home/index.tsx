@@ -570,7 +570,13 @@ export const DefaultHome = () => {
                   </p>
                   <div className="flex justify-end items-center gap-5 w-full">
                     <AppButton
-                      onClick={() => navigate(`/user/mentor/details/${_id}`)}
+                      onClick={() => {
+                        if (!authentication) {
+                          navigate("/sign-in");
+                        } else {
+                          navigate("/mentor/list");
+                        }
+                      }}
                       filled
                     >
                       Connect Now
