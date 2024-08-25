@@ -241,8 +241,8 @@ export const UserMentorDetailsPage = () => {
                 <p>Slots are loading</p>
               </div>
             )}
-            {slotData?.data.length !== 0 &&
-              slotData?.data.map(({ slots, slotsDate, _id }) => (
+            {slotData?.data?.length !== 0 &&
+              slotData?.data?.map(({ slots, slotsDate, _id }) => (
                 <div className="my-5" key={_id}>
                   <label
                     className="text-gray-900 capitalize text-sm"
@@ -254,7 +254,7 @@ export const UserMentorDetailsPage = () => {
                     </span>
                   </label>
                   <div className="flex gap-5 flex-wrap mt-3">
-                    {slots.map(({ time, booked, _id: slotId }) => (
+                    {slots?.map(({ time, booked, _id: slotId }) => (
                       <button
                         disabled={booked}
                         onClick={() =>
@@ -283,6 +283,14 @@ export const UserMentorDetailsPage = () => {
                   </div>
                 </div>
               ))}
+            {slotData?.data.length === 0 && (
+              <div className="text-center w-full mb-5">
+                <p className="text-gray-500">
+                  No Slots found for {mentor?.data.name.firstName}{" "}
+                  {mentor?.data.name.lastName}
+                </p>
+              </div>
+            )}
             <hr />
             <div className="my-5">
               <div className="flex gap-3 items-center">

@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { BiCertification } from "react-icons/bi";
 import { AppButton } from "../../UI";
 import { useNavigate } from "react-router-dom";
+import { useLazyGetSlotsByMentorIdQuery } from "../../../redux/rtk-api";
 
 interface MentorCardProps {
   fname: string;
@@ -25,6 +26,15 @@ export const MentorCard: FC<MentorCardProps> = ({
   id,
 }) => {
   const navigate = useNavigate();
+
+  const [GetMentorSlots, { data: slotData }] = useLazyGetSlotsByMentorIdQuery();
+  useEffect(() => {
+    if (!slotData) {
+      (async () => {
+        await GetMentorSlots(id);
+      })();
+    }
+  }, [slotData, GetMentorSlots, id]);
   return (
     <div className="p-3 rounded-lg bg-white shadow-primary-100 shadow-xl border">
       <div className="flex items-center gap-3 justify-between">
@@ -67,7 +77,18 @@ export const MentorCard: FC<MentorCardProps> = ({
         >
           View more
         </AppButton>
-        <AppButton filled flexed>
+        <AppButton
+          filled
+          flexed
+          disabled={
+            slotData?.data.map((prop) => {
+              return prop.mentorId === id;
+            })?.length
+              ? false
+              : true
+          }
+          onClick={() => navigate(`/user/mentor/details/${id}`)}
+        >
           Schedule now
         </AppButton>
       </div>

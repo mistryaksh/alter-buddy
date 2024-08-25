@@ -73,56 +73,56 @@ export const TeamPage = () => {
       uniqueFact:
         "From the moment my third eye opened, I knew I was meant to help others heal. Spirituality isn't just something I practice—it's who I am.",
     },
+    // {
+    //   image: require("../../../assets/team-members/placeholder.png"),
+    //   desc: "As the Content Writer at AlterBuddy, I craft content that connects with our audience on a deep level. From blog posts to web copy, my goal is to ensure that every word reflects our brand’s mission of spreading happiness and support.",
+    //   name: "Priyanka Jaiswal",
+    //   title: "Content Writer",
+    //   company: "AlterBuddy",
+    //   responsibilities: [
+    //     "Crafting content that connects with the audience",
+    //     "Ensuring every word reflects the brand’s mission",
+    //   ],
+    //   expertise: {
+    //     specializations: [
+    //       "Creative Writing",
+    //       "Storytelling",
+    //       "SEO Optimization",
+    //       "Content Strategy",
+    //     ],
+    //   },
+    //   contact: {
+    //     email: "info@alterbuddy.com", // replace with actual email
+    //   },
+    //   uniqueFact:
+    //     "I love writing stories inspired by real-life characters, much like how I guide readers through AlterBuddy's services. If you ever feel down, read one of them—you might just be the hero.",
+    // },
+    // {
+    //   image: require("../../../assets/team-members/placeholder.png"),
+    //   desc: "As the CEO and psychologist at AlterBuddy, I bring self-discovery and growth vibes from The Alchemist to guide others through their mental health journeys. My goal is to help people navigate life’s challenges, combining empathy with evidence-based practice.",
+    //   name: "Md. Wasti Laskar",
+    //   title: "CEO & Psychologist",
+    //   company: "AlterBuddy",
+    //   responsibilities: [
+    //     "Guiding mental health journeys",
+    //     "Combining empathy with evidence-based practice",
+    //   ],
+    //   expertise: {
+    //     specializations: [
+    //       "Mental Health Counseling",
+    //       "Cognitive Behavioral Therapy (CBT)",
+    //       "Stress Management",
+    //       "Personal Growth and Development",
+    //     ],
+    //   },
+    //   contact: {
+    //     email: "info@alterbuddy.com", // replace with actual email
+    //   },
+    //   uniqueFact:
+    //     "Whether I’m in the ring as a boxer or helping someone achieve a breakthrough, I tackle both physical and mental challenges with equal intensity. And, as much as I love the mental focus, show me a cat, and I’ll completely lose my train of thought!",
+    // },
     {
-      image: require("../../../assets/team-members/placeholder.png"),
-      desc: "As the Content Writer at AlterBuddy, I craft content that connects with our audience on a deep level. From blog posts to web copy, my goal is to ensure that every word reflects our brand’s mission of spreading happiness and support.",
-      name: "Priyanka Jaiswal",
-      title: "Content Writer",
-      company: "AlterBuddy",
-      responsibilities: [
-        "Crafting content that connects with the audience",
-        "Ensuring every word reflects the brand’s mission",
-      ],
-      expertise: {
-        specializations: [
-          "Creative Writing",
-          "Storytelling",
-          "SEO Optimization",
-          "Content Strategy",
-        ],
-      },
-      contact: {
-        email: "info@alterbuddy.com", // replace with actual email
-      },
-      uniqueFact:
-        "I love writing stories inspired by real-life characters, much like how I guide readers through AlterBuddy's services. If you ever feel down, read one of them—you might just be the hero.",
-    },
-    {
-      image: require("../../../assets/team-members/placeholder.png"),
-      desc: "As the CEO and psychologist at AlterBuddy, I bring self-discovery and growth vibes from The Alchemist to guide others through their mental health journeys. My goal is to help people navigate life’s challenges, combining empathy with evidence-based practice.",
-      name: "Md. Wasti Laskar",
-      title: "CEO & Psychologist",
-      company: "AlterBuddy",
-      responsibilities: [
-        "Guiding mental health journeys",
-        "Combining empathy with evidence-based practice",
-      ],
-      expertise: {
-        specializations: [
-          "Mental Health Counseling",
-          "Cognitive Behavioral Therapy (CBT)",
-          "Stress Management",
-          "Personal Growth and Development",
-        ],
-      },
-      contact: {
-        email: "info@alterbuddy.com", // replace with actual email
-      },
-      uniqueFact:
-        "Whether I’m in the ring as a boxer or helping someone achieve a breakthrough, I tackle both physical and mental challenges with equal intensity. And, as much as I love the mental focus, show me a cat, and I’ll completely lose my train of thought!",
-    },
-    {
-      image: require("../../../assets/team-members/placeholder.png"),
+      image: require("../../../assets/team-members/swarup.jpeg"),
       name: "Swarup Kamerkar",
       desc: "As the Marketing Head of Alter Buddy and the Founder of Creative Corner, I am responsible for steering our brand's growth and presence in the digital world. My focus is on crafting compelling strategies that resonate with our audience, ensuring that our message reaches the right people at the right time.",
       title: "Marketing Head",
@@ -149,7 +149,7 @@ export const TeamPage = () => {
         "I believe in the power of creativity and strategy combined. My mission is to create impactful digital experiences that not only engage but also inspire. If you interact with our brand, I want you to leave feeling more connected and informed.",
     },
     {
-      image: require("../../../assets/team-members/placeholder.png"),
+      image: require("../../../assets/team-members/shardul.jpeg"),
       name: "SHARDUL RASAL",
       desc: "As the Technical Head of AlterBuddy, I am responsible for overseeing and managing all technical aspects of our platform. My focus is on ensuring that our technology is robust, efficient, and scalable, providing a seamless experience for all our users.",
       title: "TECHNICAL HEAD",

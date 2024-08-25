@@ -1,3 +1,3 @@
 import { io } from "socket.io-client";
 
-export const socket = io("https://alterbuddy.com" as string);
+export const socket = io("https://backend.alterbuddy.com" as string);
