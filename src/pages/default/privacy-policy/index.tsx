@@ -1,5 +1,6 @@
 import React from "react";
 import { MainLayout } from "../../../layout";
+import { Link } from "react-router-dom";
 
 export const PrivacyPolicyPage = () => {
   return (
@@ -25,11 +26,24 @@ export const PrivacyPolicyPage = () => {
           {"\n"}
           {"\n"}
           If you have any questions or comments about the Privacy Policy, please
-          contact us at info@nowandme.com. This Policy is incorporated into and
-          is subject to the AlterBuddy Terms of Use, which can be accessed
-          at https://nowandme.com/terms. Your use of AlterBuddy and any personal
-          information you provide on AlterBuddy remains subject to the terms of
-          the Policy and AlterBuddy Terms of Use
+          contact us at 
+          <a
+            className="text-primary-500 underline"
+            href="mailto:cheer@alterbuddy.com"
+          >
+            cheer@alterbuddy.com
+          </a>
+          . This Policy is incorporated into and is subject to the AlterBuddy
+          Terms of Use, which can be accessed at 
+          <Link
+            className="text-primary-500 underline"
+            to="https://alterbuddy.com/terms-and-condition"
+          >
+            AlterBuddy Terms
+          </Link>
+          . Your use of AlterBuddy and any personal information you provide on
+          AlterBuddy remains subject to the terms of the Policy and AlterBuddy
+          Terms of Use
           {"\n"}
           {"\n"}
           In terms of the Information Technology (Intermediary Guidelines and
