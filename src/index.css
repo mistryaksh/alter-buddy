@@ -163,3 +163,10 @@ video {
 .swiper-wrapper {
   height: auto !important;
 }
+
+.no-tailwind {
+  all: unset;
+  /* Reapply specific properties if needed */
+  display: block;
+  font-family: inherit;
+}

@@ -97,30 +97,30 @@ export const TeamPage = () => {
     //   uniqueFact:
     //     "I love writing stories inspired by real-life characters, much like how I guide readers through AlterBuddy's services. If you ever feel down, read one of them—you might just be the hero.",
     // },
-    // {
-    //   image: require("../../../assets/team-members/placeholder.png"),
-    //   desc: "As the CEO and psychologist at AlterBuddy, I bring self-discovery and growth vibes from The Alchemist to guide others through their mental health journeys. My goal is to help people navigate life’s challenges, combining empathy with evidence-based practice.",
-    //   name: "Md. Wasti Laskar",
-    //   title: "CEO & Psychologist",
-    //   company: "AlterBuddy",
-    //   responsibilities: [
-    //     "Guiding mental health journeys",
-    //     "Combining empathy with evidence-based practice",
-    //   ],
-    //   expertise: {
-    //     specializations: [
-    //       "Mental Health Counseling",
-    //       "Cognitive Behavioral Therapy (CBT)",
-    //       "Stress Management",
-    //       "Personal Growth and Development",
-    //     ],
-    //   },
-    //   contact: {
-    //     email: "info@alterbuddy.com", // replace with actual email
-    //   },
-    //   uniqueFact:
-    //     "Whether I’m in the ring as a boxer or helping someone achieve a breakthrough, I tackle both physical and mental challenges with equal intensity. And, as much as I love the mental focus, show me a cat, and I’ll completely lose my train of thought!",
-    // },
+    {
+      image: require("../../../assets/team-members/wasti2.jpg"),
+      desc: "As the CEO and psychologist at AlterBuddy, I bring self-discovery and growth vibes from The Alchemist to guide others through their mental health journeys. My goal is to help people navigate life’s challenges, combining empathy with evidence-based practice.",
+      name: "Md. Wasti Laskar",
+      title: "CEO & Psychologist",
+      company: "AlterBuddy",
+      responsibilities: [
+        "Guiding mental health journeys",
+        "Combining empathy with evidence-based practice",
+      ],
+      expertise: {
+        specializations: [
+          "Mental Health Counseling",
+          "Cognitive Behavioral Therapy (CBT)",
+          "Stress Management",
+          "Personal Growth and Development",
+        ],
+      },
+      contact: {
+        email: "info@alterbuddy.com", // replace with actual email
+      },
+      uniqueFact:
+        "Whether I’m in the ring as a boxer or helping someone achieve a breakthrough, I tackle both physical and mental challenges with equal intensity. And, as much as I love the mental focus, show me a cat, and I’ll completely lose my train of thought!",
+    },
     {
       image: require("../../../assets/team-members/swarup.jpeg"),
       name: "Swarup Kamerkar",

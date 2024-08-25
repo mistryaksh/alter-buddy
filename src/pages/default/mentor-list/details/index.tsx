@@ -24,6 +24,7 @@ import clsx from "clsx";
 import { MdOutlineFormatQuote } from "react-icons/md";
 import { Helmet } from "react-helmet";
 import { v4 } from "uuid";
+import DOMPurify from "dompurify";
 
 export const UserMentorDetailsPage = () => {
   const navigate = useNavigate();
@@ -124,6 +125,7 @@ export const UserMentorDetailsPage = () => {
   }) => {
     await BookSlotWithMentor({ slotId, userId, mainId, mentorId });
   };
+  const cleanHTML = DOMPurify.sanitize(mentor?.data?.description);
 
   return (
     <MainLayout loading={isMentorLoading}>
@@ -163,9 +165,14 @@ export const UserMentorDetailsPage = () => {
                   About
                 </h6>
                 <div
-                  className="prose whitespace-pre-wrap"
+                  className="no-tailwind"
+                  style={{
+                    all: "unset",
+                    display: "block",
+                    fontFamily: "inherit",
+                  }}
                   dangerouslySetInnerHTML={{
-                    __html: mentor?.data.description as string,
+                    __html: cleanHTML,
                   }}
                 />
               </div>
