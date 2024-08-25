@@ -517,10 +517,12 @@ export const DefaultHome = () => {
 
       {/* section four */}
       <section className=" bg-primary-100 mb-10 mt-10 py-10">
-        <div className="lg:mx-auto pl-5 h-[520px]">
+        <div className="lg:mx-auto pl-5 xl:border=">
           <Swiper
             spaceBetween={10}
             autoplay
+            className={"mySwiper"}
+            height={520}
             modules={[Autoplay]}
             pagination={{
               clickable: true,

@@ -159,3 +159,7 @@ video {
   background-color: theme("textColor.gray.300") !important;
   border-radius: theme("borderRadius.lg");
 }
+
+.swiper-wrapper {
+  height: auto !important;
+}
