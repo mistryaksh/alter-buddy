@@ -134,9 +134,9 @@ export const UserMentorDetailsPage = () => {
         </title>
         <meta name="description" content="Helmet application" />
       </Helmet>
-      <div className="xl:px-10 px-5 pt-20 mb-10">
-        <div className="grid xl:grid-cols-12 grid-cols-12 items-start gap-20 justify-between flex-wrap">
-          <div className="xl:col-span-8 col-span-12">
+      <div className="xl:px-10 px-5 pt-10 mb-10">
+        <div className="flex flex-row items-start gap-20 justify-between xl:lg:md:flex-nowrap flex-wrap">
+          <div className="xl:lg:md:flex-1">
             <div className="flex gap-10 justify-between w-full items-center">
               <div className="flex gap-10 items-center">
                 <img
@@ -146,8 +146,7 @@ export const UserMentorDetailsPage = () => {
                 />
                 <div className="flex items-start flex-col">
                   <h6 className="text-3xl capitalize">
-                    {mentor?.data.name.firstName}{" "}
-                    {mentor?.data.name.lastName.charAt(0)}.
+                    {mentor?.data.name.firstName} {mentor?.data.name.lastName}
                   </h6>
                   <p className="capitalize text-gray-500">
                     {mentor?.data.category
@@ -160,65 +159,54 @@ export const UserMentorDetailsPage = () => {
             <hr className="my-10" />
             <div className="flex flex-col gap-5">
               <div>
-                <h6 className="text-2xl font-sans2 capitalize text-primary-500">
+                <h6 className="text-2xl flex-wrap font-libre capitalize text-primary-500">
                   About
                 </h6>
                 <div
+                  className="prose whitespace-pre-wrap"
                   dangerouslySetInnerHTML={{
                     __html: mentor?.data.description as string,
                   }}
                 />
               </div>
               <div>
-                <div className="mt-3">
-                  <video
-                    className="w-full"
-                    src={
-                      mentor?.data.videoLink
-                        ? mentor.data.videoLink
-                        : "https://www.youtube.com/embed/6stlCkUDG_s?si=pxr8czVHVOTT3JN0"
-                    }
-                    title="YouTube video player"
-                    autoPlay={false}
-                    controls
-                    controlsList="nodownload nofullscreen noremoteplayback"
-                  />
+                <div className="my-10">
+                  {mentor?.data.videoLink && (
+                    <video
+                      className="xl:lg:md:w-full aspect-video"
+                      src={mentor?.data.videoLink}
+                      title="YouTube video player"
+                      autoPlay={false}
+                      controls
+                      controlsList="nodownload nofullscreen noremoteplayback"
+                    />
+                  )}
                 </div>
               </div>
-              <div className="bg-primary-100 p-3 rounded-md">
-                <h6 className="text-xl font-sans2 mb-2 capitalize text-primary-500">
-                  What can you ask me:
-                </h6>
-                {mentor?.data?.specialists?.map((props, i) => {
-                  return (
-                    <div key={i} className="flex items-end gap-3">
-                      <MdOutlineFormatQuote
-                        size={30}
-                        className="fill-primary-500"
-                        fill="currentColor"
-                      />
-                      <p className="text-md text-gray-500 capitalize">
-                        {props}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-              {/* <div className="flex items-center gap-5">
-                <div className="bg-primary-200 p-3 rounded-lg">
-                  <BsGraphUpArrow size={20} className="fill-primary-500" />
+              {mentor?.data.specialists.length > 0 && (
+                <div className="bg-primary-100 p-3 rounded-md">
+                  <h6 className="text-xl font-sans2 mb-2 capitalize text-primary-500">
+                    What can you ask me:
+                  </h6>
+                  {mentor?.data?.specialists?.map((props, i) => {
+                    return (
+                      <div key={i} className="flex items-end gap-3">
+                        <MdOutlineFormatQuote
+                          size={30}
+                          className="fill-primary-500"
+                          fill="currentColor"
+                        />
+                        <p className="text-md text-gray-500 capitalize">
+                          {props}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
-                <p className="text-md capitalize text-gray-500">20 Sessions</p>
-              </div> */}
-              {/* <div className="flex items-center gap-5">
-                <div className="bg-primary-200 p-3 rounded-lg">
-                  <FaRegCommentDots size={20} className="fill-primary-500" />
-                </div>
-                <p className="text-md capitalize text-gray-500">20 comments</p>
-              </div> */}
+              )}
             </div>
           </div>
-          <div className="xl:col-span-4 sticky top-40 col-span-12 shadow-xl border border-gray-300 p-5 rounded-lg mt-10">
+          <div className="xl:lg:md:w-[40%] sticky top-20 shadow-xl border border-gray-300 p-5 rounded-lg mt-10">
             {slotData?.data.length !== 0 && (
               <div>
                 <p className="text-gray-500 my-2">

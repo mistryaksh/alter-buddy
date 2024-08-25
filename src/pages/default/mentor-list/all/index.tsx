@@ -52,8 +52,8 @@ export const AllMentorsPage = () => {
   return (
     <MainLayout loading={isMentorLoading || isCategoryLoading}>
       <div className="bg-gradient-to-t from-white via-white  to-primary-200">
-        <div className=" py-20">
-          <div className="container mx-auto xl:w-[65%] w-[95%] lg:w-[60%] shadow-xl px-10 bg-white rounded-md py-10">
+        <div className="py-20">
+          <div className="container mx-auto xl:lg:md:w-[65%] w-[95%] shadow-xl px-10 bg-white rounded-md py-10">
             <div className="flex flex-wrap-reverse items-center gap-10">
               <div className="flex-1 flex flex-col gap-3">
                 <h1 className="text-5xl capitalize font-bold">
@@ -71,12 +71,12 @@ export const AllMentorsPage = () => {
               <img
                 src="https://static.wixstatic.com/media/11062b_918f77d49c6e47d395addb2e5dcef03c~mv2.jpg/v1/crop/x_539,y_0,w_2021,h_2048/fill/w_734,h_744,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_918f77d49c6e47d395addb2e5dcef03c~mv2.jpg"
                 alt=""
-                className="w-[300px] rounded-full border-2 border-gray-500"
+                className="object-cover xl:lg:md:w-[300px] aspect-square rounded-full border-2 border-gray-500"
               />
             </div>
           </div>
-          <div className="py-20 container mx-auto">
-            <div className="flex gap-10 flex-wrap">
+          <div className="py-20 container mx-auto px-5">
+            <div className="flex xl:lg:md:gap-10 gap-3 xl:lg:md:justify-start justify-center flex-wrap">
               <div
                 onClick={() => setFilter("all")}
                 className={clsx(

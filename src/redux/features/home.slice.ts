@@ -235,7 +235,7 @@ const initialState: HomeSliceProps = {
       path: "/services/mental-health",
     },
     {
-      body: "Our coaches (your genies) will guide you in manifesting your desires for love, relationships, success, money, and good health, helping you transform your reality and create the life you always desired.",
+      body: "Our coaches will guide you in manifesting your desires for love, relationships, success, money, and good health, helping you transform your reality and create the life always desired.",
       image: require("../../assets/image/image2.jpg"),
       label: "manifestation",
       path: "/services/manifestation",

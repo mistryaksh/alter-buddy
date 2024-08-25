@@ -75,7 +75,7 @@ export const MentorCard: FC<MentorCardProps> = ({
           flexed
           onClick={() => navigate(`/user/mentor/details/${id}`)}
         >
-          View more
+          <span className="text-sm">More details</span>
         </AppButton>
         <AppButton
           filled
@@ -89,7 +89,13 @@ export const MentorCard: FC<MentorCardProps> = ({
           }
           onClick={() => navigate(`/user/mentor/details/${id}`)}
         >
-          Schedule now
+          <p className="text-sm">
+            {!slotData?.data.map((prop) => {
+              return prop.mentorId === id;
+            })?.length
+              ? "Not available"
+              : "Schedule now"}
+          </p>
         </AppButton>
       </div>
     </div>

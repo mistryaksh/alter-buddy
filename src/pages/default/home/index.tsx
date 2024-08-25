@@ -60,10 +60,10 @@ export const DefaultHome = () => {
         )}
       >
         <div className="flex-1 p-10">
-          <h3 className="text-2xl mt-3 capitalize font-bold font-sans2 whitespace-pre-wrap">
-            DISCOVER LIFE’S BRIGHTER SIDE WITH YOUR PERSONAL COACHES AT
-            ALTERBUDDY :
+          <h3 className="text-3xl leading-8 mt-3 capitalize font-normal font-sans2 whitespace-pre-wrap">
+            DISCOVER LIFE’S BRIGHTER SIDE WITH YOUR PERSONAL COACHES AT{" "}
           </h3>
+          <p className="text-primary-500 text-4xl my-3">ALTERBUDDY</p>
           <ul className="my-5">
             <li className="flex items-center gap-3">
               <div className=" text-primary-500 p-2 rounded-full">
@@ -199,10 +199,10 @@ export const DefaultHome = () => {
         <div className="container mx-auto mt-10 shadow-xl  shadow-primary-100 py-5 border rounded-lg">
           <div
             data-aos="fade-up"
-            className="grid xl:grid-cols-2 xl:w-[90%] mx-auto px-3 xl:px-0"
+            className="grid px-5 items-center xl:grid-cols-2 xl:w-[90%] mx-auto gap-20 xl:px-0"
           >
             <div className="">
-              <p className=" mt-10 text-xl text-gray-500 xl:w-[80%] mx-auto whitespace-pre-line text-justify">
+              <p className="mt-10 text-xl text-gray-500 mx-auto whitespace-pre-line text-justify">
                 People and sometimes the situations around us are so toxic, that
                 we feel everything bad happens only to us, making us bitter. And
                 unconsciously, we send so many negative energies to the
@@ -223,19 +223,19 @@ export const DefaultHome = () => {
               <img
                 src="https://images.pexels.com/photos/6624292/pexels-photo-6624292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
-                className="w-[70%] rounded-lg"
+                className="object-cover aspect-video object-top rounded-md"
               />
             </div>
           </div>
           <div
             data-aos="fade-up"
-            className="grid xl:grid-cols-2 xl:w-[90%] mx-auto mt-5 px-5"
+            className="grid items-center px-5 xl:grid-cols-2 mt-5"
           >
             <div className="flex items-center justify-center  xl:order-last order-1">
               <img
                 src="https://images.pexels.com/photos/6624287/pexels-photo-6624287.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
-                className="w-[70%] rounded-lg"
+                className="object-cover aspect-video object-top rounded-md"
               />
             </div>
             <div className=" xl:order-last order-1">
@@ -517,7 +517,7 @@ export const DefaultHome = () => {
 
       {/* section four */}
       <section className=" bg-primary-100 mb-10 mt-10 py-10">
-        <div className="lg:mx-auto pl-5">
+        <div className="lg:mx-auto pl-5 h-[520px]">
           <Swiper
             slidesPerView={1}
             spaceBetween={10}
@@ -561,7 +561,7 @@ export const DefaultHome = () => {
                   <h6 className="text-2xl font-libre capitalize">
                     {name?.firstName} {name?.lastName}
                   </h6>
-                  <p className="uppercase text-gray-500 my-5">
+                  <p className="uppercase text-gray-500 my-3">
                     {category?.length
                       ? (
                           (category as ICategoryProps[])?.map((prop) => {
