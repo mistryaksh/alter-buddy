@@ -5,7 +5,6 @@ import { AppButton, TextField } from "../../../component";
 import { MainLayout } from "../../../layout";
 import {
   AiOutlineFacebook,
-  AiOutlineInstagram,
   AiOutlineLinkedin,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
@@ -110,7 +109,10 @@ export const ContactPage = () => {
                     <Link to="#" className="mr-6">
                       <AiOutlineWhatsApp className="fill-[#25D366]" size={30} />
                     </Link>
-                    <Link to="#" className="mr-6">
+                    <Link
+                      to="https://www.instagram.com/alter.buddy?igsh=cXpjMGl3ZDA1dmJw&utm_source=qr"
+                      className="mr-6"
+                    >
                       <svg
                         width="31"
                         height="30"

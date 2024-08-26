@@ -156,7 +156,7 @@ export const MainFooter: FC<MainFooterProps> = () => {
                 </svg>
               </Link>
               <Link
-                to="#"
+                to="https://www.instagram.com/alter.buddy?igsh=cXpjMGl3ZDA1dmJw&utm_source=qr"
                 className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-primary-600"
               >
                 <svg

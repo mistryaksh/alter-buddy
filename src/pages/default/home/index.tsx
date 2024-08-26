@@ -568,15 +568,13 @@ export const DefaultHome = () => {
                   <h6 className="text-2xl font-libre capitalize truncate">
                     {name?.firstName} {name?.lastName}
                   </h6>
-                  <p className="uppercase text-gray-500 my-3">
-                    {category?.length
-                      ? (
-                          (category as ICategoryProps[])?.map((prop) => {
-                            return prop?.title;
-                          }) as any[]
-                        ).join(" / ")
-                      : (category as unknown as ICategoryProps)?.title}
-                  </p>
+                  <ul className="list list-disc pl-3">
+                    {(category as ICategoryProps[]).map((props) => (
+                      <li className=" list-item uppercase text-gray-500 my-1">
+                        {props.title}
+                      </li>
+                    ))}
+                  </ul>
                   <div className="flex justify-end items-center gap-5 w-full">
                     <AppButton
                       onClick={() => {
