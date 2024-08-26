@@ -48,7 +48,7 @@ export const TeamPage = () => {
         "I’ve always believed that happiness should be shared. That’s why I created AlterBuddy—to spread joy and positivity to everyone who joins us. My goal is simple: if you visit us, you leave happier.",
     },
     {
-      image: require("../../../assets/team-members/ramandeep.jpeg"),
+      image: require("../../../assets/team-members/ramandeep2.jpeg"),
       name: "Ramandeep Kaur",
       desc: "As a Healer at AlterBuddy, I guide others on their spiritual paths, helping them heal from past traumas and uncover deeper truths. My work involves leading meditation sessions and providing personalized healing practices that align the body, mind, and soul.",
       title: "Managing Director",
