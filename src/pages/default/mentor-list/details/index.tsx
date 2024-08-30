@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux";
 import {
   useBookMentorSlotMutation,
+  useGetMentorPackagesByIdQuery,
   useGetMentorUsingIdQuery,
   useLazyGetSlotsByMentorIdQuery,
   useProfileUserQuery,
@@ -37,6 +38,7 @@ export const UserMentorDetailsPage = () => {
     data: mentor,
     error: mentorError,
   } = useGetMentorUsingIdQuery(id as string);
+  const { data: packages } = useGetMentorPackagesByIdQuery(id as string);
   const [
     GetMentorSlots,
     {
@@ -302,36 +304,92 @@ export const UserMentorDetailsPage = () => {
                 <AppButton
                   outlined
                   flexed
+                  disabled={
+                    !packages?.data.find(
+                      (props) =>
+                        props.packageType === "video" && props.price > 0
+                    )
+                  }
                   onClick={() =>
                     navigate(
                       `/user/video-call/${mentor?.data._id}?audio_call=false`
                     )
                   }
                 >
-                  <AiOutlineVideoCamera size={25} />
-                  Video Call
+                  <div className="flex items-center gap-2 flex-nowrap">
+                    <AiOutlineVideoCamera size={25} />
+                    <span className="text-sm">
+                      {
+                        packages?.data.find((props) => {
+                          if (props.packageType === "video") {
+                            return props.price;
+                          } else {
+                            return 0;
+                          }
+                        })?.price
+                      }{" "}
+                      coins
+                    </span>
+                  </div>
                 </AppButton>
                 <AppButton
                   outlined
                   flexed
+                  disabled={
+                    !packages?.data.find(
+                      (props) =>
+                        props.packageType === "audio" && props.price > 0
+                    )
+                  }
                   onClick={() =>
                     navigate(
                       `/user/video-call/${mentor?.data._id}?audio_call=true`
                     )
                   }
                 >
-                  <AiOutlinePhone size={25} />
-                  Voice Call
+                  <div className="flex items-center gap-2 flex-nowrap">
+                    <AiOutlinePhone size={25} />
+                    <span className="text-sm">
+                      {
+                        packages?.data.find((props) => {
+                          if (props.packageType === "audio") {
+                            return props.price;
+                          } else {
+                            return 0;
+                          }
+                        })?.price
+                      }{" "}
+                      coins
+                    </span>
+                  </div>
                 </AppButton>
                 <AppButton
                   outlined
                   flexed
+                  disabled={
+                    !packages?.data.find(
+                      (props) => props.packageType === "chat" && props.price > 0
+                    )
+                  }
                   onClick={() =>
                     navigate(`/user/chat/${mentor?.data._id}/${v4()}`)
                   }
                 >
-                  <AiOutlineMessage size={25} />
-                  Chat
+                  <div className="flex items-center gap-2">
+                    <AiOutlineMessage size={25} />{" "}
+                    <span className="text-sm">
+                      {
+                        packages?.data.find((props) => {
+                          if (props.packageType === "chat") {
+                            return props.price;
+                          } else {
+                            return 0;
+                          }
+                        })?.price
+                      }{" "}
+                      coins
+                    </span>
+                  </div>
                 </AppButton>
               </div>
             </div>

@@ -24,6 +24,8 @@ import {
   ChatApiMiddleware,
   TeamApiReducer,
   TeamApiMiddleware,
+  PackagesApiReducer,
+  PackageApiMiddleware,
 } from "./rtk-api";
 import {
   AuthenticationReducer,
@@ -56,6 +58,7 @@ export const AppMiddlewares: Middleware[] = [
   ChatApiMiddleware,
   TeamApiMiddleware,
   BuddyCoinsApiMiddleware,
+  PackageApiMiddleware,
 ];
 export const AppReducers = combineReducers({
   //! APP API REDUCER
@@ -72,6 +75,7 @@ export const AppReducers = combineReducers({
   mentorChatApi: ChatApiReducer,
   teamApi: TeamApiReducer,
   buddyCoinApi: BuddyCoinsApiReducer,
+  packagesApi: PackagesApiReducer,
 
   //! DEFAULT APP REDUCERS
   layout: LayoutReducer,

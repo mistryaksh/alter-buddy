@@ -14,7 +14,7 @@ export const TextField: FC<
     HTMLInputElement
   > &
     TextFieldProps
-> = ({ label, error, touched, outlined, ...rest }) => {
+> = ({ label, error, touched, outlined, type, ...rest }) => {
   return (
     <div className="group flex flex-col w-full">
       {label && (
@@ -31,7 +31,8 @@ export const TextField: FC<
           outlined
             ? "border-2 px-5 py-2 rounded-md focus:outline-none focus:border-primary-500"
             : "border-b-2 text-primary-500 group-focus:border-primary-500 hover:border-primary-500 outline-none pb-2",
-          " bg-transparent"
+          " bg-transparent",
+          type === "number" && "appearance-none"
         )}
         {...rest}
       />

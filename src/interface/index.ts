@@ -11,3 +11,4 @@ export * from "./team.interface";
 export * from "./call-history.interface";
 export * from "./buddy-coin.interface";
 export * from "./transaction.interface";
+export * from "./package.interface";

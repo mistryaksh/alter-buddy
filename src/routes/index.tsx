@@ -27,6 +27,7 @@ import {
   MentorRantPage,
   TermsAndConditionPage,
   MentorVideoCallPage,
+  PackagesPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 import { UserVideoCallPage } from "../pages/user/video";
@@ -73,6 +74,7 @@ export const AppRoutes = () => {
           <Route path="schedules" element={<SchedulesMentorPage />} />
           <Route path="settings" element={<MentorSettingsPage />} />
           <Route path="rant" element={<MentorRantPage />} />
+          <Route path="packages" element={<PackagesPage />} />
         </Route>
       </Route>
     </Routes>

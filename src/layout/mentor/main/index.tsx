@@ -7,6 +7,7 @@ import {
   AiOutlinePhone,
   AiOutlineSetting,
 } from "react-icons/ai";
+import { GoPackage } from "react-icons/go";
 import { IconLinkButton } from "../../../component";
 import {
   useLazyGetUserByIdQuery,
@@ -132,6 +133,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
               path="/mentor/call-history"
             />
             <IconLinkButton Icon={IoMdCalendar} path="/mentor/schedules" />
+            <IconLinkButton Icon={GoPackage} path="/mentor/packages" />
             <IconLinkButton
               Icon={MdMessage}
               path="/mentor/rant"

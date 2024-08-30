@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { ApiBaseQuery, baseQueryUser } from "../../utils";
-import { ITopMentorProps, IMentorProps } from "../../interface";
+import { ITopMentorProps, IMentorProps, IPackagesProps } from "../../interface";
 
 const MentorApi = createApi({
   baseQuery: ApiBaseQuery(baseQueryUser),
@@ -49,6 +49,9 @@ const MentorApi = createApi({
         };
       },
     }),
+    GetMentorPackagesById: query<{ data: IPackagesProps[] }, string>({
+      query: (mentorId) => `/packages/mentor/${mentorId}`,
+    }),
   }),
 });
 
@@ -62,6 +65,7 @@ export const {
   useLazyGetMentorByCategoryQuery,
   useLazyGetMentorBySubCategoryQuery,
   useBookMentorSlotMutation,
+  useGetMentorPackagesByIdQuery,
 } = MentorApi;
 export const MentorApiReducer = MentorApi.reducer;
 export const MentorApiMiddleware = MentorApi.middleware;
