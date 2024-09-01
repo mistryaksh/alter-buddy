@@ -322,13 +322,12 @@ export const UserMentorDetailsPage = () => {
                       {
                         packages?.data.find((props) => {
                           if (props.packageType === "video") {
-                            return props.price;
+                            return `${props.price} coins`;
                           } else {
-                            return 0;
+                            return "no packages";
                           }
                         })?.price
-                      }{" "}
-                      coins
+                      }
                     </span>
                   </div>
                 </AppButton>
@@ -353,13 +352,12 @@ export const UserMentorDetailsPage = () => {
                       {
                         packages?.data.find((props) => {
                           if (props.packageType === "audio") {
-                            return props.price;
+                            return `${props.price} coins`;
                           } else {
                             return 0;
                           }
                         })?.price
                       }{" "}
-                      coins
                     </span>
                   </div>
                 </AppButton>
@@ -381,13 +379,12 @@ export const UserMentorDetailsPage = () => {
                       {
                         packages?.data.find((props) => {
                           if (props.packageType === "chat") {
-                            return props.price;
+                            return `${props.price} coins`;
                           } else {
                             return 0;
                           }
                         })?.price
-                      }{" "}
-                      coins
+                      }
                     </span>
                   </div>
                 </AppButton>

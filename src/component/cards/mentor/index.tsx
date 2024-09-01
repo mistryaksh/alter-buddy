@@ -38,12 +38,12 @@ export const MentorCard: FC<MentorCardProps> = ({
   return (
     <div className="p-3 rounded-lg bg-white shadow-primary-100 shadow-xl border">
       <div className="flex items-center gap-3 justify-between">
-        <div className="flex items-center gap-3">
-          <div className="object-cover w-[40%]">
+        <div className="flex  xl:lg:md:flex-row flex-col xl:lg:md:items-center gap-3">
+          <div className="object-cover xl:lg:md:w-[40%]">
             <img
               src={image}
               alt={fname + lname}
-              className="rounded-lg object-cover aspect-square object-center"
+              className="rounded-lg xl:lg:md:object-cover xl:lg:md:aspect-square xl:lg:md:object-center"
             />
           </div>
           <div className="flex-1">
@@ -61,12 +61,12 @@ export const MentorCard: FC<MentorCardProps> = ({
             <span className="text-primary-500 capitalize">{expertise}</span>
           </p>
         </div>
-        <div className="flex gap-3 items-center">
+        {/* <div className="flex gap-3 items-center">
           <BiCertification size={24} className="text-primary-500" />
           <p className="capitalize font-light">
             Languages for <span className="text-primary-500">{languages}</span>
           </p>
-        </div>
+        </div> */}
       </div>
       <hr className="border-t border-primary-500" />
       <div className="flex items-center mt-3 gap-3 w-full">

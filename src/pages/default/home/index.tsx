@@ -531,26 +531,26 @@ export const DefaultHome = () => {
             breakpoints={{
               0: {
                 slidesPerView: 1.5,
-                spaceBetween: 10,
+                spaceBetween: 3,
               },
               // Small tablets
               768: {
                 slidesPerView: 2.5,
-                spaceBetween: 20,
+                spaceBetween: 5,
               },
               // Tablets and small desktops
               992: {
                 slidesPerView: 3.5,
-                spaceBetween: 40,
+                spaceBetween: 10,
               },
               // Large desktops
               1200: {
                 slidesPerView: 3.5,
-                spaceBetween: 50,
+                spaceBetween: 15,
               },
               1300: {
                 slidesPerView: 3.5,
-                spaceBetween: 50,
+                spaceBetween: 20,
               },
             }}
           >
@@ -561,14 +561,14 @@ export const DefaultHome = () => {
               >
                 <img
                   src={image}
-                  className="object-cover aspect-square object-top w-full"
+                  className="object-cover aspect-square object-top"
                   alt={name.firstName}
                 />
-                <div className="py-5 px-5 flex flex-col justify-between border bg-white">
-                  <h6 className="text-2xl font-libre capitalize truncate">
+                <div className="py-5 px-5 flex flex-col justify-between border bg-white rounded-b-lg">
+                  <h6 className="text-xl font-libre capitalize truncate">
                     {name?.firstName} {name?.lastName}
                   </h6>
-                  <ul className="list list-disc pl-3">
+                  <ul className="list list-disc pl-3 text-sm">
                     {(category as ICategoryProps[]).map((props) => (
                       <li className=" list-item uppercase text-gray-500 my-1">
                         {props.title}

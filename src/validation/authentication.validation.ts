@@ -46,6 +46,7 @@ export const SignUpValidationSchema = yup.object().shape({
     .required("password is required for sign up")
     .min(6)
     .max(16),
+  mobile: yup.string().min(10).max(10),
   fname: yup.string().required("first name is required"),
   lname: yup.string().required("last name is required"),
 });

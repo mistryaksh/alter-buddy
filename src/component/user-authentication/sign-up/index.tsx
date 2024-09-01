@@ -6,6 +6,7 @@ import { Formik } from "formik";
 import { SignUpValidationSchema } from "../../../validation";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AlterBuddyLogo } from "../../../assets/logo";
 
 interface SignUpBodyProps {
   registerFunc: ({
@@ -14,6 +15,7 @@ interface SignUpBodyProps {
     lname,
     mobile,
     password,
+    c_password,
   }: UserRegisterProps) => void;
   loading?: boolean;
 }
@@ -28,13 +30,14 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
   };
   return (
     <div className="flex flex-col items-center gap-3 mx-auto xl:lg:md:w-[70%] shadow-lg border py-10 rounded-lg">
+      <AlterBuddyLogo />
       <h1 className="text-3xl font-semibold text-center capitalize">
         Create New Account
       </h1>
       <AuthModalHeader
         action={() => navigate("/sign-in")}
         btnText="Sign In"
-        title="Already Have Account"
+        title="Already Have Account?"
       />
       {/* {error} */}
       <Formik
@@ -59,7 +62,7 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
         }) => (
           <form onSubmit={handleSubmit} className="w-full">
             <div className="p-3 w-full flex flex-col gap-5 px-5">
-              <div className="flex w-full gap-5 flex-wrap">
+              <div className="flex w-full gap-5">
                 <TextField
                   placeholder="Jhon"
                   label="First Name"
@@ -92,6 +95,7 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
                 touched={touched.email}
               />
               <TextField
+                type="number"
                 value={values.mobile}
                 onChange={handleChange("mobile")}
                 onBlur={handleBlur("mobile")}
@@ -106,14 +110,29 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
                 <TextField
                   placeholder="Choose secure password"
                   label="enter password"
-                  type={password ? "password" : "text"}
+                  type={!password && "password"}
                   value={values.password}
                   onChange={handleChange("password")}
                   onBlur={handleBlur("password")}
                   error={errors.password}
                   touched={touched.password}
                 />
-                <button type="button" onClick={() => showPassword(!password)}>
+                <TextField
+                  placeholder="Matched entered password"
+                  label="Confirm Password"
+                  type={password ? "text" : "password"}
+                  value={values.c_password}
+                  onChange={handleChange("c_password")}
+                  onBlur={handleBlur("c_password")}
+                  error={errors.c_password}
+                  touched={touched.c_password}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    showPassword(!password);
+                  }}
+                >
                   {password ? (
                     <AiOutlineEyeInvisible size={24} />
                   ) : (
@@ -121,16 +140,6 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
                   )}
                 </button>
               </div>
-              <TextField
-                placeholder="Matched entered password"
-                label="Confirm Password"
-                type={password ? "password" : "text"}
-                value={values.password}
-                onChange={handleChange("password")}
-                onBlur={handleBlur("password")}
-                error={errors.password}
-                touched={touched.password}
-              />
             </div>
             <div className="flex gap-3 items-center pl-5 py-3">
               <input
