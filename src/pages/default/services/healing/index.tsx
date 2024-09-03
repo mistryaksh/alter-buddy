@@ -1,9 +1,13 @@
 import React from "react";
 import { MainLayout } from "../../../../layout";
-import { AppButton } from "../../../../component";
+import { AppButton, MentorCard } from "../../../../component";
 import { useNavigate } from "react-router-dom";
+import { ICategoryProps } from "../../../../interface";
+import { useGetMentorsListQuery } from "../../../../redux/rtk-api";
 
 export const HealingPage = () => {
+  const { data: mentors } = useGetMentorsListQuery();
+
   const navigate = useNavigate();
 
   const helpPoint: string[] = [
@@ -275,6 +279,61 @@ export const HealingPage = () => {
             your destiny. Let your actions speak louder than your fears."
           </p>
           <p className="font-semibold">- Brendon Burchard</p>
+        </div>
+      </div>
+      <div className=" xl:lg:md:px-10 px-3">
+        <div className="my-5">
+          <h6 className="text-3xl capitalize font-semibold">
+            Meet <span className="text-primary-500">mental health</span> coaches
+          </h6>
+          <p className="text-gray-500">Talk to your buddy</p>
+        </div>
+        <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-10">
+          {mentors?.data
+            .filter(
+              (mentor) =>
+                (
+                  mentor.category.find(
+                    (category: ICategoryProps) =>
+                      category._id === "657a9dc924b91a24043c71e9"
+                  ) as ICategoryProps
+                )?._id === "657a9dc924b91a24043c71e9"
+            )
+            .map(
+              ({
+                name,
+                accountStatus,
+                category,
+                specialists,
+                _id,
+                image,
+                description,
+                languages,
+              }) => (
+                <MentorCard
+                  key={_id}
+                  expertise={
+                    (category as ICategoryProps[])
+                      .map((prop) => {
+                        return prop.title.toLowerCase();
+                      })
+                      .join(", ") as unknown as string
+                  }
+                  languages={languages.join(", ")}
+                  fname={name.firstName}
+                  lname={name.lastName}
+                  description={description}
+                  image={
+                    image?.length
+                      ? image
+                      : "https://qph.cf2.quoracdn.net/main-qimg-5b495cdeb2ebb79cff41634e5f9ea076"
+                  }
+                  specialist={specialists}
+                  verified={accountStatus.verification}
+                  id={_id as string}
+                />
+              )
+            )}
         </div>
       </div>
     </MainLayout>

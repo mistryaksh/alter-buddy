@@ -1,10 +1,13 @@
 import React from "react";
 import { MainLayout } from "../../../../layout";
-import { AppButton } from "../../../../component";
+import { AppButton, MentorCard } from "../../../../component";
 import { useNavigate } from "react-router-dom";
+import { useGetMentorsListQuery } from "../../../../redux/rtk-api";
+import { ICategoryProps } from "../../../../interface";
 
 export const MentalHealthPage = () => {
   const navigate = useNavigate();
+  const { data: mentors } = useGetMentorsListQuery();
 
   const helpPoint: string[] = [
     "Anxiety",
@@ -281,6 +284,57 @@ export const MentalHealthPage = () => {
           >
             TALK TO US NOW!
           </AppButton>
+        </div>
+      </div>
+      <div className=" xl:lg:md:px-10 px-3">
+        <div className="my-5">
+          <h6 className="text-3xl capitalize font-semibold">
+            Meet <span className="text-primary-500">mental health</span> coaches
+          </h6>
+          <p className="text-gray-500">Talk to your buddy</p>
+        </div>
+        <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-10">
+          {mentors?.data
+            .filter(
+              (props) =>
+                (props.category as ICategoryProps[])[0]._id ===
+                "657a9dda24b91a24043c71ec"
+            )
+            .map(
+              ({
+                name,
+                accountStatus,
+                category,
+                specialists,
+                _id,
+                image,
+                description,
+                languages,
+              }) => (
+                <MentorCard
+                  key={_id}
+                  expertise={
+                    (category as ICategoryProps[])
+                      .map((prop) => {
+                        return prop.title.toLowerCase();
+                      })
+                      .join(", ") as unknown as string
+                  }
+                  languages={languages.join(", ")}
+                  fname={name.firstName}
+                  lname={name.lastName}
+                  description={description}
+                  image={
+                    image?.length
+                      ? image
+                      : "https://qph.cf2.quoracdn.net/main-qimg-5b495cdeb2ebb79cff41634e5f9ea076"
+                  }
+                  specialist={specialists}
+                  verified={accountStatus.verification}
+                  id={_id as string}
+                />
+              )
+            )}
         </div>
       </div>
     </MainLayout>

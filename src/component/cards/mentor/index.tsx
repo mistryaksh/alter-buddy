@@ -39,11 +39,11 @@ export const MentorCard: FC<MentorCardProps> = ({
     <div className="p-3 rounded-lg bg-white shadow-primary-100 shadow-xl border">
       <div className="flex items-center gap-3 justify-between">
         <div className="flex  xl:lg:md:flex-row flex-col xl:lg:md:items-center gap-3">
-          <div className="object-cover xl:lg:md:w-[40%]">
+          <div className="object-cover xl:lg:md:w-[35%]">
             <img
               src={image}
               alt={fname + lname}
-              className="rounded-lg xl:lg:md:object-cover xl:lg:md:aspect-square xl:lg:md:object-center"
+              className="rounded-lg w-[200px] xl:lg:md:object-cover xl:lg:md:aspect-square xl:lg:md:object-center"
             />
           </div>
           <div className="flex-1">

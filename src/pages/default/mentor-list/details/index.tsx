@@ -152,10 +152,13 @@ export const UserMentorDetailsPage = () => {
                   <h6 className="text-3xl capitalize">
                     {mentor?.data.name.firstName} {mentor?.data.name.lastName}
                   </h6>
-                  <p className="capitalize text-gray-500">
+                  <p className="capitalize text-primary-500 text-lg mt-2">
                     {mentor?.data.category
                       .map((props) => props.title)
                       .join(", ")}
+                  </p>
+                  <p className="capitalize text-gray-500 mt-2">
+                    {mentor?.data.languages.join(", ")}
                   </p>
                 </div>
               </div>
