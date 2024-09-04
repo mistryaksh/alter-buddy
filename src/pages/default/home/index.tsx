@@ -29,11 +29,12 @@ import Aos from "aos";
 import { MdStarPurple500 } from "react-icons/md";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 import { ICategoryProps } from "../../../interface";
 
 export const DefaultHome = () => {
@@ -520,10 +521,8 @@ export const DefaultHome = () => {
         <div className="lg:mx-auto pl-5 xl:border=">
           <Swiper
             spaceBetween={10}
-            autoplay
             className={"mySwiper"}
             height={520}
-            modules={[Autoplay]}
             pagination={{
               clickable: true,
             }}
@@ -546,11 +545,11 @@ export const DefaultHome = () => {
               // Large desktops
               1200: {
                 slidesPerView: 3.5,
-                spaceBetween: 15,
+                spaceBetween: 0,
               },
               1300: {
                 slidesPerView: 3.5,
-                spaceBetween: 20,
+                spaceBetween: 0,
               },
             }}
           >
@@ -559,12 +558,14 @@ export const DefaultHome = () => {
                 className="flex flex-col justify-between items-stretch rounded-md"
                 key={_id}
               >
-                <img
-                  src={image}
-                  className="object-cover aspect-square object-top"
-                  alt={name.firstName}
-                />
-                <div className="py-5 px-5 flex flex-col justify-between border bg-white rounded-b-lg">
+                <div className="h-[250px] w-[80%] overflow-hidden">
+                  <img
+                    src={image}
+                    className="object-cover aspect-square object-center"
+                    alt={name.firstName}
+                  />
+                </div>
+                <div className="py-5 px-5 flex flex-col w-[80%] justify-between border bg-white rounded-b-lg">
                   <h6 className="text-xl font-libre capitalize truncate">
                     {name?.firstName} {name?.lastName}
                   </h6>

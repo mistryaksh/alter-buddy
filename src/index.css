@@ -170,3 +170,23 @@ video {
   display: block;
   font-family: inherit;
 }
+
+.swiper-button-next::after {
+  color: theme("colors.primary.500");
+  background: #fff;
+  right: 0 !important;
+  padding: 10px;
+  border-radius: theme("borderRadius.md");
+  font-size: 30px !important;
+  size: 30px !important;
+}
+
+.swiper-button-prev::after {
+  color: theme("colors.primary.500");
+  background: #fff;
+  left: 0 !important;
+  padding: 10px;
+  border-radius: theme("borderRadius.md");
+  font-size: 30px !important;
+  size: 30px !important;
+}
