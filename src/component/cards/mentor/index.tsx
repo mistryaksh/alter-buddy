@@ -48,7 +48,7 @@ export const MentorCard: FC<MentorCardProps> = ({
           </div>
           <div className="flex-1">
             <p className="text-xl capitalize">
-              {lname} {fname}
+              {fname} {lname}
             </p>
           </div>
         </div>

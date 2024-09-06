@@ -1,5 +1,6 @@
 import React from "react";
 import { MainLayout } from "../../../layout";
+import { AiFillLinkedin } from "react-icons/ai";
 
 export const TeamPage = () => {
   interface MarketingHeadProps {
@@ -201,19 +202,15 @@ export const TeamPage = () => {
                   key={i}
                   className="flex border w-full flex-wrap xl:lg:md:flex-col xl:flex-row lg:flex-row md:flex-row items-center my-4 gap-5  rounded-md"
                 >
-                  <div className="flex flex-col xl:lg:md:flex-row items-start bg-white shadow-lg rounded-lg overflow-hidden mx-auto">
+                  <div className="flex  pb-6 flex-col xl:lg:md:flex-row items-start bg-white shadow-lg rounded-lg overflow-hidden mx-auto">
                     <div className="xl:lg:md:w-1/5 h-full object-cover">
                       <img className="" src={image} alt={`${name}'s`} />
                       <p className="font-semibold my-2 pl-3">Contact:</p>
-                      <p className="text-gray-700 pl-3">
-                        Email:{" "}
-                        <a
-                          href={`mailto:${contact.email}`}
-                          className="text-blue-500"
-                        >
-                          {contact.email}
-                        </a>
-                      </p>
+                      <div className="px-3">
+                        <button className="px-2 py-2">
+                          <AiFillLinkedin size={30} />
+                        </button>
+                      </div>
                     </div>
                     <div className="px-3 py-5 w-2/3">
                       <div className="font-bold text-2xl mb-2">{name}</div>

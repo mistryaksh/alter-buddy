@@ -29,12 +29,12 @@ import Aos from "aos";
 import { MdStarPurple500 } from "react-icons/md";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+
 import { ICategoryProps } from "../../../interface";
 
 export const DefaultHome = () => {
@@ -520,6 +520,7 @@ export const DefaultHome = () => {
       <section className=" bg-primary-100 mb-10 mt-10 py-10">
         <div className="lg:mx-auto pl-5 xl:border=">
           <Swiper
+            modules={[Navigation, Pagination]}
             spaceBetween={10}
             className={"mySwiper"}
             height={520}
@@ -532,17 +533,14 @@ export const DefaultHome = () => {
                 slidesPerView: 1.5,
                 spaceBetween: 3,
               },
-              // Small tablets
               768: {
                 slidesPerView: 2.5,
                 spaceBetween: 5,
               },
-              // Tablets and small desktops
               992: {
                 slidesPerView: 3.5,
                 spaceBetween: 10,
               },
-              // Large desktops
               1200: {
                 slidesPerView: 3.5,
                 spaceBetween: 0,
@@ -571,7 +569,7 @@ export const DefaultHome = () => {
                   </h6>
                   <ul className="list list-disc pl-3 text-sm">
                     {(category as ICategoryProps[]).map((props) => (
-                      <li className=" list-item uppercase text-gray-500 my-1">
+                      <li className="list-item uppercase text-gray-500 my-1">
                         {props.title}
                       </li>
                     ))}
