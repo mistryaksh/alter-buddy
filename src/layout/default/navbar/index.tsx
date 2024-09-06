@@ -229,21 +229,37 @@ export const MainNavBar: FC<MainNavBarProps> = ({
           {(ref) => (
             <div className="xl:hidden lg:hidden" id="mobile-menu">
               <ul className="flex items-center flex-col justify-end w-full mb-10 gap-6">
-                <li className="bg-primary-500 px-5 py-2 rounded-md text-white">
-                  <Link to="/rant">Rant</Link>
+                <li
+                  className="bg-primary-500 px-5 py-2 rounded-md text-white cursor-pointer"
+                  onClick={() => {
+                    if (profile?.data) {
+                      return window.location.replace(
+                        `https://rant.alterbuddy.com/rant?appToken=${localStorage.getItem(
+                          "USER_TOKEN"
+                        )}`
+                      );
+                    } else {
+                      toast.warn("please login first");
+                      navigate("/sign-in");
+                    }
+                  }}
+                >
+                  Rant
                 </li>
-                <li className="xl:text-md text-sm">
+                <li className="xl:text-md text-sm hover:text-primary-500">
                   <Link to="/about">About Us</Link>
                 </li>
-                {/* <li>
-                    <Link to="/services">Our Services</Link>
-                  </li> */}
+
                 <li>
                   <div className="group relative">
                     <Menu as="div" className="relative inline-block text-left">
                       <Menu.Button
-                        onMouseEnter={({ target }) => (target as any)?.click()}
-                        className="flex items-center gap-1 xl:text-md text-sm text-gray-500 capitalize"
+                        onMouseEnter={({ target }) => {
+                          if (target) {
+                            (target as any)?.click();
+                          }
+                        }}
+                        className="flex items-center gap-1 xl:text-md text-sm capitalize xl:text-md hover:text-primary-500"
                       >
                         Our Services
                         <FaChevronDown />
@@ -266,7 +282,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                               get help for:
                             </label>
                             <div className="flex flex-1 flex-col gap-3 mt-5">
-                              {pageContent?.map(({ path, pageTitle }) => (
+                              {pageContent?.map(({ pageTitle, path }) => (
                                 <div className="flex gap-3" key={path}>
                                   <Menu.Item>
                                     {({ active }) => (
@@ -278,7 +294,7 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                                             : "text-gray-500"
                                         } group flex w-full font-bold items-center capitalize`}
                                       >
-                                        {pageTitle}
+                                        {pageTitle.toLowerCase()}
                                       </Link>
                                     )}
                                   </Menu.Item>
@@ -291,19 +307,20 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                     </Menu>
                   </div>
                 </li>
-                <li className="xl:text-md text-sm">
-                  <Link to="/buddytube">BuddyTube</Link>
-                </li>
-                <li className="xl:text-md text-sm">
+                {/* <li className="xl:text-md text-sm hover:text-primary-500">
+                    <Link to="/buddytube">BuddyTube</Link>
+                  </li> */}
+                <li className="xl:text-md text-sm hover:text-primary-500">
                   <Link to="/contact-us">Contact Us</Link>
                 </li>
+
                 {!authenticated ? (
-                  <li
-                    onClick={() => navigate}
-                    className="cursor-pointer xl:text-md font-libre text-sm hover:text-primary-500"
+                  <div
+                    onClick={() => navigate("/sign-in")}
+                    className="text-primary-500 capitalize cursor-pointer font-sans2"
                   >
                     Login
-                  </li>
+                  </div>
                 ) : (
                   <>
                     <li className="xl:text-md text-sm">
@@ -314,11 +331,11 @@ export const MainNavBar: FC<MainNavBarProps> = ({
                       onClick={logout}
                     >
                       <AiOutlineLogout size={25} />
-                      Logout
+                      {navLoading ? "please wait..." : "logout"}
                     </li>
                   </>
                 )}
-                <li className="xl:text-md text-sm">
+                <li className="xl:text-md text-sm hover:text-primary-500">
                   <Link to="/our-team">Our Team</Link>
                 </li>
               </ul>
