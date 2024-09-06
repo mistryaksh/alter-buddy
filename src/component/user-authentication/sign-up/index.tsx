@@ -29,9 +29,9 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
     setAccept(!accept);
   };
   return (
-    <div className="flex flex-col items-center gap-3 mx-auto xl:lg:md:w-[70%] shadow-lg border py-10 rounded-lg">
+    <div className="flex flex-col items-center gap-3 xl:lg:md:mx-auto xl:lg:md:w-[70%] w-full shadow-lg border py-10 rounded-lg">
       <AlterBuddyLogo />
-      <h1 className="text-3xl font-semibold text-center capitalize">
+      <h1 className="xl:lg:md:text-3xl text-xl font-semibold text-center capitalize">
         Create New Account
       </h1>
       <AuthModalHeader
@@ -62,7 +62,7 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
         }) => (
           <form onSubmit={handleSubmit} className="w-full">
             <div className="p-3 w-full flex flex-col gap-5 px-5">
-              <div className="flex w-full gap-5">
+              <div className="flex w-full gap-5 flex-wrap xl:md:lg:flex-nowrap">
                 <TextField
                   placeholder="Jhon"
                   label="First Name"
@@ -106,7 +106,7 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
                 error={errors.mobile}
                 touched={touched.mobile}
               />
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-5 xl:lg:md:flex-nowrap flex-wrap">
                 <TextField
                   placeholder="Choose secure password"
                   label="enter password"
@@ -117,28 +117,35 @@ export const SignUpBody: FC<SignUpBodyProps> = ({ registerFunc, loading }) => {
                   error={errors.password}
                   touched={touched.password}
                 />
-                <TextField
-                  placeholder="Matched entered password"
-                  label="Confirm Password"
-                  type={password ? "text" : "password"}
-                  value={values.c_password}
-                  onChange={handleChange("c_password")}
-                  onBlur={handleBlur("c_password")}
-                  error={errors.c_password}
-                  touched={touched.c_password}
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    showPassword(!password);
-                  }}
-                >
-                  {password ? (
-                    <AiOutlineEyeInvisible size={24} />
-                  ) : (
-                    <AiOutlineEye size={24} />
-                  )}
-                </button>
+                <div className="flex gap-3 items-center w-full">
+                  <div className="flex-1">
+                    <TextField
+                      width="100%"
+                      placeholder="Matched entered password"
+                      label="Confirm Password"
+                      type={password ? "text" : "password"}
+                      value={values.c_password}
+                      onChange={handleChange("c_password")}
+                      onBlur={handleBlur("c_password")}
+                      error={errors.c_password}
+                      touched={touched.c_password}
+                    />
+                  </div>
+                  <div className="w-[8%]">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        showPassword(!password);
+                      }}
+                    >
+                      {password ? (
+                        <AiOutlineEyeInvisible size={24} />
+                      ) : (
+                        <AiOutlineEye size={24} />
+                      )}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="flex gap-3 items-center pl-5 py-3">
