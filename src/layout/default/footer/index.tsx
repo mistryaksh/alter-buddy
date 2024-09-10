@@ -69,7 +69,7 @@ export const MainFooter: FC<MainFooterProps> = () => {
               {category?.data?.map(({ title }, i) => (
                 <li className="mb-3" key={i}>
                   <Link
-                    to="#"
+                    to={`/mentor/list?target=${title}`}
                     className="text-gray-600 hover:text-gray-900 capitalize"
                   >
                     {title}

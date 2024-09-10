@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MainLayout } from "../../../../layout";
 import { AppButton } from "../../../../component";
 import { useNavigate } from "react-router-dom";
+import { useAuthenticationSlice } from "../../../../redux/features";
+import { toast } from "react-toastify";
+import { useLazyProfileUserQuery } from "../../../../redux/rtk-api";
 
 export const RantPage = () => {
+  const { authentication } = useAuthenticationSlice();
+  const [GetProfile, { data: profile }] = useLazyProfileUserQuery();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authentication) {
+      (async () => {
+        await GetProfile();
+      })();
+    }
+  }, [GetProfile, authentication]);
 
   const understandPoint: string[] = [
     "Overwhelming Stress",
@@ -110,7 +123,16 @@ export const RantPage = () => {
         <div className="py-10">
           <AppButton
             onClick={() => {
-              navigate("/sign-in");
+              if (profile?.data) {
+                return window.location.replace(
+                  `https://rant.alterbuddy.com/rant?appToken=${localStorage.getItem(
+                    "USER_TOKEN"
+                  )}`
+                );
+              } else {
+                toast.warn("please login first");
+                navigate("/sign-in");
+              }
             }}
             outlined
           >
@@ -171,7 +193,16 @@ export const RantPage = () => {
         <div className="py-10 flex justify-center">
           <AppButton
             onClick={() => {
-              navigate("/sign-in");
+              if (profile?.data) {
+                return window.location.replace(
+                  `https://rant.alterbuddy.com/rant?appToken=${localStorage.getItem(
+                    "USER_TOKEN"
+                  )}`
+                );
+              } else {
+                toast.warn("please login first");
+                navigate("/sign-in");
+              }
             }}
             outlined
           >

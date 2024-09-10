@@ -6,10 +6,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import { ICategoryProps } from "../../../interface";
 import { FaChevronDown } from "react-icons/fa";
-import { useServicesSlice } from "../../../redux/features";
+import {
+  useAuthenticationSlice,
+  useServicesSlice,
+} from "../../../redux/features";
 import { AlterBuddyLogo } from "../../../assets/logo";
 import Aos from "aos";
-import { useProfileUserQuery } from "../../../redux/rtk-api";
+import { useLazyProfileUserQuery } from "../../../redux/rtk-api";
 import { toast } from "react-toastify";
 
 interface MainNavBarProps {
@@ -28,11 +31,18 @@ export const MainNavBar: FC<MainNavBarProps> = ({
   logout,
   navLoading,
 }) => {
-  const { data: profile } = useProfileUserQuery();
+  const { authentication } = useAuthenticationSlice();
+  const [GetProfile, { data: profile }] = useLazyProfileUserQuery();
 
   useEffect(() => {
     Aos.init({});
-  }, []);
+    if (authentication) {
+      (async () => {
+        await GetProfile();
+      })();
+    }
+  }, [authentication, GetProfile]);
+
   const { pageContent } = useServicesSlice();
   const navigate = useNavigate();
   return (

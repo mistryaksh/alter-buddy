@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const PrivacyPolicyPage = () => {
   return (
     <MainLayout>
-      <div className="container pt-10 mx-auto">
+      <div className="container pt-10 mx-auto xl:lg:md:px-0 px-5">
         <h6 className="text-2xl text-primary-500">Privacy Policy</h6>
         <p className="font-semibold text-gray-500 my-3">
           Learn more about how AlterBuddy collects and uses data and your rights

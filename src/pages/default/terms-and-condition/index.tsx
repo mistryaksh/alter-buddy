@@ -3,7 +3,7 @@ import { MainLayout } from "../../../layout";
 export const TermsAndConditionPage = () => {
   return (
     <MainLayout>
-      <div className="py-20 container mx-auto">
+      <div className="py-20 container mx-auto xl:lg:md:px-0 px-5">
         <h6 className="underline text-2xl text-center text-primary-500">
           TERMS OF USE
         </h6>

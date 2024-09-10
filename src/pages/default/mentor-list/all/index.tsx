@@ -8,12 +8,14 @@ import {
 import { useAppDispatch } from "../../../../redux";
 import { handleError } from "../../../../redux/features";
 import { MentorCard } from "../../../../component";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import clsx from "clsx";
 import { ICategoryProps } from "../../../../interface";
 
 export const AllMentorsPage = () => {
   const { id } = useParams();
+  const [params] = useSearchParams();
+  const target = params.get("target");
   const [filter, setFilter] = useState<string>("all");
   const {
     data: category,
@@ -29,6 +31,12 @@ export const AllMentorsPage = () => {
     error: mentorError,
   } = useGetMentorsListQuery();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (target?.length) {
+      setFilter(target);
+    }
+  }, [target]);
 
   useEffect(() => {
     if (isCategoryError) {

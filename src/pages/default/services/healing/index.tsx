@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { MainLayout } from "../../../../layout";
 import { AppButton, MentorCard } from "../../../../component";
 import { useNavigate } from "react-router-dom";
 import { ICategoryProps } from "../../../../interface";
 import { useGetMentorsListQuery } from "../../../../redux/rtk-api";
+import { useAuthenticationSlice } from "../../../../redux/features";
 
 export const HealingPage = () => {
   const { data: mentors } = useGetMentorsListQuery();
+  const { authentication } = useAuthenticationSlice();
+  const useMentorDiv = useRef(null);
 
   const navigate = useNavigate();
 
@@ -208,7 +211,16 @@ export const HealingPage = () => {
           </div>
         </div>
         <div className="py-10">
-          <AppButton onClick={() => navigate("/sign-in")} outlined>
+          <AppButton
+            onClick={() => {
+              if (!authentication) {
+                navigate("/sign-in");
+              } else {
+                useMentorDiv.current.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            outlined
+          >
             TALK TO US NOW!
           </AppButton>
         </div>
@@ -269,7 +281,16 @@ export const HealingPage = () => {
           IN SHORT ‘WE BECOME YOUR GUIDING ANGEL ON YOUR JOURNEY TOWARDS GROWTH’
         </p>
         <div>
-          <AppButton onClick={() => navigate("/sign-in")} outlined>
+          <AppButton
+            onClick={() => {
+              if (!authentication) {
+                navigate("/sign-in");
+              } else {
+                useMentorDiv.current.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            outlined
+          >
             TALK TO US NOW!
           </AppButton>
         </div>
@@ -281,7 +302,11 @@ export const HealingPage = () => {
           <p className="font-semibold">- Brendon Burchard</p>
         </div>
       </div>
-      <div className=" xl:lg:md:px-10 px-3">
+      <div
+        ref={useMentorDiv}
+        id="targetDiv"
+        className=" xl:lg:md:px-10 px-3 mb-20"
+      >
         <div className="my-5">
           <h6 className="text-3xl capitalize font-semibold">
             Meet <span className="text-primary-500">mental health</span> coaches
