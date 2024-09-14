@@ -3,19 +3,22 @@ import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../../../layout";
 import {
   useGetAllCategoryQuery,
+  useGetAllSlotsQuery,
   useGetMentorsListQuery,
 } from "../../../../redux/rtk-api";
 import { useAppDispatch } from "../../../../redux";
 import { handleError } from "../../../../redux/features";
 import { MentorCard } from "../../../../component";
 import { useParams, useSearchParams } from "react-router-dom";
-import clsx from "clsx";
 import { ICategoryProps } from "../../../../interface";
+import { Field, Label, Select } from "@headlessui/react";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export const AllMentorsPage = () => {
   const { id } = useParams();
   const [params] = useSearchParams();
   const target = params.get("target");
+  const { data: slots } = useGetAllSlotsQuery();
   const [filter, setFilter] = useState<string>("all");
   const {
     data: category,
@@ -31,6 +34,12 @@ export const AllMentorsPage = () => {
     error: mentorError,
   } = useGetMentorsListQuery();
   const dispatch = useAppDispatch();
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value.toLowerCase());
+  };
 
   useEffect(() => {
     if (target?.length) {
@@ -84,41 +93,63 @@ export const AllMentorsPage = () => {
             </div>
           </div>
           <div className="py-20 container mx-auto px-5">
-            <div className="flex xl:lg:md:gap-10 gap-3 xl:lg:md:justify-start justify-center flex-wrap">
-              <div
-                onClick={() => setFilter("all")}
-                className={clsx(
-                  filter === "all"
-                    ? "bg-primary-500 text-white"
-                    : "bg-white text-gray-950",
-                  "px-10 py-2 rounded-md focus:border-primary-500 hover:border-primary-500 hover:cursor-pointer group flex justify-center items-center"
-                )}
-              >
-                <p className="capitalize">All</p>
-              </div>
-              {category?.data
-                .slice()
-                .sort((a, b) => a.title.localeCompare(b.title))
-                .map(({ _id, title }) => (
-                  <div
-                    key={_id}
-                    onClick={() => setFilter(title)}
-                    className={clsx(
-                      filter === title
-                        ? "bg-primary-500 text-white"
-                        : "bg-white text-gray-950",
-                      "px-10 py-2 rounded-md hover:border-primary-500 hover:cursor-pointer group flex justify-center items-center"
-                    )}
+            <div className="flex justify-between w-full xl:lg:md:gap-10 gap-3 xl:lg:md:justify-start flex-wrap">
+              <Field className="flex flex-1 gap-3 items-start">
+                <Label>
+                  <span className="text-gray-500 mr-3">Category</span>
+                  <Select
+                    onChange={(prop) => {
+                      console.log(prop.target.value);
+                      setFilter(prop.target.value);
+                    }}
+                    className="border px-5 py-2 focus:outline-none appearance-none rounded-md"
+                    value={filter}
                   >
-                    <p className="capitalize">{title}</p>
-                  </div>
-                ))}
+                    <option value={"all"}>All</option>
+                    {category?.data
+                      .slice()
+                      .sort((a, b) => a.title.localeCompare(b.title))
+                      .map(({ title, _id }) => (
+                        <option key={_id} value={title}>
+                          {title.toUpperCase()}
+                        </option>
+                      ))}
+                  </Select>
+                </Label>
+              </Field>
+              <div className="w-[350px] bg-white flex items-center gap-3 border rounded-md  px-5 py-2">
+                <AiOutlineSearch size={22} />
+                <input
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="bg-transparent focus:outline-none w-full"
+                  placeholder="Search Mentors"
+                  type="search"
+                />
+              </div>
             </div>
           </div>
           <div className="container mx-auto xl:px-0 lg:px-0 px-5">
             <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-10">
               {(mentor?.data.length as number) > 0 &&
                 mentor?.data
+                  .filter((item) => {
+                    // Check if the mentor's name matches the search query
+                    const matchesSearch =
+                      item.name.firstName.toLowerCase().includes(searchQuery) ||
+                      item.name.lastName.toLowerCase().includes(searchQuery);
+
+                    // Check if the mentor matches the category filter
+                    const matchesCategory =
+                      filter === "all" ||
+                      item.category.some(
+                        (cat) =>
+                          categoryIds.includes(cat._id) && cat.title === filter
+                      );
+
+                    // Return true if both search and category filters are matched
+                    return matchesSearch && matchesCategory;
+                  })
                   .filter((item) => {
                     if (filter === "all") {
                       return true; // No filtering
@@ -132,13 +163,11 @@ export const AllMentorsPage = () => {
                   .map(
                     ({
                       name,
-                      accountStatus,
                       category,
                       specialists,
                       _id,
                       image,
                       description,
-                      languages,
                     }) => (
                       <MentorCard
                         key={_id}
@@ -149,7 +178,6 @@ export const AllMentorsPage = () => {
                             })
                             .join(", ") as unknown as string
                         }
-                        languages={languages.join(", ")}
                         fname={name.firstName}
                         lname={name.lastName}
                         description={description}
@@ -159,7 +187,10 @@ export const AllMentorsPage = () => {
                             : "https://qph.cf2.quoracdn.net/main-qimg-5b495cdeb2ebb79cff41634e5f9ea076"
                         }
                         specialist={specialists}
-                        verified={accountStatus.verification}
+                        latestSlot={
+                          slots?.data.filter((prop) => prop._id === _id)[0]
+                            ?.slots[0]?.time
+                        }
                         id={_id as string}
                       />
                     )

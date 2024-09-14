@@ -38,6 +38,7 @@ export interface IMentorProps {
   _id?: string;
   createdAt?: string;
   updatedAt?: string;
+  qualification: string;
 }
 
 export interface ITopMentorProps {

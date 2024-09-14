@@ -146,7 +146,7 @@ export const UserMentorDetailsPage = () => {
                 <img
                   src={mentor?.data?.image}
                   alt="mentor "
-                  className="object-cover aspect-square w-[20%] rounded-md border-2 p-2 border-dashed border-primary-500"
+                  className="object-cover aspect-square w-[20%] rounded-md p-2 shadow-lg"
                 />
                 <div className="flex items-start flex-col">
                   <h6 className="text-3xl capitalize">
@@ -157,9 +157,22 @@ export const UserMentorDetailsPage = () => {
                       .map((props) => props.title)
                       .join(", ")}
                   </p>
-                  <p className="capitalize text-gray-500 mt-2">
-                    {mentor?.data.languages.join(", ")}
+                  <p className="capitalize text-primary-500 text-md mt-2">
+                    Qualification :{" "}
+                    {mentor?.data.qualification
+                      ? mentor?.data?.qualification
+                      : "N/A"}
                   </p>
+                  <div className="flex mt-3 gap-3 items-center">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/484/484633.png"
+                      alt=""
+                      width={20}
+                    />
+                    <p className="capitalize text-gray-900 mt-2">
+                      {mentor?.data.languages.join(",  ")}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -309,31 +322,29 @@ export const UserMentorDetailsPage = () => {
                   flexed
                   disabled={
                     !packages?.data.find(
-                      (props) =>
-                        props.packageType === "video" && props.price > 0
+                      (props) => props.packageType === "chat" && props.price > 0
                     )
                   }
                   onClick={() =>
-                    navigate(
-                      `/user/video-call/${mentor?.data._id}?audio_call=false`
-                    )
+                    navigate(`/user/chat/${mentor?.data._id}/${v4()}`)
                   }
                 >
-                  <div className="flex items-center gap-2 flex-nowrap">
-                    <AiOutlineVideoCamera size={25} />
+                  <div className="flex items-center gap-2">
+                    <AiOutlineMessage size={25} />{" "}
                     <span className="text-sm">
                       {
                         packages?.data.find((props) => {
-                          if (props.packageType === "video") {
+                          if (props.packageType === "chat") {
                             return `${props.price} coins`;
                           } else {
-                            return "no packages";
+                            return 0;
                           }
                         })?.price
                       }
                     </span>
                   </div>
                 </AppButton>
+
                 <AppButton
                   outlined
                   flexed
@@ -369,22 +380,25 @@ export const UserMentorDetailsPage = () => {
                   flexed
                   disabled={
                     !packages?.data.find(
-                      (props) => props.packageType === "chat" && props.price > 0
+                      (props) =>
+                        props.packageType === "video" && props.price > 0
                     )
                   }
                   onClick={() =>
-                    navigate(`/user/chat/${mentor?.data._id}/${v4()}`)
+                    navigate(
+                      `/user/video-call/${mentor?.data._id}?audio_call=false`
+                    )
                   }
                 >
-                  <div className="flex items-center gap-2">
-                    <AiOutlineMessage size={25} />{" "}
+                  <div className="flex items-center gap-2 flex-nowrap">
+                    <AiOutlineVideoCamera size={25} />
                     <span className="text-sm">
                       {
                         packages?.data.find((props) => {
-                          if (props.packageType === "chat") {
+                          if (props.packageType === "video") {
                             return `${props.price} coins`;
                           } else {
-                            return 0;
+                            return "no packages";
                           }
                         })?.price
                       }

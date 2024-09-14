@@ -39,6 +39,9 @@ const CallApi = createApi({
     GetSlotsByMentorId: query<{ data: IMentorCallScheduleProps[] }, string>({
       query: (mentorId: string) => `/mentor/schedule/${mentorId}`,
     }),
+    GetAllSlots: query<{ data: IMentorCallScheduleProps[] }, void>({
+      query: () => `/all-slots`,
+    }),
   }),
 });
 
@@ -48,6 +51,7 @@ export const {
   useMentorCreateScheduleMutation,
   useDeleteSlotAsMentorByIdMutation,
   useLazyGetSlotsByMentorIdQuery,
+  useGetAllSlotsQuery,
 } = CallApi;
 export const CallApiReducer = CallApi.reducer;
 export const CallApiMiddleware = CallApi.middleware;

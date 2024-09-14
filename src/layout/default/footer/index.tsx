@@ -136,8 +136,10 @@ export const MainFooter: FC<MainFooterProps> = () => {
               </Link>
             </div>
             <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-0 ">
-              <Link
-                to="#"
+              <a
+                href="https://x.com/alterbuddy_?s=21"
+                target="_blank"
+                rel="noreferrer"
                 className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-primary-600"
               >
                 <svg
@@ -154,9 +156,11 @@ export const MainFooter: FC<MainFooterProps> = () => {
                     fill="currentColor"
                   />
                 </svg>
-              </Link>
-              <Link
-                to="https://www.instagram.com/alter.buddy?igsh=cXpjMGl3ZDA1dmJw&utm_source=qr"
+              </a>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.instagram.com/alter.buddy?igsh=cXpjMGl3ZDA1dmJw&utm_source=qr"
                 className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-primary-600"
               >
                 <svg
@@ -170,10 +174,11 @@ export const MainFooter: FC<MainFooterProps> = () => {
                     fill="currentColor"
                   />
                 </svg>
-              </Link>
-              <Link
+              </a>
+              <a
+                href="https://www.linkedin.com/company/alterbuddy/"
                 target="_blank"
-                to="https://www.linkedin.com/company/alterbuddy/"
+                rel="noreferrer"
                 className="w-9 h-9 rrnded-full bg-gray-700 flex justify-center items-center hover:bg-primary-600"
               >
                 <svg
@@ -187,8 +192,8 @@ export const MainFooter: FC<MainFooterProps> = () => {
                     fill="currentColor"
                   />
                 </svg>
-              </Link>
-              <Link
+              </a>
+              {/* <a
                 to="#"
                 className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-primary-600"
               >
@@ -205,7 +210,7 @@ export const MainFooter: FC<MainFooterProps> = () => {
                     fill="currentColor"
                   />
                 </svg>
-              </Link>
+              </a> */}
             </div>
           </div>
         </div>

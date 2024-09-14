@@ -106,11 +106,13 @@ export const ContactPage = () => {
                     </h5>
                   </Link>
                   <div className="flex items-center justify-between border-t border-gray-100 pt-6">
-                    <Link to="#" className="mr-6">
+                    <a href="https://wa.me/917718845776" className="mr-6">
                       <AiOutlineWhatsApp className="fill-[#25D366]" size={30} />
-                    </Link>
-                    <Link
-                      to="https://www.instagram.com/alter.buddy?igsh=cXpjMGl3ZDA1dmJw&utm_source=qr"
+                    </a>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://www.instagram.com/alter.buddy?igsh=cXpjMGl3ZDA1dmJw&utm_source=qr"
                       className="mr-6"
                     >
                       <svg
@@ -149,23 +151,39 @@ export const ContactPage = () => {
                           </linearGradient>
                         </defs>
                       </svg>
-                    </Link>
-                    <Link to="#" className="mr-6">
-                      <AiOutlineFacebook className="fill-[#1877F2]" size={30} />
-                    </Link>
-                    <Link
-                      to="https://www.linkedin.com/company/alterbuddy/"
+                    </a>
+                    <a
                       target="_blank"
+                      rel="noreferrer"
+                      href="https://www.facebook.com/profile.php?id=61554826193607&mibextid=LQQJ4d"
+                      className="mr-6"
+                    >
+                      <AiOutlineFacebook className="fill-[#1877F2]" size={30} />
+                    </a>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://www.linkedin.com/company/alterbuddy/"
                       className="mr-6"
                     >
                       <AiOutlineLinkedin className="fill-[#0A66C2]" size={30} />
-                    </Link>
-                    <Link to="#" className="mr-6">
+                    </a>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://x.com/alterbuddy_?s=21"
+                      className="mr-6"
+                    >
                       <RiTwitterXFill className="fill-[#000]" size={30} />
-                    </Link>
-                    <Link to="#" className="mr-6">
+                    </a>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://t.me/alterbuddy"
+                      className="mr-6"
+                    >
                       <FaTelegramPlane className="fill-[#0088CC]" size={30} />
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

@@ -3,26 +3,25 @@ import { BiCertification } from "react-icons/bi";
 import { AppButton } from "../../UI";
 import { useNavigate } from "react-router-dom";
 import { useLazyGetSlotsByMentorIdQuery } from "../../../redux/rtk-api";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 interface MentorCardProps {
   fname: string;
   lname: string;
   specialist: string[];
   image: string;
-  verified: boolean;
   expertise: string;
   id: string;
   description: string;
-  languages: string;
+  latestSlot: string;
 }
 
 export const MentorCard: FC<MentorCardProps> = ({
   fname,
   image,
   lname,
-  languages,
-  verified,
   expertise,
+  latestSlot,
   id,
 }) => {
   const navigate = useNavigate();
@@ -61,12 +60,15 @@ export const MentorCard: FC<MentorCardProps> = ({
             <span className="text-primary-500 capitalize">{expertise}</span>
           </p>
         </div>
-        {/* <div className="flex gap-3 items-center">
-          <BiCertification size={24} className="text-primary-500" />
+        <div className="flex gap-3 items-center">
+          <AiOutlineCheckCircle size={24} className="text-primary-500" />
           <p className="capitalize font-light">
-            Languages for <span className="text-primary-500">{languages}</span>
+            Next available at{" "}
+            <span className="text-primary-500 capitalize">
+              {latestSlot ? latestSlot : "N/A"}
+            </span>
           </p>
-        </div> */}
+        </div>
       </div>
       <hr className="border-t border-primary-500" />
       <div className="flex items-center mt-3 gap-3 w-full">
@@ -94,7 +96,7 @@ export const MentorCard: FC<MentorCardProps> = ({
               return prop.mentorId === id;
             })?.length
               ? "Not available"
-              : "Schedule now"}
+              : "Book Sessions"}
           </p>
         </AppButton>
       </div>
