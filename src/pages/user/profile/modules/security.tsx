@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import { AppButton, TextField } from "../../../../component";
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export interface IUserSecurityProps {
   handleUpdatePassword: ({
@@ -19,6 +20,9 @@ export const Security: FC<IUserSecurityProps> = ({
   setSelectedTab,
   isLoading,
 }) => {
+  const [toggle, setToggle] = useState<boolean>(true);
+  const [toggle2, setToggle2] = useState<boolean>(true);
+
   return (
     <div>
       <Formik
@@ -43,20 +47,34 @@ export const Security: FC<IUserSecurityProps> = ({
                 password
               </p>
             </div>
-            <div className="mt-5">
+            <div className="flex items-end gap-3 mt-5">
               <TextField
                 outlined
+                type={toggle ? "password" : "text"}
                 value={values.newPassword}
                 onChange={handleChange("newPassword")}
                 onBlur={handleBlur("newPassword")}
                 touched={touched.newPassword}
                 error={errors.newPassword}
                 label="Enter New Password"
-                placeholder="New Password Must be 12 character long"
+                placeholder="Enter New Password"
+                required
               />
+              <AppButton
+                filled
+                type="button"
+                onClick={() => setToggle(!toggle)}
+              >
+                {toggle ? (
+                  <AiOutlineEye size={26} />
+                ) : (
+                  <AiOutlineEyeInvisible size={26} />
+                )}
+              </AppButton>
             </div>
-            <div>
+            <div className="flex items-center gap-3">
               <TextField
+                type={toggle2 ? "password" : "text"}
                 outlined
                 value={values.confirmNewPassword}
                 onChange={handleChange("confirmNewPassword")}
@@ -65,7 +83,19 @@ export const Security: FC<IUserSecurityProps> = ({
                 error={errors.confirmNewPassword}
                 label="Confirm New Password"
                 placeholder="Type your new password again"
+                required
               />
+              <AppButton
+                filled
+                type="button"
+                onClick={() => setToggle2(!toggle2)}
+              >
+                {toggle2 ? (
+                  <AiOutlineEye size={26} />
+                ) : (
+                  <AiOutlineEyeInvisible size={26} />
+                )}
+              </AppButton>
             </div>
             <div className="flex justify-end">
               <AppButton onClick={() => setSelectedTab(0)} type="button">
