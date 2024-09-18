@@ -11,11 +11,13 @@ export interface IUserSecurityProps {
     confirmNewPassword: string;
   }) => void;
   setSelectedTab: Dispatch<SetStateAction<number>>;
+  isLoading: boolean;
 }
 
 export const Security: FC<IUserSecurityProps> = ({
   handleUpdatePassword,
   setSelectedTab,
+  isLoading,
 }) => {
   return (
     <div>
@@ -69,7 +71,12 @@ export const Security: FC<IUserSecurityProps> = ({
               <AppButton onClick={() => setSelectedTab(0)} type="button">
                 Change Profile Details
               </AppButton>
-              <AppButton type="submit" filled>
+              <AppButton
+                disabled={isLoading}
+                type="submit"
+                filled
+                loading={isLoading}
+              >
                 Change Password
               </AppButton>
             </div>

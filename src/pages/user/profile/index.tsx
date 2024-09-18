@@ -108,10 +108,14 @@ export const UserProfilePage = () => {
     newPassword: string;
     confirmNewPassword: string;
   }) => {
-    if (newPassword !== confirmNewPassword) {
-      toast.warn("both password should be same");
+    if (newPassword === "" || confirmNewPassword === "") {
+      toast.warn("please enter password");
     } else {
-      await UpdateProfile({ password: confirmNewPassword });
+      if (newPassword !== confirmNewPassword) {
+        toast.warn("both password should be same");
+      } else {
+        await UpdateProfile({ password: confirmNewPassword });
+      }
     }
   };
 
@@ -178,6 +182,7 @@ export const UserProfilePage = () => {
               {
                 Component: (
                   <Security
+                    isLoading={isUpdateLoading}
                     handleUpdatePassword={handleUpdatePassword}
                     setSelectedTab={setSelectedTab}
                   />
