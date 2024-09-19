@@ -104,6 +104,29 @@ const AuthenticationApi = createApi({
         };
       },
     }),
+    ValidateResetToken: query<{ data: string }, string>({
+      query: (resetToken) => `/validate-reset-token?resetToken=${resetToken}`,
+    }),
+    ResetPassword: mutation<
+      { data: string },
+      {
+        password: string;
+        newPassword: string;
+        token: string;
+      }
+    >({
+      query: ({ newPassword, password, token }) => {
+        return {
+          url: "/reset-password",
+          method: "PUT",
+          body: {
+            password,
+            newPassword,
+            token,
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -117,6 +140,8 @@ export const {
   useVerifyCodeMutation,
   useUpdateUserProfileMutation,
   useForgotPasswordMailMutation,
+  useLazyValidateResetTokenQuery,
+  useResetPasswordMutation,
 } = AuthenticationApi;
 export const AuthenticationApiReducer = AuthenticationApi.reducer;
 export const AuthenticationMiddleware = AuthenticationApi.middleware;

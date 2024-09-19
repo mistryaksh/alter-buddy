@@ -29,6 +29,7 @@ import {
   MentorVideoCallPage,
   PackagesPage,
   ForgotPasswordPage,
+  ResetPasswordPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
 import { UserVideoCallPage } from "../pages/user/video";
@@ -40,6 +41,7 @@ export const AppRoutes = () => {
       <Route path="/sign-in" element={<SignInPage />} />
       <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/our-team" element={<TeamPage />} />
       <Route path="/contact-us" element={<ContactPage />} />
