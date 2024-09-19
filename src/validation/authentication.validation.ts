@@ -21,11 +21,7 @@ export const SignInInitialState: SignInProps = {
 
 export const SignInValidationSchema = yup.object().shape({
   mobile: yup.string().required("email / mobile is required to sign in"),
-  password: yup
-    .string()
-    .required("password is required for sign in")
-    .min(6)
-    .max(16),
+  password: yup.string().required("password is required for sign in").min(6),
 });
 
 export const SignUpInitialState: SignUpProps = {

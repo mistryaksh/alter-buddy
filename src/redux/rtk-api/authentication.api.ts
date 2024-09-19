@@ -95,6 +95,15 @@ const AuthenticationApi = createApi({
         };
       },
     }),
+    ForgotPasswordMail: mutation<{ data: string }, string>({
+      query: (email) => {
+        return {
+          url: "/forgot-password-mail",
+          body: { email },
+          method: "POST",
+        };
+      },
+    }),
   }),
 });
 
@@ -107,6 +116,7 @@ export const {
   useSendVerificationCodeMutation,
   useVerifyCodeMutation,
   useUpdateUserProfileMutation,
+  useForgotPasswordMailMutation,
 } = AuthenticationApi;
 export const AuthenticationApiReducer = AuthenticationApi.reducer;
 export const AuthenticationMiddleware = AuthenticationApi.middleware;

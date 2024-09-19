@@ -7,7 +7,7 @@ import {
   SignInInitialState,
   SignInValidationSchema,
 } from "../../../validation";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 interface SignInBodyProps {
@@ -79,6 +79,11 @@ export const SignInBody: FC<SignInBodyProps> = ({ loginFunc, loading }) => {
                     )}
                   </button>
                 </div>
+              </div>
+              <div className="flex justify-end">
+                <Link to="/forgot-password" className="text-primary-500">
+                  Reset Password?
+                </Link>
               </div>
               <div className="flex gap-3 items-center pl-3 py-3">
                 <input
