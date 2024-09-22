@@ -36,7 +36,6 @@ export const MentorDashboardPage = () => {
   const lengthFormatter = Intl.NumberFormat("en", { notation: "compact" });
 
   const { data } = useMentorGetMySchedulesQuery();
-  console.log(data?.data[0].slots.find((prop) => prop.userId).userId);
   return (
     <MentorLayout>
       <AlterBuddyLogo />
@@ -48,12 +47,12 @@ export const MentorDashboardPage = () => {
             <p className="capitalize">
               <strong>Name:</strong>{" "}
               {
-                data?.data[0].slots.find((prop) => prop.userId).userId.name
-                  .firstName
+                data?.data[0].slots.find((prop) => prop?.userId)?.userId?.name
+                  ?.firstName
               }{" "}
               {
-                data?.data[0].slots.find((prop) => prop.userId).userId.name
-                  .lastName
+                data?.data[0].slots.find((prop) => prop?.userId)?.userId?.name
+                  ?.lastName
               }
             </p>
             <p>
