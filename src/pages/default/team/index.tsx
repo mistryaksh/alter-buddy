@@ -122,34 +122,6 @@ export const TeamPage = () => {
         "I am passionate about leveraging technology to create solutions that make a difference. At AlterBuddy, my goal is to ensure that our platform runs smoothly, so every user can focus on their journey to happiness and healing.",
     },
     {
-      image: require("../../../assets/team-members/swarup.jpeg"),
-      name: "Swarup Kamerkar",
-      desc: "As the Marketing Head of Alter Buddy and the Founder of Creative Corner, I am responsible for steering our brand's growth and presence in the digital world. My focus is on crafting compelling strategies that resonate with our audience, ensuring that our message reaches the right people at the right time.",
-      title: "Marketing Head",
-      company: "AlterBuddy",
-      responsibilities: [
-        "Steering brand's growth and presence in the digital world",
-        "Crafting compelling strategies",
-        "Ensuring the message reaches the right people at the right time",
-      ],
-      expertise: {
-        yearsOfExperience: 3,
-        specializations: ["Digital Marketing", "Graphic Design"],
-        skills: [
-          "Building brand identity",
-          "Increasing online engagement",
-          "Strategic planning",
-          "Execution",
-        ],
-      },
-      contact: {
-        email: "info@creativecornerindia.in",
-      },
-      uniqueFact:
-        "I believe in the power of creativity and strategy combined. My mission is to create impactful digital experiences that not only engage but also inspire. If you interact with our brand, I want you to leave feeling more connected and informed.",
-    },
-
-    {
       image: require("../../../assets/team-members/priyanka.jpeg"),
       desc: "As the Content Writer at AlterBuddy, I craft content that connects with our audience on a deep level. From blog posts to web copy, my goal is to ensure that every word reflects our brand’s mission of spreading happiness and support.",
       name: "Priyanka Jaiswal",
@@ -188,7 +160,6 @@ export const TeamPage = () => {
                 {
                   name,
                   company,
-                  contact,
                   expertise,
                   responsibilities,
                   title,
@@ -206,12 +177,6 @@ export const TeamPage = () => {
                   <div className="flex  pb-6 flex-col xl:lg:md:flex-row items-start bg-white shadow-lg rounded-lg overflow-hidden mx-auto">
                     <div className="xl:lg:md:w-1/5 h-full object-cover">
                       <img className="" src={image} alt={`${name}'s`} />
-                      <p className="font-semibold my-2 pl-3">Contact:</p>
-                      <div className="px-3">
-                        <button className="px-2 py-2">
-                          <AiFillLinkedin size={30} />
-                        </button>
-                      </div>
                     </div>
                     <div className="px-3 py-5 w-2/3">
                       <div className="font-bold text-2xl mb-2">{name}</div>
@@ -252,65 +217,6 @@ export const TeamPage = () => {
                       </p>
                     </div>
                   </div>
-                  {/* ) : ( */}
-                  {/* <div className="flex flex-wrap items-start bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl">
-                    <div className="p-6 w-2/3">
-                      <div className="font-bold text-2xl mb-2">{name}</div>
-                      <h2 className="text-xl text-gray-700 mb-2">{title}</h2>
-                      <p className="text-gray-500 mb-4">{company}</p>
-                      <p className="text-gray-700 mb-4">{desc}</p>
-                      <p className="font-semibold mb-2">Responsibilities:</p>
-                      <ul className="list-disc list-inside mb-4">
-                        {responsibilities.map((resp, index) => (
-                          <li key={index} className="text-gray-700">
-                            {resp}
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="font-semibold mb-2">Expertise:</p>
-                      <ul className="list-disc list-inside mb-4">
-                        {expertise.yearsOfExperience && (
-                          <li className="text-gray-700">
-                            Years of Experience: {expertise.yearsOfExperience}
-                          </li>
-                        )}
-                        {expertise.specializations &&
-                          expertise.specializations.length > 0 && (
-                            <li className="text-gray-700">
-                              Specializations:{" "}
-                              {expertise.specializations.join(", ")}
-                            </li>
-                          )}
-                        {expertise.skills && expertise.skills.length > 0 && (
-                          <li className="text-gray-700">
-                            Skills: {expertise.skills.join(", ")}
-                          </li>
-                        )}
-                      </ul>
-                      <p className="italic text-gray-500 mb-4">
-                        Unique Fact: {uniqueFact}
-                      </p>
-                    </div>
-                    <div
-                      className="
-                      w-1/3 h-full object-cover"
-                    >
-                      <>
-                        <img className="" src={image} alt={`${name}'s`} />
-                        <p className="font-semibold my-2 pl-3">Contact:</p>
-                        <p className="text-gray-700 pl-3">
-                          Email:{" "}
-                          <a
-                            href={`mailto:${contact.email}`}
-                            className="text-blue-500"
-                          >
-                            {contact.email}
-                          </a>
-                        </p>
-                      </>
-                    </div>
-                  </div> */}
-                  {/* )} */}
                 </div>
               )
             )
