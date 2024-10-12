@@ -22,14 +22,11 @@ export const JoinForm: FC<JoinRoomProps> = ({
   const hmsActions = useHMSActions();
 
   const Continue = async () => {
-    console.log(roomCode);
     if (!roomCode && !userName) {
-      console.log("failed to start meeting");
     } else {
       const authToken = await hmsActions.getAuthTokenByRoomCode({
         roomCode: roomCode,
       });
-      console.log(authToken);
       try {
         await hmsActions.join({
           userName: userName,

@@ -1,6 +1,5 @@
 import React from "react";
 import { MainLayout } from "../../../layout";
-import { AiFillLinkedin } from "react-icons/ai";
 
 export const TeamPage = () => {
   interface MarketingHeadProps {

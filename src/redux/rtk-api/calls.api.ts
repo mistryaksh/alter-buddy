@@ -14,6 +14,22 @@ const CallApi = createApi({
       query: () => `/mentor/schedule`,
       providesTags: ["callApi"],
     }),
+    UseWalletCoins: mutation<
+      { data: "SUCCESS" | "FAILED" },
+      { coinsToUsed: number; useType: string; userId: string }
+    >({
+      query: ({ coinsToUsed, useType, userId }) => {
+        return {
+          url: "/buddy-coins/use",
+          method: "PUT",
+          body: {
+            coinsToUsed,
+            useType,
+            userId,
+          },
+        };
+      },
+    }),
     MentorCreateSchedule: mutation<{ data: string }, IMentorCallScheduleProps>({
       query: ({ slotsDate, slots }) => {
         return {
@@ -52,6 +68,7 @@ export const {
   useDeleteSlotAsMentorByIdMutation,
   useLazyGetSlotsByMentorIdQuery,
   useGetAllSlotsQuery,
+  useUseWalletCoinsMutation,
 } = CallApi;
 export const CallApiReducer = CallApi.reducer;
 export const CallApiMiddleware = CallApi.middleware;

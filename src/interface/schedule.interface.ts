@@ -15,4 +15,16 @@ export interface ISlotProps {
   time: string;
   booked: boolean;
   userId?: UserProps;
+  status: ISlotStatus;
+}
+
+export enum ISlotStatus {
+  ACCEPTED = "accepted",
+  REJECTED = "rejected",
+}
+
+export interface IConfirmSlotProps {
+  slotId: string;
+  mentorId: string;
+  userId: string;
 }

@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState } from "react";
 
 import { MentorLayout } from "../../../layout";
 import {
+  useCancelSlotMutation,
+  useConfirmSlotMutation,
   useMentorCreateScheduleMutation,
   useMentorGetMySchedulesQuery,
   useMentorProfileQuery,
@@ -10,7 +12,7 @@ import { AppButton, TextField } from "../../../component";
 import { AiOutlineLoading } from "react-icons/ai";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { ISlotProps } from "../../../interface";
+import { IConfirmSlotProps, ISlotProps } from "../../../interface";
 import {
   Description,
   Dialog,
@@ -27,12 +29,36 @@ import { toast } from "react-toastify";
 import moment from "moment";
 
 export const SchedulesMentorPage = () => {
+  const [noteModel, setNoteModel] = useState<ISlotProps | null>(null);
+  const [noteField, setNoteField] = useState<string>("");
   const [date, setDate] = useState(new Date());
   const [selectedSlots, setSelectedSlots] = useState<ISlotProps[]>([]);
+  const [
+    confirmSlot,
+    {
+      isSuccess: isConfirmed,
+      isError: isConfirmError,
+      error: confirmError,
+      isLoading: isConfirmLoading,
+      data: confirmData,
+    },
+  ] = useConfirmSlotMutation();
+  const [
+    cancelSlot,
+    {
+      isError: isCancelError,
+      error: cancelError,
+      data: cancelData,
+      isLoading: isCancelLoading,
+      isSuccess: isCancelSuccess,
+    },
+  ] = useCancelSlotMutation();
 
   // MAKE NEW SLOT DATA
   const [newDate, setNewDate] = useState(""); // State for selected date
-  const [newSlots, setNewSlots] = useState([{ time: "", booked: false }]);
+  const [newSlots, setNewSlots] = useState([
+    { time: "", booked: false, status: "rejected" },
+  ]);
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -63,9 +89,38 @@ export const SchedulesMentorPage = () => {
     }
   }, [isNewError, newError, isNewSuccess, newData?.data]);
 
+  useEffect(() => {
+    if (isConfirmError) {
+      console.log(confirmError);
+    }
+    if (isConfirmed) {
+      toast.success(confirmData?.data);
+    }
+  }, [isConfirmError, confirmError, confirmData?.data, isConfirmed]);
+
+  useEffect(() => {
+    if (isCancelError) {
+      console.log(cancelError);
+    }
+    if (isCancelSuccess) {
+      toast.success(cancelData?.data);
+    }
+  }, [isCancelError, cancelError, cancelData?.data, isCancelSuccess]);
+
+  const onConfirm = async ({ mentorId, slotId, userId }: IConfirmSlotProps) => {
+    console.log({ mentorId, slotId, userId });
+    await confirmSlot({ slotId, mentorId, userId });
+  };
+
+  const onCancel = async (slotId: string) => {
+    await cancelSlot(slotId);
+  };
+
   const handleDateChange = (newDate) => {
     setDate(newDate);
-    const selectedDate = newDate.toISOString().split("T")[0]; // Get the date in YYYY-MM-DD format
+
+    // Use moment.js or .toLocaleDateString() for timezone-safe date formatting
+    const selectedDate = moment(newDate).format("YYYY-MM-DD"); // Ensure it's using the correct timezone
     const slotsForDate = data?.data.find((day) => {
       return day.slotsDate === selectedDate;
     });
@@ -73,11 +128,10 @@ export const SchedulesMentorPage = () => {
   };
 
   const getTileClassName = ({ date }) => {
-    const dateString = date.toISOString().split("T")[0];
+    const dateString = moment(date).format("YYYY-MM-DD");
     const hasSlots = data?.data.some((day) => day.slotsDate === dateString);
     return hasSlots ? "has-slot-tile" : "";
   };
-
   // Handle change in date input
   const handleNewDateChange = (event) => {
     setNewDate(event.target.value.toString());
@@ -85,22 +139,21 @@ export const SchedulesMentorPage = () => {
 
   // Handle change in time input
   const handleTimeChange = (index, event) => {
-    const newSlot = [...newSlots];
-    newSlots[index].time = event.target.value;
-    setNewSlots(newSlot);
+    const updatedSlots = [...newSlots]; // Clone array to avoid direct mutation
+    updatedSlots[index].time = event.target.value;
+    setNewSlots(updatedSlots);
   };
 
   // Add a new time slot
   const addTimeSlot = () => {
-    setNewSlots([...newSlots, { time: "", booked: false }]);
+    setNewSlots([...newSlots, { time: "", booked: false, status: "rejected" }]);
   };
 
   // Remove a time slot
   const removeTimeSlot = (index) => {
-    const newSlot = newSlots.filter((_, i) => i !== index);
-    setNewSlots(newSlot);
+    const updatedSlots = newSlots.filter((_, i) => i !== index);
+    setNewSlots(updatedSlots);
   };
-
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -108,22 +161,25 @@ export const SchedulesMentorPage = () => {
       slots: newSlots,
       slotsDate: newDate,
     };
-    await CreateSlot({
-      slots: slotData.slots,
-      slotsDate: moment(slotData.slotsDate).format("YYYY-MM-DD"),
-      mentorId: profile?.data._id as string,
-    });
-    console.log(slotData); // Here you would normally send the data to the server or update the state
+    try {
+      await CreateSlot({
+        slots: slotData.slots as any,
+        slotsDate: moment(slotData.slotsDate).format("YYYY-MM-DD"),
+        mentorId: profile?.data._id as string,
+      });
+    } catch (error) {
+      console.error("Error creating slot:", error);
+    }
   };
 
   return (
     <MentorLayout>
-      {isLoading && (
+      {isLoading && isConfirmLoading && isCancelLoading && (
         <div className="h-[300px] flex justify-center">
           <AiOutlineLoading className="animate-spin" size={30} />
         </div>
       )}
-      {!isLoading && (
+      {!isLoading && !isConfirmLoading && !isCancelLoading && (
         <>
           <div>
             <div className="flex justify-between items-center xl:lg:md:gap-10  flex-wrap">
@@ -158,37 +214,44 @@ export const SchedulesMentorPage = () => {
             />
             <div className="flex-1">
               <div className="mt-6">
-                {selectedSlots.length > 0 && (
-                  <h3 className="text-xl text-gray-700 mb-4">
-                    🚀 You're all set for{" "}
-                    <span className="text-primary-500">
-                      {date.toISOString().split("T")[0]}
-                    </span>{" "}
-                    with{" "}
-                    <span className="text-primary-500">
-                      {selectedSlots.length}
-                    </span>{" "}
-                    exciting slot
-                    {selectedSlots.length > 1 ? "s" : ""} available for
-                    sessions. Let’s get those slots booked and make the most out
-                    of your day!
-                  </h3>
-                )}
-                <ul className=" flex flex-col flex-wrap gap-3">
-                  {selectedSlots.length > 0 ? (
-                    selectedSlots.map((slot, index) => (
-                      <div>
+                <h6 className="text-2xl font-semibold">
+                  {moment(date).format("dddd, MMMM DD, YYYY")}
+                </h6>
+                {selectedSlots.length > 0 ? (
+                  <ul className="flex flex-col flex-wrap gap-3 mt-4">
+                    {selectedSlots.map((slot, index) => (
+                      <Fragment key={index}>
                         <li
-                          key={index}
-                          className={`px-4 py-3 rounded-md flex items-center ${
+                          className={`px-4 py-3 rounded-md flex justify-between items-center ${
                             slot.booked
                               ? "border border-primary-500 text-primary-500"
                               : "border-2 border-green-600 text-green-600"
                           }`}
                         >
-                          {slot.time} - {slot.booked ? "Session" : "Available"}{" "}
+                          <div className="flex gap-1 items-center">
+                            <span>{slot.time}</span>
+                            <span>{!slot.booked && "Available"}</span>
+                            <span className="capitalize">
+                              {slot.status === "accepted" ? (
+                                <span>{`Confirmed for ${
+                                  slot.userId?.name?.firstName || ""
+                                } ${slot.userId?.name?.lastName || ""}`}</span>
+                              ) : (
+                                <span className="text-gray-500">Pending</span>
+                              )}
+                            </span>
+                          </div>
+                          <div>
+                            <AppButton
+                              onClick={() => setNoteModel(slot)}
+                              filled
+                            >
+                              Add Note
+                            </AppButton>
+                          </div>
                         </li>
-                        {slot.booked && (
+
+                        {slot.status !== "accepted" && slot.booked && (
                           <Menu>
                             <MenuButton as={Fragment}>
                               {({ active }) => (
@@ -200,7 +263,7 @@ export const SchedulesMentorPage = () => {
                                     "rounded-md px-5 py-3 flex items-center gap-3 w-full mt-1"
                                   )}
                                 >
-                                  Session with {slot?.userId?.name?.firstName}{" "}
+                                  Requested By {slot?.userId?.name?.firstName}{" "}
                                   {slot?.userId?.name?.lastName}{" "}
                                   <FiChevronDown size={24} />
                                 </button>
@@ -208,30 +271,50 @@ export const SchedulesMentorPage = () => {
                             </MenuButton>
                             <MenuItems
                               anchor="bottom start"
-                              className="w-64 z-50 right-4 px-3  space-y-4 bg-white py-2 rounded-md shadow-xl shadow-primary-500 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                              className="w-64 z-50 right-4 px-3 space-y-4 bg-white py-2 rounded-md shadow-xl shadow-primary-500 ring-1 ring-black ring-opacity-5 focus:outline-none"
                             >
                               <MenuItem as={Fragment}>
-                                {({ focus }) => <div>Accept Appointment</div>}
+                                {({ focus }) => (
+                                  <button
+                                    onClick={() => {
+                                      onConfirm({
+                                        slotId: slot?._id,
+                                        mentorId: profile?.data?._id,
+                                        userId: slot?.userId?._id,
+                                      });
+                                    }}
+                                  >
+                                    Accept Appointment
+                                  </button>
+                                )}
                               </MenuItem>
-
                               <MenuItem as={Fragment}>
-                                {({ focus }) => <div>Cancel Appointment</div>}
+                                {({ focus }) => (
+                                  <button onClick={() => onCancel(slot._id)}>
+                                    Cancel Appointment
+                                  </button>
+                                )}
                               </MenuItem>
                             </MenuItems>
                           </Menu>
                         )}
-                      </div>
-                    ))
-                  ) : (
-                    <div className="shadow-lg border flex flex-col justify-center items-center w-full h-full p-3">
-                      <p className="text-lg">
-                        No slots available for this date.
-                      </p>
-                    </div>
-                  )}
-                </ul>
+                      </Fragment>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="shadow-lg border flex flex-col justify-center items-center w-full h-full p-3">
+                    <p className="text-lg">
+                      No slots available for{" "}
+                      <span className="text-primary-500">
+                        {moment(date).format("LL")}
+                      </span>
+                      .
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
+
             <Dialog
               open={isOpen}
               onClose={() => setIsOpen(false)}
@@ -286,6 +369,58 @@ export const SchedulesMentorPage = () => {
               </div>
             </Dialog>
           </div>
+        </>
+      )}
+      {noteModel?._id?.length && (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    Add Note for This Slot?
+                  </h3>
+                  <button
+                    onClick={() => setNoteModel(null)}
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      ×
+                    </span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                    <TextField
+                      onChange={(prop) => setNoteField(prop.target.value)}
+                      value={noteField}
+                    />
+                  </p>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                  <button
+                    className="text-gray-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setNoteModel(null)}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="bg-primary-500 text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setNoteModel(null)}
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       )}
     </MentorLayout>

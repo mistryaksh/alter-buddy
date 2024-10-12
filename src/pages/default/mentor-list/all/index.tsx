@@ -14,12 +14,51 @@ import { ICategoryProps } from "../../../../interface";
 import { Field, Label, Select } from "@headlessui/react";
 import { AiOutlineSearch } from "react-icons/ai";
 
+const indianLanguages = [
+  "Hindi",
+  "Tamil",
+  "Telugu",
+  "Kannada",
+  "Gujarati",
+  "Bengali",
+  "Punjabi",
+  "Marathi",
+  "Malayalam",
+  "Odia",
+  "Assamese",
+  "Rajasthani",
+  "Sanskrit",
+  "Konkani",
+  "Tulu",
+  "Dogri",
+  "Maithili",
+  "Bhojpuri",
+  "Sambalpuri",
+  "Kodava",
+  "Meitei",
+  "Kashmiri",
+  "Chhattisgarhi",
+  "Badaga",
+  "Braj Bhasha",
+  "Kutchi",
+  "Sindhi",
+  "Toda",
+  "Mizo",
+  "Marwari",
+  "Magahi",
+  "Bodo",
+  "Beary",
+  "Pahari",
+  "Bhili",
+];
+
 export const AllMentorsPage = () => {
   const { id } = useParams();
   const [params] = useSearchParams();
   const target = params.get("target");
   const { data: slots } = useGetAllSlotsQuery();
-  const [filter, setFilter] = useState<string>("all");
+  const [catFilter, setCatFilter] = useState<string>("all");
+  const [langFilter, setLangFilter] = useState<string>("all");
   const {
     data: category,
     isError: isCategoryError,
@@ -43,7 +82,7 @@ export const AllMentorsPage = () => {
 
   useEffect(() => {
     if (target?.length) {
-      setFilter(target);
+      setCatFilter(target);
     }
   }, [target]);
 
@@ -76,7 +115,7 @@ export const AllMentorsPage = () => {
                 <h1 className="text-5xl capitalize font-bold">
                   Talk to your{" "}
                   <span className="text-primary-500">
-                    {filter === "all" ? "Mentor" : filter}
+                    {catFilter === "all" ? "Mentor" : catFilter}
                   </span>
                 </h1>
                 <p className="text-gray-500">
@@ -93,30 +132,52 @@ export const AllMentorsPage = () => {
             </div>
           </div>
           <div className="py-20 container mx-auto px-5">
-            <div className="flex justify-between w-full xl:lg:md:gap-10 gap-3 xl:lg:md:justify-start flex-wrap">
-              <Field className="flex flex-1 gap-3 items-start">
-                <Label>
-                  <span className="text-gray-500 mr-3">Category</span>
-                  <Select
-                    onChange={(prop) => {
-                      console.log(prop.target.value);
-                      setFilter(prop.target.value);
-                    }}
-                    className="border px-5 py-2 focus:outline-none appearance-none rounded-md"
-                    value={filter}
-                  >
-                    <option value={"all"}>All</option>
-                    {category?.data
-                      .slice()
-                      .sort((a, b) => a.title.localeCompare(b.title))
-                      .map(({ title, _id }) => (
-                        <option key={_id} value={title}>
-                          {title.toUpperCase()}
-                        </option>
-                      ))}
-                  </Select>
-                </Label>
-              </Field>
+            <div className="flex w-full xl:lg:md:gap-10 gap-3 justify-between flex-wrap">
+              <div className="flex justify-start gap-5 items-center">
+                <Field className="flex gap-3 items-start">
+                  <Label>
+                    <span className="text-gray-500 mr-3">Category</span>
+                    <Select
+                      onChange={(prop) => {
+                        setCatFilter(prop.target.value);
+                      }}
+                      className="border px-5 py-2 focus:outline-none appearance-none rounded-md"
+                      value={catFilter}
+                    >
+                      <option value={"all"}>All</option>
+                      {category?.data
+                        .slice()
+                        .sort((a, b) => a.title.localeCompare(b.title))
+                        .map(({ title, _id }) => (
+                          <option key={_id} value={title}>
+                            {title.toUpperCase()}
+                          </option>
+                        ))}
+                    </Select>
+                  </Label>
+                </Field>
+                <Field className="flex gap-3 items-start">
+                  <Label>
+                    <span className="text-gray-500 mr-3">Languages</span>
+                    <Select
+                      onChange={(prop) => {
+                        setLangFilter(prop.target.value);
+                      }}
+                      className="border px-5 py-2 focus:outline-none appearance-none rounded-md"
+                      value={langFilter}
+                    >
+                      <option value={"all"}>All</option>
+                      {indianLanguages.map((lang, i) => {
+                        return (
+                          <option key={i} value={lang}>
+                            {lang}
+                          </option>
+                        );
+                      })}
+                    </Select>
+                  </Label>
+                </Field>
+              </div>
               <div className="w-[350px] bg-white flex items-center gap-3 border rounded-md  px-5 py-2">
                 <AiOutlineSearch size={22} />
                 <input
@@ -139,25 +200,33 @@ export const AllMentorsPage = () => {
                       item.name.firstName.toLowerCase().includes(searchQuery) ||
                       item.name.lastName.toLowerCase().includes(searchQuery);
 
-                    // Check if the mentor matches the category filter
+                    // Check if the mentor matches the category catfilter
                     const matchesCategory =
-                      filter === "all" ||
+                      catFilter === "all" ||
                       item.category.some(
                         (cat) =>
-                          categoryIds.includes(cat._id) && cat.title === filter
+                          categoryIds.includes(cat._id) &&
+                          cat.title === catFilter
                       );
 
-                    // Return true if both search and category filters are matched
+                    // Return true if both search and category catfilters are matched
                     return matchesSearch && matchesCategory;
                   })
                   .filter((item) => {
-                    if (filter === "all") {
-                      return true; // No filtering
+                    if (catFilter === "all") {
+                      return true;
                     }
-                    // Filter by category if filter is set
                     return item.category.some(
                       (cat) =>
-                        categoryIds.includes(cat._id) && cat.title === filter
+                        categoryIds.includes(cat._id) && cat.title === catFilter
+                    );
+                  })
+                  .filter((item) => {
+                    if (langFilter === "all") {
+                      return true;
+                    }
+                    return item.languages.some(
+                      (cat) => langFilter.includes(cat) && cat === langFilter
                     );
                   })
                   .map(

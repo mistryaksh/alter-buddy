@@ -125,7 +125,13 @@ export const UserMentorDetailsPage = () => {
     mainId: string;
     mentorId: string;
   }) => {
-    await BookSlotWithMentor({ slotId, userId, mainId, mentorId });
+    await BookSlotWithMentor({
+      slotId,
+      userId,
+      mainId,
+      mentorId,
+      callType: "video",
+    });
   };
   const cleanHTML = DOMPurify.sanitize(mentor?.data?.description);
 
@@ -267,7 +273,7 @@ export const UserMentorDetailsPage = () => {
                     </span>
                   </label>
                   <div className="flex gap-5 flex-wrap mt-3">
-                    {slots?.map(({ time, booked, _id: slotId }) => (
+                    {slots?.map(({ time, booked, _id: slotId, status }) => (
                       <button
                         disabled={booked}
                         onClick={() =>

@@ -38,21 +38,7 @@ const BuddyCoinsApi = createApi({
         };
       },
     }),
-    UseWalletCoins: mutation<
-      { data: "SUCCESS" | "FAILED" },
-      { coinsToUsed: number; useType: string }
-    >({
-      query: ({ coinsToUsed, useType }) => {
-        return {
-          url: "/buddy-coins/use",
-          method: "PUT",
-          body: {
-            coinsToUsed,
-            useType,
-          },
-        };
-      },
-    }),
+   
     GetMyTransaction: query<{ data: ITransactionProps[] }, void>({
       query: () => "/buddy-coins/transactions/my",
     }),
@@ -65,7 +51,6 @@ export const {
   useGetMyWalletQuery,
   useLazyGetMyWalletQuery,
   useRechargeWalletMutation,
-  useUseWalletCoinsMutation,
   useValidateWalletMutation,
   useGetMyTransactionQuery,
 } = BuddyCoinsApi;

@@ -10,9 +10,11 @@ import {
 import { GoPackage } from "react-icons/go";
 import { IconLinkButton } from "../../../component";
 import {
+  useGetMyPackagesQuery,
   useLazyGetUserByIdQuery,
   useMentorProfileQuery,
   useMentorSignOutMutation,
+  useUseWalletCoinsMutation,
 } from "../../../redux/rtk-api";
 import { useAppDispatch } from "../../../redux";
 import { FiPhoneIncoming } from "react-icons/fi";
@@ -25,7 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { removeMentorToken } from "../../../utils";
 import { toast } from "react-toastify";
 import { socket } from "../../../service";
-import moment from "moment";
+import { IChatProps } from "../../../interface";
 
 interface MentorLayoutProps {
   children: ReactNode;
@@ -40,6 +42,17 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
 }) => {
   const [notification, setNotification] = useState<boolean>(false);
   const { data: mentor } = useMentorProfileQuery();
+  const { data: packages } = useGetMyPackagesQuery();
+  const [
+    UseWalletCoins,
+    {
+      isError: isWalletError,
+      error: walletError,
+      data: walletData,
+      isSuccess: isWalletSuccess,
+      isLoading: isWalletLoading,
+    },
+  ] = useUseWalletCoinsMutation();
   const [GetUser, { isError: isUserError, error: userError, data: user }] =
     useLazyGetUserByIdQuery();
   const [SignOut, { isError, error, data, isLoading, isSuccess }] =
@@ -52,16 +65,14 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     if (isUserError) {
       console.log(userError);
     }
-    socket.on("THROW_CALL_REQUEST", (data) => {
-      console.log("DATA", data, moment().fromNow());
-      console.log(data.users.mentor, mentor?.data._id);
-      if (data.users.mentor === mentor?.data._id) {
+    socket.on("THROW_CALL_REQUEST", (data: IChatProps) => {
+      if ((data?.users.mentor as unknown as string) === mentor?.data._id) {
         dispatch(handleReceiveCall(true));
         dispatch(
           handleMentorRoomCode({
             roomCode: data?.sessionDetails?.roomCode?.mentor,
-            userName: data.users.user,
-            roomName: data.sessionDetails.roomName,
+            userName: data?.users.user as unknown as string,
+            roomName: data?.sessionDetails.roomName,
           })
         );
       }
@@ -94,6 +105,18 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     data?.data,
   ]);
 
+  useEffect(() => {
+    if (isWalletError) {
+      console.log(walletError);
+    }
+  }, [walletError, isWalletError]);
+
+  useEffect(() => {
+    if (isWalletSuccess) {
+      console.log(walletData?.data);
+    }
+  }, [isWalletSuccess, walletData?.data]);
+
   const onSignOut = async () => {
     await SignOut();
   };
@@ -112,7 +135,28 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     };
   }, []);
   const AcceptCall = () => {
+    UseWalletCoins({
+      coinsToUsed: (() => {
+        const selectedPackage = packages.data.find(
+          (prop) =>
+            prop.packageType === "audio" ||
+            prop.packageType === "video" ||
+            prop.packageType === "chat"
+        ).price;
+        return selectedPackage ? selectedPackage : 0; // Return 0 if no package is found
+      })(),
+      userId: user?.data?._id as string,
+      useType: `Session Of ${
+        packages?.data?.find(
+          (prop) =>
+            prop?.packageType === "audio" ||
+            prop?.packageType === "video" ||
+            prop?.packageType === "chat"
+        ).packageType
+      } with ${mentor?.data?.name?.firstName} ${mentor?.data?.name?.lastName}`,
+    });
     socket.emit("ACCEPT_CALL", mentorMeetingConfig.mentorRoomCode);
+
     navigate(`/mentor/chat/${mentorMeetingConfig.mentorRoomCode}`, {
       replace: true,
     });
@@ -193,7 +237,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
         </div>
       )}
       <main className="bg-primary-50 overflow-y-scroll p-5 rounded-tl-3xl z-10 rounded-bl-3xl flex-1 relative">
-        {loading && isLoading ? (
+        {loading && isLoading && isWalletLoading ? (
           <div className="flex justify-center items-center h-full w-full flex-col gap-10">
             <AiOutlineLoading
               size={150}

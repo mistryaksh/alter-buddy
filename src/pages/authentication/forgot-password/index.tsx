@@ -31,7 +31,6 @@ export const ForgotPasswordPage = () => {
     if (!email) {
       toast.warn("Please enter email address first!");
     } else {
-      console.log(email);
       await SendResetMail(email);
     }
   };

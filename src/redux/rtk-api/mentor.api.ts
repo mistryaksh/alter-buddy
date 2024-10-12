@@ -24,18 +24,26 @@ const MentorApi = createApi({
     }),
     BookMentorSlot: mutation<
       { data: any },
-      { userId: string; slotId: string; mainId: string; mentorId: string }
+      {
+        userId: string;
+        slotId: string;
+        mainId: string;
+        mentorId: string;
+        callType: string;
+      }
     >({
       query: ({
         slotId,
         userId,
         mainId,
         mentorId,
+        callType,
       }: {
         userId: string;
         slotId: string;
         mainId: string;
         mentorId: string;
+        callType: string;
       }) => {
         return {
           url: "/slot/book",
@@ -45,6 +53,7 @@ const MentorApi = createApi({
             slotId,
             mainId,
             mentorId,
+            callType,
           },
         };
       },
