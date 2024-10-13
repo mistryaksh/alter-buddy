@@ -32,8 +32,8 @@ export const MentorCallHistoryPage = () => {
         return (
           <div>
             <p className="capitalize">
-              {row.original.users.user.name?.firstName}{" "}
-              {row.original.users.user.name?.lastName}
+              {row.original?.users?.user?.name?.firstName}{" "}
+              {row.original?.users?.user?.name?.lastName}
             </p>
           </div>
         );

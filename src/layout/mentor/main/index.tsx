@@ -1,4 +1,11 @@
-import React, { FC, ReactNode, useEffect, useState } from "react";
+import React, {
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { MdLogout, MdMessage, MdOutlineHome } from "react-icons/md";
 import { IoMdCalendar } from "react-icons/io";
 import {
@@ -24,10 +31,8 @@ import {
   useVideoCallSlice,
 } from "../../../redux/features";
 import { useNavigate } from "react-router-dom";
-import { removeMentorToken } from "../../../utils";
-import { toast } from "react-toastify";
 import { socket } from "../../../service";
-import { IChatProps } from "../../../interface";
+import { toast } from "react-toastify";
 
 interface MentorLayoutProps {
   children: ReactNode;
@@ -43,6 +48,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   const [notification, setNotification] = useState<boolean>(false);
   const { data: mentor } = useMentorProfileQuery();
   const { data: packages } = useGetMyPackagesQuery();
+  const [hasUserInteracted, setUserInteracted] = useState(false);
   const [
     UseWalletCoins,
     {
@@ -55,18 +61,67 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   ] = useUseWalletCoinsMutation();
   const [GetUser, { isError: isUserError, error: userError, data: user }] =
     useLazyGetUserByIdQuery();
-  const [SignOut, { isError, error, data, isLoading, isSuccess }] =
+  const [SignOut, { isError, error, data: signOutData, isLoading, isSuccess }] =
     useMentorSignOutMutation();
   const dispatch = useAppDispatch();
   const { mentorMeetingConfig, receivedCall } = useVideoCallSlice();
   const navigate = useNavigate();
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
   useEffect(() => {
     if (isUserError) {
       console.log(userError);
     }
-    socket.on("THROW_CALL_REQUEST", (data: IChatProps) => {
+  }, [isUserError, userError]);
+
+  // Function to initialize audio
+  const initializeAudio = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(require("./original_guitar_jam.mp3"));
+    }
+  };
+
+  // Function to play notification sound
+  const playSound = useCallback(() => {
+    if (audioRef.current && hasUserInteracted) {
+      audioRef.current.play().catch((error) => {
+        console.error("Playback failed:", error);
+      });
+    }
+  }, [hasUserInteracted]);
+
+  // Function to stop notification sound
+  const stopSound = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0; // Reset to the beginning
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(signOutData?.data);
+    }
+  }, [isSuccess, signOutData?.data]);
+
+  useEffect(() => {
+    if (isError) {
+      console.log(error);
+    }
+  }, [isError, error]);
+
+  useEffect(() => {
+    if (mentorMeetingConfig?.requestedUser) {
+      (async () => {
+        await GetUser(mentorMeetingConfig?.requestedUser as string);
+      })();
+    }
+
+    const handleCallRequest = (data: any) => {
       if ((data?.users.mentor as unknown as string) === mentor?.data._id) {
+        initializeAudio();
+        playSound();
         dispatch(handleReceiveCall(true));
         dispatch(
           handleMentorRoomCode({
@@ -76,34 +131,34 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
           })
         );
       }
-    });
-    if (isError) {
-      console.log(error);
-    }
+    };
 
-    if (mentorMeetingConfig?.requestedUser) {
-      (async () => {
-        await GetUser(mentorMeetingConfig?.requestedUser as string);
-      })();
-    }
-    if (isSuccess) {
-      toast(data?.data, { type: "success" });
-      removeMentorToken();
-      navigate("/", { replace: true });
-    }
+    socket.on("THROW_CALL_REQUEST", handleCallRequest);
+
+    return () => {
+      socket.off("THROW_CALL_REQUEST", handleCallRequest); // Cleanup socket listener
+    };
   }, [
     mentor,
     dispatch,
+    mentorMeetingConfig?.requestedUser,
     GetUser,
-    mentorMeetingConfig.requestedUser,
-    isUserError,
-    userError,
-    isError,
-    error,
-    isSuccess,
-    navigate,
-    data?.data,
+    playSound,
   ]);
+
+  const handleUserInteraction = () => {
+    setUserInteracted(true);
+  };
+  useEffect(() => {
+    // This is your user interaction trigger
+    window.addEventListener("click", handleUserInteraction);
+    window.addEventListener("touchstart", handleUserInteraction); // For mobile
+
+    return () => {
+      window.removeEventListener("click", handleUserInteraction);
+      window.removeEventListener("touchstart", handleUserInteraction);
+    };
+  }, []);
 
   useEffect(() => {
     if (isWalletError) {
@@ -135,6 +190,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
     };
   }, []);
   const AcceptCall = () => {
+    stopSound();
     UseWalletCoins({
       coinsToUsed: (() => {
         const selectedPackage = packages.data.find(
@@ -163,6 +219,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   };
 
   const DeclineCall = () => {
+    stopSound();
     socket.emit("DECLINE_CALL", mentorMeetingConfig.mentorRoomCode);
     dispatch(handleReceiveCall(false));
   };

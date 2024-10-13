@@ -13,6 +13,7 @@ export interface IMentorCallScheduleProps {
 export interface ISlotProps {
   _id?: string;
   time: string;
+  note?: string;
   booked: boolean;
   userId?: UserProps;
   status: ISlotStatus;

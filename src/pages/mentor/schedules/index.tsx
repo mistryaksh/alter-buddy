@@ -7,9 +7,10 @@ import {
   useMentorCreateScheduleMutation,
   useMentorGetMySchedulesQuery,
   useMentorProfileQuery,
+  useUpdateSlotMutation,
 } from "../../../redux/rtk-api";
 import { AppButton, TextField } from "../../../component";
-import { AiOutlineLoading } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineLoading } from "react-icons/ai";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { IConfirmSlotProps, ISlotProps } from "../../../interface";
@@ -53,9 +54,19 @@ export const SchedulesMentorPage = () => {
       isSuccess: isCancelSuccess,
     },
   ] = useCancelSlotMutation();
+  const [
+    updateSlot,
+    {
+      isLoading: isUpdateLoading,
+      isSuccess: isUpdateSuccess,
+      error: updateError,
+      data: updateData,
+      isError: isUpdateError,
+    },
+  ] = useUpdateSlotMutation();
 
   // MAKE NEW SLOT DATA
-  const [newDate, setNewDate] = useState(""); // State for selected date
+  const [newDate, setNewDate] = useState("");
   const [newSlots, setNewSlots] = useState([
     { time: "", booked: false, status: "rejected" },
   ]);
@@ -88,6 +99,21 @@ export const SchedulesMentorPage = () => {
       setNewSlots([]);
     }
   }, [isNewError, newError, isNewSuccess, newData?.data]);
+
+  useEffect(() => {
+    if (noteModel?.note.length !== 0) {
+      setNoteField(noteModel?.note);
+    }
+    if (isUpdateError) {
+      console.log(updateError);
+    }
+  }, [isUpdateError, updateError, noteModel?.note]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success(updateData?.data);
+    }
+  }, [isUpdateSuccess, updateData?.data]);
 
   useEffect(() => {
     if (isConfirmError) {
@@ -169,6 +195,23 @@ export const SchedulesMentorPage = () => {
       });
     } catch (error) {
       console.error("Error creating slot:", error);
+    }
+  };
+
+  const onUpdate = async () => {
+    if (!noteField) {
+      return null;
+    } else {
+      updateSlot({
+        slotId: noteModel._id,
+        payload: {
+          note: noteField as string,
+        } as Partial<ISlotProps>,
+      });
+      if (noteField || noteModel) {
+        setNoteField("");
+        setNoteModel(null);
+      }
     }
   };
 
@@ -393,12 +436,39 @@ export const SchedulesMentorPage = () => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-                    <TextField
-                      onChange={(prop) => setNoteField(prop.target.value)}
-                      value={noteField}
-                    />
-                  </p>
+                  {noteModel?.note?.length === 0 && (
+                    <>
+                      <h6 className="capitalize">
+                        This Slot is booked by{" "}
+                        {noteModel?.userId?.name?.firstName}{" "}
+                        {noteModel?.userId?.name?.lastName}
+                      </h6>
+                      <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                        <TextField
+                          outlined
+                          onChange={(e) => setNoteField(e.target.value)}
+                          value={noteField || ""}
+                        />
+                      </p>
+                    </>
+                  )}
+
+                  {noteModel?.note?.length !== 0 && (
+                    <div className="flex items-center justify-between">
+                      <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                        SAVED NOTE: {noteField}
+                      </p>
+                      <AppButton
+                        filled
+                        onClick={() => {
+                          setNoteField("");
+                          setNoteModel({ ...noteModel, note: "" });
+                        }}
+                      >
+                        <AiOutlineClose />
+                      </AppButton>
+                    </div>
+                  )}
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
@@ -409,13 +479,14 @@ export const SchedulesMentorPage = () => {
                   >
                     Close
                   </button>
-                  <button
-                    className="bg-primary-500 text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  <AppButton
+                    loading={isUpdateLoading}
+                    filled
                     type="button"
-                    onClick={() => setNoteModel(null)}
+                    onClick={onUpdate}
                   >
                     Save Changes
-                  </button>
+                  </AppButton>
                 </div>
               </div>
             </div>

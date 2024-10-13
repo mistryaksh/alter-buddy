@@ -45,6 +45,7 @@ export const AppRoutes = () => {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/our-team" element={<TeamPage />} />
       <Route path="/contact-us" element={<ContactPage />} />
+      <Route path="/buddytube" element={<BuddyTubePage />} />
       <Route path="services">
         <Route path="mental-health" element={<MentalHealthPage />} />
         <Route path="manifestation" element={<ManifestationPage />} />

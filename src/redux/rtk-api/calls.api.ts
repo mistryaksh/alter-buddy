@@ -1,6 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { ApiBaseQuery, baseQueryMentor } from "../../utils";
-import { IChatProps, IMentorCallScheduleProps } from "../../interface";
+import {
+  IChatProps,
+  IConfirmSlotProps,
+  IMentorCallScheduleProps,
+  ISlotProps,
+} from "../../interface";
 
 const CallApi = createApi({
   baseQuery: ApiBaseQuery(baseQueryMentor),
@@ -58,6 +63,43 @@ const CallApi = createApi({
     GetAllSlots: query<{ data: IMentorCallScheduleProps[] }, void>({
       query: () => `/all-slots`,
     }),
+    ConfirmSlot: mutation<{ data: string }, IConfirmSlotProps>({
+      query: ({ slotId, mentorId, userId }: IConfirmSlotProps) => {
+        return {
+          url: `/confirm-slot`,
+          method: "PUT",
+          body: {
+            slotId,
+            mentorId,
+            userId,
+          },
+        };
+      },
+    }),
+    CancelSlot: mutation<{ data: string }, string>({
+      query: (slotId: string) => {
+        return {
+          url: `/cancel-slot/`,
+          method: "PUT",
+          body: slotId,
+        };
+      },
+    }),
+    UpdateSlot: mutation<
+      { data: string },
+      Partial<{ slotId: string; payload: Partial<ISlotProps> }>
+    >({
+      query: ({ payload, slotId }) => {
+        return {
+          url: `/mentor/slot/${slotId}`,
+          method: "PUT",
+          body: {
+            ...payload,
+          },
+        };
+      },
+      invalidatesTags: ["callApi"],
+    }),
   }),
 });
 
@@ -69,6 +111,9 @@ export const {
   useLazyGetSlotsByMentorIdQuery,
   useGetAllSlotsQuery,
   useUseWalletCoinsMutation,
+  useConfirmSlotMutation,
+  useCancelSlotMutation,
+  useUpdateSlotMutation,
 } = CallApi;
 export const CallApiReducer = CallApi.reducer;
 export const CallApiMiddleware = CallApi.middleware;

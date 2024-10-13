@@ -4,7 +4,6 @@ import { useGetAllBlogQuery } from "../../../redux/rtk-api";
 import { useAppDispatch } from "../../../redux";
 import { handleError } from "../../../redux/features";
 import { AppButton, BlogCard } from "../../../component";
-import { IBlogCommentProps } from "../../../interface";
 
 export const BuddyTubePage = () => {
   const {
@@ -20,7 +19,6 @@ export const BuddyTubePage = () => {
       dispatch(handleError((blogError as any).data.message));
     }
   }, [isBlogError, blogError, dispatch]);
-
 
   return (
     <MainLayout loading={isBlogLoading}>
@@ -39,18 +37,19 @@ export const BuddyTubePage = () => {
             <AppButton filled>Get in touch with mentor</AppButton>
           </div>
         </div>
-        <div className="grid xl:grid-cols-3 grid-cols-1 gap-10 xl:w-[80%] mx-auto mt-20">
+        <div className="grid xl:lg:md:grid-cols-12 grid-cols-12 gap-10 xl:w-[80%] mx-auto my-20">
           {blogs?.data.map(
-            ({ body, label, subLabel, comment, _id, createdAt }) => (
-              <BlogCard
-                image="https://hms.harvard.edu/sites/default/files/media/neurons-850.jpg"
-                key={_id}
-                body={body}
-                comment={comment as IBlogCommentProps[]}
-                label={label}
-                subLabel={subLabel}
-                createdAt={createdAt as string}
-              />
+            ({ body, label, subLabel, _id, createdAt, blogLink }) => (
+              <div className="col-span-6">
+                <BlogCard
+                  key={_id}
+                  body={body}
+                  label={label}
+                  subLabel={subLabel}
+                  blogLink={blogLink}
+                  createdAt={createdAt as string}
+                />
+              </div>
             )
           )}
         </div>

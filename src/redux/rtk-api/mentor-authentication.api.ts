@@ -1,10 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { ApiBaseQuery, baseQueryMentor } from "../../utils";
-import {
-  IConfirmSlotProps,
-  IMentorAuthProps,
-  IMentorProps,
-} from "../../interface";
+import { IMentorAuthProps, IMentorProps } from "../../interface";
 
 const MentorAuthenticationApi = createApi({
   baseQuery: ApiBaseQuery(baseQueryMentor),
@@ -36,28 +32,6 @@ const MentorAuthenticationApi = createApi({
         };
       },
     }),
-    ConfirmSlot: mutation<{ data: string }, IConfirmSlotProps>({
-      query: ({ slotId, mentorId, userId }: IConfirmSlotProps) => {
-        return {
-          url: `/confirm-slot`,
-          method: "PUT",
-          body: {
-            slotId,
-            mentorId,
-            userId,
-          },
-        };
-      },
-    }),
-    CancelSlot: mutation<{ data: string }, string>({
-      query: (slotId: string) => {
-        return {
-          url: `/cancel-slot/`,
-          method: "PUT",
-          body: slotId,
-        };
-      },
-    }),
   }),
 });
 
@@ -68,6 +42,4 @@ export const {
   useMentorProfileQuery,
   useMentorSignInMutation,
   useMentorSignOutMutation,
-  useConfirmSlotMutation,
-  useCancelSlotMutation,
 } = MentorAuthenticationApi;
