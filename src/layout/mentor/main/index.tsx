@@ -78,7 +78,7 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   // Function to initialize audio
   const initializeAudio = () => {
     if (!audioRef.current) {
-      audioRef.current = new Audio(require("./original_guitar_jam.mp3"));
+      audioRef.current = new Audio(require("./90s_chat_room.mp3"));
     }
   };
 

@@ -24,7 +24,7 @@ export const Transactions: FC<ITransactionsModuleProps> = ({
           <p>No transaction found</p>
         </div>
       )}
-      {transactions.length && (
+      {transactions?.length && (
         <div className="space-y-5 pr-3 mt-10 h-[60vh] overflow-y-scroll">
           {transactions?.map((props, i) => {
             const {

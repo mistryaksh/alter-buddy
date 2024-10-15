@@ -138,6 +138,8 @@ export const UserProfilePage = () => {
 
   const Activity = <div>Activity</div>;
 
+  console.log(profile?.data._id, wallet?.data.userId);
+
   return (
     <MainLayout loading={isProfileLoading} hideNav={false}>
       <div className="p-3 mt-24 xl:container mx-auto">

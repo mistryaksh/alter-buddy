@@ -9,6 +9,10 @@ interface IVideoCallProps {
     requestedUser: string | null;
     roomName: string | null;
   };
+  chat: {
+    chatRoomId: string | null;
+    userId: string | null;
+  };
 }
 
 const initialState: IVideoCallProps = {
@@ -17,6 +21,10 @@ const initialState: IVideoCallProps = {
     mentorRoomCode: null,
     requestedUser: null,
     roomName: null,
+  },
+  chat: {
+    chatRoomId: null,
+    userId: null,
   },
 };
 
@@ -39,6 +47,13 @@ const VideoCallSlice = createSlice({
       state.mentorMeetingConfig.requestedUser = action.payload.userName;
       state.mentorMeetingConfig.roomName = action.payload.roomName;
     },
+    handleMentorChatConfig(
+      state,
+      action: PayloadAction<{ roomCode: string | null; userId: string | null }>
+    ) {
+      state.chat.chatRoomId = action.payload.roomCode;
+      state.chat.userId = action.payload.userId;
+    },
   },
 });
 
@@ -47,5 +62,8 @@ export const useVideoCallSlice = () =>
     return state.videoCall;
   });
 export const VideoCallReducer = VideoCallSlice.reducer;
-export const { handleReceiveCall, handleMentorRoomCode } =
-  VideoCallSlice.actions;
+export const {
+  handleReceiveCall,
+  handleMentorRoomCode,
+  handleMentorChatConfig,
+} = VideoCallSlice.actions;

@@ -34,7 +34,7 @@ export const MentorVideoCallPage = () => {
       })();
     }
   }, [dispatch, id, Session, isSessionError, sessionError]);
-  console.log(sessionData?.data.sessionDetails.callType);
+
   return (
     <MentorLayout>
       {isConnected && (
@@ -42,7 +42,6 @@ export const MentorVideoCallPage = () => {
           <CallHeader width={90} />
           <CallConference />
           <CallFooter
-            duration={0}
             isAudioCall={
               sessionData?.data.sessionDetails.callType === "audio"
                 ? "audio"

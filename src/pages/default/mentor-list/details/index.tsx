@@ -26,6 +26,8 @@ import { MdOutlineFormatQuote } from "react-icons/md";
 import { Helmet } from "react-helmet";
 import { v4 } from "uuid";
 import DOMPurify from "dompurify";
+import { useGetMyWalletQuery } from "../../../../redux/rtk-api/buddy-coin.api";
+import { toast } from "react-toastify";
 
 export const UserMentorDetailsPage = () => {
   const navigate = useNavigate();
@@ -62,6 +64,7 @@ export const UserMentorDetailsPage = () => {
       error: bookSlotError,
     },
   ] = useBookMentorSlotMutation();
+  const { data: wallet } = useGetMyWalletQuery();
 
   useEffect(() => {
     if (isMentorError) {
@@ -331,9 +334,23 @@ export const UserMentorDetailsPage = () => {
                       (props) => props.packageType === "chat" && props.price > 0
                     )
                   }
-                  onClick={() =>
-                    navigate(`/user/chat/${mentor?.data._id}/${v4()}`)
-                  }
+                  onClick={() => {
+                    if (
+                      wallet.data.balance < 0 ||
+                      wallet.data.balance < 0 ||
+                      wallet.data.balance <
+                        packages?.data.find(
+                          (props) => props.packageType === "chat"
+                        ).price
+                    ) {
+                      toast.warn("insufficient BuddyCoins");
+                      navigate("/user/my-profile", {
+                        replace: true,
+                      });
+                    } else {
+                      navigate(`/user/chat/${mentor?.data._id}/${v4()}`);
+                    }
+                  }}
                 >
                   <div className="flex items-center gap-2">
                     <AiOutlineMessage size={25} />{" "}
@@ -350,21 +367,29 @@ export const UserMentorDetailsPage = () => {
                     </span>
                   </div>
                 </AppButton>
-
                 <AppButton
                   outlined
                   flexed
                   disabled={
                     !packages?.data.find(
                       (props) =>
-                        props.packageType === "audio" && props.price > 0
+                        props.packageType === "audio" &&
+                        props.price <
+                          packages?.data.find(
+                            (props) => props.packageType === "audio"
+                          ).price
                     )
                   }
-                  onClick={() =>
-                    navigate(
-                      `/user/video-call/${mentor?.data._id}?audio_call=true`
-                    )
-                  }
+                  onClick={() => {
+                    if (wallet.data.balance < 0 || wallet.data.balance < 0) {
+                      toast.warn("insufficient BuddyCoins");
+                      navigate("/user/my-profile", { replace: true });
+                    } else {
+                      navigate(
+                        `/user/video-call/${mentor?.data._id}?audio_call=true`
+                      );
+                    }
+                  }}
                 >
                   <div className="flex items-center gap-2 flex-nowrap">
                     <AiOutlinePhone size={25} />
@@ -390,11 +415,25 @@ export const UserMentorDetailsPage = () => {
                         props.packageType === "video" && props.price > 0
                     )
                   }
-                  onClick={() =>
-                    navigate(
-                      `/user/video-call/${mentor?.data._id}?audio_call=false`
-                    )
-                  }
+                  onClick={() => {
+                    if (
+                      wallet.data.balance < 0 ||
+                      wallet.data.balance < 0 ||
+                      wallet.data.balance <
+                        packages?.data.find(
+                          (props) => props.packageType === "video"
+                        ).price
+                    ) {
+                      toast.warn("insufficient BuddyCoins");
+                      navigate("/user/my-profile", {
+                        replace: true,
+                      });
+                    } else {
+                      navigate(
+                        `/user/video-call/${mentor?.data._id}?audio_call=false`
+                      );
+                    }
+                  }}
                 >
                   <div className="flex items-center gap-2 flex-nowrap">
                     <AiOutlineVideoCamera size={25} />

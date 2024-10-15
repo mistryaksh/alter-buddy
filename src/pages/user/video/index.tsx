@@ -87,7 +87,6 @@ export const UserVideoCallPage = () => {
           <CallHeader width={98} />
           <CallConference />
           <CallFooter
-            duration={0}
             isAudioCall={isAudioCall ? "audio" : "video"}
             cancellationPath="/"
             width={98}
