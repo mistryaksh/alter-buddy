@@ -96,7 +96,7 @@ export const SchedulesMentorPage = () => {
       setIsOpen(false);
       toast.success(newData?.data);
       setNewDate("");
-      setNewSlots([]);
+      setNewSlots([{ time: "", booked: false, status: "rejected" }]);
     }
   }, [isNewError, newError, isNewSuccess, newData?.data]);
 
