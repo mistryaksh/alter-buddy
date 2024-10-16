@@ -181,7 +181,7 @@ export const MentorDashboardPage = () => {
                 <h5 className="capitalize text-2xl">
                   {
                     (
-                      slots?.data[0].slots?.filter((props) => props?.booked)[0]
+                      slots?.data[0]?.slots?.filter((props) => props?.booked)[0]
                         ?.userId as UserProps
                     )?.name?.firstName
                   }{" "}
