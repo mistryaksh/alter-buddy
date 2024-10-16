@@ -44,6 +44,11 @@ const AuthenticationSlice = createSlice({
       state.mentor.token = action.payload.token;
       sessionStorage.setItem("ROLE", "MENTOR");
     },
+    handleMentorLogout: (state) => {
+      state.mentor.authentication = false;
+      state.mentor.token = null;
+      sessionStorage.removeItem("ROLE");
+    },
   },
 });
 
@@ -55,5 +60,6 @@ export const AuthenticationReducer = AuthenticationSlice.reducer;
 export const {
   handleUserAuthentication,
   handleUserLogout,
+  handleMentorLogout,
   handleMentorAuthentication,
 } = AuthenticationSlice.actions;

@@ -26,6 +26,7 @@ import {
 import { useAppDispatch } from "../../../redux";
 import { FiPhoneIncoming } from "react-icons/fi";
 import {
+  handleMentorLogout,
   handleMentorRoomCode,
   handleReceiveCall,
   useVideoCallSlice,
@@ -33,6 +34,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { socket } from "../../../service";
 import { toast } from "react-toastify";
+import { removeMentorToken } from "../../../utils";
 
 interface MentorLayoutProps {
   children: ReactNode;
@@ -102,8 +104,11 @@ export const MentorLayout: FC<MentorLayoutProps> = ({
   useEffect(() => {
     if (isSuccess) {
       toast.success(signOutData?.data);
+      removeMentorToken();
+      dispatch(handleMentorLogout());
+      navigate("/", { replace: true });
     }
-  }, [isSuccess, signOutData?.data]);
+  }, [isSuccess, signOutData?.data, navigate,dispatch]);
 
   useEffect(() => {
     if (isError) {

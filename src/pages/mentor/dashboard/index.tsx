@@ -172,27 +172,30 @@ export const MentorDashboardPage = () => {
               <div className="border rounded-lg bg-white p-3 col-span-4">
                 <h6 className="text-xl">Upcoming Slot</h6>
                 <p className="my-2 text-sm text-gray-500">
-                  {slots.data[0].slotsDate}{" "}
-                  {slots.data[0].slots.filter((props) => props.booked)[0].time}
+                  {slots?.data[0]?.slotsDate}{" "}
+                  {
+                    slots?.data[0]?.slots?.filter((props) => props?.booked)[0]
+                      ?.time
+                  }
                 </p>
                 <h5 className="capitalize text-2xl">
                   {
                     (
-                      slots.data[0].slots.filter((props) => props.booked)[0]
-                        .userId as UserProps
-                    ).name.firstName
+                      slots?.data[0].slots?.filter((props) => props?.booked)[0]
+                        ?.userId as UserProps
+                    )?.name?.firstName
                   }{" "}
                   {
                     (
-                      slots.data[0].slots.filter((props) => props.booked)[0]
-                        .userId as UserProps
-                    ).name.lastName
+                      slots?.data[0]?.slots?.filter((props) => props?.booked)[0]
+                        ?.userId as UserProps
+                    )?.name?.lastName
                   }
                 </h5>
                 <p className="my-2  uppercase">
                   {
-                    slots.data[0].slots.filter((props) => props.booked)[0]
-                      .status
+                    slots?.data[0]?.slots?.filter((props) => props?.booked)[0]
+                      ?.status
                   }
                 </p>
                 <div className="flex items-center justify-end">
@@ -202,7 +205,9 @@ export const MentorDashboardPage = () => {
                         setNoteModel(null);
                       } else {
                         setNoteModel(
-                          slots.data[0].slots.filter((props) => props.booked)[0]
+                          slots?.data[0]?.slots?.filter(
+                            (props) => props?.booked
+                          )[0]
                         );
                       }
                     }}
