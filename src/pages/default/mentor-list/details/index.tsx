@@ -245,13 +245,13 @@ export const UserMentorDetailsPage = () => {
                   {packages?.data.map((packageList, i) => {
                     return (
                       <div className="space-y-4">
-                        {packageList.subServices.length !== 0 && (
+                        {packageList?.subServices?.length !== 0 && (
                           <h6 className="text-2xl flex-wrap font-libre capitalize text-primary-500">
                             {(packageList.categoryId as ICategoryProps).title}{" "}
                             Service List
                           </h6>
                         )}
-                        {packageList.subServices.length !== 0 && (
+                        {packageList?.subServices?.length !== 0 && (
                           <table>
                             <thead className="bg-gray-200">
                               <td className="px-5 py-2 w-[40%] border-r-2">
