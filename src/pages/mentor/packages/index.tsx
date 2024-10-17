@@ -8,6 +8,7 @@ import {
   useUpdatePackageMutation,
 } from "../../../redux/rtk-api";
 import {
+  AiOutlineClose,
   AiOutlineDelete,
   AiOutlineEdit,
   AiOutlineLoading,
@@ -24,12 +25,23 @@ import {
 import { AlterBuddyLogo } from "../../../assets/logo";
 import { AppButton, TextField } from "../../../component";
 import { Formik } from "formik";
-import { ICategoryProps, IPackagesProps, Package } from "../../../interface";
+import {
+  ICategoryProps,
+  IPackagesProps,
+  ISubPackagesProps,
+  Package,
+} from "../../../interface";
 import { toast } from "react-toastify";
 
 export const PackagesPage = () => {
+  const [subPackages, setSubPackages] = useState<ISubPackagesProps[]>([]);
+  const [subPackageField, setSubPackagesField] = useState<ISubPackagesProps>({
+    title: "",
+    price: 0,
+  });
   let [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
+  const [selectedCategoryName, setSelectedCategoryName] = useState<string>("");
   const [status, setStatus] = useState<boolean>(false);
   const [selected, setSelect] = useState<{
     mode: "edit" | "delete";
@@ -131,10 +143,17 @@ export const PackagesPage = () => {
   }, [isDeleteSuccess, deleteData?.data]);
 
   const handleSubmit = async (props: IPackagesProps) => {
+    console.log({});
+    const data = {
+      ...props,
+      price: subPackages.reduce((acc, service) => acc + service.price, 0),
+      subServices: subPackages,
+    };
+
     if (selected?.mode === "edit") {
-      await UpdatePackage({ _id: selected.props._id, ...props });
+      await UpdatePackage({ _id: selected.props._id, ...data });
     } else {
-      await NewPackage(props);
+      await NewPackage({ ...data });
     }
   };
 
@@ -160,7 +179,7 @@ export const PackagesPage = () => {
               New Packages
             </AppButton>
           </div>
-          <div className="grid xl:lg:grid-cols-3 md:grid-cols-6 grid-cols-12 my-10 gap-5">
+          <div className="grid xl:lg:grid-cols-3 md:grid-cols-6 sm:grid-cols-12 grid-cols-12 my-10 gap-5">
             {data?.data.map(({ ...props }, i) => (
               <div
                 className=" border-2 border-primary-500 border-opacity-50 p-3"
@@ -203,7 +222,7 @@ export const PackagesPage = () => {
         onClose={() => setIsOpen(false)}
         transition
         style={{ zIndex: 20 }}
-        className="fixed inset-0 flex w-screen items-center justify-center bg-black/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0"
+        className="fixed inset-0 overflow-y-scroll flex w-screen items-center justify-center bg-black/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0"
       >
         <Formik
           onSubmit={handleSubmit}
@@ -227,9 +246,10 @@ export const PackagesPage = () => {
             values,
             errors,
             touched,
+            setFieldValue,
           }) => (
             <form onSubmit={handleSubmit}>
-              <DialogPanel className="max-w-lg space-y-4 bg-white p-5">
+              <DialogPanel className="max-w-lg space-y-4 bg-white p-5 mt-20">
                 <DialogTitle className="font-bold text-2xl font-libre">
                   Select the details
                 </DialogTitle>
@@ -246,7 +266,16 @@ export const PackagesPage = () => {
                       Select Category to Make Package
                     </label>
                     <Select
-                      onChange={handleChange("categoryId")}
+                      onChange={(event) => {
+                        setFieldValue("categoryId", event.target.value);
+                        setSelectedCategoryName(
+                          (profile?.data.category as ICategoryProps[]).find(
+                            (prop) =>
+                              (prop as ICategoryProps)._id ===
+                              event.target.value
+                          )?.title
+                        );
+                      }}
                       value={values.categoryId as string}
                       className="border-2 px-5 py-2 rounded-md focus:outline-none focus:border-primary-500 capitalize"
                       name="Select Category to Make Package"
@@ -273,8 +302,94 @@ export const PackagesPage = () => {
                     label="Package Name"
                     outlined
                   />
+                  {Array.isArray(subPackages) &&
+                    subPackages.map((element, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between"
+                      >
+                        <p>{element.title}</p>
+                        <div className="flex gap-3 items-center">
+                          <p>
+                            {element.price.toLocaleString("en-IN", {
+                              currency: "INR",
+                              style: "currency",
+                              notation: "standard",
+                            })}
+                          </p>
+                          <button
+                            className="text-red-500"
+                            onClick={() => {
+                              setSubPackages((prevSubPackages) =>
+                                prevSubPackages.filter(
+                                  (subPackage) => subPackage !== element
+                                )
+                              );
+                            }}
+                          >
+                            <AiOutlineClose />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  {selectedCategoryName === "healer" && (
+                    <div className="flex flex-col gap-2">
+                      <div>
+                        <TextField
+                          outlined
+                          label="Sub Package Title"
+                          value={subPackageField?.title}
+                          onChange={(prop) => {
+                            setSubPackagesField({
+                              ...subPackageField,
+                              title: prop.target.value,
+                            });
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <TextField
+                          type="number"
+                          outlined
+                          label="Sub Package Price"
+                          value={subPackageField?.price}
+                          onChange={(prop) => {
+                            setSubPackagesField({
+                              ...subPackageField,
+                              price: parseInt(prop.target.value),
+                            });
+                          }}
+                        />
+                      </div>
+                      <AppButton
+                        outlined
+                        type="button"
+                        onClick={() => {
+                          if (
+                            !subPackageField.title ||
+                            !subPackageField.price
+                          ) {
+                            return null;
+                          } else {
+                            setSubPackages((prevSubPackages) => [
+                              ...prevSubPackages,
+                              {
+                                price: subPackageField.price,
+                                title: subPackageField.title,
+                              },
+                            ]);
+                            console.log(subPackages);
+                            setSubPackagesField({ title: "", price: 0 });
+                          }
+                        }}
+                      >
+                        Add Sub Package
+                      </AppButton>
+                    </div>
+                  )}
+
                   <TextField
-                    value={values.price}
+                    value={subPackageField.price || values.price}
                     onChange={handleChange("price")}
                     onBlur={handleBlur("price")}
                     touched={touched.price}
@@ -307,10 +422,9 @@ export const PackagesPage = () => {
                   <div className="flex gap-3 items-center">
                     <Switch
                       id="status"
-                      type="button"
                       name="status"
-                      checked={status}
-                      onChange={() => setStatus(!status)}
+                      checked={values.status}
+                      onChange={() => setFieldValue("status", !values.status)} // Use Formik's setFieldValue
                       className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-primary-600"
                     >
                       <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />

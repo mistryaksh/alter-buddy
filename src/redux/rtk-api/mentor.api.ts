@@ -27,7 +27,6 @@ const MentorApi = createApi({
       {
         userId: string;
         slotId: string;
-        mainId: string;
         mentorId: string;
         callType: string;
       }
@@ -35,13 +34,11 @@ const MentorApi = createApi({
       query: ({
         slotId,
         userId,
-        mainId,
         mentorId,
         callType,
       }: {
         userId: string;
         slotId: string;
-        mainId: string;
         mentorId: string;
         callType: string;
       }) => {
@@ -51,7 +48,6 @@ const MentorApi = createApi({
           body: {
             userId,
             slotId,
-            mainId,
             mentorId,
             callType,
           },

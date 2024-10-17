@@ -15,4 +15,11 @@ export interface IPackagesProps {
   updatedAt?: string;
   mentorId: IMentorProps | string;
   status: boolean;
+  subServices?: ISubPackagesProps[];
+}
+
+export interface ISubPackagesProps {
+  _id?: string;
+  title: string;
+  price: number;
 }

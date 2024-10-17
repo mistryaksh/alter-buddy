@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../../../layout";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux";
 import {
-  useBookMentorSlotMutation,
   useGetMentorPackagesByIdQuery,
   useGetMentorUsingIdQuery,
   useLazyGetSlotsByMentorIdQuery,
@@ -13,6 +12,7 @@ import { handleError } from "../../../../redux/features";
 import { AppButton } from "../../../../component";
 import {
   AiOutlineCalendar,
+  AiOutlineLeft,
   AiOutlineLoading,
   AiOutlineMessage,
   AiOutlinePhone,
@@ -24,14 +24,21 @@ import moment from "moment";
 import clsx from "clsx";
 import { MdOutlineFormatQuote } from "react-icons/md";
 import { Helmet } from "react-helmet";
-import { v4 } from "uuid";
 import DOMPurify from "dompurify";
 import { useGetMyWalletQuery } from "../../../../redux/rtk-api/buddy-coin.api";
-import { toast } from "react-toastify";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { ICategoryProps } from "../../../../interface";
 
 export const UserMentorDetailsPage = () => {
   const navigate = useNavigate();
-
+  const [scheduleModel, setScheduleModel] = useState<boolean>(false);
+  const [selectedPrice, setSelectedPrice] = useState<number>(0);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState({
+    date: "",
+    slot: "",
+    _id: "",
+  });
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const {
@@ -51,47 +58,48 @@ export const UserMentorDetailsPage = () => {
     },
   ] = useLazyGetSlotsByMentorIdQuery();
   const {
-    data: profile,
+    // data: profile,
     isError: isProfileError,
     error: profileError,
   } = useProfileUserQuery();
-  const [
-    BookSlotWithMentor,
-    {
-      isError: isBookSlotError,
-      isLoading: isBookSlotLoading,
-      data: bookSlotData,
-      error: bookSlotError,
-    },
-  ] = useBookMentorSlotMutation();
+  // const [
+  //   BookSlotWithMentor,
+  //   {
+  //     isError: isBookSlotError,
+  //     isLoading: isBookSlotLoading,
+  //     data: bookSlotData,
+  //     error: bookSlotError,
+  //     isSuccess: isBookSuccess,
+  //   },
+  // ] = useBookMentorSlotMutation();
   const { data: wallet } = useGetMyWalletQuery();
 
   useEffect(() => {
     if (isMentorError) {
-      if ((mentorError as any).data) {
-        dispatch(handleError((mentorError as any).data.message));
+      if ((mentorError as any)?.data) {
+        dispatch(handleError((mentorError as any)?.data.message));
       } else {
         console.log(mentorError);
       }
     }
-    if (isBookSlotError) {
-      if ((bookSlotError as any).data) {
-        console.log((bookSlotError as any).data);
-        dispatch(handleError((bookSlotError as any).data.message));
-      } else {
-        console.log(bookSlotError);
-      }
-    }
+    // if (isBookSlotError) {
+    //   if ((bookSlotError as any).data) {
+    //     console.log((bookSlotError as any).data);
+    //     dispatch(handleError((bookSlotError as any).data.message));
+    //   } else {
+    //     console.log(bookSlotError);
+    //   }
+    // }
     if (isSlotError) {
-      if ((slotError as any).data) {
-        dispatch(handleError((slotError as any).data.message));
+      if ((slotError as any)?.data) {
+        dispatch(handleError((slotError as any)?.data.message));
       } else {
         console.log(slotError);
       }
     }
     if (isProfileError) {
-      if ((profileError as any).data) {
-        dispatch(handleError((profileError as any).data.message));
+      if ((profileError as any)?.data) {
+        dispatch(handleError((profileError as any)?.data.message));
       } else {
         console.log(profileError);
       }
@@ -112,30 +120,46 @@ export const UserMentorDetailsPage = () => {
     slotError,
     isProfileError,
     profileError,
-    isBookSlotError,
-    bookSlotError,
-    bookSlotData,
+    // isBookSlotError,
+    // bookSlotError,
+    // bookSlotData,
   ]);
 
-  const BookSlot = async ({
-    userId,
-    slotId,
-    mainId,
-    mentorId,
-  }: {
-    userId: string;
-    slotId: string;
-    mainId: string;
-    mentorId: string;
-  }) => {
-    await BookSlotWithMentor({
-      slotId,
-      userId,
-      mainId,
-      mentorId,
-      callType: "video",
-    });
-  };
+  // useEffect(() => {
+  //   if (isBookSuccess) {
+  //     toast.success(bookSlotData?.data);
+  //     setSelectedTimeSlot({
+  //       date: "",
+  //       slot: "",
+  //       _id: "",
+  //     });
+  //     setScheduleModel(false);
+  //   }
+  // }, [isBookSuccess, bookSlotData?.data]);
+
+  // const BookSlot = async ({
+  //   userId,
+  //   slotId,
+  //   mentorId,
+  //   callType,
+  // }: {
+  //   userId: string;
+  //   slotId: string;
+  //   callType: string;
+  //   mentorId: string;
+  // }) => {
+  //   if (!callType) {
+  //     toast.warn("Please try again");
+  //   } else {
+  //     await BookSlotWithMentor({
+  //       slotId,
+  //       userId,
+  //       mentorId,
+  //       callType: callType,
+  //     });
+  //   }
+  // };
+
   const cleanHTML = DOMPurify.sanitize(mentor?.data?.description);
 
   return (
@@ -147,13 +171,26 @@ export const UserMentorDetailsPage = () => {
         </title>
         <meta name="description" content="Helmet application" />
       </Helmet>
-      <div className="xl:px-10 px-5 pt-10 mb-10">
-        <div className="flex flex-row items-start gap-20 justify-between xl:lg:md:flex-nowrap flex-wrap">
+      <div className="xl:px-10 px-5 pt-10 mb-10 z-10">
+        <div className="my-5">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-3"
+          >
+            <AiOutlineLeft size={30} />
+            <p>Back</p>
+          </button>
+        </div>
+        <hr />
+        <div className="flex flex-row items-start gap-20 justify-between xl:lg:md:flex-nowrap flex-wrap mt-5">
           <div className="xl:lg:md:flex-1">
             <div className="flex gap-10 justify-between w-full items-center">
               <div className="flex gap-10 items-center">
                 <img
-                  src={mentor?.data?.image}
+                  src={
+                    mentor?.data?.image ||
+                    "https://qph.cf2.quoracdn.net/main-qimg-5b495cdeb2ebb79cff41634e5f9ea076"
+                  }
                   alt="mentor "
                   className="object-cover aspect-square w-[20%] rounded-md p-2 shadow-lg"
                 />
@@ -203,6 +240,54 @@ export const UserMentorDetailsPage = () => {
                   }}
                 />
               </div>
+              {packages?.data.length > 0 && (
+                <div>
+                  {packages?.data.map((packageList, i) => {
+                    return (
+                      <div className="space-y-4">
+                        {packageList.subServices.length !== 0 && (
+                          <h6 className="text-2xl flex-wrap font-libre capitalize text-primary-500">
+                            {(packageList.categoryId as ICategoryProps).title}{" "}
+                            Service List
+                          </h6>
+                        )}
+                        {packageList.subServices.length !== 0 && (
+                          <table>
+                            <thead className="bg-gray-200">
+                              <td className="px-5 py-2 w-[40%] border-r-2">
+                                Name
+                              </td>
+                              <td className="px-5 py-2 w-[20%] text-right">
+                                BuddyCoins
+                              </td>
+                            </thead>
+                            <tbody>
+                              {packageList?.subServices?.map(
+                                (subPackage, i) => {
+                                  return (
+                                    <tr className="border-b border-x" key={i}>
+                                      <td className="px-5 py-2 w-[350px]">
+                                        <p className="capitalize">
+                                          {subPackage.title}
+                                        </p>
+                                      </td>
+                                      <td className="px-5 py-2 w-[150px]">
+                                        <p className="text-right">
+                                          {subPackage.price}
+                                        </p>
+                                      </td>
+                                    </tr>
+                                  );
+                                }
+                              )}
+                            </tbody>
+                          </table>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
               <div>
                 <div className="my-10">
                   {mentor?.data.videoLink && (
@@ -257,7 +342,7 @@ export const UserMentorDetailsPage = () => {
               </div>
             )}
 
-            {isBookSlotLoading && isSlotLoading && (
+            {isSlotLoading && (
               <div>
                 <AiOutlineLoading size={30} className="fill-primary-500" />
                 <p>Slots are loading</p>
@@ -279,14 +364,21 @@ export const UserMentorDetailsPage = () => {
                     {slots?.map(({ time, booked, _id: slotId, status }) => (
                       <button
                         disabled={booked}
-                        onClick={() =>
-                          BookSlot({
-                            slotId: slotId as string,
-                            userId: profile?.data._id as string,
-                            mainId: _id as string,
-                            mentorId: mentor?.data._id as string,
-                          })
-                        }
+                        onClick={() => {
+                          // BookSlot({
+                          //   slotId: slotId as string,
+                          //   userId: profile?.data._id as string,
+                          //   mainId: _id as string,
+                          //   mentorId: mentor?.data._id as string,
+                          // })
+
+                          setScheduleModel(true);
+                          setSelectedTimeSlot({
+                            date: slotsDate,
+                            slot: time,
+                            _id: slotId,
+                          });
+                        }}
                         key={slotId}
                         className={clsx(
                           "border px-5 py-3 border-primary-500 rounded-lg cursor-pointer group disabled:opacity-50"
@@ -298,7 +390,7 @@ export const UserMentorDetailsPage = () => {
                             "group-hover:text-primary-500 text-primary-500"
                           )}
                         >
-                          {time}
+                          {moment(time, "HH:mm").format("hh:mm A")}
                         </p>
                       </button>
                     ))}
@@ -306,155 +398,152 @@ export const UserMentorDetailsPage = () => {
                 </div>
               ))}
             {slotData?.data.length === 0 && (
-              <div className="text-center w-full mb-5">
+              <div className="text-center w-full">
                 <p className="text-gray-500">
-                  No Slots found for {mentor?.data.name.firstName}{" "}
-                  {mentor?.data.name.lastName}
+                  No Slots found for {mentor?.data?.name?.firstName}{" "}
+                  {mentor?.data?.name?.lastName}
                 </p>
               </div>
             )}
-            <hr />
-            <div className="my-5">
-              <div className="flex gap-3 items-center">
-                <AiOutlineMessage size={30} className="fill-primary-500" />
-                <p className="text-gray-900 capitalize font-bold">
-                  Chat with {mentor?.data.name.firstName}{" "}
-                  {mentor?.data.name.lastName.charAt(0)}.
-                </p>
-              </div>
-              <p className="text-gray-500 my-2">
-                Chat with the expert and get instant guidance
-              </p>
-              <div className="w-full mt-5 flex gap-3 flex-wrap">
-                <AppButton
-                  outlined
-                  flexed
-                  disabled={
-                    !packages?.data.find(
-                      (props) => props.packageType === "chat" && props.price > 0
-                    )
-                  }
-                  onClick={() => {
-                    if (
-                      wallet.data.balance < 0 ||
-                      wallet.data.balance < 0 ||
-                      wallet.data.balance <
-                        packages?.data.find(
-                          (props) => props.packageType === "chat"
-                        ).price
-                    ) {
-                      toast.warn("insufficient BuddyCoins");
-                      navigate("/user/my-profile", {
-                        replace: true,
-                      });
-                    } else {
-                      navigate(`/user/chat/${mentor?.data._id}/${v4()}`);
-                    }
-                  }}
-                >
-                  <div className="flex items-center gap-2">
-                    <AiOutlineMessage size={25} />{" "}
-                    <span className="text-sm">
-                      {
-                        packages?.data.find((props) => {
-                          if (props.packageType === "chat") {
-                            return `${props.price} coins`;
-                          } else {
-                            return 0;
-                          }
-                        })?.price
-                      }
-                    </span>
-                  </div>
-                </AppButton>
-                <AppButton
-                  outlined
-                  flexed
-                  disabled={
-                    !packages?.data.find(
-                      (props) =>
-                        props.packageType === "audio" &&
-                        props.price <
-                          packages?.data.find(
-                            (props) => props.packageType === "audio"
-                          ).price
-                    )
-                  }
-                  onClick={() => {
-                    if (wallet.data.balance < 0 || wallet.data.balance < 0) {
-                      toast.warn("insufficient BuddyCoins");
-                      navigate("/user/my-profile", { replace: true });
-                    } else {
-                      navigate(
-                        `/user/video-call/${mentor?.data._id}?audio_call=true`
-                      );
-                    }
-                  }}
-                >
-                  <div className="flex items-center gap-2 flex-nowrap">
-                    <AiOutlinePhone size={25} />
-                    <span className="text-sm">
-                      {
-                        packages?.data.find((props) => {
-                          if (props.packageType === "audio") {
-                            return `${props.price} coins`;
-                          } else {
-                            return 0;
-                          }
-                        })?.price
-                      }{" "}
-                    </span>
-                  </div>
-                </AppButton>
-                <AppButton
-                  outlined
-                  flexed
-                  disabled={
-                    !packages?.data.find(
-                      (props) =>
-                        props.packageType === "video" && props.price > 0
-                    )
-                  }
-                  onClick={() => {
-                    if (
-                      wallet.data.balance < 0 ||
-                      wallet.data.balance < 0 ||
-                      wallet.data.balance <
-                        packages?.data.find(
-                          (props) => props.packageType === "video"
-                        ).price
-                    ) {
-                      toast.warn("insufficient BuddyCoins");
-                      navigate("/user/my-profile", {
-                        replace: true,
-                      });
-                    } else {
-                      navigate(
-                        `/user/video-call/${mentor?.data._id}?audio_call=false`
-                      );
-                    }
-                  }}
-                >
-                  <div className="flex items-center gap-2 flex-nowrap">
-                    <AiOutlineVideoCamera size={25} />
-                    <span className="text-sm">
-                      {
-                        packages?.data.find((props) => {
-                          if (props.packageType === "video") {
-                            return `${props.price} coins`;
-                          } else {
-                            return "no packages";
-                          }
-                        })?.price
-                      }
-                    </span>
-                  </div>
-                </AppButton>
-              </div>
-            </div>
           </div>
         </div>
       </div>
+      <Dialog
+        open={scheduleModel}
+        onClose={() => setScheduleModel(false)}
+        className="fixed inset-0 z-50 overflow-y-scroll flex w-screen items-center justify-center bg-black/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0"
+      >
+        <DialogPanel className="w-[40%] space-y-4 bg-white p-5 mt-20">
+          <DialogTitle>
+            Selected Time Slot -
+            {moment(selectedTimeSlot.date).format("DD-MM-YYYY")}{" "}
+            {moment(selectedTimeSlot.slot, "HH:mm").format("hh:mm A")}
+          </DialogTitle>
+          <div className="my-5">
+            <div className="flex gap-3 items-center">
+              <AiOutlineMessage size={30} className="fill-primary-500" />
+              <p className="text-gray-900 capitalize font-bold">
+                Chat with {mentor?.data?.name?.firstName}{" "}
+                {mentor?.data?.name?.lastName.charAt(0)}.
+              </p>
+            </div>
+            <p className="text-gray-500 my-2">
+              Chat with the expert and get instant guidance
+            </p>
+            <h6 className="text-right">
+              My Wallet {wallet?.data?.balance - selectedPrice}
+            </h6>
+            <h6 className="my-3 font-semibold">Select Service Category</h6>
+            <div className="flex items-center gap-3">
+              {packages?.data
+                .filter(
+                  (value, index, self) =>
+                    index ===
+                    self.findIndex(
+                      (t) =>
+                        (t?.categoryId as ICategoryProps)?._id ===
+                        (value?.categoryId as ICategoryProps)?._id
+                    )
+                )
+                .map((packageList) => (
+                  <div className="flex items-center gap-3">
+                    {packageList?.subServices?.length === 0 && (
+                      <AppButton
+                        outlined={
+                          selectedCategory ===
+                          (packageList?.categoryId as ICategoryProps)?._id
+                        }
+                        key={packageList?._id}
+                        onClick={() =>
+                          setSelectedCategory(
+                            (packageList?.categoryId as ICategoryProps)?._id
+                          )
+                        }
+                      >
+                        {(packageList?.categoryId as ICategoryProps)?.title}
+                      </AppButton>
+                    )}
+                  </div>
+                ))}
+            </div>
+            <div className={clsx("flex items-center gap-3")}>
+              {packages?.data
+                ?.filter(
+                  (value, index, self) =>
+                    index ===
+                    self.findIndex(
+                      (t) =>
+                        (t.categoryId as ICategoryProps)._id ===
+                        (value.categoryId as ICategoryProps)._id
+                    )
+                )
+                ?.map((packageList) => (
+                  <>
+                    <div className="w-full">
+                      {packageList?.subServices?.length !== 0 &&
+                        packageList?.subServices?.map((subService) => (
+                          <div
+                            key={subService?._id}
+                            className="flex items-center justify-between"
+                          >
+                            <h6 className="capitalize text-lg">
+                              {subService?.title}
+                            </h6>
+                            <AppButton
+                              onClick={() =>
+                                setSelectedPrice(subService?.price)
+                              }
+                              outlined={selectedPrice === subService?.price}
+                            >
+                              <p>{subService?.price}</p>
+                            </AppButton>
+                          </div>
+                        ))}
+                    </div>
+                  </>
+                ))}
+            </div>
+            <h6 className="text-right my-4 text-green-500">
+              Your Wallet Amount Will be charged as {selectedPrice}
+            </h6>
+            <div className="flex items-center gap-3 mt-3">
+              <AppButton outlined flexed>
+                <AiOutlineMessage size={20} />
+                {packages?.data
+                  .filter(
+                    (prop) =>
+                      (prop.categoryId as ICategoryProps)._id ===
+                      selectedCategory
+                  )
+                  .find((prop) => prop?.packageType === "chat")?.price ||
+                  selectedPrice}
+              </AppButton>
+              <AppButton outlined flexed>
+                <AiOutlinePhone size={20} />
+                {packages?.data
+                  ?.filter(
+                    (prop) =>
+                      (prop?.categoryId as ICategoryProps)._id ===
+                      selectedCategory
+                  )
+                  ?.find((prop) => prop?.packageType === "audio")?.price ||
+                  selectedPrice}
+              </AppButton>
+              <AppButton outlined flexed>
+                <AiOutlineVideoCamera size={20} />
+                {packages?.data
+                  .filter(
+                    (prop) =>
+                      (prop?.categoryId as ICategoryProps)._id ===
+                      selectedCategory
+                  )
+                  ?.find((prop) => prop?.packageType === "video")?.price ||
+                  selectedPrice}
+              </AppButton>
+            </div>
+          </div>
+        </DialogPanel>
+      </Dialog>
     </MainLayout>
   );
 };
