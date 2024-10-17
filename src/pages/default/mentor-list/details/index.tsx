@@ -243,51 +243,52 @@ export const UserMentorDetailsPage = () => {
               {packages?.data.length > 0 && (
                 <div>
                   {packages?.data.map((packageList, i) => {
-                    return (
-                      <div className="space-y-4">
-                        {packageList?.subServices?.length !== 0 && (
-                          <h6 className="text-2xl flex-wrap font-libre capitalize text-primary-500">
-                            {(packageList.categoryId as ICategoryProps).title}{" "}
-                            Service List
-                          </h6>
-                        )}
-                        {packageList?.subServices?.length !== 0 && (
-                          <table>
-                            <thead className="bg-gray-200">
-                              <td className="px-5 py-2 w-[40%] border-r-2">
+                    // Check if subServices are available
+                    return packageList?.subServices?.length > 0 ? (
+                      <div key={i} className="space-y-4">
+                        <h6 className="text-2xl flex-wrap font-libre capitalize text-primary-500">
+                          {(packageList.categoryId as ICategoryProps).title}{" "}
+                          Service List
+                        </h6>
+                        <table>
+                          <thead className="bg-gray-200">
+                            <tr>
+                              <th className="px-5 py-2 w-[40%] border-r-2">
                                 Name
-                              </td>
-                              <td className="px-5 py-2 w-[20%] text-right">
+                              </th>
+                              <th className="px-5 py-2 w-[20%] text-right">
                                 BuddyCoins
-                              </td>
-                            </thead>
-                            <tbody>
-                              {packageList?.subServices?.map(
-                                (subPackage, i) => {
-                                  return (
-                                    <tr className="border-b border-x" key={i}>
-                                      <td className="px-5 py-2 w-[350px]">
-                                        <p className="capitalize">
-                                          {subPackage.title}
-                                        </p>
-                                      </td>
-                                      <td className="px-5 py-2 w-[150px]">
-                                        <p className="text-right">
-                                          {subPackage.price}
-                                        </p>
-                                      </td>
-                                    </tr>
-                                  );
-                                }
-                              )}
-                            </tbody>
-                          </table>
-                        )}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {packageList?.subServices?.map(
+                              (subPackage, subIndex) => (
+                                <tr
+                                  className="border-b border-x"
+                                  key={subIndex}
+                                >
+                                  <td className="px-5 py-2 w-[350px]">
+                                    <p className="capitalize">
+                                      {subPackage?.title}
+                                    </p>
+                                  </td>
+                                  <td className="px-5 py-2 w-[150px]">
+                                    <p className="text-right">
+                                      {subPackage?.price}
+                                    </p>
+                                  </td>
+                                </tr>
+                              )
+                            )}
+                          </tbody>
+                        </table>
                       </div>
-                    );
+                    ) : null;
                   })}
                 </div>
               )}
+
               <div>
                 <div className="my-10">
                   {mentor?.data.videoLink && (
