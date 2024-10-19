@@ -26,15 +26,14 @@ import {
   SignUpPage,
   MentorRantPage,
   TermsAndConditionPage,
-  MentorVideoCallPage,
   PackagesPage,
   ForgotPasswordPage,
   ResetPasswordPage,
   UserChatPage,
   MentorChatPage,
+  CallPage,
 } from "../pages";
 import { MentorPrivateRoutes, UserPrivateRoutes } from "../component";
-import { UserVideoCallPage } from "../pages/user/video";
 
 export const AppRoutes = () => {
   return (
@@ -60,6 +59,7 @@ export const AppRoutes = () => {
       <Route path="/mentor/category/:id" element={<AllMentorsPage />} />
       <Route path="/mobile-verification" element={<MobileVerificationPage />} />
       <Route path="/coming-soon" element={<ComingSoonPage />} />
+      <Route path="/call" element={<CallPage />} />
       <Route path="user">
         <Route element={<UserPrivateRoutes />}>
           <Route
@@ -70,14 +70,12 @@ export const AppRoutes = () => {
           <Route path="buddytube" element={<BuddyTubePage />} />
           <Route path="my-profile" element={<UserProfilePage />} />
           <Route path="payment" element={<UserPaymentStatus />} />
-          <Route path="video-call/:mentorId" element={<UserVideoCallPage />} />
         </Route>
       </Route>
       <Route path="/mentor/login" element={<MentorLoginPage />} />
       <Route path="mentor">
         <Route element={<MentorPrivateRoutes />}>
           <Route path="dashboard" element={<MentorDashboardPage />} />
-          <Route path="chat/:id" element={<MentorVideoCallPage />} />
           <Route path="chat/messages" element={<MentorChatPage />} />
           <Route path="call-history" element={<MentorCallHistoryPage />} />
           <Route path="schedules" element={<SchedulesMentorPage />} />

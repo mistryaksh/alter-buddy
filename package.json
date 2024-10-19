@@ -11,9 +11,6 @@
       "./src/**/*.stories.@(js|jsx|ts|tsx)"
     ]
   },
-  "overrides": {
-    "@tldraw/state": "desired_version"
-  },
   "dependencies": {
     "@100mslive/hms-noise-cancellation": "^0.0.1",
     "@100mslive/react-icons": "^0.10.18",
