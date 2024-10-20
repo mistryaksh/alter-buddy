@@ -299,8 +299,8 @@ export const UserMentorDetailsPage = () => {
                                                                                 <th className="px-5 py-2 w-[40%] border-r-2 text-left">
                                                                                      Name
                                                                                 </th>
-                                                                                <th className="px-5 py-2 w-[20%] text-right">
-                                                                                     BuddyCoins
+                                                                                <th className="px-5 py-2 w-[20%] text-left">
+                                                                                     Time
                                                                                 </th>
                                                                                 <th className="px-5 py-2 w-[20%] text-right">
                                                                                      BuddyCoins
