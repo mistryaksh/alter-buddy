@@ -5,21 +5,22 @@ export type IPackageType = "video" | "audio" | "chat";
 export const Package: IPackageType[] = ["audio", "video", "chat"];
 
 export interface IPackagesProps {
-  categoryId: ICategoryProps | string;
-  packageType: IPackageType;
-  packageName: string;
-  description?: string;
-  price: number;
-  _id?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  mentorId: IMentorProps | string;
-  status: boolean;
-  subServices?: ISubPackagesProps[];
+     categoryId: ICategoryProps | string;
+     packageType: IPackageType;
+     packageName: string;
+     description?: string;
+     price: number;
+     _id?: string;
+     createdAt?: string;
+     updatedAt?: string;
+     mentorId: IMentorProps | string;
+     status: boolean;
+     subServices?: ISubPackagesProps[];
 }
 
 export interface ISubPackagesProps {
-  _id?: string;
-  title: string;
-  price: number;
+     _id?: string;
+     title: string;
+     price: number;
+     time: string;
 }

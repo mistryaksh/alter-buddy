@@ -65,8 +65,8 @@ export const MentorRantPage: FC = () => {
      return (
           <MentorLayout>
                <AlterBuddyLogo />
-               <div className="flex justify-center">
-                    <div className="text-center w-[50%] space-y-4">
+               <div className="flex items-center h-[80vh] justify-center">
+                    <div className="text-center w-[50%] bg-gray-100 space-y-4 shadow-lg border-md p-5 rounded-lg border-2 border-gray-300">
                          <h6 className="text-2xl">Rant Disclaimer</h6>
                          <p className="text-lg text-red-500">
                               The Rant feature allows clients to engage in
@@ -80,43 +80,45 @@ export const MentorRantPage: FC = () => {
                               choose to continue therapy by transitioning to a
                               formal therapeutic relationship.
                          </p>
-                    </div>
-               </div>
-               <div className="h-[80vh] relative">
-                    <div className="absolute bottom-5 right-5 z-50  w-[30%]">
-                         {notification && chatRequest?.roomId && (
-                              <div className="animate__animated animate__bounceInRigh animate animate-pulse">
-                                   <div className="flex flex-col items-center justify-center  rounded-lg shadow-2xl border-2 border-gray-500 bg-gray-100">
-                                        <div className="bg-white p-6 rounded-lg shadow-lg text-center w-full">
-                                             <p className="text-lg text-gray-500 mb-4 text-right">
-                                                  Stay anonymous during this
-                                                  call
-                                             </p>
-                                             <h2 className="text-xl font-semibold text-gray-800 mb-4 text-right">
-                                                  Incoming Call
-                                             </h2>
-                                             <p className="text-lg text-right text-gray-600">
-                                                  Anonymous Caller
-                                             </p>
-                                             <div className="flex justify-between items-center space-x-4 w-full">
-                                                  <button
-                                                       onClick={rantAccepted}
-                                                       className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 focus:outline-none"
-                                                  >
-                                                       Answer
-                                                  </button>
+                         <div className="w-full">
+                              {notification && chatRequest?.roomId && (
+                                   <div className="animate__animated animate__bounceInRigh animate animate-pulse">
+                                        <div className="flex flex-col items-center justify-center">
+                                             <div className="text-center w-full">
+                                                  <p className="text-lg text-gray-500 mb-4 text-center">
+                                                       Stay anonymous during
+                                                       this call
+                                                  </p>
+                                                  <h2 className="text-xl font-semibold text-gray-800 mb-4 text-center">
+                                                       Incoming Call
+                                                  </h2>
+                                                  <p className="text-lg text-center text-gray-600">
+                                                       Anonymous Caller
+                                                  </p>
+                                                  <div className="flex justify-between items-center space-x-4 w-full">
+                                                       <button
+                                                            onClick={
+                                                                 rantAccepted
+                                                            }
+                                                            className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 focus:outline-none"
+                                                       >
+                                                            Answer
+                                                       </button>
 
-                                                  <button
-                                                       onClick={rantDecline}
-                                                       className="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 focus:outline-none"
-                                                  >
-                                                       Decline
-                                                  </button>
+                                                       <button
+                                                            onClick={
+                                                                 rantDecline
+                                                            }
+                                                            className="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 focus:outline-none"
+                                                       >
+                                                            Decline
+                                                       </button>
+                                                  </div>
                                              </div>
                                         </div>
                                    </div>
-                              </div>
-                         )}
+                              )}
+                         </div>
                     </div>
                </div>
           </MentorLayout>

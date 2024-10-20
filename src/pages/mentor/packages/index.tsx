@@ -39,6 +39,7 @@ export const PackagesPage = () => {
           {
                title: "",
                price: 0,
+               time: "",
           }
      );
      let [isOpen, setIsOpen] = useState<boolean>(false);
@@ -445,6 +446,28 @@ export const PackagesPage = () => {
                                                             <TextField
                                                                  type="number"
                                                                  outlined
+                                                                 label="Sub Package Time"
+                                                                 value={
+                                                                      subPackageField?.time
+                                                                 }
+                                                                 onChange={(
+                                                                      prop
+                                                                 ) => {
+                                                                      setSubPackagesField(
+                                                                           {
+                                                                                ...subPackageField,
+                                                                                time: prop
+                                                                                     .target
+                                                                                     .value,
+                                                                           }
+                                                                      );
+                                                                 }}
+                                                            />
+                                                       </div>
+                                                       <div>
+                                                            <TextField
+                                                                 type="number"
+                                                                 outlined
                                                                  label="Sub Package Price"
                                                                  value={
                                                                       subPackageField?.price
@@ -483,6 +506,7 @@ export const PackagesPage = () => {
                                                                                 {
                                                                                      price: subPackageField.price,
                                                                                      title: subPackageField.title,
+                                                                                     time: subPackageField.time,
                                                                                 },
                                                                            ]
                                                                       );
@@ -493,6 +517,7 @@ export const PackagesPage = () => {
                                                                            {
                                                                                 title: "",
                                                                                 price: 0,
+                                                                                time: "",
                                                                            }
                                                                       );
                                                                  }

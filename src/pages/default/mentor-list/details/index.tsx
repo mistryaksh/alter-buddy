@@ -302,6 +302,9 @@ export const UserMentorDetailsPage = () => {
                                                                                 <th className="px-5 py-2 w-[20%] text-right">
                                                                                      BuddyCoins
                                                                                 </th>
+                                                                                <th className="px-5 py-2 w-[20%] text-right">
+                                                                                     BuddyCoins
+                                                                                </th>
                                                                            </tr>
                                                                       </thead>
                                                                       <tbody>
@@ -321,6 +324,14 @@ export const UserMentorDetailsPage = () => {
                                                                                                     {
                                                                                                          subPackage?.title
                                                                                                     }
+                                                                                               </p>
+                                                                                          </td>
+
+                                                                                          <td className="px-5 py-2 w-[350px]">
+                                                                                               <p className="capitalize">
+                                                                                                    {subPackage?.time
+                                                                                                         ? subPackage.time
+                                                                                                         : "N/A"}
                                                                                                </p>
                                                                                           </td>
                                                                                           <td className="px-5 py-2 w-[150px]">
