@@ -3,6 +3,7 @@ import { MainLayout } from "../../../../layout";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux";
 import {
+     useBookMentorSlotMutation,
      useGetMentorPackagesByIdQuery,
      useGetMentorUsingIdQuery,
      useLazyGetSlotsByMentorIdQuery,
@@ -27,10 +28,12 @@ import { Helmet } from "react-helmet";
 import DOMPurify from "dompurify";
 import { useGetMyWalletQuery } from "../../../../redux/rtk-api/buddy-coin.api";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { ICategoryProps } from "../../../../interface";
+import { callType, ICategoryProps } from "../../../../interface";
+import { toast } from "react-toastify";
 
 export const UserMentorDetailsPage = () => {
      const navigate = useNavigate();
+     const [confirmModel, setConfirmModel] = useState<boolean>(false);
      const [scheduleModel, setScheduleModel] = useState<boolean>(false);
      const [selectedPrice, setSelectedPrice] = useState<number>(0);
      const [selectedTimeSlot, setSelectedTimeSlot] = useState({
@@ -38,6 +41,7 @@ export const UserMentorDetailsPage = () => {
           slot: "",
           _id: "",
      });
+     const [callType, setCallType] = useState<callType | null>(null);
      const [selectedCategory, setSelectedCategory] = useState<string>("");
      const { id } = useParams();
      const dispatch = useAppDispatch();
@@ -58,20 +62,20 @@ export const UserMentorDetailsPage = () => {
           },
      ] = useLazyGetSlotsByMentorIdQuery();
      const {
-          // data: profile,
+          data: profile,
           isError: isProfileError,
           error: profileError,
      } = useProfileUserQuery();
-     // const [
-     //   BookSlotWithMentor,
-     //   {
-     //     isError: isBookSlotError,
-     //     isLoading: isBookSlotLoading,
-     //     data: bookSlotData,
-     //     error: bookSlotError,
-     //     isSuccess: isBookSuccess,
-     //   },
-     // ] = useBookMentorSlotMutation();
+     const [
+          BookSlotWithMentor,
+          {
+               isError: isBookSlotError,
+               isLoading: isBookSlotLoading,
+               data: bookSlotData,
+               error: bookSlotError,
+               isSuccess: isBookSuccess,
+          },
+     ] = useBookMentorSlotMutation();
      const { data: wallet } = useGetMyWalletQuery();
 
      useEffect(() => {
@@ -82,14 +86,14 @@ export const UserMentorDetailsPage = () => {
                     console.log(mentorError);
                }
           }
-          // if (isBookSlotError) {
-          //   if ((bookSlotError as any).data) {
-          //     console.log((bookSlotError as any).data);
-          //     dispatch(handleError((bookSlotError as any).data.message));
-          //   } else {
-          //     console.log(bookSlotError);
-          //   }
-          // }
+          if (isBookSlotError) {
+               if ((bookSlotError as any).data) {
+                    console.log((bookSlotError as any).data);
+                    dispatch(handleError((bookSlotError as any).data.message));
+               } else {
+                    console.log(bookSlotError);
+               }
+          }
           if (isSlotError) {
                if ((slotError as any)?.data) {
                     dispatch(handleError((slotError as any)?.data.message));
@@ -120,45 +124,47 @@ export const UserMentorDetailsPage = () => {
           slotError,
           isProfileError,
           profileError,
-          // isBookSlotError,
-          // bookSlotError,
-          // bookSlotData,
+          isBookSlotError,
+          bookSlotError,
+          bookSlotData,
      ]);
 
-     // useEffect(() => {
-     //   if (isBookSuccess) {
-     //     toast.success(bookSlotData?.data);
-     //     setSelectedTimeSlot({
-     //       date: "",
-     //       slot: "",
-     //       _id: "",
-     //     });
-     //     setScheduleModel(false);
-     //   }
-     // }, [isBookSuccess, bookSlotData?.data]);
+     useEffect(() => {
+          if (isBookSuccess) {
+               toast.success(bookSlotData?.data);
+               setSelectedTimeSlot({
+                    date: "",
+                    slot: "",
+                    _id: "",
+               });
+               setScheduleModel(false);
+               setCallType(null);
+               setConfirmModel(false);
+          }
+     }, [isBookSuccess, bookSlotData?.data]);
 
-     // const BookSlot = async ({
-     //   userId,
-     //   slotId,
-     //   mentorId,
-     //   callType,
-     // }: {
-     //   userId: string;
-     //   slotId: string;
-     //   callType: string;
-     //   mentorId: string;
-     // }) => {
-     //   if (!callType) {
-     //     toast.warn("Please try again");
-     //   } else {
-     //     await BookSlotWithMentor({
-     //       slotId,
-     //       userId,
-     //       mentorId,
-     //       callType: callType,
-     //     });
-     //   }
-     // };
+     const BookSlot = async ({
+          userId,
+          slotId,
+          mentorId,
+          callType,
+     }: {
+          userId: string;
+          slotId: string;
+          callType: string;
+          mentorId: string;
+     }) => {
+          if (!callType) {
+               toast.warn("Please try again");
+          } else {
+               await BookSlotWithMentor({
+                    slotId,
+                    userId,
+                    mentorId,
+                    callType: callType,
+               });
+          }
+     };
 
      const cleanHTML = DOMPurify.sanitize(mentor?.data?.description);
 
@@ -513,7 +519,7 @@ export const UserMentorDetailsPage = () => {
                                    Chat with the expert and get instant guidance
                               </p>
                               <h6 className="text-right">
-                                   My Wallet{" "}
+                                   Wallet Effect{" "}
                                    {wallet?.data?.balance - selectedPrice}
                               </h6>
                               <h6 className="my-3 font-semibold">
@@ -630,7 +636,29 @@ export const UserMentorDetailsPage = () => {
                                    {selectedPrice}
                               </h6>
                               <div className="flex items-center gap-3 mt-3">
-                                   <AppButton outlined flexed>
+                                   <AppButton
+                                        outlined
+                                        flexed
+                                        onClick={() => {
+                                             setSelectedPrice(
+                                                  packages?.data
+                                                       ?.filter(
+                                                            (prop) =>
+                                                                 (
+                                                                      prop?.categoryId as ICategoryProps
+                                                                 )._id ===
+                                                                 selectedCategory
+                                                       )
+                                                       ?.find(
+                                                            (prop) =>
+                                                                 prop?.packageType ===
+                                                                 "chat"
+                                                       )?.price
+                                             );
+                                             setConfirmModel(true);
+                                             setCallType("chat");
+                                        }}
+                                   >
                                         <AiOutlineMessage size={20} />
                                         {packages?.data
                                              .filter(
@@ -646,39 +674,129 @@ export const UserMentorDetailsPage = () => {
                                                        "chat"
                                              )?.price || selectedPrice}
                                    </AppButton>
-                                   <AppButton outlined flexed>
+                                   <AppButton
+                                        outlined
+                                        flexed
+                                        onClick={() => {
+                                             setSelectedPrice(
+                                                  packages?.data
+                                                       .filter(
+                                                            (prop) =>
+                                                                 (
+                                                                      prop?.categoryId as ICategoryProps
+                                                                 )._id ===
+                                                                 selectedCategory
+                                                       )
+                                                       ?.find(
+                                                            (prop) =>
+                                                                 prop?.packageType ===
+                                                                 "audio"
+                                                       )?.price
+                                             );
+                                             setConfirmModel(true);
+                                             setCallType("audio");
+                                        }}
+                                   >
                                         <AiOutlinePhone size={20} />
-                                        {packages?.data
-                                             ?.filter(
-                                                  (prop) =>
-                                                       (
-                                                            prop?.categoryId as ICategoryProps
-                                                       )._id ===
-                                                       selectedCategory
-                                             )
-                                             ?.find(
-                                                  (prop) =>
-                                                       prop?.packageType ===
-                                                       "audio"
-                                             )?.price || selectedPrice}
+                                        {
+                                             packages?.data
+                                                  ?.filter(
+                                                       (prop) =>
+                                                            (
+                                                                 prop?.categoryId as ICategoryProps
+                                                            )._id ===
+                                                            selectedCategory
+                                                  )
+                                                  ?.find(
+                                                       (prop) =>
+                                                            prop?.packageType ===
+                                                            "audio"
+                                                  )?.price
+                                        }
                                    </AppButton>
-                                   <AppButton outlined flexed>
+                                   <AppButton
+                                        outlined
+                                        flexed
+                                        onClick={() => {
+                                             setSelectedPrice(
+                                                  packages?.data
+                                                       .filter(
+                                                            (prop) =>
+                                                                 (
+                                                                      prop?.categoryId as ICategoryProps
+                                                                 )._id ===
+                                                                 selectedCategory
+                                                       )
+                                                       ?.find(
+                                                            (prop) =>
+                                                                 prop?.packageType ===
+                                                                 "video"
+                                                       )?.price
+                                             );
+                                             setConfirmModel(true);
+                                             setCallType("video");
+                                        }}
+                                   >
                                         <AiOutlineVideoCamera size={20} />
-                                        {packages?.data
-                                             .filter(
-                                                  (prop) =>
-                                                       (
-                                                            prop?.categoryId as ICategoryProps
-                                                       )._id ===
-                                                       selectedCategory
-                                             )
-                                             ?.find(
-                                                  (prop) =>
-                                                       prop?.packageType ===
-                                                       "video"
-                                             )?.price || selectedPrice}
+                                        {
+                                             packages?.data
+                                                  .filter(
+                                                       (prop) =>
+                                                            (
+                                                                 prop?.categoryId as ICategoryProps
+                                                            )._id ===
+                                                            selectedCategory
+                                                  )
+                                                  ?.find(
+                                                       (prop) =>
+                                                            prop?.packageType ===
+                                                            "video"
+                                                  )?.price
+                                        }
                                    </AppButton>
                               </div>
+                         </div>
+                    </DialogPanel>
+               </Dialog>
+               <Dialog
+                    open={confirmModel}
+                    onClose={() => setConfirmModel(false)}
+                    className="fixed inset-0 z-50 overflow-y-scroll flex w-screen items-center justify-center bg-black/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0"
+               >
+                    <DialogPanel className="w-[50%] space-y-4 bg-white p-5 mt-20 rounded-md">
+                         <DialogTitle>
+                              <h6>
+                                   You will receive session link on{" "}
+                                   {profile?.data.email}
+                              </h6>
+                         </DialogTitle>
+                         <p>
+                              We will charge you {selectedPrice} for this
+                              session!
+                         </p>
+                         <div className="flex items-center gap-3 justify-end">
+                              <AppButton
+                                   onClick={() => setConfirmModel(false)}
+                                   filled
+                              >
+                                   Cancel
+                              </AppButton>
+                              <AppButton
+                                   loading={isBookSlotLoading}
+                                   onClick={() =>
+                                        BookSlot({
+                                             callType,
+                                             userId: profile?.data
+                                                  ._id as string,
+                                             slotId: selectedTimeSlot._id,
+                                             mentorId: mentor?.data
+                                                  ._id as string,
+                                        })
+                                   }
+                                   filled
+                              >
+                                   Confirm
+                              </AppButton>
                          </div>
                     </DialogPanel>
                </Dialog>
