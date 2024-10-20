@@ -253,6 +253,24 @@ export const UserMentorDetailsPage = () => {
                                              }}
                                         />
                                    </div>
+
+                                   <div>
+                                        <div className="my-10">
+                                             {mentor?.data.videoLink && (
+                                                  <video
+                                                       className="xl:lg:md:w-full aspect-video"
+                                                       src={
+                                                            mentor?.data
+                                                                 .videoLink
+                                                       }
+                                                       title="YouTube video player"
+                                                       autoPlay={false}
+                                                       controls
+                                                       controlsList="nodownload nofullscreen noremoteplayback"
+                                                  />
+                                             )}
+                                        </div>
+                                   </div>
                                    {packages?.data.length > 0 && (
                                         <div>
                                              {packages?.data.map(
@@ -278,7 +296,7 @@ export const UserMentorDetailsPage = () => {
                                                                  <table>
                                                                       <thead className="bg-gray-200">
                                                                            <tr>
-                                                                                <th className="px-5 py-2 w-[40%] border-r-2">
+                                                                                <th className="px-5 py-2 w-[40%] border-r-2 text-left">
                                                                                      Name
                                                                                 </th>
                                                                                 <th className="px-5 py-2 w-[20%] text-right">
@@ -323,24 +341,118 @@ export const UserMentorDetailsPage = () => {
                                              )}
                                         </div>
                                    )}
+                                   {packages?.data.length !== 0 && (
+                                        <div>
+                                             {packages?.data.map(
+                                                  (packageList, i) => {
+                                                       return (
+                                                            <div>
+                                                                 {packageList
+                                                                      .subServices
+                                                                      .length !==
+                                                                      0 && (
+                                                                      <div>
+                                                                           <h6 className="text-lg font-bold text-primary-500 uppercase">
+                                                                                note
+                                                                                :
+                                                                           </h6>
+                                                                           <p className="">
+                                                                                Please
+                                                                                note
+                                                                                that
+                                                                                the
+                                                                                rates
+                                                                                mentioned
+                                                                                above
+                                                                                are
+                                                                                for{" "}
+                                                                                <b>
+                                                                                     readings
+                                                                                     and
+                                                                                     consultations
+                                                                                     only
+                                                                                </b>
 
-                                   <div>
-                                        <div className="my-10">
-                                             {mentor?.data.videoLink && (
-                                                  <video
-                                                       className="xl:lg:md:w-full aspect-video"
-                                                       src={
-                                                            mentor?.data
-                                                                 .videoLink
-                                                       }
-                                                       title="YouTube video player"
-                                                       autoPlay={false}
-                                                       controls
-                                                       controlsList="nodownload nofullscreen noremoteplayback"
-                                                  />
+                                                                                .
+                                                                                These
+                                                                                charges
+                                                                                apply
+                                                                                to
+                                                                                sessions
+                                                                                where
+                                                                                the
+                                                                                healer
+                                                                                assess
+                                                                                your
+                                                                                current
+                                                                                emotional,
+                                                                                spiritual
+                                                                                or
+                                                                                physical
+                                                                                state
+                                                                                and
+                                                                                offers
+                                                                                guidance
+                                                                                on
+                                                                                their
+                                                                                findings.
+                                                                           </p>
+                                                                           <p className="mt-3">
+                                                                                Healing
+                                                                                services,
+                                                                                which
+                                                                                may
+                                                                                be
+                                                                                recommended
+                                                                                after
+                                                                                the
+                                                                                consultation,
+                                                                                are{" "}
+                                                                                <b>
+                                                                                     customized
+                                                                                     specifically
+                                                                                </b>{" "}
+                                                                                to
+                                                                                meet
+                                                                                your
+                                                                                individual
+                                                                                needs
+                                                                                and
+                                                                                are{" "}
+                                                                                <b>
+                                                                                     separately
+                                                                                     charged
+                                                                                </b>
+
+                                                                                .
+                                                                                The
+                                                                                healer
+                                                                                will
+                                                                                discuss
+                                                                                the
+                                                                                best
+                                                                                healing
+                                                                                methods
+                                                                                during
+                                                                                your
+                                                                                consultation,
+                                                                                and
+                                                                                together
+                                                                                you
+                                                                                can
+                                                                                decide
+                                                                                the
+                                                                                next
+                                                                                steps.
+                                                                           </p>
+                                                                      </div>
+                                                                 )}
+                                                            </div>
+                                                       );
+                                                  }
                                              )}
                                         </div>
-                                   </div>
+                                   )}
                                    {mentor?.data.specialists.length > 0 && (
                                         <div className="bg-primary-100 p-3 rounded-md">
                                              <h6 className="text-xl font-sans2 mb-2 capitalize text-primary-500">
