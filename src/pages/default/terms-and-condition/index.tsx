@@ -216,17 +216,18 @@ export const TermsAndConditionPage = () => {
             <li>
               If the Consultancy Service is cancelled by the Client on or before 7 days of the appointment
               date, the amount will be refunded after deducting payment gateway and website charges.
-
+            </li>
+            <li>
+              The amount will not be refunded if the Consultancy Service is cancelled by the Client within a
+              duration of less than 7 days before the appointment date.
             </li>
             <li>
               No amount will be refunded in case the Client does not show up for the session at the
               scheduled appointment time.
-
             </li>
             <li>
               If any kind of session is ended by the client on his will before the designated time or the time
               chosen by them, no refund will be granted.
-
             </li>
             <li>
               No amount will be refunded if any working/ritual/course/energy work/spells is cancelled by
@@ -235,12 +236,12 @@ export const TermsAndConditionPage = () => {
             <li>
               100% of the amount will be refunded if a product order is cancelled by the Client within 24
               hours of placing the order.
-
             </li>
             <li>
-              Refund will be granted after 14 working days
+              Refund will be granted after 14 working days.
             </li>
-            <li>50% of the amount will be refunded if a product order is cancelled by the Client after 24
+            <li>
+              50% of the amount will be refunded if a product order is cancelled by the Client after 24
               hours of placing the order and before the order is shipped.
             </li>
             <li>
@@ -253,10 +254,12 @@ export const TermsAndConditionPage = () => {
             <li>
               Payment gateway charges and website charges will be deducted from refunds.
             </li>
-            <li>Rant feature sessions have a time limit. If a session funded by the Client exceeds the due
+            <li>
+              Rant feature sessions have a time limit. If a session funded by the Client exceeds the due
               time limit, the amount will not be refunded.
             </li>
-            <li>If a therapist or consultant discontinues a Rant session for an inappropriate or illegal reason
+            <li>
+              If a therapist or consultant discontinues a Rant session for an inappropriate or illegal reason
               (Client behaviours), the amount will not be refunded to the Client.
             </li>
         </ul>
