@@ -15,13 +15,14 @@ export const PrivacyPolicyPage = () => {
                     </p>
                     <h6 className="text-primary-500 uppercase text-2xl">
                          AlterBuddy – PRIVACY POLICY
+
                     </h6>
                     <p className="my-3 text-gray-500">
                          This Privacy Policy agreement was last updated:
                          08.02.2024.
                     </p>
                     <p className="text-gray-500 whitespace-pre-wrap">
-                         AlterBuddy Enterprises Private Limited ("Company")
+                         AlterBuddy ("Company")
                          values your privacy. In this Privacy Policy ("Policy"),
                          we describe the information that we collect about you
                          when you visit the Company's platform ("AlterBuddy")
@@ -37,43 +38,66 @@ export const PrivacyPolicyPage = () => {
                          >
                               cheer@alterbuddy.com
                          </a>
+
                          . This Policy is incorporated into and is subject to
                          the AlterBuddy Terms of Use, which can be accessed at 
                          <Link
                               className="text-primary-500 underline"
+
                               to="https://alterbuddy.com/terms-and-condition"
                          >
                               AlterBuddy Terms
+
                          </Link>
                          . Your use of AlterBuddy and any personal information
                          you provide on AlterBuddy remains subject to the terms
+
                          of the Policy and AlterBuddy Terms of Use
                          {"\n"}
+
                          {"\n"}
+
                          In terms of the Information Technology (Intermediary
+
                          Guidelines and Digital Media Ethics Code) Rules, 2021,
+
                          and the Information Technology (Reasonable Security
+
                          Practices and Procedures and Sensitive Personal Data or
                          Information) Rules, 2011, any grievance or complaint
+
                          may be intimated to Drishti Gupta, Grievance Officer,
+
                          who may be reached at 23-A Third Floor, Shivaji Marg,
                          West Delhi, Delhi India – 110027. The complaint shall
+
                          be redressed within a period of 15 (fifteen) days.
+
                     </p>
+
                     <h6 className="text-primary-500 uppercase text-2xl my-5">
+
                          A. Collection of Your Personal Information
                     </h6>
+
                     <p className="text-primary-500 font-semibold mb-3">
+
                          1. COLLECTION OF PERSONAL INFORMATION
+
                     </p>
+
                     <p className="text-gray-500 whitespace-pre-wrap">
+
                          "Personal information" is defined to include
+
                          information that whether on its own or in combination
+
                          with other information may be used to readily identify
                          or contact you such as: name, email address, phone
                          number etc.
                          {"\n"}
                          {"\n"}
+
                          “Sensitive personal data or information” or “SPDI” for
                          the purpose of User’s chats with the Experts (as
                          defined in the Terms of Use) is defined to include the
@@ -81,11 +105,14 @@ export const PrivacyPolicyPage = () => {
                          {"\n"}
                          {"\n"}
                          (i) physical, physiological and mental health
+
                          condition;
                          {"\n"}
                          (ii) sexual orientation;
+
                          {"\n"}
                          (iii) medical history and records;
+
                          {"\n"}
                          (iv) any detail in relation to the above as provided to
                          the Company for providing the service; and
@@ -94,6 +121,7 @@ export const PrivacyPolicyPage = () => {
                          for processing or storing such information under a
                          lawful contract or otherwise.
                          {"\n"}
+
                          {"\n"}
                          SPDI shall not include any such information that is
                          freely available or accessible in the public domain or
@@ -101,93 +129,126 @@ export const PrivacyPolicyPage = () => {
                          any other law for the time being in force.
                          {"\n"}
                          {"\n"}
+
                          We collect personal information from users who are
                          desirous of using AlterBuddy including availing the
                          Expert sessions, interacting with LiveStream Sessions
                          and/or the chatbots, and posting / creating Submitted
                          Content (as defined in the Terms of Use) on AlterBuddy.
                          This information is partially or completely accessible
+
                          to all visitors using AlterBuddy (other than
                          information/proceedings between an User and an Expert).
                          Users are required to create an account to be able to
                          access certain portions of AlterBuddy.
                          {"\n"}
                          {"\n"}
+
                          At the time of creating the Account, user data such as
                          name, email ID, etc., shall be collected and the user
                          grants requisite permission for the same. Further,
                          while interacting with the LiveStream Sessions and
                          chatbots, your preferences and chat logs shall also be
                          collected. Such information gathered shall be utilized
+
                          to ensure greater customer satisfaction, personalize
                          your experience, provide support, improve our services
                          and help a customer satiate its needs. The type of
                          personal information that we collect from you varies
                          based on your particular interaction with the Company.
+
                          {"\n"}
                          {"\n"}
                          We may also collect data in relation to your reactions
                          on the thoughts and replies through emojis, your
                          postings in Sub-communities, your status updates etc.
+
                          in order to optimize AlterBuddy and provide curated
                          experience to each individual User.
                          {"\n"}
                          {"\n"}We may also collect personal information that you
+
                          post in your Submitted Content such as profile,
                          feedback, and any comments or discussions you post in
                          any blog, forum, or other correspondence site on
                          AlterBuddy. The Company may also record usernames, chat
                          messages, audio/video recordings, optional profile
+
                          details, while you interact with a LiveStream Session.
                          The Company reserves the right to record the
                          conversations through the messaging/chat mechanism
                          including the chatbots on the platform. All the
+
                          chat/messaging logs can be used for but not limited to
                          monitor and prohibit abuse, moderate content, improve
                          AlterBuddy features, anonymised research, safeguard the
+
                          rights of the users, resolve disputes etc.
                          {"\n\n"}
                          We shall also collect information in relation to the
                          number of Expert sessions availed or LiveStream
+
                          Sessions browsed / joined / interacted / followed by
                          you, details of the Expert, date and time slot of the
                          sessions, any SPDI shared over chat with the Expert. It
+
                          is however clarified notwithstanding anything else
                          contained in this policy, the Company shall not be
                          privy to the proceedings of the Expert sessions itself
+
                          and the same shall be confidential as per applicable
                          law. Certain functionalities on AlterBuddy may be
                          powered by third party software such as LiveStream
+
                          Sessions are enabled by Agora, and the Users expressly
                          acknowledge and agree that they consent to the terms of
                          use and privacy policy of Agora, as prevailing and
+
                          applicable.
                          {"\n\n"}
+
                          Chatbots on AlterBuddy may be integrated with third
                          parties such as OpenAI, and the Users expressly
                          acknowledge and agree that they consent to the terms of
+
                          use and privacy policy of OpenAI, as prevailing and
                          applicable.
+
                          {"\n\n"}
                     </p>
+
                     <p className="text-primary-500 font-semibold capitalize mb-3">
                          2. COLLECTION OF AUTOMATIC INFORMATION, USE OF COOKIES
+
                          AND OTHER TRACKING DEVICES
+
                     </p>
                     <p className="text-gray-500 whitespace-pre-wrap">
+
                          We and our third-party service providers, which include
                          ad networks, use cookies, web beacons, and other
+
                          tracking technologies to collect information about your
+
                          use of AlterBuddy, such as your browser type, your ISP
                          or operating system, your domain name, your access
+
                          time, the URL of the previous website you visited, your
+
                          page views, your IP address, and the type of device
+
                          that you use. We also track how frequently you visit
+
                          AlterBuddy. We use this information (including the
+
                          information collected by our third-party service
+
                          providers) for website analytics (including to
+
                          determine which portions of AlterBuddy are used most
+
                          frequently, what our users like/do not like), to assist
+
                          us in determining relevant advertising
                          {"\n\n"}
                          (both on and off our AlterBuddy), to evaluate the
@@ -792,13 +853,13 @@ export const PrivacyPolicyPage = () => {
                          BE SUBJECT TO THE TERMS OF THE THEN-CURRENT POLICY.
                     </p>
                </div>
-               <p className="my-5 mx-auto w-[70%] text-gray-500">
+               {/* <p className="my-5 mx-auto w-[70%] text-gray-500">
                     Please Note: Currently we not do have any merchandise and we
                     also provide Healings (including but not limited to reiki,
                     pranic and all kinds of healings),Rant and Manifesting
                     services which needs to be incorporated into all kinds of
                     documents.
-               </p>
+               </p> */}
           </MainLayout>
      );
 };
