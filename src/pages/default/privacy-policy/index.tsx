@@ -184,7 +184,7 @@ export const PrivacyPolicyPage = () => {
                          AlterBuddy features, anonymised research, safeguard the
 
                          rights of the users, resolve disputes etc.
-                         {"\n\n"}
+                         {/* {"\n\n"}
                          We shall also collect information in relation to the
                          number of Expert sessions availed or LiveStream
 
@@ -212,7 +212,7 @@ export const PrivacyPolicyPage = () => {
                          acknowledge and agree that they consent to the terms of
 
                          use and privacy policy of OpenAI, as prevailing and
-                         applicable.
+                         applicable. */}
 
                          {"\n\n"}
                     </p>
