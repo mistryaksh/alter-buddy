@@ -208,11 +208,13 @@ export const TermsAndConditionPage = () => {
           CANCELLATION & RETURN POLICY:
         </h6>
         <ul className="text-gray-500 list-disc list-inside space-y-2">
-          <li>
-            AlterBuddy values your privacy and does not sell or rent your contact information to other
-            marketers. Unless otherwise disclosed or required by law (such as after consulting with legal
-            counsel), we will not share your personal information with third parties without notifying you first
-            and giving you the chance to prevent such sharing.
+            <p>
+              AlterBuddy values your privacy and does not sell or rent your contact information to other
+              marketers. Unless otherwise disclosed or required by law (such as after consulting with legal
+              counsel), we will not share your personal information with third parties without notifying you first
+              and giving you the chance to prevent such sharing.
+            </p>
+            
             <li>
               If the Consultancy Service is cancelled by the Client on or before 7 days of the appointment
               date, the amount will be refunded after deducting payment gateway and website charges.
